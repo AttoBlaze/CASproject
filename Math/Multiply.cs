@@ -14,7 +14,7 @@ public class Multiply : MathObject {
 
     public MathObject Evaluate(Dictionary<string, double> definedVariables) {
         //calculate all terms
-        return new Multiply(terms.Select(term => term.Calculate(definedVariables)));
+        return new Multiply(terms.Select(term => term.Evaluate(definedVariables)));
     }
 
     public MathObject Simplify() {

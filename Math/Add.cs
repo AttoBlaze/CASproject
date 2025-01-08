@@ -12,9 +12,9 @@ public class Add : MathObject {
         }
     }
 
-    public MathObject Calculate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
         //calculate all terms
-        return new Add(terms.Select(term => term.Calculate(definedVariables)));
+        return new Add(terms.Select(term => term.Evaluate(definedVariables)));
     }
 
     public MathObject Simplify() {
@@ -39,7 +39,7 @@ public class Add : MathObject {
         ((Add)obj).terms.SequenceEqual(this.terms);  //same terms
 
     public bool EquivalentTo(MathObject obj) =>
-        obj.Calculate().Equals(this.Calculate(new()));
+        obj.Evaluate().Equals(this.Evaluate(new()));
 
     public string AsString() => string.Join("+",terms.Select(term => term.AsString())).Replace("+-","-");
 

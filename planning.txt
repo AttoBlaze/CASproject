@@ -1,11 +1,9 @@
-Naming:
+TODO:
 
-Interfaces: Calculateable, Differentiable, Simplifiable, EqualityComparer 
-terms - MathObject : Equality - abstract ToString override
+More Simplifications
+User-defined variables
+Log, Ln
+Factorial
+Differentiable expressions
+Help command
 
-
-Operator math objects:
-Add (contains negate)
-Multiply
-Divide
-Power

@@ -1,17 +1,17 @@
 using CAS;
 
 namespace Commands;
-public class CalculateExpression : ExecutableCommand {
+public class EvaluateExpression : ExecutableCommand {
     public Type[][] GetOverloads() => [
         [typeof(MathObject)]
     ];
     
     public Func<object> GetCommandByInputs() =>()=>{
-        return expression.Calculate();
+        return expression.Evaluate();
     };
 
     private readonly MathObject expression;
-    public CalculateExpression(MathObject expression) {
+    public EvaluateExpression(MathObject expression) {
         this.expression = expression;
     }
 }

@@ -31,6 +31,24 @@ public class Operator {
                 var term1 = (MathObject)inputs.Pop();
                 return new Multiply([term1,term2]);
             }
+        )},
+
+        {'/',new Operator(
+            '/',2,
+            inputs => {
+                var term2 = (MathObject)inputs.Pop();
+                var term1 = (MathObject)inputs.Pop();
+                return new Divide(term1,term2);
+            }
+        )},
+
+        {'^',new Operator(
+            '^',-3,
+            inputs => {
+                var term2 = (MathObject)inputs.Pop();
+                var term1 = (MathObject)inputs.Pop();
+                return new Power(term1,term2);
+            }
         )}
     };
 

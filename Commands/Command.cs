@@ -19,13 +19,26 @@ public interface ExecutableCommand {
 	public object Execute() => GetCommandByInputs()(); 
 }
 
+/// <summary>
+/// Exits the application
+/// </summary>
+public class ExitCommand : ExecutableCommand {
+	public Type[][] GetOverloads() => [[]];
+	public Func<object> GetCommandByInputs() =>()=> {
+		Environment.Exit(0);
+		return 0;
+	};
+
+	public ExitCommand() {}
+}
+
 public class Command {
 	/// <summary>
 	/// Contains all commands in the program
 	/// </summary>
     public static readonly Dictionary<string,Func<Stack<object>,ExecutableCommand>> Commands = new(){
-        //calculates the given math expression
-        {"calculate",arguments => new CalculateExpression((MathObject)arguments.Pop())},
+        //evalutes the given math expression
+        {"evaluate",arguments => new EvaluateExpression((MathObject)arguments.Pop())},
         
         //writes the given input result in the console
         {"write",arguments => new Write(arguments.Pop())},
@@ -34,11 +47,14 @@ public class Command {
         {"simplify",arguments => new SimplifyExpression((MathObject)arguments.Pop())},
         
         //calculates and simplifies the given expression
-        {"evaluate",arguments => new InformalCommand(
+        {"calculate",arguments => new InformalCommand(
             ()=> [[typeof(MathObject)]],
-            args => ()=> ((MathObject)args[0]).Evaluate().Simplify(),
+            args => ()=> ((MathObject)args[0]).Calculate(new()),
             arguments.Pop()
         )},
+
+		//exists the application
+		{"exit", arguments => new ExitCommand()},
 
 
 		//TEST VAR
@@ -47,7 +63,6 @@ public class Command {
             args => ()=> ((MathObject)args[0]).Evaluate().Simplify(),
             arguments.Pop()
         )},
-
     };
     
 	/// <summary>
@@ -110,6 +125,13 @@ public class Command {
 			
 			//parse operators
 			else if (Operator.operators.TryGetValue(tokens[i], out Operator? op)) {
+				//** == ^
+				if (op.symbol=='*' && i<tokens.Length-1 && tokens[i+1]=='*') {
+					op = Operator.operators['^'];
+					i++;
+				}
+				
+				//continually apply operators
 				while (operators.Count>0 && 				//the operator stack isnt empty
 						operators.Peek()!="(" && 			//the top operator is not a left parentheses
 						(Math.Abs(Operator.Precedence(operators.Peek()))>=Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
