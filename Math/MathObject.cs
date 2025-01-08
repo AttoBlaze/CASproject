@@ -18,11 +18,17 @@ public interface Differentiable<T> {
     public T Differentiate(string variable);
 }
 
-public interface Calculateable<T> {
-    public T Calculate() => Calculate(new());
-    public T Calculate(Dictionary<string,double> definedVariables);
+public interface Evaluatable<T> {
+    public T Evaluate() => Evaluate(new());
+    public T Evaluate(Dictionary<string,double> definedVariables);
 }
 
-public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<MathObject>, Simplifiable<MathObject>, Calculateable<MathObject> {
+/// <summary>
+/// Represents a mathematical object/expression
+/// </summary>
+public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
+        public MathObject Calculate(Dictionary<string,double> definedVariables) => 
+            this.Evaluate(definedVariables).Simplify();
+
     public string AsString();
 }

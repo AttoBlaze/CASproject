@@ -1,6 +1,9 @@
 using System.Collections;
 using CAS;
 
+/// <summary>
+/// Represents an operator (such as + or *)
+/// </summary>
 public class Operator {
     public static Dictionary<char,Operator> operators = new(){
         {'+',new Operator(
@@ -31,10 +34,15 @@ public class Operator {
         )}
     };
 
+    /// <summary>
+    /// The precedence of the given operator
+    /// </summary>
+    /// <param name="op"></param>
+    /// <returns></returns>
     public static int Precedence(string op) => 
         op.Length>1? 0:
         Precedence(op[0]);
-    
+    /// <inheritdoc cref="Precedence(string)"/>
     public static int Precedence(char op) {
         if (operators.TryGetValue(op, out Operator? ope)) return ope.precedence;
         return 0; 

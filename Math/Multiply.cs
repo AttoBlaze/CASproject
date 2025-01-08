@@ -12,7 +12,7 @@ public class Multiply : MathObject {
         }
     }
 
-    public MathObject Calculate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
         //calculate all terms
         return new Multiply(terms.Select(term => term.Calculate(definedVariables)));
     }
@@ -39,7 +39,7 @@ public class Multiply : MathObject {
         ((Multiply)obj).terms.SequenceEqual(this.terms);  //same terms
 
     public bool EquivalentTo(MathObject obj) =>
-        obj.Calculate().Equals(this.Calculate(new()));
+        obj.Evaluate().Equals(this.Evaluate(new()));
 
     public string AsString() => string.Join("*",terms.Select(term => term.AsString()));
 }

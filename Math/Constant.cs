@@ -1,5 +1,8 @@
 using CAS;
 
+/// <summary>
+/// Represents a constant value
+/// </summary>
 public class Constant : MathObject {
     public double value {get; private set;}
     public Constant(double value) {
@@ -7,7 +10,7 @@ public class Constant : MathObject {
     }
 
 
-    public MathObject Calculate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
         return this;
     }
 
@@ -21,7 +24,7 @@ public class Constant : MathObject {
         ((Constant)obj).value==this.value;  //same value
 
     public bool EquivalentTo(MathObject obj) =>
-        obj.Calculate().Equals(this);
+        obj.Evaluate().Equals(this);
 
     public string AsString() => value.ToString();
 }

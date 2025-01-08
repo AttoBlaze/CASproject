@@ -7,11 +7,22 @@ public interface ExecutableCommand {
     /// Gets the list of overloads this command has
     /// </summary>
     public Type[][] GetOverloads();
+
+	/// <summary>
+	/// Gets the specific command to be executed according the command arguments given 
+	/// </summary>
     protected Func<object> GetCommandByInputs();
-    public object Execute() => GetCommandByInputs()(); 
+    
+	/// <summary>
+	/// Executes this command
+	/// </summary>
+	public object Execute() => GetCommandByInputs()(); 
 }
 
 public class Command {
+	/// <summary>
+	/// Contains all commands in the program
+	/// </summary>
     public static readonly Dictionary<string,Func<Stack<object>,ExecutableCommand>> Commands = new(){
         //calculates the given math expression
         {"calculate",arguments => new CalculateExpression((MathObject)arguments.Pop())},
@@ -25,24 +36,32 @@ public class Command {
         //calculates and simplifies the given expression
         {"evaluate",arguments => new InformalCommand(
             ()=> [[typeof(MathObject)]],
-            args => ()=> ((MathObject)args[0]).Calculate().Simplify(),
+            args => ()=> ((MathObject)args[0]).Evaluate().Simplify(),
             arguments.Pop()
         )},
 
+
+		//TEST VAR
         {"ADDD",arguments => new InformalCommand(
             ()=> [[typeof(Add)]],
-            args => ()=> ((MathObject)args[0]).Calculate().Simplify(),
+            args => ()=> ((MathObject)args[0]).Evaluate().Simplify(),
             arguments.Pop()
         )},
 
     };
-    public static readonly Dictionary<string,Constant> FormalConstants = new(){
+    
+	/// <summary>
+	/// Contains all formal constants (eg. pi, e, ect.)
+	/// </summary>
+	public static readonly Dictionary<string,Constant> FormalConstants = new(){
         {"e",new Constant(Math.E)},
         {"pi",new Constant(Math.PI)},
     };
     
-    
-    public static ExecutableCommand Parse(string input) {
+	/// <summary>
+	/// Parses a string input into an executable command. 
+	/// </summary>
+	public static ExecutableCommand Parse(string input) {
 		//stacks
 		var operators = new Stack<string>();
 		var output = new Stack<object>();
@@ -143,7 +162,7 @@ public class Command {
 		
 		//return result
 		if (output.Peek() is ExecutableCommand) return (ExecutableCommand)output.Pop();
-        return new Write(((MathObject)output.Pop()).Calculate().Simplify());
+        return new Write(((MathObject)output.Pop()).Evaluate().Simplify());
 	}
 
     private static object ApplyOperator(string op, Stack<object> output) {
