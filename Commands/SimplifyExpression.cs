@@ -6,9 +6,7 @@ public class SimplifyExpression : ExecutableCommand {
         [typeof(MathObject)]
     ];
     
-    public Func<object> GetCommandByInputs() =>()=>{
-        return expression.Simplify();
-    };
+    public Func<object> GetCommandByInputs() => expression.Simplify;
 
     private readonly MathObject expression;
     public SimplifyExpression(MathObject expression) {

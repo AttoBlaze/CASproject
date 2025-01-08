@@ -1,4 +1,4 @@
-using CAS;
+namespace CAS;
 
 public class Power : MathObject {
     public MathObject Base {get; private set;}

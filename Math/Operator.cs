@@ -1,5 +1,5 @@
 using System.Collections;
-using CAS;
+namespace CAS;
 
 /// <summary>
 /// Represents an operator (such as + or *)

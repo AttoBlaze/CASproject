@@ -1,9 +1,9 @@
 TODO:
 
-More Simplifications
-User-defined variables
+Math functions
 Log, Ln
 Factorial
-Differentiable expressions
+More Simplifications
 Help command
+Differentiable expressions
 

@@ -1,4 +1,4 @@
-using CAS;
+namespace CAS;
 
 /// <summary>
 /// Represents a variable value

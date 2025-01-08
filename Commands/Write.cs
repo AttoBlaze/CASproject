@@ -1,6 +1,5 @@
 using CAS;
-using Commands;
-
+namespace Commands;
 public class Write : ExecutableCommand {
     public Type[][] GetOverloads() => [
         [typeof(object)]

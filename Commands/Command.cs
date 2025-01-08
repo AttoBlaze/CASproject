@@ -38,7 +38,7 @@ public class Command {
 	/// </summary>
     public static readonly Dictionary<string,Func<Stack<object>,ExecutableCommand>> Commands = new(){
         //evalutes the given math expression
-        {"evaluate",arguments => new EvaluateExpression((MathObject)arguments.Pop())},
+        {"evaluate",arguments => new EvaluateExpression((MathObject)arguments.Pop(),definedVariables??new())},
         
         //writes the given input result in the console
         {"write",arguments => new Write(arguments.Pop())},
@@ -49,29 +49,44 @@ public class Command {
         //calculates and simplifies the given expression
         {"calculate",arguments => new InformalCommand(
             ()=> [[typeof(MathObject)]],
-            args => ()=> ((MathObject)args[0]).Calculate(new()),
+            args => ()=> ((MathObject)args[0]).Calculate(definedVariables??new()),
             arguments.Pop()
         )},
 
 		//exists the application
 		{"exit", arguments => new ExitCommand()},
 
+ 		//simplifies the given expression
+        {"define",arguments => {
+			double value = ((Constant)arguments.Pop()).value;
+			string name = ((Variable)arguments.Pop()).name;
+			if (name.ToCharArray().Any(c => !Char.IsLetter(c))) throw new Exception("Variable names can only consist of letters!");
+			return new DefineVariable(name,value);
+		}},
 
-		//TEST VAR
-        {"ADDD",arguments => new InformalCommand(
-            ()=> [[typeof(Add)]],
-            args => ()=> ((MathObject)args[0]).Evaluate().Simplify(),
-            arguments.Pop()
-        )},
+		//lists objects
+		{"list",arguments => {
+			string name = ((Variable)arguments.Pop()).name;
+			return new ListObjects(name);
+		}},
     };
     
 	/// <summary>
-	/// Contains all formal constants (eg. pi, e, ect.)
+	/// Contains all pre-defined variables (fx e, pi).
 	/// </summary>
-	public static readonly Dictionary<string,Constant> FormalConstants = new(){
-        {"e",new Constant(Math.E)},
-        {"pi",new Constant(Math.PI)},
+	public static readonly Dictionary<string,double> formalDefinedVariables = new(){
+        {"e",Math.E},
+        {"pi",Math.PI},
     };
+	
+	/// <summary>
+	/// Contains all defined variables (fx e, pi, x if user defined).
+	/// </summary>
+	public static Dictionary<string,double> definedVariables {get; private set;} = formalDefinedVariables.ToDictionary();
+	public static void DefineVariable(string name, double value) {
+		if (!formalDefinedVariables.ContainsKey(name)) 
+			definedVariables[name] = value;
+	}
     
 	/// <summary>
 	/// Parses a string input into an executable command. 
@@ -85,7 +100,7 @@ public class Command {
 		string builder = "";
 		char[] tokens = input.ToCharArray();
 		for (int i=0;i<tokens.Length;i++) {
-            //parse constants
+			//parse constants
 			if (tokens[i]=='.' || Char.IsDigit(tokens[i])) {
 				
                 //get number as string
@@ -116,7 +131,7 @@ public class Command {
 				}
 				
 				//push to variable stack if string is a variable, otherwise push to operator stack.
-                if(FormalConstants.ContainsKey(builder)) output.Push(FormalConstants[builder]);
+                if(definedVariables.ContainsKey(builder) || (i<tokens.Length && tokens[i]!='(')) output.Push(new Variable(builder));
                 else operators.Push(builder);
 
                 builder = "";	//reset builder
@@ -184,7 +199,7 @@ public class Command {
 		
 		//return result
 		if (output.Peek() is ExecutableCommand) return (ExecutableCommand)output.Pop();
-        return new Write(((MathObject)output.Pop()).Evaluate().Simplify());
+        return new Write(((MathObject)output.Pop()).Calculate(definedVariables));
 	}
 
     private static object ApplyOperator(string op, Stack<object> output) {

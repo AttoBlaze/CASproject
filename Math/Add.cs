@@ -1,4 +1,4 @@
-using CAS;
+namespace CAS;
 
 public class Add : MathObject {
     public List<MathObject> terms {get; private set;}
