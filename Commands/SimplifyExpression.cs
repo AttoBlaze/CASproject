@@ -2,10 +2,6 @@ using CAS;
 
 namespace Commands;
 public class SimplifyExpression : ExecutableCommand {
-    public Type[][] GetOverloads() => [
-        [typeof(MathObject)]
-    ];
-    
     public Func<object> GetCommandByInputs() => expression.Simplify;
 
     private readonly MathObject expression;

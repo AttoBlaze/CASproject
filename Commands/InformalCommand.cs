@@ -4,8 +4,6 @@ namespace Commands;
 /// Represents an informally defined command
 /// </summary>
 public class InformalCommand : ExecutableCommand {
-    public Type[][] GetOverloads() => overloads();
-    
     public Func<object> GetCommandByInputs() => getCommand(args);
 
     private readonly Func<Type[][]> overloads;

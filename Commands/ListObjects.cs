@@ -1,10 +1,6 @@
 namespace Commands;
 
 public class ListObjects : ExecutableCommand {
-    public Type[][] GetOverloads() => [
-        [typeof(string)]
-    ];
-
     public Func<object> GetCommandByInputs() =>()=> {
         if (objects=="variables") Console.WriteLine(
             string.Join("\n",

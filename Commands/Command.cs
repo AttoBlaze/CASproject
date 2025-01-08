@@ -4,11 +4,6 @@ namespace Commands;
 
 public interface ExecutableCommand {
     /// <summary>
-    /// Gets the list of overloads this command has
-    /// </summary>
-    public Type[][] GetOverloads();
-
-	/// <summary>
 	/// Gets the specific command to be executed according the command arguments given 
 	/// </summary>
     protected Func<object> GetCommandByInputs();
@@ -23,7 +18,6 @@ public interface ExecutableCommand {
 /// Exits the application
 /// </summary>
 public class ExitCommand : ExecutableCommand {
-	public Type[][] GetOverloads() => [[]];
 	public Func<object> GetCommandByInputs() =>()=> {
 		Environment.Exit(0);
 		return 0;
@@ -58,7 +52,7 @@ public class Command {
 
  		//simplifies the given expression
         {"define",arguments => {
-			double value = ((Constant)arguments.Pop()).value;
+			double value = ((Constant)((MathObject)arguments.Pop()).Calculate(definedVariables??new())).value;
 			string name = ((Variable)arguments.Pop()).name;
 			if (name.ToCharArray().Any(c => !Char.IsLetter(c))) throw new Exception("Variable names can only consist of letters!");
 			return new DefineVariable(name,value);
@@ -98,10 +92,10 @@ public class Command {
 
 		//tool variables
 		string builder = "";
-		char[] tokens = input.ToCharArray();
+		char[] tokens = input.Replace("**","^").ToCharArray();
 		for (int i=0;i<tokens.Length;i++) {
 			//parse constants
-			if (tokens[i]=='.' || Char.IsDigit(tokens[i])) {
+			if (tokens[i]=='.' || tokens[i]==',' || Char.IsDigit(tokens[i])) {
 				
                 //get number as string
 				while(i<tokens.Length && (tokens[i]=='.' || tokens[i]==',' || Char.IsDigit(tokens[i]))) {
@@ -110,7 +104,7 @@ public class Command {
 				}
 
 				//check for shit term
-				if (Double.TryParse(builder, out double value)) {
+				if (Double.TryParse(builder.Replace('.',','), out double value)) {
                     output.Push(new Constant(value));				//push to output stack
 				    builder = "";					                //reset builder
 				    i--;											//account for 'overshoot'
@@ -140,11 +134,6 @@ public class Command {
 			
 			//parse operators
 			else if (Operator.operators.TryGetValue(tokens[i], out Operator? op)) {
-				//** == ^
-				if (op.symbol=='*' && i<tokens.Length-1 && tokens[i+1]=='*') {
-					op = Operator.operators['^'];
-					i++;
-				}
 				
 				//continually apply operators
 				while (operators.Count>0 && 				//the operator stack isnt empty

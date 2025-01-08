@@ -1,10 +1,6 @@
 namespace Commands;
 
 public class DefineVariable : ExecutableCommand {
-    public Type[][] GetOverloads() => [
-        [typeof(string),typeof(double)]
-    ];
-
     public Func<object> GetCommandByInputs() => ()=>{
         Command.DefineVariable(name,value);
         return "succesfully defined variable "+name+" as "+value;

@@ -1,10 +1,6 @@
 using CAS;
 namespace Commands;
 public class Write : ExecutableCommand {
-    public Type[][] GetOverloads() => [
-        [typeof(object)]
-    ];
-
     public Func<object> GetCommandByInputs() =>()=>{
         object temp;
         Console.WriteLine(
