@@ -1,0 +1,11 @@
+Naming:
+
+Interfaces: Calculateable, Differentiable, Simplifiable, EqualityComparer 
+terms - MathObject : Equality - abstract ToString override
+
+
+Operator math objects:
+Add (contains negate)
+Multiply
+Divide
+Power
