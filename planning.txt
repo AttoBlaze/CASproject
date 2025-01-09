@@ -4,8 +4,6 @@ Log, Ln
 Sin, Cos, Tan, Asin, Acos, Atan
 RadToDeg, DegToRad
 Floor, Ceil, Round, Abs, Exp, Sqrt, root, random, gamma 
-AsString parentheses
-Function names get shown with input params in lists 
 Big floating point
 More Simplifications
 Help command
