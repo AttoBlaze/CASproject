@@ -8,10 +8,18 @@ public class Power : MathObject {
         exponent = obj2;
     }
     
-    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         //calculate all terms
-        return new Power(Base.Calculate(definedVariables),exponent.Calculate(definedVariables));
+        return new Power(Base.Calculate(definedObjects),exponent.Calculate(definedObjects));
     }
+
+    /*
+    Simplifications:
+    a^b = c,  a is R, b is R, c is R
+    (a^b)^c) = a^(b*c)
+    a^0 = 1
+    a^1 = a
+    */
 
     public MathObject Simplify() {
         //combine constants

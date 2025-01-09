@@ -20,15 +20,15 @@ public interface Differentiable<T> {
 
 public interface Evaluatable<T> {
     public T Evaluate() => Evaluate(new());
-    public T Evaluate(Dictionary<string,double> definedVariables);
+    public T Evaluate(Dictionary<string,MathObject> definedObjects);
 }
 
 /// <summary>
 /// Represents a mathematical object/expression
 /// </summary>
 public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
-        public MathObject Calculate(Dictionary<string,double> definedVariables) => 
-            this.Evaluate(definedVariables).Simplify();
+    public MathObject Calculate(Dictionary<string,MathObject> definedObjects) => 
+        this.Evaluate(definedObjects).Simplify();
 
     public string AsString();
 }

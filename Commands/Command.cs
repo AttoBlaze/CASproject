@@ -32,7 +32,7 @@ public class Command {
 	/// </summary>
     public static readonly Dictionary<string,Func<Stack<object>,ExecutableCommand>> Commands = new(){
         //evalutes the given math expression
-        {"evaluate",arguments => new EvaluateExpression((MathObject)arguments.Pop(),definedVariables??new())},
+        {"evaluate",arguments => new EvaluateExpression((MathObject)arguments.Pop(),definedObjects??new())},
         
         //writes the given input result in the console
         {"write",arguments => new Write(arguments.Pop())},
@@ -42,20 +42,36 @@ public class Command {
         
         //calculates and simplifies the given expression
         {"calculate",arguments => new InformalCommand(
-            ()=> [[typeof(MathObject)]],
-            args => ()=> ((MathObject)args[0]).Calculate(definedVariables??new()),
+            args => ()=> ((MathObject)args[0]).Calculate(definedObjects??new()),
             arguments.Pop()
         )},
 
 		//exists the application
 		{"exit", arguments => new ExitCommand()},
 
- 		//simplifies the given expression
-        {"define",arguments => {
-			double value = ((Constant)((MathObject)arguments.Pop()).Calculate(definedVariables??new())).value;
-			string name = ((Variable)arguments.Pop()).name;
-			if (name.ToCharArray().Any(c => !Char.IsLetter(c))) throw new Exception("Variable names can only consist of letters!");
-			return new DefineVariable(name,value);
+		//defines an object
+		{"define",arguments => {
+			if (((object[])arguments.Peek()).Length==2)
+				return (Commands??new())["defineVariable"](arguments);
+			return (Commands??new())["defineFunction"](arguments);
+		}},
+
+ 		//defines a variable
+        {"defineVariable",arguments => {
+			object[] args = (object[])arguments.Pop();
+			double value = ((Constant)((MathObject)args[0]).Calculate(definedObjects??new())).value;
+			string name = ((Variable)args[1]).name;
+			if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
+				return new DefineVariable(name,value);
+		}},
+
+		//defines a function
+		{"defineFunction",arguments => {
+			object[] args = (object[])arguments.Pop();
+			string[] inputs = args.Skip(1).SkipLast(1).Select(n => ((Variable)n).name).ToArray(); 
+			string name = ((Variable)args.Last()).name;
+			if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
+				return new DefineFunction(name,inputs,(MathObject)args[0]);
 		}},
 
 		//lists objects
@@ -68,19 +84,25 @@ public class Command {
 	/// <summary>
 	/// Contains all pre-defined variables (fx e, pi).
 	/// </summary>
-	public static readonly Dictionary<string,double> formalDefinedVariables = new(){
-        {"e",Math.E},
-        {"pi",Math.PI},
+	public static readonly Dictionary<string,MathObject> formalDefinedObjects = new(){
+        {"e",new Constant(Math.E)},
+        {"pi",new Constant(Math.E)},
     };
 	
 	/// <summary>
 	/// Contains all defined variables (fx e, pi, x if user defined).
 	/// </summary>
-	public static Dictionary<string,double> definedVariables {get; private set;} = formalDefinedVariables.ToDictionary();
-	public static void DefineVariable(string name, double value) {
-		if (!formalDefinedVariables.ContainsKey(name)) 
-			definedVariables[name] = value;
+	public static Dictionary<string,MathObject> definedObjects {get; private set;} = formalDefinedObjects.ToDictionary();
+	public static void Define(string name, MathObject expression) {
+		if (!formalDefinedObjects.ContainsKey(name)) 
+			definedObjects[name] = expression;
 	}
+
+	public static IEnumerable<string> GetVariables() =>	
+		definedObjects.Keys.Where(key => definedObjects[key] is Constant);
+
+	public static IEnumerable<string> GetFunctions() =>
+		definedObjects.Keys.Where(key => definedObjects[key] is Function);
     
 	/// <summary>
 	/// Parses a string input into an executable command. 
@@ -104,7 +126,7 @@ public class Command {
 				}
 
 				//check for shit term
-				if (Double.TryParse(builder.Replace('.',','), out double value)) {
+				if (double.TryParse(builder.Replace('.',','), out double value)) {
                     output.Push(new Constant(value));				//push to output stack
 				    builder = "";					                //reset builder
 				    i--;											//account for 'overshoot'
@@ -124,11 +146,13 @@ public class Command {
 					i++;
 				}
 				
-				//push to variable stack if string is a variable, otherwise push to operator stack.
-                if(definedVariables.ContainsKey(builder) || (i<tokens.Length && tokens[i]!='(')) output.Push(new Variable(builder));
-                else operators.Push(builder);
-
-                builder = "";	//reset builder
+				//push to variable stack if string is a variable (no parentheses), otherwise push to operator stack.
+                if(i>=tokens.Length || tokens[i]!='(' ||												//math objects that are not functions with inputs
+					(definedObjects.TryGetValue(builder,out MathObject? obj) && (obj is not Function)))	//^
+					output.Push(new Variable(builder));
+				else operators.Push(builder);											//commands + functions with inputs
+				
+				builder = "";	//reset builder
 				i--;			//account for 'overshoot'
 			}
 			
@@ -171,7 +195,7 @@ public class Command {
 			}
 
             //commands with several inputs have inputs seperated by ;
-            else if (tokens[i]==';') continue;
+            else if (tokens[i]==';') operators.Push(";");
 			
 			//if we have neither letters, numbers, an operator, or a parentheses, then a mistake must have happened.
 			else throw new Exception("Unknown error occurred when parsing input");
@@ -187,8 +211,12 @@ public class Command {
 		if (output.Count!=1) throw new Exception("Output was unable to be combined");
 		
 		//return result
-		if (output.Peek() is ExecutableCommand) return (ExecutableCommand)output.Pop();
-        return new Write(((MathObject)output.Pop()).Calculate(definedVariables));
+		object Output = output.Pop();
+		if (Output is ExecutableCommand) {
+			if (Output is EvaluateExpression || Output is SimplifyExpression) return new Write(Output);
+			return (ExecutableCommand)Output;
+		}
+        return new Write(((MathObject)Output).Calculate(definedObjects));
 	}
 
     private static object ApplyOperator(string op, Stack<object> output) {
@@ -196,10 +224,50 @@ public class Command {
         if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 
             return ope.operation(output);
 
+		//combine multiple inputs
+		if (op == ";") {
+			object val1 = output.Pop();
+			object val2 = output.Pop();
+			if (val1 is object[])
+				return ((object[])val1).Append(val2).ToArray();
+			return new object[]{val1,val2};
+		}
+
         //commands
         if (Commands.TryGetValue(op, out Func<Stack<object>,ExecutableCommand>? createCommand))
             return createCommand(output);
         
+		//functions
+		if (definedObjects.TryGetValue(op, out MathObject? expression) && expression is Function) {
+			var function = (Function)expression;
+			object args = output.Pop(); //get function inputs
+			
+			//multiple inputs
+			if (args is object[]) {
+				var Args = ((object[])args).Select(n => (MathObject)n).ToArray();
+				
+				//error check
+				if(function.inputs.Length!=Args.Length) throw new Exception("Improper math function input count! ("+Args.Length+" inputs given, "+function.inputs.Length+" inputs required)");
+				
+				//function inputs
+				Dictionary<string,MathObject> inputs = new();
+				for(int i=0 ; i<Args.Length ; i++)
+					inputs[function.inputs[i]] = Args[i];
+
+				return function.Evaluate(inputs);
+			}
+
+			//single input
+			else {
+				//error check
+				if(function.inputs.Length!=1) throw new Exception("Improper math function input count! ("+1+" inputs given, "+function.inputs.Length+" inputs required)");
+				
+				return function.Evaluate(new(){
+					{function.inputs[0],(MathObject)args}
+				}); 
+			}
+		}
+
         throw new Exception("No operator could be applied!");
     }
 }

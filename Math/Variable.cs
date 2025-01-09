@@ -9,8 +9,8 @@ public class Variable : MathObject {
         this.name = name;
     }
 
-    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
-        if (definedVariables.TryGetValue(name, out double value)) return new Constant(value);
+    public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
+        if (definedObjects.TryGetValue(name, out MathObject? value)) return value.Evaluate(definedObjects);
         return this;
     }
 

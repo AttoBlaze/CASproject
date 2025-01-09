@@ -8,11 +8,18 @@ public class Divide : MathObject {
         denominator = obj2;
     }
     
-    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         //calculate all terms
-        return new Divide(numerator.Calculate(definedVariables),denominator.Calculate(definedVariables));
+        return new Divide(numerator.Calculate(definedObjects),denominator.Calculate(definedObjects));
     }
 
+    /*
+    Simplifications:
+    a/(a^b) = a^(1-b)
+    (a^b)/a = a^(b-1)
+    (a^b)/(a^c) = a^(b-c)
+    a/(b/c) = (a*c)/b
+    */
     public MathObject Simplify() {
         //combine constants
         if(numerator is Constant && denominator is Constant) return new Constant(((Constant)numerator).value/((Constant)denominator).value);

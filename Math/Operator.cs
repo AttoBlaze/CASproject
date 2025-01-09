@@ -11,7 +11,7 @@ public class Operator {
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
-                return new Add([term1,term2]);
+                return new Add(term1,term2);
             }
         )},
 
@@ -20,7 +20,7 @@ public class Operator {
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
-                return new Add([term1,Add.Negate(term2)]);
+                return new Add(term1,Add.Negate(term2));
             }
         )},
         
@@ -29,7 +29,7 @@ public class Operator {
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
-                return new Multiply([term1,term2]);
+                return new Multiply(term1,term2);
             }
         )},
 
@@ -55,8 +55,6 @@ public class Operator {
     /// <summary>
     /// The precedence of the given operator
     /// </summary>
-    /// <param name="op"></param>
-    /// <returns></returns>
     public static int Precedence(string op) => 
         op.Length>1? 0:
         Precedence(op[0]);

@@ -10,7 +10,7 @@ public class Constant : MathObject {
     }
 
 
-    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         return this;
     }
 

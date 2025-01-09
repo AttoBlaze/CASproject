@@ -2,10 +2,10 @@ namespace Commands;
 
 public class ListObjects : ExecutableCommand {
     public Func<object> GetCommandByInputs() =>()=> {
-        if (objects=="variables") Console.WriteLine(
+        if (objects=="all") Console.WriteLine(
             string.Join("\n",
-                Command.definedVariables.Keys.ToList()
-                .Select(n => n+": "+Command.definedVariables[n])
+                Command.definedObjects.Keys.ToList()
+                .Select(n => n+": "+Command.definedObjects[n].AsString())
         ));
         return 0;
     };

@@ -1,21 +1,29 @@
 namespace CAS;
 
 public class Multiply : MathObject {
-    public List<MathObject> terms {get; private set;}
+    public List<MathObject> terms {get; private set;} = new();
     public Multiply(MathObject obj1, MathObject obj2) : this([obj1,obj2]) {}
     public Multiply(IEnumerable<MathObject> terms) {
-        this.terms = terms.Where(n => !(n is Multiply)).ToList();
-        
-        //combine all add terms
-        foreach(Multiply term in terms.Where(n => n is Multiply)) {
-            this.terms.AddRange(term.terms);
+        //combine all multiply terms under this multiply
+        foreach(var term in terms) {
+            if(term is Multiply) this.terms.AddRange(((Multiply)term).terms);
+            else this.terms.Add(term);
         }
     }
 
-    public MathObject Evaluate(Dictionary<string, double> definedVariables) {
+    public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         //calculate all terms
-        return new Multiply(terms.Select(term => term.Evaluate(definedVariables)));
+        return new Multiply(terms.Select(term => term.Evaluate(definedObjects)));
     }
+
+    /*
+    Simplifications:
+    a*a = a^2
+    a*a^b = a^(b+1)
+    a^b*a^c = a^(b+c)
+    0*a = 0
+    1*a = a
+    */
 
     public MathObject Simplify() {
         //simplify terms
@@ -28,7 +36,7 @@ public class Multiply : MathObject {
             terms.Remove(constant);
             value *= constant.value;            
         }
-        terms.Add(new Constant(value));
+        if (value!=1) terms.Add(new Constant(value));
 
         if(terms.Count==1) return terms[0];
         return this;

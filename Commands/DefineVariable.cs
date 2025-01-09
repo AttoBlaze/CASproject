@@ -1,8 +1,10 @@
+using CAS;
+
 namespace Commands;
 
 public class DefineVariable : ExecutableCommand {
     public Func<object> GetCommandByInputs() => ()=>{
-        Command.DefineVariable(name,value);
+        Command.Define(name,new Constant(value));
         return "succesfully defined variable "+name+" as "+value;
     };
 
@@ -12,6 +14,4 @@ public class DefineVariable : ExecutableCommand {
         name = variableName;
         this.value = value;
     }
-
-
 }
