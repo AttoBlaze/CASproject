@@ -51,18 +51,21 @@ public class Command {
 
 		//defines an object
 		{"define",arguments => {
+			//variables
 			if (((object[])arguments.Peek()).Length==2)
 				return (Commands??new())["defineVariable"](arguments);
+			
+			//functions
 			return (Commands??new())["defineFunction"](arguments);
 		}},
 
  		//defines a variable
         {"defineVariable",arguments => {
 			object[] args = (object[])arguments.Pop();
-			double value = ((Constant)((MathObject)args[0]).Calculate(definedObjects??new())).value;
+			var expression = (MathObject)args[0];
 			string name = ((Variable)args[1]).name;
 			if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
-				return new DefineVariable(name,value);
+			return new DefineVariable(name,expression);
 		}},
 
 		//defines a function
@@ -98,9 +101,12 @@ public class Command {
 			definedObjects[name] = expression;
 	}
 
-	public static IEnumerable<string> GetVariables() =>	
+	public static IEnumerable<string> GetConstants() =>	
 		definedObjects.Keys.Where(key => definedObjects[key] is Constant);
-
+	
+	public static IEnumerable<string> GetVariables() =>	
+		definedObjects.Keys;
+	
 	public static IEnumerable<string> GetFunctions() =>
 		definedObjects.Keys.Where(key => definedObjects[key] is Function);
     
@@ -147,10 +153,11 @@ public class Command {
 				}
 				
 				//push to variable stack if string is a variable (no parentheses), otherwise push to operator stack.
-                if(i>=tokens.Length || tokens[i]!='(' ||												//math objects that are not functions with inputs
-					(definedObjects.TryGetValue(builder,out MathObject? obj) && (obj is not Function)))	//^
-					output.Push(new Variable(builder));
-				else operators.Push(builder);											//commands + functions with inputs
+                if((definedObjects.TryGetValue(builder,out MathObject? obj) && (obj is not Function)) ||	//math objects that are not functions with inputs
+					i>=tokens.Length || tokens[i]!='(')										
+					if (obj is Function) output.Push(obj);													//function without inputs
+					else output.Push(new Variable(builder));												//math object
+				else operators.Push(builder);																//commands + functions with inputs
 				
 				builder = "";	//reset builder
 				i--;			//account for 'overshoot'

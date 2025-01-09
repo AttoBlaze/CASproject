@@ -1,6 +1,5 @@
 TODO:
 
-Math functions
 Log, Ln
 Sin, Cos, Tan, Asin, Acos, Atan
 RadToDeg, DegToRad
