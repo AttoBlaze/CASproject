@@ -37,5 +37,9 @@ public class Power : MathObject {
     public bool EquivalentTo(MathObject obj) =>
         obj.Evaluate().Equals(this.Evaluate(new()));
 
-    public string AsString() => Base.AsString()+"^"+exponent.AsString();
+    public string AsString() => 
+        (Base.Precedence()!=0 && Base.AbsPrecedence()<Math.Abs(this.Precedence())? "("+Base.AsString()+")":Base.AsString()) + "^"+
+        (exponent.Precedence()!=0 && exponent.AbsPrecedence()<Math.Abs(this.Precedence())? "("+exponent.AsString()+")":exponent.AsString());
+
+    public int Precedence() => Operator.Precedence('^');
 }

@@ -1,3 +1,5 @@
+using CAS;
+
 namespace Commands;
 
 public class ListObjects : ExecutableCommand {
@@ -8,7 +10,9 @@ public class ListObjects : ExecutableCommand {
             objects=="constants"?   Command.GetConstants():
             objects=="functions"?   Command.GetFunctions():
             Array.Empty<string>()
-        ).Select(n => n+": "+Command.definedObjects[n].AsString())));
+        ).Select(n => 
+            n+Command.definedObjects[n].Parameters()+": "+Command.definedObjects[n].AsString()                                                                                                                //definition
+        )));                                                   
         return 0;
     };
 

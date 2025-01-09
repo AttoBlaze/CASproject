@@ -49,5 +49,6 @@ public class Multiply : MathObject {
     public bool EquivalentTo(MathObject obj) =>
         obj.Evaluate().Equals(this.Evaluate(new()));
 
-    public string AsString() => string.Join("*",terms.Select(term => term.AsString()));
+    public string AsString() => string.Join("*",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString()));
+    public int Precedence() => Operator.Precedence('*');
 }

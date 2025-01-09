@@ -31,4 +31,8 @@ public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<
         this.Evaluate(definedObjects).Simplify();
 
     public string AsString();
+    public virtual string Parameters() => "";
+    public virtual int Precedence() => 0;
+    public int AbsPrecedence() => Math.Abs(Precedence());
+    
 }

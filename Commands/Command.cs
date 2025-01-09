@@ -101,14 +101,9 @@ public class Command {
 			definedObjects[name] = expression;
 	}
 
-	public static IEnumerable<string> GetConstants() =>	
-		definedObjects.Keys.Where(key => definedObjects[key] is Constant);
-	
-	public static IEnumerable<string> GetVariables() =>	
-		definedObjects.Keys;
-	
-	public static IEnumerable<string> GetFunctions() =>
-		definedObjects.Keys.Where(key => definedObjects[key] is Function);
+	public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
+	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys;
+	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is Function);
     
 	/// <summary>
 	/// Parses a string input into an executable command. 

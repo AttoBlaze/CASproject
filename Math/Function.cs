@@ -29,4 +29,5 @@ public class Function : MathObject {
         obj.Evaluate().Equals(this.Evaluate(new()));
 
     public string AsString() => expression.AsString();
+    public string Parameters() => "("+string.Join(",",inputs)+")";
 }

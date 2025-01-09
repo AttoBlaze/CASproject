@@ -47,7 +47,8 @@ public class Add : MathObject {
     public bool EquivalentTo(MathObject obj) =>
         obj.Evaluate().Equals(this.Evaluate(new()));
 
-    public string AsString() => string.Join("+",terms.Select(term => term.AsString())).Replace("+-","-");
+    public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");
+    public int Precedence() => Operator.Precedence('+');
 
     public static Multiply Negate(MathObject obj) => new Multiply(new Constant(-1),obj);
 }

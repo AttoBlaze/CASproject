@@ -36,5 +36,8 @@ public class Divide : MathObject {
     public bool EquivalentTo(MathObject obj) =>
         obj.Evaluate().Equals(this.Evaluate(new()));
 
-    public string AsString() => numerator.AsString()+"/"+denominator.AsString();
+    public string AsString() => 
+        (numerator.Precedence()!=0 && numerator.AbsPrecedence()<Math.Abs(this.Precedence())? "("+numerator.AsString()+")":numerator.AsString()) + "/"+
+        (denominator.Precedence()!=0 && denominator.AbsPrecedence()<Math.Abs(this.Precedence())? "("+denominator.AsString()+")":denominator.AsString());
+    public int Precedence() => Operator.Precedence('/');
 }
