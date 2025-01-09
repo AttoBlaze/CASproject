@@ -51,6 +51,9 @@ public class Command {
 
 		//defines an object
 		{"define",arguments => {
+			if((formalDefinedObjects??new()).ContainsKey(((Variable)((object[])arguments.Peek()).Last()).name))
+				throw new Exception("You cannot redefine formally defined objects!");
+
 			//variables
 			if (((object[])arguments.Peek()).Length==2)
 				return (Commands??new())["defineVariable"](arguments);
@@ -102,7 +105,7 @@ public class Command {
 	}
 
 	public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
-	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys;
+	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !formalDefinedObjects.ContainsKey(key));
 	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is Function);
     
 	/// <summary>
