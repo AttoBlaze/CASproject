@@ -1,24 +1,51 @@
 using CAS;
+using Commands;
 
 namespace Application;
 
 public class Setting {
-    public static void CreateAllSettings() {
-
+    public static Setting Get(string name) {
+        if (Program.settings.TryGetValue(name, out Setting? setting)) return setting;
+        throw new Exception("Setting \""+name+"\" does not exist!");
     }
 
+    public static void CreateAllSettings() {
+        new Setting(
+            "HideAllMessages",
+            "Disables all messages from being written in the console",
+            [
+                "true|false",""
+            ],
+            ()=> Program.HideAllMessages,
+            (input)=> {Program.HideAllMessages = (bool)input;},
+            ConvertToBool
+        );
+        new Setting(
+            "HideAllErrors",
+            "Disables all errors from being written in the console",
+            [
+                "true|false",""
+            ],
+            ()=> Program.HideAllErrors,
+            (input)=> {Program.HideAllErrors = (bool)input;},
+            ConvertToBool
+        );
+    }
 
-    public readonly string Name, Description;
-    public readonly string[] Overloads;
-    public readonly Action<object> Set;
-    public readonly Func<object,object> ConvertInput;
-    public readonly Func<object> Get;
+    public readonly string name, description;
+    public readonly string[] overloads;
+    public readonly Action<object> set;
+    public readonly Func<object,object> convertInput;
+    public readonly Func<object> get;
     
     public Setting(string name, string description, string[] overloads, Func<object> get, Action<object> set, Func<object,object> convertInput) {
-        Name = name;
-        ConvertInput = convertInput;
-        Set = set;
-        Get = get;
+        this.name = name;
+        this.description = description;
+        this.overloads = overloads;
+        this.convertInput = convertInput;
+        this.set = set;
+        this.get = get;
+        Program.settings[name] = this;
     }
     
     /* WIP to only pass ref and not getter and setter
@@ -37,13 +64,13 @@ public class Setting {
 
     public static readonly Func<object,object> ConvertToBool = input => {
         //string
-        if (input is Variable) {
-            var temp = (Variable)input;
-            if(temp.name.ToLower() == "true")
+        if (input is Variable or Function) {
+            var name = input.AsInput();
+            if(name.ToLower() is "true")
                 return true;
-            if (temp.name.ToLower() == "false")
+            if (name.ToLower() is "false")
                 return false;
-            throw new Exception("Given input is not either \"true\" or \"false\"!");
+            throw new Exception("Given input is not either \"true\" or \"false\"! ("+name+")");
         }
 
         //value 

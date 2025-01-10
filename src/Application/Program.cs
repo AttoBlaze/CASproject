@@ -1,5 +1,6 @@
 ﻿namespace Application;
 using CAS;
+using Commands;
 
 public static class Program {
     public static bool 
@@ -10,13 +11,14 @@ public static class Program {
     /// Contains all settings
     /// </summary>
     public static Dictionary<string,Setting> settings = new();
-    public static void SetSetting(string name, object input) {
-        if (!settings.TryGetValue(name, out Setting? setting)) 
-            throw new Exception("Setting \""+name+"\" does not exist!");
+    public static IEnumerable<string> GetSettings() => settings.Keys;
+	
 
-        setting.Set(setting.ConvertInput);
-        Log("succesfully set setting \""+name+"\" to "+setting.Get());
-    }
+    /// <summary>
+	/// Contains all commands in the program
+	/// </summary>
+    public static readonly Dictionary<string,Command> commands = new();
+    public static IEnumerable<string> GetCommands() => commands.Keys;
 
     /// <summary>
     /// Logs the given message in the console
@@ -45,6 +47,7 @@ public static class Program {
 		if (!formalDefinedObjects.ContainsKey(name)) 
 			definedObjects[name] = expression;
 	}
+    public static IEnumerable<string> GetPredefined() => formalDefinedObjects.Keys;
 	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is Function);
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);

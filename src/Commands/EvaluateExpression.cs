@@ -2,9 +2,9 @@ using CAS;
 
 namespace Commands;
 public class EvaluateExpression : ExecutableCommand {
-    public Func<object> GetCommand() =>()=>{
+    public object Execute(){
         return expression.Evaluate(definedObjects);
-    };
+    }
 
     private readonly MathObject expression;
     private readonly Dictionary<string,MathObject> definedObjects;

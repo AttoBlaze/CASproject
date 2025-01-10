@@ -4,10 +4,10 @@ using Application;
 namespace Commands;
 
 public class DefineFunction : ExecutableCommand {
-    public Func<object> GetCommand() => ()=>{
+    public object Execute() {
         Program.Define(name,new Function(name,inputs,function));
         return "succesfully defined function "+name+" as "+function.AsString();
-    };
+    }
 
     private readonly MathObject function;
     private readonly string name;

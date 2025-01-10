@@ -2,7 +2,7 @@ using CAS;
 
 namespace Commands;
 public class SimplifyExpression : ExecutableCommand {
-    public Func<object> GetCommand() => expression.Simplify;
+    public object Execute() => expression.Simplify();
 
     private readonly MathObject expression;
     public SimplifyExpression(MathObject expression) {

@@ -4,25 +4,20 @@ using Application;
 namespace Commands;
 
 public interface ExecutableCommand {
-    /// <summary>
-	/// Gets the specific command to be executed according the command arguments given 
-	/// </summary>
-    protected Func<object> GetCommand();
-    
 	/// <summary>
 	/// Executes this command
 	/// </summary>
-	public object Execute() => GetCommand()(); 
+	public object Execute(); 
 }
 
 /// <summary>
 /// Exits the application
 /// </summary>
 public class ExitCommand : ExecutableCommand {
-	public Func<object> GetCommand() =>()=> {
+	public object Execute() {
 		Environment.Exit(0);
 		return 0;
-	};
+	}
 
 	public ExitCommand() {}
 }
@@ -34,19 +29,15 @@ public sealed partial class Command {
 		this.description = description;
 		this.create = createCommand;
 		this.overloads = overloads;
-		AllCommands[name] = this;
+		Program.commands[name] = this;
 	}
 	public readonly string name;
 	public readonly string description;
 	public readonly string[] overloads;
 	public readonly Func<Stack<object>,ExecutableCommand> create;
 
-	/// <summary>
-	/// Contains all commands in the program
-	/// </summary>
-    public static readonly Dictionary<string,Command> AllCommands = new();
 	public static Command Get(string name) {
-		if (AllCommands.TryGetValue(name, out Command? cmd)) return cmd;
+		if (Program.commands.TryGetValue(name, out Command? cmd)) return cmd;
 		throw new Exception("Command \""+name+"\" does not exist!");
 	}
 
@@ -181,7 +172,7 @@ public sealed partial class Command {
 		}
 
         //commands
-        if (AllCommands.TryGetValue(op, out Command? command))
+        if (Program.commands.TryGetValue(op, out Command? command))
             return command.create(output);
         
 		//functions

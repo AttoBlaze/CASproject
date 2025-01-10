@@ -4,10 +4,10 @@ using Application;
 namespace Commands;
 
 public class DefineVariable : ExecutableCommand {
-    public Func<object> GetCommand() => ()=>{
+    public object Execute(){
         Program.Define(name,value);
         return "succesfully defined variable "+name+" as "+value;
-    };
+    }
 
     private readonly MathObject value;
     private readonly string name;

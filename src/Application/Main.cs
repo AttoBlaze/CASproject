@@ -17,8 +17,7 @@ internal class Application {
             "Startup initiated",
             "Creating settings... "
         );
-        //new Program.Setting("HideAllMessages",(input)=>{Program.HideAllMessages = (bool)input;}, ()=> Program.HideAllMessages,Program.Setting.ConvertToBool);
-        //new Program.Setting("HideAllErrors",(input)=>{Program.HideAllErrors = (bool)input;}, ()=> Program.HideAllErrors,Program.Setting.ConvertToBool);
+        Setting.CreateAllSettings();
         WRITE(
             "   Finished",
             "Creating commands... "

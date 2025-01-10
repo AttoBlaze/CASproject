@@ -1,5 +1,6 @@
 using CAS;
 using Application;
+using System.Linq;
 
 namespace Commands;
 
@@ -72,14 +73,26 @@ public sealed partial class Command {
             "list",
             "Lists objects",
             [
-                "all","Lists all defined objects",
+                "all","Lists everything in the program",
+                "commands","Lists all commands",
+                "objects","Lists all defined objects",
                 "variables","Lists all defined variables",
                 "functions","Lists all defined functions",
-                "constants","Lists all defined constants"
+                "constants","Lists all defined constants",
             ],
             arguments => {
                 string name = arguments.Pop().AsInput();
                 return new ListObjects(name);
 		});
+        new Command(
+            "set",
+            "Sets the value of a setting",
+            [
+                "SETTING;INPUTS..","Sets the given setting to the given input"
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                return new SetSetting(args.Last().AsInput(),args.Count()==2?args.First():args.Skip(1).ToArray());
+        });
     }
 }

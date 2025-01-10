@@ -3,9 +3,9 @@ using Application;
 
 namespace Commands;
 public class Write : ExecutableCommand {
-    public Func<object> GetCommand() =>()=>{
+    public object Execute() {
         object temp;
-        Program.Log(
+        string str = (
             //expressions
             obj is MathObject? ((MathObject)obj).AsString():
             
@@ -13,13 +13,14 @@ public class Write : ExecutableCommand {
             obj is ExecutableCommand?    
                 (temp=((ExecutableCommand)obj).Execute()) is MathObject?
                     ((MathObject)temp).AsString():
-                    temp:
+                    temp.ToString():
             
             //default
-            obj
-        );
+            obj.ToString()
+        )??"";
+        Program.Log(str);
         return 0;
-    };
+    }
 
     private readonly object obj;
     public Write(object obj) {
