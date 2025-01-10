@@ -3,7 +3,8 @@ using CAS;
 using Commands;
 
 public static class Program {
-    public static bool STARTED = false,
+    private static bool STARTED = false;
+    public static bool
         ShowAllMessages = true,
         ShowAllErrors = true,
         AlwaysWrite = true,
