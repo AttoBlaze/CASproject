@@ -89,5 +89,11 @@ public sealed partial class Command {
                 var args = (object[])arguments.Pop();
                 return new SetSetting(args.Last().AsInput(),args.Count()==2?args.First():args.Skip(1).ToArray());
         });
+
+        //NEXT:
+        //getSetting
+        //destroy
+        //show/hide
+        //time
     }
 }

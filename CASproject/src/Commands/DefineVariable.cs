@@ -6,7 +6,7 @@ namespace Commands;
 public sealed class DefineVariable : ExecutableCommand {
     public object Execute(){
         Program.Define(name,value);
-        return "succesfully defined variable "+name+" as "+value;
+        return "succesfully defined variable "+name+" as "+value.AsString();
     }
 
     private readonly MathObject value;

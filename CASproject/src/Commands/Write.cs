@@ -5,6 +5,7 @@ namespace Commands;
 public sealed class Write : ExecutableCommand {
     public object Execute() {
         object temp;
+        bool nothingToWrite = false;
         string str = (
             //variables
             obj is Variable? 
@@ -16,22 +17,32 @@ public sealed class Write : ExecutableCommand {
             
             //commands
             obj is ExecutableCommand?    
-                (temp=((ExecutableCommand)obj).Execute()) is MathObject?
-                    ((MathObject)temp).AsString():
-                    temp.ToString():
+                (temp=((ExecutableCommand)obj).Execute()) is MathObject?    ((MathObject)temp).AsString():
+                (nothingToWrite = temp is int && (int)temp==0)?          null://command returns 0 = nothing to write
+                temp.ToString():
             
             //default
             obj.ToString()
         )??"";
-        Program.Log(str);
-        return obj;
+        if(nothingToWrite) return 0;
+        
+        //if AlwaysShowWrite is enabled, override the ShowAllMessages setting temporarily
+        if(Program.AlwaysShowWrite) {
+            bool showMsgs = Program.ShowAllMessages;
+            Program.ShowAllMessages = true;  
+            Program.Log(str);
+            Program.ShowAllMessages = showMsgs;  
+        }
+
+        else Program.Log(str);
+        return 0;
     }
 
     private readonly object obj;
-    public Write(object obj) {
-        if (obj is Write)
-            this.obj = ((Write)obj).obj;
+    public Write(object Obj) {
+        if (Obj is Write)
+            this.obj = ((Write)Obj).obj;
         else
-            this.obj = obj;
+            this.obj = Obj;
     }
 }

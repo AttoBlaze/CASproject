@@ -5,14 +5,18 @@ using Commands;
 public static class Program {
     public static bool STARTED = false,
         ShowAllMessages = true,
-        ShowAllErrors = true;
+        ShowAllErrors = true,
+        AlwaysWrite = true,
+        AlwaysShowWrite = true;
 
     /// <summary>
     /// Parses and executes the given input  
     /// </summary>
     public static void Execute(string input) {
         //parse input and execute as command
-        Command.Parse(input)?.Execute();
+        var cmd = Command.Parse(input);
+        if(AlwaysWrite && cmd is not Write) cmd = new Write(cmd);
+        cmd.Execute();
     }
     
     /// <summary>

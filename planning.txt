@@ -12,4 +12,3 @@ time command (records time taken to execute command)
 show/hide command (overrides showallmessages)
 Differentiable expressions
 Factorial operator
-Global settings

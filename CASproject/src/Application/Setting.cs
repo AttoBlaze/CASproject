@@ -30,6 +30,26 @@ public class Setting {
             (input)=> {Program.ShowAllErrors = (bool)input;},
             ConvertToBool
         );
+        new Setting(
+            "AlwaysWrite",
+            "Enables/disables all executed commands being written in the console",
+            [
+                "true|false",""
+            ],
+            ()=> Program.AlwaysWrite,
+            (input)=> {Program.AlwaysWrite = (bool)input;},
+            ConvertToBool
+        );
+        new Setting(
+            "AlwaysShowWrite",
+            "When enabled, the Write command will override the ShowAllMessages setting and will always be written in the console",
+            [
+                "true|false",""
+            ],
+            ()=> Program.AlwaysShowWrite,
+            (input)=> {Program.AlwaysShowWrite = (bool)input;},
+            ConvertToBool
+        );
     }
 
     public readonly string name, description;
