@@ -3,7 +3,6 @@ using CAS;
 using Commands;
 
 public static class Program {
-    private static bool STARTED = false;
     public static bool
         ShowAllMessages = true,
         ShowAllErrors = true,
@@ -108,5 +107,6 @@ public static class Program {
             Console.Write(str.Length>0 && str.EndsWith(" ")?str.Substring(0,str.Length-1):str+"\n");
         }
     }
+    private static bool STARTED = false;
 }
 
