@@ -72,20 +72,15 @@ public sealed partial class Command {
         new Command(
             "list",
             "Lists objects",
-            [
-                "all","Lists everything in the program",
-                "commands","Lists all commands",
-                "objects","Lists all defined objects",
-                "variables","Lists all defined variables",
-                "functions","Lists all defined functions",
-                "constants","Lists all defined constants",
-            ],
+            ListObjects.listables.Keys.Select(key => new string[]{
+                key,ListObjects.listables[key].description
+            }).SelectMany(n=>n).ToArray(),
             arguments => {
                 string name = arguments.Pop().AsInput();
                 return new ListObjects(name);
 		});
         new Command(
-            "set",
+            "setSetting",
             "Sets the value of a setting",
             [
                 "SETTING;INPUTS..","Sets the given setting to the given input"

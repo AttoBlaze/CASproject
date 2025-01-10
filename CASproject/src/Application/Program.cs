@@ -3,7 +3,7 @@ using CAS;
 using Commands;
 
 public static class Program {
-    public static bool 
+    public static bool STARTED = false,
         ShowAllMessages = true,
         ShowAllErrors = true;
 
@@ -72,9 +72,10 @@ public static class Program {
 	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !formalDefinedObjects.ContainsKey(key));
 
     /// <summary>
-    /// Initializes the startup process
+    /// Initiates the startup process (if startup has not been initiated yet)
     /// </summary>
     public static void START() {
+        if (STARTED) return;
         const string BAR = "-------------------------------";
         WRITE(
             "",
@@ -94,6 +95,7 @@ public static class Program {
             BAR,
             "Type \"help()\" to see a list of commands"
         );
+        STARTED = true;
     }
     private static void WRITE(params object[] args) {
         foreach(var msg in args) {
@@ -101,6 +103,5 @@ public static class Program {
             Console.Write(str.Length>0 && str.EndsWith(" ")?str.Substring(0,str.Length-1):str+"\n");
         }
     }
-
 }
 

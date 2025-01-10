@@ -4,16 +4,28 @@ using CAS;
 namespace Commands;
 
 public sealed class ListObjects : ExecutableCommand {
+    public static readonly Dictionary<string,ListCommand> listables = new(){
+        {"all",         new("Lists everything in the program",Write_ALL)}, 
+        {"predefined",  new("Lists all pre-defined objects in the program",Write_PREDEFINED)},
+        {"objects",     new("Lists all defined objects",Write_MATH)},
+        {"variables",   new("Lists all defined variables",Write_VARIABLES)},
+        {"functions",   new("Lists all defined functions",Write_FUNCTIONS)},
+        {"constants",   new("Lists all defined constants",Write_CONSTANTS)},
+        {"commands",    new("Lists all commands in the program",Write_COMMANDS)},
+        {"settings",    new("Lists all settings in the program",Write_SETTINGS)}
+    };
+
+    public struct ListCommand{
+        public string description;
+        public Action write;
+        public ListCommand(string description, Action write) {
+            this.description = description;
+            this.write = write;
+        }
+    }
+    
     public object Execute() {
-        switch(objects) {
-            case "all":       Write_ALL(); break; 
-            case "objects":   Write_MATH(); break;
-            case "variables": Write_VARIABLES(); break;
-            case "functions": Write_FUNCTIONS(); break;
-            case "constants": Write_CONSTANTS(); break;
-            case "commands":  Write_COMMANDS(); break;
-            case "settings":  Write_SETTINGS(); break;
-        }                                   
+        if(listables.TryGetValue(objects, out ListCommand list)) list.write();                         
         return 0;
     }
 
@@ -39,6 +51,7 @@ public sealed class ListObjects : ExecutableCommand {
 
     private static void Write_SETTINGS() => WriteSettings(Program.GetSettings());
     private static void Write_MATH() => WriteMath(Program.GetDefinedObjects());
+    private static void Write_PREDEFINED() => WriteMath(Program.GetPredefined());
     private static void Write_VARIABLES() => WriteMath(Program.GetVariables());
     private static void Write_FUNCTIONS() => WriteMath(Program.GetFunctions());
     private static void Write_CONSTANTS() => WriteMath(Program.GetConstants());
