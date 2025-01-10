@@ -1,7 +1,7 @@
 using CAS;
 
 namespace Commands;
-public class EvaluateExpression : ExecutableCommand {
+public sealed class EvaluateExpression : ExecutableCommand {
     public object Execute(){
         return expression.Evaluate(definedObjects);
     }

@@ -27,14 +27,18 @@ public class Divide : MathObject {
         return this;
     }
 
+    public bool Contains(MathObject obj) => 
+        obj.Equals(this) || 
+        numerator.Equals(obj) || denominator.Equals(obj) ||
+        numerator.Contains(obj) || denominator.Contains(obj);
+
     public bool Equals(MathObject obj) =>
         obj is Divide &&                                    //same type
         ((Divide)obj).numerator.Equals(this.numerator) &&   //same terms
         ((Divide)obj).denominator.Equals(this.denominator); //same terms
         
 
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this.Evaluate(new()));
+    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
 
     public string AsString() => 
         (numerator.Precedence()!=0 && numerator.AbsPrecedence()<Math.Abs(this.Precedence())? "("+numerator.AsString()+")":numerator.AsString()) + "/"+

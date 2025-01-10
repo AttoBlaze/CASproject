@@ -14,7 +14,7 @@ public interface ExecutableCommand {
 /// <summary>
 /// Exits the application
 /// </summary>
-public class ExitCommand : ExecutableCommand {
+public sealed class ExitCommand : ExecutableCommand {
 	public object Execute() {
 		Environment.Exit(0);
 		return 0;
@@ -51,9 +51,6 @@ public sealed partial class Command {
 	/// Parses a string input into a math object 
 	/// </summary>
 	public static MathObject ParseMath(string input) => (MathObject)ParseInput(input, convertToCommand:false);
-	/// <summary>
-	/// Parses a string input  
-	/// </summary>
 	public static object ParseInput(string input, bool convertToCommand = true){
 		//reformat input
 		char[] tokens = input
@@ -222,7 +219,7 @@ public sealed partial class Command {
 				}); 
 			}
 		}
-        throw new Exception("No operator could be applied!");
+        throw new Exception("No operator/function could be applied!");
     }
 
 	/// <summary>

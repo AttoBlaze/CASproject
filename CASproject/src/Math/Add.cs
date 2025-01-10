@@ -40,12 +40,20 @@ public class Add : MathObject {
         return this;
     }
 
-    public  bool Equals(MathObject obj) =>
-        obj is Add &&                                //same type
-        ((Add)obj).terms.SequenceEqual(this.terms);  //same terms
+    public bool Contains(MathObject obj) => 
+        obj.Equals(this) || 
+        terms.Any(term => term.Equals(obj) || term.Contains(obj)); 
+    
+    public bool Equals(MathObject obj) {
+        //same type
+        if(!(obj is Add)) return false;    
+        
+        //same terms
+        var objTerms = ((Add)obj).terms.ToHashSet();
+        return terms.All(term => objTerms.Any(n => n.Equals(term))); 
+    }
 
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this.Evaluate(new()));
+    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
 
     public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");
     public int Precedence() => Operator.Precedence('+');

@@ -2,7 +2,7 @@ using Application;
 
 namespace Commands;
 
-public class SetSetting : ExecutableCommand {
+public sealed class SetSetting : ExecutableCommand {
     public object Execute() {
         object before = setting.get();
         setting.set(setting.convertInput(args));

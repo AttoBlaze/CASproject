@@ -2,7 +2,7 @@ using CAS;
 using Application;
 
 namespace Commands;
-public class Write : ExecutableCommand {
+public sealed class Write : ExecutableCommand {
     public object Execute() {
         object temp;
         string str = (

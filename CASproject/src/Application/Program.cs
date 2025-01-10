@@ -8,11 +8,29 @@ public static class Program {
         ShowAllErrors = true;
 
     /// <summary>
+    /// Parses and executes the given input  
+    /// </summary>
+    public static void Execute(string input) {
+        //parse input and execute as command
+        Command.Parse(input)?.Execute();
+    }
+    
+    /// <summary>
+    /// Attempts to parse and execute the given input 
+    /// </summary>
+    public static void TryExecute(string input) {
+        try {
+            Execute(input);
+        } catch (Exception e) {
+            Log("Unknown error occured",e);
+        }
+    }
+
+    /// <summary>
     /// Contains all settings
     /// </summary>
     public static Dictionary<string,Setting> settings = new();
     public static IEnumerable<string> GetSettings() => settings.Keys;
-	
 
     /// <summary>
 	/// Contains all commands in the program

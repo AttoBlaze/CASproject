@@ -1,7 +1,7 @@
 using CAS;
 
 namespace Commands;
-public class SimplifyExpression : ExecutableCommand {
+public sealed class SimplifyExpression : ExecutableCommand {
     public object Execute() => expression.Simplify();
 
     private readonly MathObject expression;

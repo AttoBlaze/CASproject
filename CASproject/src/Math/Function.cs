@@ -25,10 +25,10 @@ public class Function : MathObject, NamedObject {
         obj is Function &&           //same type
         ((Function)obj).name==name;  //same name
 
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this.Evaluate(new()));
+    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
 
+    public bool Contains(MathObject obj) => obj.Equals(this) || expression.Contains(obj) || expression.Contains(new Variable(name));
     public string AsString() => expression.AsString();
-    public string Parameters() => "("+string.Join(",",inputs)+")";
+    public string GetParameters() => "("+string.Join(",",inputs)+")";
     public string GetName() => name;
 }

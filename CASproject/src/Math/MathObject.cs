@@ -31,13 +31,17 @@ public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<
     public MathObject Calculate(Dictionary<string,MathObject> definedObjects) => 
         this.Evaluate(definedObjects).Simplify();
 
+    /// <summary>
+    /// Gives a string representation of this math object. 
+    /// </summary>
     public string AsString();
-    public virtual string Parameters() => "";
-    public virtual int Precedence() => 0;
+    /// <summary>
+    /// Wether or not the definition of this math object contains the given term 
+    /// </summary>
+    public bool Contains(MathObject term) => Equals(term);
+    public int Precedence() => 0;
     public int AbsPrecedence() => Math.Abs(Precedence()); 
-    public virtual double AsValue() {
-        throw new Exception("Not a value!");
-    }
+    public double AsValue() => throw new Exception("Not a value!");
 }
 
 public interface NamedObject {

@@ -23,8 +23,7 @@ public class Variable : MathObject, NamedObject {
         obj is Variable &&           //same type
         ((Variable)obj).name==name;  //same name
 
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this);
+    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
 
     public string AsString() => name;
 

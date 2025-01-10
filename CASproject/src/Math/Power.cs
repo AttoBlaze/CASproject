@@ -33,10 +33,12 @@ public class Power : MathObject {
         ((Power)obj).Base.Equals(this.Base) &&       //same terms
         ((Power)obj).exponent.Equals(this.exponent); //same terms
         
+    public bool Contains(MathObject obj) => 
+        obj.Equals(this) || 
+        Base.Equals(obj) || exponent.Equals(obj) ||
+        Base.Contains(obj) || exponent.Contains(obj);
 
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this.Evaluate(new()));
-
+    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
     public string AsString() => 
         (Base.Precedence()!=0 && Base.AbsPrecedence()<Math.Abs(this.Precedence())? "("+Base.AsString()+")":Base.AsString()) + "^"+
         (exponent.Precedence()!=0 && exponent.AbsPrecedence()<Math.Abs(this.Precedence())? "("+exponent.AsString()+")":exponent.AsString());

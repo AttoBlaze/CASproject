@@ -67,7 +67,7 @@ public sealed partial class Command {
                 string[] inputs = args.Skip(1).SkipLast(1).Select(n => n.AsInput()).ToArray();   //function inputs are all but last and first of command inputs
                 string name = args.Last().AsInput();                                             //last command input is name
                 if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
-                    return new DefineFunction(name,inputs,(MathObject)args[0]);
+                return new DefineFunction(name,inputs,(MathObject)args[0]);
 		});
         new Command(
             "list",

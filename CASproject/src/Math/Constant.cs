@@ -23,8 +23,7 @@ public class Constant : MathObject {
         obj is Constant &&  //same type
         ((Constant)obj).value==this.value;  //same value
 
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this);
+    public bool EquivalentTo(MathObject obj) => obj.Simplify().Equals(this);
 
     public string AsString() => value.ToString();
 

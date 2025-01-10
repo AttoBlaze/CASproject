@@ -3,7 +3,7 @@ using CAS;
 
 namespace Commands;
 
-public class ListObjects : ExecutableCommand {
+public sealed class ListObjects : ExecutableCommand {
     public object Execute() {
         switch(objects) {
             case "all":       Write_ALL(); break; 
@@ -99,9 +99,12 @@ public class ListObjects : ExecutableCommand {
     }
 
     private static void WriteMath(IEnumerable<string> objs) {
-         Program.Log(string.Join("\n",objs.Select(n => 
-            n+Program.definedObjects[n].Parameters()+": "+Program.definedObjects[n].AsString()                                                                                                                //definition
-        )));      
+        Program.Log(string.Join("\n",objs.Select(n => {
+            string str = n;
+            if(Program.definedObjects[n] is Function) str += ((Function)Program.definedObjects[n]).GetParameters(); //add function parameters
+            str += ": "+Program.definedObjects[n].AsString();                                                                                                               //definition
+            return str;
+        })));      
     }
 
     private readonly string objects;

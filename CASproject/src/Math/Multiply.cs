@@ -42,13 +42,20 @@ public class Multiply : MathObject {
         return this;
     }
 
-    public bool Equals(MathObject obj) =>
-        obj is Multiply &&                                //same type
-        ((Multiply)obj).terms.SequenceEqual(this.terms);  //same terms
-
-    public bool EquivalentTo(MathObject obj) =>
-        obj.Evaluate().Equals(this.Evaluate(new()));
-
+    public bool Contains(MathObject obj) => 
+        obj.Equals(this) || 
+        terms.Any(term => term.Contains(obj) || term.Equals(obj)); 
+    
+    
+    public bool Equals(MathObject obj) {
+        //same type
+        if(!(obj is Add)) return false;    
+        
+        //same terms
+        var objTerms = ((Add)obj).terms.ToHashSet();
+        return terms.All(term => objTerms.Any(n => n.Equals(term))); 
+    }
+    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
     public string AsString() => string.Join("*",terms.Select((term,i) => 
         term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())?    "("+term.AsString()+")":   //parentheses
         term.AsString()                                                                                         //default
