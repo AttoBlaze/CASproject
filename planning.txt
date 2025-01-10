@@ -4,10 +4,10 @@ Log, Ln
 Sin, Cos, Tan, Asin, Acos, Atan
 RadToDeg, DegToRad
 Floor, Ceil, Round, Abs, Exp, Sqrt, root, random, gamma 
-Big floating point
+Big floating point, SetPrecision
 More Simplifications
 Help command
-showtime command
+time command (records time taken to execute command)
 Differentiable expressions
-Factorial
-
+Factorial operator
+Global settings

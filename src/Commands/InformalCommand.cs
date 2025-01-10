@@ -4,7 +4,7 @@ namespace Commands;
 /// Represents an informally defined command
 /// </summary>
 public class InformalCommand : ExecutableCommand {
-    public Func<object> GetCommandByInputs() => getCommand(args);
+    public Func<object> GetCommand() => getCommand(args);
 
     private readonly Func<object[],Func<object>> getCommand;
     private readonly object[] args;

@@ -2,7 +2,7 @@ using CAS;
 
 namespace Commands;
 public class EvaluateExpression : ExecutableCommand {
-    public Func<object> GetCommandByInputs() =>()=>{
+    public Func<object> GetCommand() =>()=>{
         return expression.Evaluate(definedObjects);
     };
 

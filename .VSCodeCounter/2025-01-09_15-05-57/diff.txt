@@ -1,0 +1,44 @@
+Date : 2025-01-09 15:05:57
+Directory : c:\programmering\visualstudiocodeFiles\CASproject\Math
+Total : 17 files,  -2 codes, 3 comments, 5 blanks, all 6 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         17 |         -2 |          3 |          5 |          6 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                |         17 |         -2 |          3 |          5 |          6 |
+| . (Files)                                                                        |          9 |        269 |         72 |         73 |        414 |
+| ..                                                                               |          8 |       -271 |        -69 |        -68 |       -408 |
+| ..\Commands                                                                      |          8 |       -271 |        -69 |        -68 |       -408 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                         | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\Command.cs            | C#       |       -165 |        -63 |        -50 |       -278 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\DefineFunction.cs     | C#       |        -16 |          0 |         -3 |        -19 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\DefineVariable.cs     | C#       |        -18 |          0 |         -3 |        -21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\EvaluateExpression.cs | C#       |        -13 |          0 |         -2 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\InformalCommand.cs    | C#       |        -10 |         -3 |         -2 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\ListObjects.cs        | C#       |        -20 |          0 |         -3 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\SimplifyExpression.cs | C#       |         -9 |          0 |         -2 |        -11 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Commands\Write.cs              | C#       |        -20 |         -3 |         -3 |        -26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Add.cs                    | C#       |         34 |         11 |          9 |         54 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Constant.cs               | C#       |         19 |          4 |          7 |         30 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Divide.cs                 | C#       |         26 |          9 |          8 |         43 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Function.cs               | C#       |         24 |          3 |          6 |         33 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\MathObject.cs             | C#       |         26 |          3 |          9 |         38 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Multiply.cs               | C#       |         33 |         12 |          9 |         54 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Operator.cs               | C#       |         61 |         17 |          9 |         87 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Power.cs                  | C#       |         26 |          9 |         10 |         45 |
+| c:\programmering\visualstudiocodeFiles\CASproject\Math\Variable.cs               | C#       |         20 |          4 |          6 |         30 |
+| Total                                                                            |          |         -2 |          3 |          5 |          6 |
++----------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -1,10 +1,11 @@
 using CAS;
+using Application;
 
 namespace Commands;
 
 public class DefineVariable : ExecutableCommand {
-    public Func<object> GetCommandByInputs() => ()=>{
-        Command.Define(name,value);
+    public Func<object> GetCommand() => ()=>{
+        Program.Define(name,value);
         return "succesfully defined variable "+name+" as "+value;
     };
 
@@ -12,7 +13,7 @@ public class DefineVariable : ExecutableCommand {
     private readonly string name;
     public DefineVariable(string variableName, MathObject value) {
         name = variableName;
-        var result = value.Calculate(Command.definedObjects);
+        var result = value.Calculate(Program.definedObjects);
         if (result is Constant)
             this.value = result;
         else

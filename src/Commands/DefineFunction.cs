@@ -1,10 +1,11 @@
 using CAS;
+using Application;
 
 namespace Commands;
 
 public class DefineFunction : ExecutableCommand {
-    public Func<object> GetCommandByInputs() => ()=>{
-        Command.Define(name,new Function(name,inputs,function));
+    public Func<object> GetCommand() => ()=>{
+        Program.Define(name,new Function(name,inputs,function));
         return "succesfully defined function "+name+" as "+function.AsString();
     };
 

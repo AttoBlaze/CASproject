@@ -1,4 +1,5 @@
 using CAS;
+using Application;
 
 namespace Commands;
 
@@ -6,19 +7,19 @@ public interface ExecutableCommand {
     /// <summary>
 	/// Gets the specific command to be executed according the command arguments given 
 	/// </summary>
-    protected Func<object> GetCommandByInputs();
+    protected Func<object> GetCommand();
     
 	/// <summary>
 	/// Executes this command
 	/// </summary>
-	public object Execute() => GetCommandByInputs()(); 
+	public object Execute() => GetCommand()(); 
 }
 
 /// <summary>
 /// Exits the application
 /// </summary>
 public class ExitCommand : ExecutableCommand {
-	public Func<object> GetCommandByInputs() =>()=> {
+	public Func<object> GetCommand() =>()=> {
 		Environment.Exit(0);
 		return 0;
 	};
@@ -26,88 +27,29 @@ public class ExitCommand : ExecutableCommand {
 	public ExitCommand() {}
 }
 
-public class Command {
+public sealed partial class Command {
+	public Command(string name, string description, Func<Stack<object>,ExecutableCommand> createCommand) : this(name,description,[],createCommand) {}
+	public Command(string name, string description, string[] overloads, Func<Stack<object>,ExecutableCommand> createCommand) {
+		this.name = name;
+		this.description = description;
+		this.create = createCommand;
+		this.overloads = overloads;
+		AllCommands[name] = this;
+	}
+	public readonly string name;
+	public readonly string description;
+	public readonly string[] overloads;
+	public readonly Func<Stack<object>,ExecutableCommand> create;
+
 	/// <summary>
 	/// Contains all commands in the program
 	/// </summary>
-    public static readonly Dictionary<string,Func<Stack<object>,ExecutableCommand>> Commands = new(){
-        //evalutes the given math expression
-        {"evaluate",arguments => new EvaluateExpression((MathObject)arguments.Pop(),definedObjects??new())},
-        
-        //writes the given input result in the console
-        {"write",arguments => new Write(arguments.Pop())},
-        
-        //simplifies the given expression
-        {"simplify",arguments => new SimplifyExpression((MathObject)arguments.Pop())},
-        
-        //calculates and simplifies the given expression
-        {"calculate",arguments => new InformalCommand(
-            args => ()=> ((MathObject)args[0]).Calculate(definedObjects??new()),
-            arguments.Pop()
-        )},
-
-		//exists the application
-		{"exit", arguments => new ExitCommand()},
-
-		//defines an object
-		{"define",arguments => {
-			if((formalDefinedObjects??new()).ContainsKey(((Variable)((object[])arguments.Peek()).Last()).name))
-				throw new Exception("You cannot redefine formally defined objects!");
-
-			//variables
-			if (((object[])arguments.Peek()).Length==2)
-				return (Commands??new())["defineVariable"](arguments);
-			
-			//functions
-			return (Commands??new())["defineFunction"](arguments);
-		}},
-
- 		//defines a variable
-        {"defineVariable",arguments => {
-			object[] args = (object[])arguments.Pop();
-			var expression = (MathObject)args[0];
-			string name = ((Variable)args[1]).name;
-			if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
-			return new DefineVariable(name,expression);
-		}},
-
-		//defines a function
-		{"defineFunction",arguments => {
-			object[] args = (object[])arguments.Pop();
-			string[] inputs = args.Skip(1).SkipLast(1).Select(n => ((Variable)n).name).ToArray(); 
-			string name = ((Variable)args.Last()).name;
-			if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
-				return new DefineFunction(name,inputs,(MathObject)args[0]);
-		}},
-
-		//lists objects
-		{"list",arguments => {
-			string name = ((Variable)arguments.Pop()).name;
-			return new ListObjects(name);
-		}},
-    };
-    
-	/// <summary>
-	/// Contains all pre-defined variables (fx e, pi).
-	/// </summary>
-	public static readonly Dictionary<string,MathObject> formalDefinedObjects = new(){
-        {"e",new Constant(Math.E)},
-        {"pi",new Constant(Math.E)},
-    };
-	
-	/// <summary>
-	/// Contains all defined variables (fx e, pi, x if user defined).
-	/// </summary>
-	public static Dictionary<string,MathObject> definedObjects {get; private set;} = formalDefinedObjects.ToDictionary();
-	public static void Define(string name, MathObject expression) {
-		if (!formalDefinedObjects.ContainsKey(name)) 
-			definedObjects[name] = expression;
+    public static readonly Dictionary<string,Command> AllCommands = new();
+	public static Command Get(string name) {
+		if (AllCommands.TryGetValue(name, out Command? cmd)) return cmd;
+		throw new Exception("Command \""+name+"\" does not exist!");
 	}
 
-	public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
-	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !formalDefinedObjects.ContainsKey(key));
-	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is Function);
-    
 	/// <summary>
 	/// Parses a string input into an executable command. 
 	/// </summary>
@@ -151,11 +93,11 @@ public class Command {
 				}
 				
 				//push to variable stack if string is a variable (no parentheses), otherwise push to operator stack.
-                if((definedObjects.TryGetValue(builder,out MathObject? obj) && (obj is not Function)) ||	//math objects that are not functions with inputs
+                if((Program.definedObjects.TryGetValue(builder,out MathObject? obj) && (obj is not Function)) ||	//math objects that are not functions with inputs
 					i>=tokens.Length || tokens[i]!='(')										
-					if (obj is Function) output.Push(obj);													//function without inputs
-					else output.Push(new Variable(builder));												//math object
-				else operators.Push(builder);																//commands + functions with inputs
+					if (obj is Function) output.Push(obj);															//function without inputs
+					else output.Push(new Variable(builder));														//math object
+				else operators.Push(builder);																		//commands + functions with inputs
 				
 				builder = "";	//reset builder
 				i--;			//account for 'overshoot'
@@ -221,7 +163,7 @@ public class Command {
 			if (Output is EvaluateExpression || Output is SimplifyExpression) return new Write(Output);
 			return (ExecutableCommand)Output;
 		}
-        return new Write(((MathObject)Output).Calculate(definedObjects));
+        return new Write(((MathObject)Output).Calculate(Program.definedObjects));
 	}
 
     private static object ApplyOperator(string op, Stack<object> output) {
@@ -239,11 +181,11 @@ public class Command {
 		}
 
         //commands
-        if (Commands.TryGetValue(op, out Func<Stack<object>,ExecutableCommand>? createCommand))
-            return createCommand(output);
+        if (AllCommands.TryGetValue(op, out Command? command))
+            return command.create(output);
         
 		//functions
-		if (definedObjects.TryGetValue(op, out MathObject? expression) && expression is Function) {
+		if (Program.definedObjects.TryGetValue(op, out MathObject? expression) && expression is Function) {
 			var function = (Function)expression;
 			object args = output.Pop(); //get function inputs
 			

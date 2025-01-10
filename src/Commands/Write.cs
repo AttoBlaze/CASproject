@@ -1,11 +1,13 @@
 using CAS;
+using Application;
+
 namespace Commands;
 public class Write : ExecutableCommand {
-    public Func<object> GetCommandByInputs() =>()=>{
+    public Func<object> GetCommand() =>()=>{
         object temp;
-        Console.WriteLine(
+        Program.Log(
             //expressions
-            obj is MathObject?           ((MathObject)obj).AsString():
+            obj is MathObject? ((MathObject)obj).AsString():
             
             //commands
             obj is ExecutableCommand?    
