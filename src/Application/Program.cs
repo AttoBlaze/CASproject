@@ -4,8 +4,8 @@ using Commands;
 
 public static class Program {
     public static bool 
-        HideAllMessages = false,
-        HideAllErrors = false;
+        ShowAllMessages = true,
+        ShowAllErrors = true;
 
     /// <summary>
     /// Contains all settings
@@ -24,12 +24,12 @@ public static class Program {
     /// Logs the given message in the console
     /// </summary>
     public static void Log(object log, bool newLine = true) {
-        if(!HideAllMessages)
+        if(ShowAllMessages)
             Console.Write(log + (newLine?"\n":""));
     }
     /// <inheritdoc cref="Log(object,bool)"/>
     public static void Log(object log, Exception e, bool newLine = true) =>
-        Log(log + (HideAllErrors?"":"\n"+e),newLine);
+        Log(log + (ShowAllErrors?"\n"+e:""),newLine);
 
     /// <summary>
 	/// Contains all pre-defined variables (fx e, pi).

@@ -11,23 +11,23 @@ public class Setting {
 
     public static void CreateAllSettings() {
         new Setting(
-            "HideAllMessages",
-            "Disables all messages from being written in the console",
+            "ShowAllMessages",
+            "Enables/disables logs being written in the console",
             [
                 "true|false",""
             ],
-            ()=> Program.HideAllMessages,
-            (input)=> {Program.HideAllMessages = (bool)input;},
+            ()=> Program.ShowAllMessages,
+            (input)=> {Program.ShowAllMessages = (bool)input;},
             ConvertToBool
         );
         new Setting(
-            "HideAllErrors",
-            "Disables all errors from being written in the console",
+            "ShowAllErrors",
+            "Enables/disables error logs being written in the console",
             [
                 "true|false",""
             ],
-            ()=> Program.HideAllErrors,
-            (input)=> {Program.HideAllErrors = (bool)input;},
+            ()=> Program.ShowAllErrors,
+            (input)=> {Program.ShowAllErrors = (bool)input;},
             ConvertToBool
         );
     }
@@ -64,7 +64,7 @@ public class Setting {
 
     public static readonly Func<object,object> ConvertToBool = input => {
         //string
-        if (input is Variable or Function) {
+        if (input is NamedObject) {
             var name = input.AsInput();
             if(name.ToLower() is "true")
                 return true;

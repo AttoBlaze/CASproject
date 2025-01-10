@@ -213,8 +213,7 @@ public sealed partial class Command {
 	/// Converts the given object to an input string for a command
 	/// </summary>
 	public static string AsInput(object obj) {
-		if(obj is Function) return ((Function)obj).name;
-		if(obj is Variable) return ((Variable)obj).name; 
+		if(obj is NamedObject) return ((NamedObject)obj).GetName();
 		throw new Exception("Could not convert input \""+obj+"\" to a command input string");
 	}
 }

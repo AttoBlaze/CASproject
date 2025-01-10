@@ -3,7 +3,7 @@ namespace CAS;
 /// <summary>
 /// Represents a function
 /// </summary>
-public class Function : MathObject {
+public class Function : MathObject, NamedObject {
     public string name {get; private set;}
     public string[] inputs {get; private set;}
     public MathObject expression {get; private set;}
@@ -30,4 +30,5 @@ public class Function : MathObject {
 
     public string AsString() => expression.AsString();
     public string Parameters() => "("+string.Join(",",inputs)+")";
+    public string GetName() => name;
 }

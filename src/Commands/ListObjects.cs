@@ -60,7 +60,7 @@ public class ListObjects : ExecutableCommand {
                 
                 //no overloads
                 if (setting.overloads.Length<=2) 
-                    str += "Input arguments: "+overload[0]+(overload[1].Length>0?" - "+overload[1]:"");
+                    str += "Input arguments: ("+overload[0]+")"+(overload[1].Length>0?" - "+overload[1]:"");
                 
                 //multiple overloads
                 else {

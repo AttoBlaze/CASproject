@@ -33,6 +33,9 @@ public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<
     public string AsString();
     public virtual string Parameters() => "";
     public virtual int Precedence() => 0;
-    public int AbsPrecedence() => Math.Abs(Precedence());
-    
+    public int AbsPrecedence() => Math.Abs(Precedence());   
+}
+
+public interface NamedObject {
+    public string GetName();
 }
