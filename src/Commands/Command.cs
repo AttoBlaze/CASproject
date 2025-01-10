@@ -217,4 +217,18 @@ public sealed partial class Command {
 
         throw new Exception("No operator could be applied!");
     }
+
+	/// <summary>
+	/// Converts the given object to an input string for a command
+	/// </summary>
+	public static string AsInput(object obj) {
+		if(obj is Function) return ((Function)obj).name;
+		if(obj is Variable) return ((Variable)obj).name; 
+		throw new Exception("Could not convert input \""+obj+"\" to a command input string");
+	}
+}
+
+public static class CommandExtensions {
+	/// <inheritdoc cref="Command.AsInput(object)"/>
+	public static string AsInput(this object obj) => Command.AsInput(obj);
 }

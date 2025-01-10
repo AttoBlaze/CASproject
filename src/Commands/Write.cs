@@ -23,6 +23,9 @@ public class Write : ExecutableCommand {
 
     private readonly object obj;
     public Write(object obj) {
-        this.obj = obj;
+        if (obj is Write)
+            this.obj = ((Write)obj).obj;
+        else
+            this.obj = obj;
     }
 }

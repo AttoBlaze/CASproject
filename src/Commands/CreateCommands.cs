@@ -38,7 +38,7 @@ public sealed partial class Command {
                 "NAME;INPUTS..;EXPRESSION","Defines a function with the given inputs"
             ],
             arguments => {
-                if((Program.formalDefinedObjects??new()).ContainsKey(((Variable)((object[])arguments.Peek()).Last()).name))
+                if((Program.formalDefinedObjects??new()).ContainsKey(((object[])arguments.Peek()).Last().AsInput()))
                     throw new Exception("You cannot redefine formally defined objects!");
 
                 //variables
@@ -54,7 +54,7 @@ public sealed partial class Command {
             arguments => {
                 object[] args = (object[])arguments.Pop();
                 var expression = (MathObject)args[0];       //first value in stack will be the expression
-                string name = ((Variable)args[1]).name;     //second in stack will be name
+                string name = args[1].AsInput();            //second in stack will be name
                 if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
                 return new DefineVariable(name,expression);
 		});
@@ -62,9 +62,9 @@ public sealed partial class Command {
             "defineFunction",
             "Defines a function",
             arguments => {
-                object[] args = (object[])arguments.Pop();                                              //multiple command inputs combine
-                string[] inputs = args.Skip(1).SkipLast(1).Select(n => ((Variable)n).name).ToArray();   //function inputs are all but last and first of command inputs
-                string name = ((Variable)args.Last()).name;                                             //last command input is name
+                object[] args = (object[])arguments.Pop();                                       //multiple command inputs combine
+                string[] inputs = args.Skip(1).SkipLast(1).Select(n => n.AsInput()).ToArray();   //function inputs are all but last and first of command inputs
+                string name = args.Last().AsInput();                                             //last command input is name
                 if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
                     return new DefineFunction(name,inputs,(MathObject)args[0]);
 		});
@@ -78,7 +78,7 @@ public sealed partial class Command {
                 "constants","Lists all defined constants"
             ],
             arguments => {
-                string name = ((Variable)arguments.Pop()).name;
+                string name = arguments.Pop().AsInput();
                 return new ListObjects(name);
 		});
     }

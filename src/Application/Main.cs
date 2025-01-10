@@ -3,28 +3,32 @@ using Commands;
 
 internal class Application {
     private static void WRITE(params object[] args) {
-        foreach(var msg in args)
-            Console.WriteLine(msg);
+        foreach(var msg in args) {
+            string str = msg.ToString()??" ";
+            Console.Write(str.Length>0 && str.EndsWith(" ")?str.Substring(0,str.Length-1):str+"\n");
+        }
     }
+
     static void Main() {
+        const string BAR = "-------------------------------";
         WRITE(
             "",
-            "----------------------",
-            "Loading settings..."
+            BAR,
+            "Startup initiated",
+            "Creating settings... "
         );
         //new Program.Setting("HideAllMessages",(input)=>{Program.HideAllMessages = (bool)input;}, ()=> Program.HideAllMessages,Program.Setting.ConvertToBool);
         //new Program.Setting("HideAllErrors",(input)=>{Program.HideAllErrors = (bool)input;}, ()=> Program.HideAllErrors,Program.Setting.ConvertToBool);
         WRITE(
-            "Finished.",
-            "Loading commands..."
+            "   Finished",
+            "Creating commands... "
         );
         Command.CreateAllCommands();
         WRITE(
-            "Finished.",
-            "",
-            "----------------------",
-            "Startup completed. Type \"help()\" to see a list of commands",
-            "----------------------"
+            "   Finished",
+            "Startup completed",
+            BAR,
+            "Type \"help()\" to see a list of commands"
         );
 
         //input reader
