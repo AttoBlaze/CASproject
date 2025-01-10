@@ -1,5 +1,6 @@
 using CAS;
 using Application;
+using System.Text;
 
 namespace Commands;
 
@@ -45,52 +46,58 @@ public sealed partial class Command {
 	/// Parses a string input into an executable command. 
 	/// </summary>
 	public static ExecutableCommand Parse(string input) {
-		//stacks
+		//reformat input
+		char[] tokens = input
+			//.Replace("\\s+","").Replace("\n","")	//remove spaces & line breaks
+			.Replace(".",",")						//make dots and commas interchangeable
+			.Replace("**","^")						//make ** equivalent to a ^ operator
+			.ToCharArray();
+		
+		//tools
 		var operators = new Stack<string>();
 		var output = new Stack<object>();
+		var builder = new StringBuilder();
 
-		//tool variables
-		string builder = "";
-		char[] tokens = input.Replace("**","^").ToCharArray();
+		//parse input
 		for (int i=0;i<tokens.Length;i++) {
 			//parse constants
-			if (tokens[i]=='.' || tokens[i]==',' || Char.IsDigit(tokens[i])) {
+			if (tokens[i]==',' || char.IsDigit(tokens[i])) {
 				
-                //get number as string
-				while(i<tokens.Length && (tokens[i]=='.' || tokens[i]==',' || Char.IsDigit(tokens[i]))) {
-					builder += tokens[i]; 
+                //parse numbers
+				while(i<tokens.Length && (tokens[i]==',' || char.IsDigit(tokens[i]))) {
+					builder.Append(tokens[i]); 
 					i++;
 				}
 
 				//check for shit term
-				if (double.TryParse(builder.Replace('.',','), out double value)) {
+				if (double.TryParse(builder.ToString(), out double value)) {
                     output.Push(new Constant(value));				//push to output stack
-				    builder = "";					                //reset builder
+				    builder.Clear();					            //reset builder
 				    i--;											//account for 'overshoot'
                 } 
                 else throw new Exception("Value \""+builder+"\" was unable to be parsed");
 			}
 			
-
 			//parse letters
-			else if (Char.IsLetter(tokens[i])) {
+			else if (char.IsLetter(tokens[i])) {
 				//if this letter borders a digit, then add a multiply
-                if (i>0 && Char.IsDigit(tokens[i-1])) operators.Push("*");
+                if (i>0 && char.IsDigit(tokens[i-1])) operators.Push("*");
 
-                //get whole length
-				while (i<tokens.Length && Char.IsLetter(tokens[i])) {
-					builder += tokens[i];
+                //parse total length
+				while (i<tokens.Length && char.IsLetter(tokens[i])) {
+					builder.Append(tokens[i]);
 					i++;
 				}
 				
-				//push to variable stack if string is a variable (no parentheses), otherwise push to operator stack.
-                if((Program.definedObjects.TryGetValue(builder,out MathObject? obj) && (obj is not Function)) ||	//math objects that are not functions with inputs
+				//push to variable stack if a variable (no parentheses), otherwise push to the operator stack.
+                if((Program.definedObjects.TryGetValue(builder.ToString(),out MathObject? obj) && (obj is not Function)) ||	//math objects that are not functions with inputs
 					i>=tokens.Length || tokens[i]!='(')										
-					if (obj is Function) output.Push(obj);															//function without inputs
-					else output.Push(new Variable(builder));														//math object
-				else operators.Push(builder);																		//commands + functions with inputs
+						if (obj is Function) output.Push(obj);																//function without inputs
+						else output.Push(new Variable(builder.ToString()));													//math object
 				
-				builder = "";	//reset builder
+				else operators.Push(builder.ToString());																	//commands + functions with inputs
+				
+				builder.Clear();//reset builder
 				i--;			//account for 'overshoot'
 			}
 			

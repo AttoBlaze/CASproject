@@ -7,6 +7,7 @@ Floor, Ceil, Round, Abs, Exp, Sqrt, root, random, gamma
 Big floating point, Precision setting
 More Simplifications
 Help command
+destroy command (removes object definition)
 time command (records time taken to execute command)
 show/hide command (overrides showallmessages)
 Differentiable expressions

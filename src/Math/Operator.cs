@@ -19,6 +19,12 @@ public class Operator {
             '-',1,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
+                
+                //negate
+                if(inputs.Count<=0 || inputs.Peek() is not MathObject) 
+                    return Add.Negate(term2);
+                
+                //subtract
                 var term1 = (MathObject)inputs.Pop();
                 return new Add(term1,Add.Negate(term2));
             }

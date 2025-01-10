@@ -36,7 +36,7 @@ public class Multiply : MathObject {
             terms.Remove(constant);
             value *= constant.value;            
         }
-        if (value!=1) terms.Add(new Constant(value));
+        if (value!=1) terms.Insert(0,new Constant(value));
 
         if(terms.Count==1) return terms[0];
         return this;
@@ -49,6 +49,9 @@ public class Multiply : MathObject {
     public bool EquivalentTo(MathObject obj) =>
         obj.Evaluate().Equals(this.Evaluate(new()));
 
-    public string AsString() => string.Join("*",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString()));
+    public string AsString() => string.Join("*",terms.Select((term,i) => 
+        term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())?    "("+term.AsString()+")":   //parentheses
+        term.AsString()                                                                                         //default
+    )).Replace("-1*","-");
     public int Precedence() => Operator.Precedence('*');
 }
