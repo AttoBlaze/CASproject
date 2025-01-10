@@ -6,6 +6,11 @@ public class Write : ExecutableCommand {
     public object Execute() {
         object temp;
         string str = (
+            //variables
+            obj is Variable? 
+                Program.definedObjects.ContainsKey(((Variable)obj).name)?   Program.definedObjects[((Variable)obj).name].AsString():
+                ((Variable)obj).name:
+
             //expressions
             obj is MathObject? ((MathObject)obj).AsString():
             
@@ -19,7 +24,7 @@ public class Write : ExecutableCommand {
             obj.ToString()
         )??"";
         Program.Log(str);
-        return 0;
+        return obj;
     }
 
     private readonly object obj;

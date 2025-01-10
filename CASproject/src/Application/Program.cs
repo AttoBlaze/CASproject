@@ -52,5 +52,37 @@ public static class Program {
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
 	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !formalDefinedObjects.ContainsKey(key));
+
+    /// <summary>
+    /// Initializes the startup process
+    /// </summary>
+    public static void START() {
+        const string BAR = "-------------------------------";
+        WRITE(
+            "",
+            BAR,
+            "Startup initiated",
+            "Creating settings... "
+        );
+        Setting.CreateAllSettings();
+        WRITE(
+            "   Finished",
+            "Creating commands... "
+        );
+        Command.CreateAllCommands();
+        WRITE(
+            "   Finished",
+            "Startup completed",
+            BAR,
+            "Type \"help()\" to see a list of commands"
+        );
+    }
+    private static void WRITE(params object[] args) {
+        foreach(var msg in args) {
+            string str = msg.ToString()??" ";
+            Console.Write(str.Length>0 && str.EndsWith(" ")?str.Substring(0,str.Length-1):str+"\n");
+        }
+    }
+
 }
 

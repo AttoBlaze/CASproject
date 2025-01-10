@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASProject\\CASproject.csproj": {}
+    "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj": {}
   },
   "projects": {
-    "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASProject\\CASproject.csproj": {
+    "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASProject\\CASproject.csproj",
+        "projectUniqueName": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj",
         "projectName": "CASproject",
-        "projectPath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASProject\\CASproject.csproj",
+        "projectPath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj",
         "packagesPath": "C:\\Users\\jonas\\.nuget\\packages\\",
-        "outputPath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASProject\\obj\\",
+        "outputPath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -45,10 +45,19 @@ public sealed partial class Command {
 	/// <summary>
 	/// Parses a string input into an executable command. 
 	/// </summary>
-	public static ExecutableCommand Parse(string input) {
+	/// Uses a slightly modified shunting yard algorithm.
+	public static ExecutableCommand Parse(string input) => (ExecutableCommand)ParseInput(input); 
+	/// <summary>
+	/// Parses a string input into a math object 
+	/// </summary>
+	public static MathObject ParseMath(string input) => (MathObject)ParseInput(input, convertToCommand:false);
+	/// <summary>
+	/// Parses a string input  
+	/// </summary>
+	public static object ParseInput(string input, bool convertToCommand = true){
 		//reformat input
 		char[] tokens = input
-			//.Replace("\\s+","").Replace("\n","")	//remove spaces & line breaks
+			.Replace(" ","").Replace("\n","")		//remove spaces & line breaks
 			.Replace(".",",")						//make dots and commas interchangeable
 			.Replace("**","^")						//make ** equivalent to a ^ operator
 			.ToCharArray();
@@ -107,8 +116,8 @@ public sealed partial class Command {
 				//continually apply operators
 				while (operators.Count>0 && 				//the operator stack isnt empty
 						operators.Peek()!="(" && 			//the top operator is not a left parentheses
-						(Math.Abs(Operator.Precedence(operators.Peek()))>=Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
-						(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence<0))) {	//the top operator and current operator have the same precedence and the current operator is left associative.
+						(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
+						(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0))) {	//the top operator and current operator have the same precedence and the current operator is left associative.
 					
                     //apply operators
 					output.Push(ApplyOperator(operators.Pop(),output));
@@ -116,6 +125,9 @@ public sealed partial class Command {
 				}
 				operators.Push(tokens[i]+"");
 			}
+
+            //commands with several inputs have inputs seperated by ;
+            else if (tokens[i]==';') operators.Push(";");
 			
 			//left parentheses
 			else if(tokens[i]=='(') operators.Push("(");
@@ -139,9 +151,6 @@ public sealed partial class Command {
 				}
 			}
 
-            //commands with several inputs have inputs seperated by ;
-            else if (tokens[i]==';') operators.Push(";");
-			
 			//if we have neither letters, numbers, an operator, or a parentheses, then a mistake must have happened.
 			else throw new Exception("Unknown error occurred when parsing input");
 		}
@@ -161,10 +170,11 @@ public sealed partial class Command {
 			if (Output is EvaluateExpression || Output is SimplifyExpression) return new Write(Output);
 			return (ExecutableCommand)Output;
 		}
-        return new Write(((MathObject)Output).Calculate(Program.definedObjects));
+        if (convertToCommand) return new Write(((MathObject)Output).Calculate(Program.definedObjects));
+		return Output;
 	}
 
-    private static object ApplyOperator(string op, Stack<object> output) {
+	private static object ApplyOperator(string op, Stack<object> output) {
         //operators
         if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 
             return ope.operation(output);
@@ -198,7 +208,7 @@ public sealed partial class Command {
 				Dictionary<string,MathObject> inputs = new();
 				for(int i=0 ; i<Args.Length ; i++)
 					inputs[function.inputs[i]] = Args[i];
-
+				
 				return function.Evaluate(inputs);
 			}
 
@@ -212,7 +222,6 @@ public sealed partial class Command {
 				}); 
 			}
 		}
-
         throw new Exception("No operator could be applied!");
     }
 

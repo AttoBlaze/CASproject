@@ -7,7 +7,7 @@ namespace CAS;
 public class Operator {
     public static Dictionary<char,Operator> operators = new(){
         {'+',new Operator(
-            '+',1,
+            '+',2,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
@@ -16,7 +16,7 @@ public class Operator {
         )},
 
         {'-',new Operator(
-            '-',1,
+            '-',2,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 
@@ -31,7 +31,7 @@ public class Operator {
         )},
         
         {'*',new Operator(
-            '*',2,
+            '*',3,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
@@ -40,7 +40,7 @@ public class Operator {
         )},
 
         {'/',new Operator(
-            '/',2,
+            '/',3,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
@@ -49,7 +49,7 @@ public class Operator {
         )},
 
         {'^',new Operator(
-            '^',-3,
+            '^',-4,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
                 var term1 = (MathObject)inputs.Pop();
@@ -77,7 +77,7 @@ public class Operator {
     
     /// <summary>
     /// The precedence of the operator. The sign of the precedence signifies the operators association; <\b>
-    /// - is left association, + is right association 
+    /// - is right association, + is left association 
     /// </summary>
     public readonly int precedence;
 

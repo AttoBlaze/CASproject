@@ -27,13 +27,17 @@ public interface Evaluatable<T> {
 /// Represents a mathematical object/expression
 /// </summary>
 public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
+    public MathObject Calculate() => Calculate(new());
     public MathObject Calculate(Dictionary<string,MathObject> definedObjects) => 
         this.Evaluate(definedObjects).Simplify();
 
     public string AsString();
     public virtual string Parameters() => "";
     public virtual int Precedence() => 0;
-    public int AbsPrecedence() => Math.Abs(Precedence());   
+    public int AbsPrecedence() => Math.Abs(Precedence()); 
+    public virtual double AsValue() {
+        throw new Exception("Not a value!");
+    }
 }
 
 public interface NamedObject {

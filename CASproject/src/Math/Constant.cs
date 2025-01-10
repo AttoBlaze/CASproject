@@ -27,4 +27,6 @@ public class Constant : MathObject {
         obj.Evaluate().Equals(this);
 
     public string AsString() => value.ToString();
+
+    public double AsValue() => value;
 }

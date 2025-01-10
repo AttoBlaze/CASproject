@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\programmering\\visualstudiocodeFiles\\CASproject\\Math\\MathObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Math\\MathObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestProject1\\UnitTests.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\programmering\\visualstudiocodeFiles\\CASproject\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\src\\application\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\src\\application\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestProject1\\UnitTest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,25 +27,37 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MathObject.cs",
-              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\Math\\MathObject.cs",
-              "RelativeDocumentMoniker": "Math\\MathObject.cs",
-              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\Math\\MathObject.cs",
-              "RelativeToolTip": "Math\\MathObject.cs",
+              "Title": "UnitTests.csproj",
+              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTests.csproj",
+              "RelativeDocumentMoniker": "TestProject1\\UnitTests.csproj",
+              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTests.csproj",
+              "RelativeToolTip": "TestProject1\\UnitTests.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-10T18:24:26.272Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "TestProject1\\UnitTest1.cs",
+              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTest1.cs",
+              "RelativeToolTip": "TestProject1\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T12:05:55.952Z"
+              "WhenOpened": "2025-01-10T18:24:19.476Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\Program.cs",
-              "RelativeToolTip": "Program.cs",
+              "Title": "Main.cs",
+              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Main.cs",
+              "RelativeDocumentMoniker": "CASproject\\src\\Application\\Main.cs",
+              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Main.cs",
+              "RelativeToolTip": "CASproject\\src\\Application\\Main.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T11:44:54.403Z"
+              "WhenOpened": "2025-01-10T18:11:34.217Z"
             }
           ]
         }
