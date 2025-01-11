@@ -2,29 +2,29 @@ using Commands;
 using CAS;
 using Application;
 
-namespace CommandsTests;
+namespace CommandTests;
 
 public class DefineTests{
     [Test]
     public void DefineVariableValue() {
         Program.START();
         Program.Execute("define(x;1)");
-        Assert.That(Command.ParseMath("x").Calculate(Program.definedObjects).AsValue()==1);   
+        Assert.That(MathObject.Parse("x").Calculate().AsValue()==1);   
     }
 
     [Test]
     public void DefineVariableExpression() {
         Program.START();
         Program.Execute("define(x;y+1)");
-        Assert.That(Command.ParseMath("x").Calculate(Program.definedObjects).Equals(Command.ParseMath("y+1")));   
+        Assert.That(MathObject.Parse("x").Calculate().Equals(MathObject.Parse("y+1")));   
     }
 
     [Test]
     public void DefineFunction() {
         Program.START();
         Program.Execute("define(f;x;x^2)");
-        Assert.That(Command.ParseMath("f(2)").Calculate(Program.definedObjects).AsValue()==4);
-        Assert.That(Command.ParseMath("f").Calculate(Program.definedObjects).Equals(Command.ParseMath("x^2")));
+        Assert.That(MathObject.Parse("f(2)").Calculate().AsValue()==4);
+        Assert.That(MathObject.Parse("f").Calculate().Equals(MathObject.Parse("x^2")));
     }
 
 

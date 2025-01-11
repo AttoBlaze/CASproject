@@ -1,9 +1,9 @@
-using Commands;
+using CAS;
 
 namespace Algebra;
 
 public class HierarchyTests {
-    private static double eval(string input) => Command.ParseMath(input).Calculate().AsValue();
+    private static double eval(string input) => MathObject.Parse(input).Calculate().AsValue();
 
     [Test]
     public void ParseExpression() {

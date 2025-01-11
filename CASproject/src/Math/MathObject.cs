@@ -1,4 +1,5 @@
-using System.Numerics;
+using Commands;
+using Application;
 
 namespace CAS;
 
@@ -27,7 +28,13 @@ public interface Evaluatable<T> {
 /// Represents a mathematical object/expression
 /// </summary>
 public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
-    public MathObject Calculate() => Calculate(new());
+    /// <summary>
+	/// Parses a string input into a math object 
+	/// </summary>
+	public static MathObject Parse(string input) => (MathObject)Command.ParseInput(input);
+	
+    
+    public MathObject Calculate() => Calculate(Program.definedObjects);
     public MathObject Calculate(Dictionary<string,MathObject> definedObjects) => 
         this.Evaluate(definedObjects).Simplify();
 

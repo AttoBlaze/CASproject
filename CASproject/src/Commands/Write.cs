@@ -18,7 +18,10 @@ public sealed class Write : ExecutableCommand {
             //commands
             obj is ExecutableCommand?    
                 (temp=((ExecutableCommand)obj).Execute()) is MathObject?    ((MathObject)temp).AsString():
-                (nothingToWrite = temp is int && (int)temp==0)?          null://command returns 0 = nothing to write
+                
+                //command returns SUCCESS = nothing to write
+                (nothingToWrite = temp is ExecutableCommand.State && (ExecutableCommand.State)temp==ExecutableCommand.State.SUCCESS)? null:
+                
                 temp.ToString():
             
             //default
@@ -35,7 +38,7 @@ public sealed class Write : ExecutableCommand {
         }
 
         else Program.Log(str);
-        return 0;
+        return ExecutableCommand.State.SUCCESS;
     }
 
     private readonly object obj;

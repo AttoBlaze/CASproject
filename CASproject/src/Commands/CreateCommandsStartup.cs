@@ -1,34 +1,43 @@
 using CAS;
 using Application;
-using System.Linq;
 
 namespace Commands;
 
 public sealed partial class Command {
     public static void CreateAllCommands() {
-         new Command(
+        string[] 
+            EXPR = ["EXPRESSION",""],
+            CMD = ["COMMAND",""],
+            NONE = ["",""];
+
+        new Command(
             "evaluate",
             "Evalutes the given mathematical expression without simplifying it",
+            EXPR,
             arguments => new EvaluateExpression((MathObject)arguments.Pop(),Program.definedObjects)
         );
         new Command(
             "write",
             "Writes the output of the given command",
+            CMD,
             arguments => new Write(arguments.Pop())
         );
         new Command(
             "simplify",
             "Simplifies the given mathematical expression",
+            EXPR,
             arguments => new SimplifyExpression((MathObject)arguments.Pop())
         );
         new Command(
             "calculate",
             "Calculates the given mathematical expression",
-            arguments => new InformalCommand(args =>()=> ((MathObject)args[0]).Calculate(Program.definedObjects??new()),arguments.Pop())
+            EXPR,
+            arguments => new InformalCommand(args =>()=> ((MathObject)args[0]).Calculate(),arguments.Pop())
         );
 		new Command(
             "exit",
             "Exits the application", 
+            NONE,
             arguments => new ExitCommand()
         );
         new Command(
@@ -52,6 +61,9 @@ public sealed partial class Command {
         new Command(
             "defineVariable",
             "Defines a variable",
+            [
+                "NAME;EXPRESSION","Defines a variable with the given name and expression"
+            ],
             arguments => {
                 object[] args = (object[])arguments.Pop();
                 var expression = (MathObject)args[0];       //first value in stack will be the expression
@@ -62,6 +74,9 @@ public sealed partial class Command {
 		new Command(
             "defineFunction",
             "Defines a function",
+            [
+                "NAME;INPUTS..;EXPRESSION","Defines a function with the given name, inputs, and expression"
+            ],
             arguments => {
                 object[] args = (object[])arguments.Pop();                                       //multiple command inputs combine
                 string[] inputs = args.Skip(1).SkipLast(1).Select(n => n.AsInput()).ToArray();   //function inputs are all but last and first of command inputs
@@ -73,7 +88,7 @@ public sealed partial class Command {
             "list",
             "Lists objects",
             ListObjects.listables.Keys.Select(key => new string[]{
-                key,ListObjects.listables[key].description
+                key, ListObjects.listables[key].description
             }).SelectMany(n=>n).ToArray(),
             arguments => {
                 string name = arguments.Pop().AsInput();
@@ -89,11 +104,37 @@ public sealed partial class Command {
                 var args = (object[])arguments.Pop();
                 return new SetSetting(args.Last().AsInput(),args.Count()==2?args.First():args.Skip(1).ToArray());
         });
-
+        new Command(
+            "getSetting",
+            "Gets the value of a setting",
+            [
+                "SETTING","Gets the value of the given setting"
+            ],
+            arguments => {
+                return new GetSetting(arguments.Pop().AsInput());
+        });
+        new Command(
+            "help",
+            "Gives information about the usage of this program",
+            NONE,
+            arguments => {
+                return new HelpCommand();
+        });
+        new Command(
+            "explain",
+            "Explains a command/setting",
+            [
+                "SETTING","Explains the given setting",
+                "COMMAND","Explains the usage of the given command"
+            ], 
+            arguments => {
+                return new ExplainCommand(arguments.Pop().AsInput());
+        });
         //NEXT:
         //getSetting
         //destroy
         //show/hide
         //time
+        //help command
     }
 }

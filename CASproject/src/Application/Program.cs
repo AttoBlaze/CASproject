@@ -12,22 +12,46 @@ public static class Program {
     /// <summary>
     /// Parses and executes the given input  
     /// </summary>
-    public static void Execute(string input) {
+    public static void Execute(string input, bool muteOutput = false) {
+        bool showMsgs = ShowAllMessages;
+        if (muteOutput) ShowAllMessages = false;
+        
         //parse input and execute as command
         var cmd = Command.Parse(input);
         if(AlwaysWrite && cmd is not Write) cmd = new Write(cmd);
         cmd.Execute();
+
+        if (muteOutput) ShowAllMessages = showMsgs;
+    }
+    /// <summary>
+    /// Executes all of the given inputs 
+    /// </summary>
+    public static void ExecuteAll(IEnumerable<string> inputs, bool muteOutput = false) {
+        foreach(var input in inputs)
+            Execute(input,muteOutput:muteOutput);
     }
     
     /// <summary>
     /// Attempts to parse and execute the given input 
     /// </summary>
-    public static void TryExecute(string input) {
+    public static void TryExecute(string input, bool muteOutput = false) {
+        bool showMsgs = ShowAllMessages;
+        if (muteOutput) ShowAllMessages = false;
+        
         try {
             Execute(input);
         } catch (Exception e) {
             Log("Unknown error occured",e);
         }
+
+        if (muteOutput) ShowAllMessages = showMsgs;
+    }
+    /// <summary>
+    /// Attempts to executes all of the given inputs 
+    /// </summary>
+    public static void TryExecuteAll(IEnumerable<string> inputs, bool muteOutput = false) {
+        foreach(var input in inputs)
+            TryExecute(input,muteOutput:muteOutput);
     }
 
     /// <summary>
@@ -75,6 +99,7 @@ public static class Program {
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
 	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !formalDefinedObjects.ContainsKey(key));
 
+    private static bool STARTED = false;
     /// <summary>
     /// Initiates the startup process (if startup has not been initiated yet)
     /// </summary>
@@ -97,7 +122,7 @@ public static class Program {
             "   Finished",
             "Startup completed",
             BAR,
-            "Type \"help()\" to see a list of commands"
+            "Type \"help()\" for help."
         );
         STARTED = true;
     }
@@ -107,6 +132,5 @@ public static class Program {
             Console.Write(str.Length>0 && str.EndsWith(" ")?str.Substring(0,str.Length-1):str+"\n");
         }
     }
-    private static bool STARTED = false;
 }
 

@@ -8,7 +8,9 @@ public class Tests {
     [Test]
     public void TEST() {
         Program.START();
-        Program.Execute("define(x;1)");
+        Program.ExecuteAll([
+            "explain(help)"
+        ]);
         Assert.Pass();
     }
 }

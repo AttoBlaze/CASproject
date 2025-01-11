@@ -5,17 +5,17 @@ namespace Commands;
 
 public sealed class ListObjects : ExecutableCommand {
     public static readonly Dictionary<string,ListCommand> listables = new(){
-        {"all",         new("Lists everything in the program",Write_ALL)}, 
-        {"predefined",  new("Lists all pre-defined objects in the program",Write_PREDEFINED)},
-        {"objects",     new("Lists all defined objects",Write_MATH)},
-        {"variables",   new("Lists all defined variables",Write_VARIABLES)},
-        {"functions",   new("Lists all defined functions",Write_FUNCTIONS)},
-        {"constants",   new("Lists all defined constants",Write_CONSTANTS)},
-        {"commands",    new("Lists all commands in the program",Write_COMMANDS)},
-        {"settings",    new("Lists all settings in the program",Write_SETTINGS)}
+        {"all",         new("Lists everything in the program",              Write_ALL)}, 
+        {"predefined",  new("Lists all pre-defined objects in the program", Write_PREDEFINED)},
+        {"objects",     new("Lists all defined objects",                    Write_MATH)},
+        {"variables",   new("Lists all defined variables",                  Write_VARIABLES)},
+        {"functions",   new("Lists all defined functions",                  Write_FUNCTIONS)},
+        {"constants",   new("Lists all defined constants",                  Write_CONSTANTS)},
+        {"commands",    new("Lists all commands in the program",            Write_COMMANDS)},
+        {"settings",    new("Lists all settings in the program",            Write_SETTINGS)}
     };
 
-    public struct ListCommand{
+    public struct ListCommand {
         public string description;
         public Action write;
         public ListCommand(string description, Action write) {
@@ -26,7 +26,7 @@ public sealed class ListObjects : ExecutableCommand {
     
     public object Execute() {
         if(listables.TryGetValue(objects, out ListCommand list)) list.write();                         
-        return 0;
+        return ExecutableCommand.State.SUCCESS;
     }
 
     private static void Write_ALL() {
@@ -58,61 +58,15 @@ public sealed class ListObjects : ExecutableCommand {
     private static void Write_COMMANDS() => WriteCommands(Program.GetCommands());
     
     private static void WriteSettings(IEnumerable<string> settings) {
-        Program.Log(string.Join("\n\n",settings.Select(Setting.Get).Select(setting => {
-            //name
-            string str = setting.name+"\n"+
-
-            //description
-            " ^-> Description: "+setting.description;
-
-            //input args
-            //overloads
-            str += "\n ^-> ";
-            if (setting.overloads.Length>0) {
-                string[] overload = setting.overloads;
-                
-                //no overloads
-                if (setting.overloads.Length<=2) 
-                    str += "Input arguments: ("+overload[0]+")"+(overload[1].Length>0?" - "+overload[1]:"");
-                
-                //multiple overloads
-                else {
-                    str += "Input arguments:\n" + string.Join("\n",overload.Chunk(2).Select(n => "     ^-> "+n.First()+(n.Last().Length>0?" - "+n.Last():"")));
-                }
-            }
-            else str += "Input arguments unspecified";
-            return str;
-        })));
+        Program.Log(string.Join("\n\n",settings.OrderBy(n=>n).Select(Setting.Get).Select(ExplainCommand.ExplainSetting)));
     }
 
     private static void WriteCommands(IEnumerable<string> commands) {
-        Program.Log(string.Join("\n\n",commands.Select(Command.Get).Select(cmd => {
-            //name
-            string str = cmd.name+"\n"+
-            
-            //description
-            " ^-> Description: "+cmd.description;
-            
-            //overloads
-            str += "\n ^-> ";
-            if (cmd.overloads.Length>0) {
-                string[] overload = cmd.overloads;
-                
-                //no overloads
-                if (cmd.overloads.Length<=2) 
-                    str += "Input: "+cmd.name+"("+overload[0]+") - "+overload[1];
-                //multiple overloads
-                else {
-                    str += "Overloads:\n" + string.Join("\n",overload.Chunk(2).Select(n => "     ^-> "+cmd.name+"("+n.First()+") - "+n.Last()));
-                }
-            }
-            else str += "Arguments unspecified";
-            return str;
-        })));
+        Program.Log(string.Join("\n\n",commands.OrderBy(n=>n).Select(Command.Get).Select(ExplainCommand.ExplainCmd)));
     }
 
     private static void WriteMath(IEnumerable<string> objs) {
-        Program.Log(string.Join("\n",objs.Select(n => {
+        Program.Log(string.Join("\n",objs.OrderBy(n=>n).Select(n => {
             string str = n;
             if(Program.definedObjects[n] is Function) str += ((Function)Program.definedObjects[n]).GetParameters(); //add function parameters
             str += ": "+Program.definedObjects[n].AsString();                                                                                                               //definition

@@ -9,6 +9,10 @@ public interface ExecutableCommand {
 	/// Executes this command
 	/// </summary>
 	public object Execute(); 
+
+	public enum State {
+		SUCCESS
+	}
 }
 
 /// <summary>
@@ -45,18 +49,26 @@ public sealed partial class Command {
 	/// <summary>
 	/// Parses a string input into an executable command. 
 	/// </summary>
-	/// Uses a slightly modified shunting yard algorithm.
-	public static ExecutableCommand Parse(string input) => (ExecutableCommand)ParseInput(input); 
-	/// <summary>
-	/// Parses a string input into a math object 
-	/// </summary>
-	public static MathObject ParseMath(string input) => (MathObject)ParseInput(input, convertToCommand:false);
-	public static object ParseInput(string input, bool convertToCommand = true){
+	public static ExecutableCommand Parse(string input) {
+		var temp = ParseInput(input);
+        
+		if (temp is MathObject) 
+			return new Write(((MathObject)temp).Calculate());
+		
+		if (temp is ExecutableCommand && (temp is EvaluateExpression || temp is SimplifyExpression)) 
+			return new Write(temp);
+		
+		return (ExecutableCommand)temp;
+	} 
+	
+	//Uses a slightly modified shunting yard algorithm.
+	public static object ParseInput(string input){
 		//reformat input
 		char[] tokens = input
 			.Replace(" ","").Replace("\n","")		//remove spaces & line breaks
 			.Replace(".",",")						//make dots and commas interchangeable
-			.Replace("**","^")						//make ** equivalent to a ^ operator
+			.Replace("(-","(0-")					//- in start of parentheses act as negation
+			.Replace("**","^")						//make ** equivalent to a ^
 			.ToCharArray();
 		
 		//tools
@@ -162,13 +174,7 @@ public sealed partial class Command {
 		if (output.Count!=1) throw new Exception("Output was unable to be combined");
 		
 		//return result
-		object Output = output.Pop();
-		if (Output is ExecutableCommand) {
-			if (Output is EvaluateExpression || Output is SimplifyExpression) return new Write(Output);
-			return (ExecutableCommand)Output;
-		}
-        if (convertToCommand) return new Write(((MathObject)Output).Calculate(Program.definedObjects));
-		return Output;
+		return output.Pop();
 	}
 
 	private static object ApplyOperator(string op, Stack<object> output) {
@@ -176,7 +182,7 @@ public sealed partial class Command {
         if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 
             return ope.operation(output);
 
-		//combine multiple inputs
+		//combine multiple inputs. This combines to make overloads possible as arguments can have variable lengths
 		if (op == ";") {
 			object val1 = output.Pop();
 			object val2 = output.Pop();

@@ -14,7 +14,7 @@ public sealed class DefineVariable : ExecutableCommand {
     public DefineVariable(string name, MathObject value) {
         if(value.Contains(new Variable(name))) throw new Exception("Self-reference: Variables cannot be defined with themselves!");
         this.name = name;
-        var result = value.Calculate(Program.definedObjects);
+        var result = value.Calculate();
         if (result is Constant)
             this.value = result;
         else
