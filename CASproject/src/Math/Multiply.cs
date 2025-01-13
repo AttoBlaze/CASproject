@@ -18,17 +18,13 @@ public class Multiply : MathObject {
 
     /*
     Simplifications:
-    a*a = a^2
-    a*a^b = a^(b+1)
-    a^b*a^c = a^(b+c)
-    0*a = 0
-    1*a = a
+    
     */
 
     public MathObject Simplify() {
         //simplify terms
         terms = terms.Select(term => term.Simplify()).ToList();
-        
+
         //combine constants
         double value = 1;
         var temp = terms.Where(term => term is Constant).ToList();
@@ -36,9 +32,44 @@ public class Multiply : MathObject {
             terms.Remove(constant);
             value *= constant.value;            
         }
-        if (value!=1) terms.Insert(0,new Constant(value));
+        if(value==0) return new Constant(0);                //0*a = 0
+        if (value!=1) terms.Insert(0,new Constant(value));  //1*a = a
+
+        MathObject obj = this;
+        int index = 0;
+        for(int i=0;i<terms.Count;i++) {
+            var term = terms[i];
+            
+            //a*a = a^2
+            if (MathObject.FindOtherEqualTerm(terms,term,i, ref obj, ref index)) {
+                terms.RemoveAt(index); i--;
+                terms[i] = new Power(term,new Constant(2));
+                i = 0;
+                continue;
+            }
+
+            if (term is Power) {
+                //a * a^n = a^(n+1)
+                var pow = (Power)term;
+                if (MathObject.FindOtherEqualTerm(terms,pow.Base,i, ref obj, ref index)) {
+                    terms.RemoveAt(index); i--;
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1)).Simplify());
+                    i = 0;
+                    continue;
+                }
+                
+                //a^b * a^c = a^(b+c)
+                if (MathObject.FindOtherTerm(term => (term as Power)?.Base.Equals(pow.Base)??false, terms,i,ref obj, ref index)) {
+                    terms.RemoveAt(index); i--;
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,obj.As<Power>().exponent).Simplify());
+                    i = 0;
+                    continue;
+                }
+            }
+        }
 
         if(terms.Count==1) return terms[0];
+        if(terms.Count==0) return new Constant(1);
         return this;
     }
 

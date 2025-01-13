@@ -12,7 +12,16 @@ public class Ln : MathObject {
 
     public MathObject Simplify() {
         var expr = expression.Simplify();
+        
+        //constant
         if(expr is Constant) return new Constant(Math.Log(expr.AsValue()));
+        
+        //e
+        if((expr as Variable)?.Equals(new Variable("e"))??false) return new Constant(1);
+
+        //e^x
+        if(((expr as Power)?.Base as Variable)?.Equals(new Variable("e"))??false) return expr.As<Power>().exponent;
+        
         return new Ln(expr);
     }
 

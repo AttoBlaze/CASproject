@@ -3,9 +3,9 @@ namespace CAS;
 public class Power : MathObject {
     public MathObject Base {get; private set;}
     public MathObject exponent {get; private set;}
-    public Power(MathObject obj1, MathObject obj2) {
-        Base = obj1;
-        exponent = obj2;
+    public Power(MathObject Base, MathObject exponent) {
+        this.Base = Base;
+        this.exponent = exponent;
     }
     
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {

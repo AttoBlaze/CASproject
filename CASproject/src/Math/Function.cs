@@ -8,17 +8,19 @@ public class Function : MathObject, NamedObject {
     public readonly Dictionary<string,MathObject> inputs = new();
     public readonly MathObject expression;
     public Function(Function func, MathObject[] inputs) {
+        if(inputs.Length!=func.inputs.Keys.Count()) throw new Exception("Cannot create function with new inputs as input counts do not match!");
         name = func.name;
-        int i=0;
+        int i = 0;
         foreach(var key in func.inputs.Keys) {
             this.inputs[key] = inputs[i];
+            i++;
         }
         expression = func.expression;
     }
     public Function(string name, string[] inputs, MathObject expression) {
         this.name = name;
         foreach(var input in inputs){
-            this.inputs.Add(input,new Variable(input));
+            this.inputs[input] = new Variable(input);
         }
         this.expression = expression;
     }

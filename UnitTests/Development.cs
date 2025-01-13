@@ -9,7 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "list(all)"
+            "a^x * a * a^2"
         );
         Assert.Pass();
     }

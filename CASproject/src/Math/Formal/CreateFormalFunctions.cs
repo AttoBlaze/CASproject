@@ -15,7 +15,7 @@ public sealed partial class FormalFunction {
         });
         new FormalFunction(
             "getSetting",
-            "Gets the value of the specified setting",
+            "Gets the value of the specified setting. Note: value will be copied as is, and will not update when setting changes",
             ["SETTING"],
             arguments => {
                 var setting = Setting.Get(arguments.Pop().AsInput());

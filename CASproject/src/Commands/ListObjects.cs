@@ -57,14 +57,14 @@ public sealed class ListObjects : ExecutableCommand {
     private static void Write_PREDEFINED() => WriteMath(Program.GetPredefined());
     private static void Write_VARIABLES() => WriteMath(Program.GetVariables());
     private static void Write_FUNCTIONS() {
-        Program.Log(string.Join("\n",Program.formalFunctions.Keys.OrderBy(n=>n).Select(FormalFunction.Get).Where(n=>n.mathematical).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
+        Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Where(n=>n.mathematical).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
         WriteMath(Program.GetFunctions());
     }
     private static void Write_CONSTANTS() => WriteMath(Program.GetConstants());
     private static void Write_COMMANDS() => WriteCommands(Program.GetCommands());
     
     private static void Write_FORMAL() {
-        Program.Log(string.Join("\n",Program.formalFunctions.Keys.OrderBy(n=>n).Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
+        Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
     }
     private static void WriteSettings(IEnumerable<string> settings) {
         Program.Log(string.Join("\n",settings.OrderBy(n=>n)));
@@ -75,7 +75,7 @@ public sealed class ListObjects : ExecutableCommand {
     }
 
     private static void WriteMath(IEnumerable<string> objs) {
-        Program.Log(string.Join("\n",objs.OrderBy(n=>n).Select(n => 
+        Program.Log(string.Join("\n",objs.Select(n => 
             Program.definedObjects[n] is Function?
                 Program.definedObjects[n].AsString()+": "+((Function)Program.definedObjects[n]).expression.AsString():
                 n + ": "+Program.definedObjects[n].AsString()

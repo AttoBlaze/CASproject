@@ -3,14 +3,14 @@ using CAS;
 public class Divide : MathObject {
     public MathObject numerator {get; private set;}
     public MathObject denominator {get; private set;}
-    public Divide(MathObject obj1, MathObject obj2) {
-        numerator = obj1;
-        denominator = obj2;
+    public Divide(MathObject numerator, MathObject denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
     
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         //calculate all terms
-        return new Divide(numerator.Calculate(definedObjects),denominator.Calculate(definedObjects));
+        return new Divide(numerator.Evaluate(definedObjects),denominator.Evaluate(definedObjects));
     }
 
     /*
@@ -21,9 +21,14 @@ public class Divide : MathObject {
     a/(b/c) = (a*c)/b
     */
     public MathObject Simplify() {
+        var num = numerator.Simplify();
+        var denom = denominator.Simplify();
+
+        //a/a = 1
+        if(num.Equals(denom)) return new Constant(1);
+
         //combine constants
-        if(numerator is Constant && denominator is Constant) return new Constant(((Constant)numerator).value/((Constant)denominator).value);
-        
+        if(num is Constant && denom is Constant) return new Constant(((Constant)num).value/((Constant)denom).value);
         return this;
     }
 

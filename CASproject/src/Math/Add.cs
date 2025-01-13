@@ -26,7 +26,7 @@ public class Add : MathObject {
     public MathObject Simplify() {
         //simplify terms
         terms = terms.Select(term => term.Simplify()).ToList();
-        
+
         //combine constants
         double value = 0;
         var temp = terms.Where(term => term is Constant).ToList();
@@ -37,6 +37,7 @@ public class Add : MathObject {
         if(value!=0) terms.Add(new Constant(value));
 
         if(terms.Count==1) return terms[0];
+        if(terms.Count==0) return new Constant(0);
         return this;
     }
 
