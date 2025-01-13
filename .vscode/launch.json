@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/CASproject/bin/Debug/net8.0/CASproject.dll",
+            "program": "${workspaceFolder}/UnitTests/bin/Debug/net8.0/UnitTests.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/CASproject",
+            "cwd": "${workspaceFolder}/UnitTests",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false

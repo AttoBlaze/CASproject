@@ -195,6 +195,10 @@ public sealed partial class Command {
         if (Program.commands.TryGetValue(op, out Command? command))
             return command.create(output);
         
+		//formal functions
+		if (Program.formalFunctions.TryGetValue(op, out FormalFunction? formalFunction)) 
+			return formalFunction.create(output);
+
 		//functions
 		if (Program.definedObjects.TryGetValue(op, out MathObject? expression) && expression is Function) {
 			var function = (Function)expression;
@@ -205,24 +209,18 @@ public sealed partial class Command {
 				var Args = ((object[])args).Select(n => (MathObject)n).ToArray();
 				
 				//error check
-				if(function.inputs.Length!=Args.Length) throw new Exception("Improper math function input count! ("+Args.Length+" inputs given, "+function.inputs.Length+" inputs required)");
+				if(function.inputs.Count()!=Args.Length) throw new Exception("Improper math function input count! ("+Args.Length+" inputs given, "+function.inputs.Keys.Count()+" inputs required)");
 				
 				//function inputs
-				Dictionary<string,MathObject> inputs = new();
-				for(int i=0 ; i<Args.Length ; i++)
-					inputs[function.inputs[i]] = Args[i];
-				
-				return function.Evaluate(inputs);
+				return new Function(function,Args);
 			}
 
 			//single input
 			else {
 				//error check
-				if(function.inputs.Length!=1) throw new Exception("Improper math function input count! ("+1+" inputs given, "+function.inputs.Length+" inputs required)");
+				if(function.inputs.Keys.Count()!=1) throw new Exception("Improper math function input count! ("+1+" inputs given, "+function.inputs.Keys.Count()+" inputs required)");
 				
-				return function.Evaluate(new(){
-					{function.inputs[0],(MathObject)args}
-				}); 
+				return new Function(function,[(MathObject)args]);
 			}
 		}
         throw new Exception("No operator/function could be applied!");

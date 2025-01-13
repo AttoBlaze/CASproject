@@ -4,19 +4,19 @@ public sealed partial class Setting {
     public static void CreateAllSettings() {
         string[] BOOL = ["true|false|1|0",""];
         new Setting(
-            "ShowAllMessages",
-            "Enables/disables logs being written in the console",
+            "MuteOutput",
+            "Mutes command outputs from being written in the console",
             BOOL,
-            ()=> Program.ShowAllMessages,
-            (input)=> {Program.ShowAllMessages = (bool)input;},
+            ()=> Program.MuteOutput,
+            (input)=> {Program.MuteOutput = (bool)input;},
             ConvertToBool
         );
         new Setting(
-            "ShowAllErrors",
-            "Enables/disables error logs being written in the console",
+            "MuteErrors",
+            "Mutes error logs being written in the console",
             BOOL,
-            ()=> Program.ShowAllErrors,
-            (input)=> {Program.ShowAllErrors = (bool)input;},
+            ()=> Program.MuteErrors,
+            (input)=> {Program.MuteErrors = (bool)input;},
             ConvertToBool
         );
         new Setting(

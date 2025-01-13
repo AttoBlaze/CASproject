@@ -12,7 +12,8 @@ public sealed class ListObjects : ExecutableCommand {
         {"functions",   new("Lists all defined functions",                  Write_FUNCTIONS)},
         {"constants",   new("Lists all defined constants",                  Write_CONSTANTS)},
         {"commands",    new("Lists all commands in the program",            Write_COMMANDS)},
-        {"settings",    new("Lists all settings in the program",            Write_SETTINGS)}
+        {"settings",    new("Lists all settings in the program",            Write_SETTINGS)},
+        {"formal",      new("Lists all formal functions in the program",    Write_FORMAL)}
     };
 
     public struct ListCommand {
@@ -33,9 +34,11 @@ public sealed class ListObjects : ExecutableCommand {
         const int barsize = 50;
         Program.Log(CenteredInBar("Settings",barsize));
         Write_SETTINGS();
-        Program.Log("\n"+CenteredInBar("Commands",barsize));
+        Program.Log(CenteredInBar("Commands",barsize));
         Write_COMMANDS();
-        Program.Log("\n"+CenteredInBar("Objects",barsize));
+        Program.Log(CenteredInBar("Formal",barsize));
+        Write_FORMAL();
+        Program.Log(CenteredInBar("Objects",barsize));
         Write_MATH();
         Program.Log(CenteredInBar("",barsize));
     }
@@ -53,25 +56,30 @@ public sealed class ListObjects : ExecutableCommand {
     private static void Write_MATH() => WriteMath(Program.GetDefinedObjects());
     private static void Write_PREDEFINED() => WriteMath(Program.GetPredefined());
     private static void Write_VARIABLES() => WriteMath(Program.GetVariables());
-    private static void Write_FUNCTIONS() => WriteMath(Program.GetFunctions());
+    private static void Write_FUNCTIONS() {
+        Program.Log(string.Join("\n",Program.formalFunctions.Keys.OrderBy(n=>n).Select(FormalFunction.Get).Where(n=>n.mathematical).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
+        WriteMath(Program.GetFunctions());
+    }
     private static void Write_CONSTANTS() => WriteMath(Program.GetConstants());
     private static void Write_COMMANDS() => WriteCommands(Program.GetCommands());
     
+    private static void Write_FORMAL() {
+        Program.Log(string.Join("\n",Program.formalFunctions.Keys.OrderBy(n=>n).Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
+    }
     private static void WriteSettings(IEnumerable<string> settings) {
-        Program.Log(string.Join("\n\n",settings.OrderBy(n=>n).Select(Setting.Get).Select(ExplainCommand.ExplainSetting)));
+        Program.Log(string.Join("\n",settings.OrderBy(n=>n)));
     }
 
     private static void WriteCommands(IEnumerable<string> commands) {
-        Program.Log(string.Join("\n\n",commands.OrderBy(n=>n).Select(Command.Get).Select(ExplainCommand.ExplainCmd)));
+        Program.Log(string.Join("\n",commands.OrderBy(n=>n)));
     }
 
     private static void WriteMath(IEnumerable<string> objs) {
-        Program.Log(string.Join("\n",objs.OrderBy(n=>n).Select(n => {
-            string str = n;
-            if(Program.definedObjects[n] is Function) str += ((Function)Program.definedObjects[n]).GetParameters(); //add function parameters
-            str += ": "+Program.definedObjects[n].AsString();                                                                                                               //definition
-            return str;
-        })));      
+        Program.Log(string.Join("\n",objs.OrderBy(n=>n).Select(n => 
+            Program.definedObjects[n] is Function?
+                Program.definedObjects[n].AsString()+": "+((Function)Program.definedObjects[n]).expression.AsString():
+                n + ": "+Program.definedObjects[n].AsString()
+        )));
     }
 
     private readonly string objects;

@@ -1,4 +1,5 @@
 using Application;
+using CAS;
 
 namespace Commands;
 
@@ -19,10 +20,14 @@ public sealed class ExplainCommand : ExecutableCommand {
             return ExplainSetting(Setting.Get(thing)); 
         }
         
-        //commands
+        //command
         if (Program.commands.ContainsKey(thing)) {
             return ExplainCmd(Command.Get(thing)); 
         }
+
+        //formal function
+        if(Program.formalFunctions.ContainsKey(thing))
+            return ExplainFormalFunction(FormalFunction.Get(thing)); 
 
         throw new Exception("Cannot explain given input as it is not a command/setting!");
     }
@@ -74,5 +79,9 @@ public sealed class ExplainCommand : ExecutableCommand {
         }
         else str += "Arguments unspecified";
         return str;
+    }
+
+    public static string ExplainFormalFunction(FormalFunction func) {
+        return func.name+"("+string.Join(",",func.inputs)+") - "+func.description;
     }
 }

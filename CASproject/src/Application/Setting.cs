@@ -13,11 +13,11 @@ public sealed partial class Setting {
     public readonly string[] overloads;
     public readonly Action<object> set;
     public readonly Func<object,object> convertInput;
-    public readonly Func<object,object> convertOutput;
+    public readonly Func<object,MathObject> convertOutput;
     public readonly Func<object> get;
     
     public Setting(string name, string description, string[] overloads, Func<object> get, Action<object> set, Func<object,object> convertInput) : this(name,description,overloads,get,set,convertInput,GetOutputConverter(get())) {}
-    public Setting(string name, string description, string[] overloads, Func<object> get, Action<object> set, Func<object,object> convertInput, Func<object,object> convertOutput) {
+    public Setting(string name, string description, string[] overloads, Func<object> get, Action<object> set, Func<object,object> convertInput, Func<object,MathObject> convertOutput) {
         this.name = name;
         this.description = description;
         this.overloads = overloads;
@@ -28,7 +28,7 @@ public sealed partial class Setting {
         Program.settings[name] = this;
     }
     
-    public static Func<object,object> GetOutputConverter(object value) {
+    public static Func<object,MathObject> GetOutputConverter(object value) {
         if(value is string) return val => new Variable((string)val);
         if(value is bool) return val => new Constant((bool)val?1:0);
         throw new Exception("No settings output converter exists for type \""+value.GetType()+"\"!");
@@ -63,8 +63,9 @@ public sealed partial class Setting {
         if (input is MathObject) {
             var temp = ((MathObject)input).Calculate();
             if (temp is Constant)
-                return ((Constant)temp).value==1;
-            throw new Exception("Given expression is not simplifiable to a constant value (where 1=true, !1 = false)!");
+                if (temp.AsValue()==0) return false;
+                if (temp.AsValue()==1) return true;
+            throw new Exception("Given expression is not simplifiable to a constant value (where 1=true, 0 = false)!");
         }
         
         throw new Exception("Unable to convert input to a bool");

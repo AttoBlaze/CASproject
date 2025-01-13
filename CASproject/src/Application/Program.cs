@@ -4,8 +4,8 @@ using Commands;
 
 public static class Program {
     public static bool
-        ShowAllMessages = true,
-        ShowAllErrors = true,
+        MuteOutput = true,
+        MuteErrors = true,
         AlwaysWrite = true,
         AlwaysShowWrite = true;
 
@@ -13,15 +13,15 @@ public static class Program {
     /// Parses and executes the given input  
     /// </summary>
     public static void Execute(string input, bool muteOutput = false) {
-        bool showMsgs = ShowAllMessages;
-        if (muteOutput) ShowAllMessages = false;
+        bool mute = MuteOutput;
+        if (muteOutput) MuteOutput = true;
         
         //parse input and execute as command
         var cmd = Command.Parse(input);
         if(AlwaysWrite && cmd is not Write) cmd = new Write(cmd);
         cmd.Execute();
 
-        if (muteOutput) ShowAllMessages = showMsgs;
+        if (muteOutput) MuteOutput = mute;
     }
     /// <summary>
     /// Executes all of the given inputs 
@@ -30,13 +30,15 @@ public static class Program {
         foreach(var input in inputs)
             Execute(input,muteOutput:muteOutput);
     }
+    /// <inheritdoc cref="ExecuteAll(IEnumerable{string},bool)"/>
+    public static void Execute(params string[] inputs) => ExecuteAll(inputs);
     
     /// <summary>
     /// Attempts to parse and execute the given input 
     /// </summary>
     public static void TryExecute(string input, bool muteOutput = false) {
-        bool showMsgs = ShowAllMessages;
-        if (muteOutput) ShowAllMessages = false;
+        bool showMsgs = MuteOutput;
+        if (muteOutput) MuteOutput = true;
         
         try {
             Execute(input);
@@ -44,7 +46,7 @@ public static class Program {
             Log("Unknown error occured",e);
         }
 
-        if (muteOutput) ShowAllMessages = showMsgs;
+        if (muteOutput) MuteOutput = showMsgs;
     }
     /// <summary>
     /// Attempts to executes all of the given inputs 
@@ -53,11 +55,14 @@ public static class Program {
         foreach(var input in inputs)
             TryExecute(input,muteOutput:muteOutput);
     }
+    /// <inheritdoc cref="TryExecuteAll(IEnumerable{string},bool)"/>
+    public static void TryExecute(params string[] inputs) => TryExecuteAll(inputs);
+    
 
     /// <summary>
     /// Contains all settings
     /// </summary>
-    public static Dictionary<string,Setting> settings = new();
+    public static readonly Dictionary<string,Setting> settings = new();
     public static IEnumerable<string> GetSettings() => settings.Keys;
 
     /// <summary>
@@ -67,20 +72,27 @@ public static class Program {
     public static IEnumerable<string> GetCommands() => commands.Keys;
 
     /// <summary>
+    /// Contains all formal functions in the program
+    /// </summary>
+    public static readonly Dictionary<string,FormalFunction> formalFunctions = new();
+    public static IEnumerable<string> GetFormalFunctions() => formalFunctions.Keys;
+
+    /// <summary>
     /// Logs the given message in the console
     /// </summary>
     public static void Log(object log, bool newLine = true) {
-        if(ShowAllMessages)
+        if(!MuteOutput)
             Console.Write(log + (newLine?"\n":""));
     }
     /// <inheritdoc cref="Log(object,bool)"/>
     public static void Log(object log, Exception e, bool newLine = true) =>
-        Log(log + (ShowAllErrors?"\n"+e:""),newLine);
+        Log(log + (!MuteErrors?"\n"+e:""),newLine);
+
 
     /// <summary>
 	/// Contains all pre-defined variables (fx e, pi).
 	/// </summary>
-	public static readonly Dictionary<string,MathObject> formalDefinedObjects = new(){
+	public static readonly Dictionary<string,MathObject> preDefinedObjects = new(){
         {"e",new Constant(Math.E)},
         {"pi",new Constant(Math.PI)},
     };
@@ -88,16 +100,17 @@ public static class Program {
 	/// <summary>
 	/// Contains all defined variables (fx e, pi, x if user defined).
 	/// </summary>
-	public static Dictionary<string,MathObject> definedObjects {get; private set;} = formalDefinedObjects.ToDictionary();
+	public static Dictionary<string,MathObject> definedObjects {get; private set;} = preDefinedObjects.ToDictionary();
 	public static void Define(string name, MathObject expression) {
-		if (!formalDefinedObjects.ContainsKey(name)) 
-			definedObjects[name] = expression;
+		if (preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot redefine predefined objects!");
+        if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
+		definedObjects[name] = expression;
 	}
-    public static IEnumerable<string> GetPredefined() => formalDefinedObjects.Keys;
+    public static IEnumerable<string> GetPredefined() => preDefinedObjects.Keys;
 	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is Function);
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
-	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !formalDefinedObjects.ContainsKey(key));
+	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !preDefinedObjects.ContainsKey(key));
 
     private static bool STARTED = false;
     /// <summary>
@@ -105,21 +118,26 @@ public static class Program {
     /// </summary>
     public static void START() {
         if (STARTED) return;
-        const string BAR = "-------------------------------";
+        const string BAR = "---------------------------------------";
         WRITE(
             "",
             BAR,
             "Startup initiated",
-            "Creating settings... "
+            "Creating settings.............. "
         );
         Setting.CreateAllSettings();
         WRITE(
-            "   Finished",
-            "Creating commands... "
+            "Finished",
+            "Creating commands.............. "
         );
         Command.CreateAllCommands();
         WRITE(
-            "   Finished",
+            "Finished",
+            "Creating formal functions...... "
+        );
+        FormalFunction.CreateAllFormalFunctions();
+        WRITE(
+            "Finished",
             "Startup completed",
             BAR,
             "Type \"help()\" for help."

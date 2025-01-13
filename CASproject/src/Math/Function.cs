@@ -4,31 +4,41 @@ namespace CAS;
 /// Represents a function
 /// </summary>
 public class Function : MathObject, NamedObject {
-    public string name {get; private set;}
-    public string[] inputs {get; private set;}
-    public MathObject expression {get; private set;}
+    public readonly string name;
+    public readonly Dictionary<string,MathObject> inputs = new();
+    public readonly MathObject expression;
+    public Function(Function func, MathObject[] inputs) {
+        name = func.name;
+        int i=0;
+        foreach(var key in func.inputs.Keys) {
+            this.inputs[key] = inputs[i];
+        }
+        expression = func.expression;
+    }
     public Function(string name, string[] inputs, MathObject expression) {
         this.name = name;
-        this.inputs = inputs;
+        foreach(var input in inputs){
+            this.inputs.Add(input,new Variable(input));
+        }
         this.expression = expression;
     }
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
-        return expression.Evaluate(definedObjects);
+        return expression.Evaluate(inputs).Evaluate(definedObjects);
     }
 
     public MathObject Simplify() {
-        return new Function(name,inputs,expression.Simplify());
+        return expression.Evaluate(inputs).Simplify();
     }
 
     public bool Equals(MathObject obj) =>
         obj is Function &&           //same type
-        ((Function)obj).name==name;  //same name
+        ((Function)obj).name==name &&//same name
+        ((Function)obj).inputs.Keys.All(key => this.inputs[key].Equals(((Function)obj).inputs[key]));//same inputs
 
     public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
 
     public bool Contains(MathObject obj) => obj.Equals(this) || expression.Contains(obj) || expression.Contains(new Variable(name));
-    public string AsString() => expression.AsString();
-    public string GetParameters() => "("+string.Join(",",inputs)+")";
+    public string AsString() => name+"("+string.Join(";",inputs.Values.Select(n => n.AsString()))+")";
     public string GetName() => name;
 }

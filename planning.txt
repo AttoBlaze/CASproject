@@ -1,14 +1,25 @@
 TODO:
 
-Log, Ln
-Sin, Cos, Tan, Asin, Acos, Atan
-RadToDeg, DegToRad
-Floor, Ceil, Round, Abs, Exp, Sqrt, root, random, gamma 
+Formal functions (of which will exist:
+    log
+    sin, cos, tan, atan, acos, atan
+    RadToDeg, DegToRad
+    floor, ceil, round, Abs, exp, sqrt, root, random, gamma
+    sum, product, recurse 
+) 
 Big floating point, Precision setting
 More Simplifications
-Help command
 destroy command (removes object definition)
 time command (records time taken to execute command)
 show/hide command (overrides showallmessages)
 Differentiable expressions
 Factorial operator
+
+Simplification settings:
+DisolveConstants - disolve predefined constants (replace with their value)
+PreferFractions
+
+
+
+NOTES:
+rename ShowAllMessages to MuteOutput, ShowAllErrors to MuteErrors

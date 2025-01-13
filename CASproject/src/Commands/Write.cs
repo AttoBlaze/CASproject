@@ -12,6 +12,9 @@ public sealed class Write : ExecutableCommand {
                 Program.definedObjects.ContainsKey(((Variable)obj).name)?   Program.definedObjects[((Variable)obj).name].AsString():
                 ((Variable)obj).name:
 
+            obj is Function?
+                ((Function)obj).expression.AsString():
+
             //expressions
             obj is MathObject? ((MathObject)obj).AsString():
             
@@ -31,10 +34,10 @@ public sealed class Write : ExecutableCommand {
         
         //if AlwaysShowWrite is enabled, override the ShowAllMessages setting temporarily
         if(Program.AlwaysShowWrite) {
-            bool showMsgs = Program.ShowAllMessages;
-            Program.ShowAllMessages = true;  
+            bool mute = Program.MuteOutput;
+            Program.MuteOutput = false;  
             Program.Log(str);
-            Program.ShowAllMessages = showMsgs;  
+            Program.MuteOutput = mute;  
         }
 
         else Program.Log(str);

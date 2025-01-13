@@ -48,9 +48,6 @@ public sealed partial class Command {
                 "NAME;INPUTS..;EXPRESSION","Defines a function with the given inputs"
             ],
             arguments => {
-                if((Program.formalDefinedObjects??new()).ContainsKey(((object[])arguments.Peek()).Last().AsInput()))
-                    throw new Exception("You cannot redefine formally defined objects!");
-
                 //variables
                 if (((object[])arguments.Peek()).Length==2)
                     return Command.Get("defineVariable").create(arguments);
@@ -105,15 +102,6 @@ public sealed partial class Command {
                 return new SetSetting(args.Last().AsInput(),args.Count()==2?args.First():args.Skip(1).ToArray());
         });
         new Command(
-            "getSetting",
-            "Gets the value of a setting",
-            [
-                "SETTING","Gets the value of the given setting"
-            ],
-            arguments => {
-                return new GetSetting(arguments.Pop().AsInput());
-        });
-        new Command(
             "help",
             "Gives information about the usage of this program",
             NONE,
@@ -122,10 +110,11 @@ public sealed partial class Command {
         });
         new Command(
             "explain",
-            "Explains a command/setting",
+            "Explains a command/setting/formal function",
             [
                 "SETTING","Explains the given setting",
-                "COMMAND","Explains the usage of the given command"
+                "COMMAND","Explains the usage of the given command",
+                "FUNCTION","Explains the usage of the given formal function"
             ], 
             arguments => {
                 return new ExplainCommand(arguments.Pop().AsInput());

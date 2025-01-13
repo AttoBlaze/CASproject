@@ -52,7 +52,7 @@ public class Multiply : MathObject {
         if(!(obj is Add)) return false;    
         
         //same terms
-        var objTerms = ((Add)obj).terms.ToHashSet();
+        var objTerms = ((Add)obj).terms;
         return terms.All(term => objTerms.Any(n => n.Equals(term))); 
     }
     public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
@@ -61,4 +61,4 @@ public class Multiply : MathObject {
         term.AsString()                                                                                         //default
     )).Replace("-1*","-");
     public int Precedence() => Operator.Precedence('*');
-}
+} 

@@ -1,0 +1,98 @@
+Date : 2025-01-11 20:28:44
+Directory : c:\programmering\visualstudiocodeFiles\CASproject\UnitTests
+Total : 54 files,  1104 codes, -196 comments, -167 blanks, all 741 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          8 |      1,835 |          0 |          0 |      1,835 |
+| XML        |          5 |         92 |          0 |          7 |         99 |
+| Properties |          2 |         26 |          0 |          2 |         28 |
+| C#         |         39 |       -849 |       -196 |       -176 |     -1,221 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                   |         54 |      1,104 |       -196 |       -167 |        741 |
+| . (Files)                                                                                                                           |          3 |         43 |          0 |         10 |         53 |
+| ..                                                                                                                                  |         27 |     -1,052 |       -219 |       -217 |     -1,488 |
+| ..\CASproject                                                                                                                       |         27 |     -1,052 |       -219 |       -217 |     -1,488 |
+| ..\CASproject\src                                                                                                                   |         27 |     -1,052 |       -219 |       -217 |     -1,488 |
+| ..\CASproject\src (Files)                                                                                                           |          1 |        -31 |         -1 |         -3 |        -35 |
+| ..\CASproject\src\Application                                                                                                       |          3 |       -178 |        -49 |        -27 |       -254 |
+| ..\CASproject\src\Commands                                                                                                          |         13 |       -546 |        -78 |       -105 |       -729 |
+| ..\CASproject\src\Math                                                                                                              |         10 |       -297 |        -91 |        -82 |       -470 |
+| Commands                                                                                                                            |          3 |         88 |          1 |         16 |        105 |
+| Math                                                                                                                                |          2 |         57 |          0 |          9 |         66 |
+| bin                                                                                                                                 |          4 |        480 |          0 |          0 |        480 |
+| bin\Debug                                                                                                                           |          4 |        480 |          0 |          0 |        480 |
+| bin\Debug\net8.0                                                                                                                    |          4 |        480 |          0 |          0 |        480 |
+| obj                                                                                                                                 |         15 |      1,488 |         22 |         15 |      1,525 |
+| obj (Files)                                                                                                                         |          7 |      1,424 |          0 |          0 |      1,424 |
+| obj\Debug                                                                                                                           |          8 |         64 |         22 |         15 |        101 |
+| obj\Debug\net8.0                                                                                                                    |          8 |         64 |         22 |         15 |        101 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                            | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\CreateSettingsStartup.cs                               | C#         |        -38 |          0 |         -1 |        -39 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.cs                                             | C#         |        -92 |        -34 |        -16 |       -142 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Setting.cs                                             | C#         |        -48 |        -15 |        -10 |        -73 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Command.cs                                                | C#         |       -153 |        -46 |        -44 |       -243 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\CreateCommandsStartup.cs                                  | C#         |       -127 |         -8 |         -5 |       -140 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\DefineFunction.cs                                         | C#         |        -19 |          0 |         -3 |        -22 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\DefineVariable.cs                                         | C#         |        -20 |          0 |         -3 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\EvaluateExpression.cs                                     | C#         |        -13 |          0 |         -2 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Explain.cs                                                | C#         |        -51 |        -12 |        -15 |        -78 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\GetSetting.cs                                             | C#         |        -11 |          0 |         -3 |        -14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Help.cs                                                   | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\InformalCommand.cs                                        | C#         |        -10 |         -3 |         -2 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\ListObjects.cs                                            | C#         |        -67 |         -3 |        -11 |        -81 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\SetSetting.cs                                             | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\SimplifyExpression.cs                                     | C#         |         -9 |          0 |         -2 |        -11 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Write.cs                                                  | C#         |        -36 |         -6 |         -9 |        -51 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Main.cs                                                            | C#         |        -31 |         -1 |         -3 |        -35 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Add.cs                                                        | C#         |        -38 |        -13 |        -11 |        -62 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Constant.cs                                                   | C#         |        -19 |         -4 |         -8 |        -31 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Divide.cs                                                     | C#         |        -29 |         -9 |         -9 |        -47 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Function.cs                                                   | C#         |        -25 |         -3 |         -6 |        -34 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\GetValue.cs                                                   | C#         |         -1 |         -4 |          0 |         -5 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\MathObject.cs                                                 | C#         |        -33 |        -12 |        -11 |        -56 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Multiply.cs                                                   | C#         |        -40 |        -14 |        -10 |        -64 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Operator.cs                                                   | C#         |        -63 |        -19 |        -11 |        -93 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Power.cs                                                      | C#         |        -29 |         -9 |         -9 |        -47 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Variable.cs                                                   | C#         |        -20 |         -4 |         -7 |        -31 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Commands\Define.cs                                                      | C#         |         41 |          0 |          7 |         48 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Commands\Settings.cs                                                    | C#         |         24 |          1 |          5 |         30 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Commands\SingleInput.cs                                                 | C#         |         23 |          0 |          4 |         27 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Development.cs                                                          | C#         |         14 |          0 |          2 |         16 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\Comparison.cs                                                      | C#         |         13 |          0 |          2 |         15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\Hierarchy.cs                                                       | C#         |         44 |          0 |          7 |         51 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\UnitTests.cs                                                            | C#         |          7 |          0 |          1 |          8 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\UnitTests.csproj                                                        | XML        |         22 |          0 |          7 |         29 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\CASproject.deps.json                                   | JSON       |         23 |          0 |          0 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\CASproject.runtimeconfig.json                          | JSON       |         12 |          0 |          0 |         12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\UnitTests.deps.json                                    | JSON       |        433 |          0 |          0 |        433 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\UnitTests.runtimeconfig.json                           | JSON       |         12 |          0 |          0 |         12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs         | C#         |          3 |          1 |          1 |          5 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\TestProject1.AssemblyInfo.cs                           | C#         |          9 |         10 |          5 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\TestProject1.GeneratedMSBuildEditorConfig.editorconfig | Properties |         13 |          0 |          1 |         14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\TestProject1.GlobalUsings.g.cs                         | C#         |          8 |          1 |          1 |         10 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.AssemblyInfo.cs                              | C#         |          9 |          9 |          5 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.GeneratedMSBuildEditorConfig.editorconfig    | Properties |         13 |          0 |          1 |         14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.GlobalUsings.g.cs                            | C#         |          8 |          1 |          1 |         10 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.sourcelink.json                              | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\TestProject1.csproj.nuget.dgspec.json                               | JSON       |         95 |          0 |          0 |         95 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\TestProject1.csproj.nuget.g.props                                   | XML        |         26 |          0 |          0 |         26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\TestProject1.csproj.nuget.g.targets                                 | XML        |          9 |          0 |          0 |          9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json                                  | JSON       |        164 |          0 |          0 |        164 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\UnitTests.csproj.nuget.g.props                                      | XML        |         26 |          0 |          0 |         26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\UnitTests.csproj.nuget.g.targets                                    | XML        |          9 |          0 |          0 |          9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\project.assets.json                                                 | JSON       |      1,095 |          0 |          0 |      1,095 |
+| Total                                                                                                                               |            |      1,104 |       -196 |       -167 |        741 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
