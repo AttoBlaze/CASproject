@@ -53,6 +53,15 @@ public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<
     public int AbsPrecedence() => Math.Abs(Precedence()); 
     public double AsValue() => throw new Exception("Not a value!");
 
+    public static bool FindAndRemoveOtherTerm(Func<MathObject,bool> predicate, List<MathObject> terms, ref int index, ref MathObject otherTerm, ref int otherIndex) {
+        if(FindOtherTerm(predicate,terms,index,ref otherTerm,ref otherIndex)) {
+            terms.RemoveAt(otherIndex);
+            if (otherIndex<index) index--;
+            return true;
+        }
+        return false;
+    }
+    
     public static bool FindOtherTerm(Func<MathObject,bool> predicate, List<MathObject> terms, int index, ref MathObject otherTerm, ref int otherIndex) {
         for(int i=0; i<terms.Count && i!=index ; i++) {
             if(predicate(terms[i])) {
@@ -62,17 +71,6 @@ public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<
             }
         }
         return false;
-    }
-    
-    public static bool FindOtherEqualTerm(List<MathObject> terms, MathObject term, int index, ref MathObject otherTerm, ref int otherIndex) =>
-        FindOtherTerm(obj=>obj.Equals(term), terms,index,ref otherTerm, ref otherIndex);
-    public struct TermInfo {
-        public int index;
-        public MathObject obj;
-        public TermInfo(MathObject obj, int index) {
-            this.obj = obj;
-            this.index = index;
-        }
     }
 }
 

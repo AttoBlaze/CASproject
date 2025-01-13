@@ -25,6 +25,34 @@ public class Multiply : MathObject {
         //simplify terms
         terms = terms.Select(term => term.Simplify()).ToList();
 
+        MathObject obj = this;
+        int index = 0;
+        for(int i=0;i<terms.Count;i++) {
+            var term = terms[i];
+            if(term is Constant) continue;
+            
+            //a*a = a^2
+            if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i, ref obj, ref index)) {
+                terms[i] = new Power(term,new Constant(2));
+                i=0; continue;
+            }
+
+            if (term is Power) {
+                //a * a^n = a^(n+1)
+                var pow = (Power)term;
+                if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(pow.Base),terms,ref i, ref obj, ref index)) {
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1)).Simplify());
+                    i=0; continue;
+                }
+                
+                //a^b * a^c = a^(b+c)
+                if (MathObject.FindAndRemoveOtherTerm(term => (term as Power)?.Base.Equals(pow.Base)??false, terms,ref i,ref obj, ref index)) {
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,obj.As<Power>().exponent).Simplify());
+                    i=0; continue;
+                }
+            }
+        }
+
         //combine constants
         double value = 1;
         var temp = terms.Where(term => term is Constant).ToList();
@@ -34,39 +62,6 @@ public class Multiply : MathObject {
         }
         if(value==0) return new Constant(0);                //0*a = 0
         if (value!=1) terms.Insert(0,new Constant(value));  //1*a = a
-
-        MathObject obj = this;
-        int index = 0;
-        for(int i=0;i<terms.Count;i++) {
-            var term = terms[i];
-            
-            //a*a = a^2
-            if (MathObject.FindOtherEqualTerm(terms,term,i, ref obj, ref index)) {
-                terms.RemoveAt(index); i--;
-                terms[i] = new Power(term,new Constant(2));
-                i = 0;
-                continue;
-            }
-
-            if (term is Power) {
-                //a * a^n = a^(n+1)
-                var pow = (Power)term;
-                if (MathObject.FindOtherEqualTerm(terms,pow.Base,i, ref obj, ref index)) {
-                    terms.RemoveAt(index); i--;
-                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1)).Simplify());
-                    i = 0;
-                    continue;
-                }
-                
-                //a^b * a^c = a^(b+c)
-                if (MathObject.FindOtherTerm(term => (term as Power)?.Base.Equals(pow.Base)??false, terms,i,ref obj, ref index)) {
-                    terms.RemoveAt(index); i--;
-                    terms[i] = new Power(pow.Base,new Add(pow.exponent,obj.As<Power>().exponent).Simplify());
-                    i = 0;
-                    continue;
-                }
-            }
-        }
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(1);
@@ -80,10 +75,10 @@ public class Multiply : MathObject {
     
     public bool Equals(MathObject obj) {
         //same type
-        if(!(obj is Add)) return false;    
+        if(!(obj is Multiply)) return false;    
         
         //same terms
-        var objTerms = ((Add)obj).terms;
+        var objTerms = ((Multiply)obj).terms;
         return terms.All(term => objTerms.Any(n => n.Equals(term))); 
     }
     public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
@@ -91,5 +86,12 @@ public class Multiply : MathObject {
         term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())?    "("+term.AsString()+")":   //parentheses
         term.AsString()                                                                                         //default
     )).Replace("-1*","-");
+    
+    public MathObject WithoutFirstTerm() {
+        return terms.Count>2? 
+            new Multiply(terms.Skip(1)): 
+            terms[1];
+    }
+
     public int Precedence() => Operator.Precedence('*');
 } 

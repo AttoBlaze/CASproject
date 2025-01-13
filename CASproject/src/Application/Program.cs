@@ -95,7 +95,6 @@ public static class Program {
 	public static readonly Dictionary<string,MathObject> preDefinedObjects = new(){
         {"e",new Constant(Math.E)},
         {"pi",new Constant(Math.PI)},
-        {"log",new Function("log",["base","x"],new Divide(new Ln(new Variable("base")),new Ln(new Variable("x"))))},
         {"radtodeg",new Function("radtodeg",["radians"],new Divide(new Multiply([new Variable("radians"),new Constant(180)]),new Variable("pi")))},
         {"degtorad",new Function("degtorad",["degrees"],new Divide(new Multiply([new Variable("degrees"),new Variable("pi")]),new Constant(180)))},
     };

@@ -18,14 +18,43 @@ public class Add : MathObject {
 
     /*
     Simplifications:
-    a + n*a -> (n+1)*a), n is R
-    a + a -> 2*a
-    n*a + m*a -> (n+m)*a,  n is R, m is R
     a/c + b/c = (a+b)/c
     */
     public MathObject Simplify() {
         //simplify terms
         terms = terms.Select(term => term.Simplify()).ToList();
+
+        MathObject obj = this;
+        int index = 0;
+        for(int i=0;i<terms.Count;i++) {
+            var term = terms[i];
+            if(term is Constant) continue;
+            
+            if ((term as Multiply)?.terms[0] is Constant) {
+                //a + n*a = (n+1)*a
+                var num = term.As<Multiply>().terms[0].AsValue(); 
+                MathObject mult = term.As<Multiply>().WithoutFirstTerm();
+                if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
+                    terms[i] = new Multiply(new Constant(num+1),mult);
+                    i=0; continue;
+                }
+
+                //b*a + c*a = (b+c)*a
+                if(MathObject.FindAndRemoveOtherTerm(t => 
+                    t is Multiply && t.As<Multiply>().terms[0] is Constant && t.As<Multiply>().WithoutFirstTerm().Equals(mult)
+                    ,terms,ref i,ref obj ,ref index)) 
+                {   
+                    terms[i] = new Multiply(new Constant(num+obj.As<Multiply>().terms[0].AsValue()),mult);
+                    i=0; continue;
+                }
+            }
+
+            //a+a = 2*a
+            if(MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i,ref obj,ref index)) {
+                terms[i] = new Multiply(new Constant(2),term);
+                i=0; continue;
+            }
+        }
 
         //combine constants
         double value = 0;
