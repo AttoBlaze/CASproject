@@ -12,4 +12,9 @@ public class ComparisonTests {
         Assert.That(expr.Contains(new Variable("z")));
         Assert.That(expr.Contains(new Variable("c")));
     }
+
+    /*[Test]
+    public void Equals() {
+        Assert.Inconclusive();
+    }*/
 }

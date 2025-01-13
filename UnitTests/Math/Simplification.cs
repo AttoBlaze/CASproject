@@ -26,5 +26,16 @@ public class Simplifications {
 		Assert.That(ParseSimplify("a+a").Equals(ParseSimplify("2*a")));
 		Assert.That(ParseSimplify("a+2*a").Equals(Parse("3*a")));
 		Assert.That(ParseSimplify("2*a+2*a").Equals(Parse("4*a")));
+		Assert.That(ParseSimplifyVal("a-a")==0);
+		Assert.That(ParseSimplifyVal("2*a-2*a")==0);
+		Assert.That(ParseSimplifyVal("3*a-2*a-a")==0);
+	}
+
+	[Test]
+	public void Ln() {
+		Program.START();
+		Assert.That(ParseSimplify("ln(1)").Equals(ParseSimplify("0")));
+		Assert.That(ParseSimplify("ln(e)").Equals(ParseSimplify("1")));
+		Assert.That(ParseSimplify("ln(e^x)").Equals(ParseSimplify("x")));
 	}
 }

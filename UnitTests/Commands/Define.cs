@@ -22,9 +22,9 @@ public class DefineTests{
     [Test]
     public void DefineFunction() {
         Program.START();
-        Program.Execute("define(f;x;x^2)");
+        Program.Execute("define(f;y;y^2)");
         Assert.That(MathObject.Parse("f(2)").Calculate().AsValue()==4);
-        Assert.That(MathObject.Parse("f").Calculate().Equals(MathObject.Parse("x^2")));
+        Assert.That(MathObject.Parse("f").Calculate().Equals(MathObject.Parse("y^2")));
     }
 
 

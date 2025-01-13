@@ -9,7 +9,9 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "a^x * a * a^2"
+            "define(f;x;x^2)",
+            "f(2)",
+            "f(x)"
         );
         Assert.Pass();
     }

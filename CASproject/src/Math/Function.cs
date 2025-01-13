@@ -26,7 +26,7 @@ public class Function : MathObject, NamedObject {
     }
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
-        return expression.Evaluate(inputs).Evaluate(definedObjects);
+        return expression.Evaluate(inputs.Where(kvp => (kvp.Value as Variable)?.name!=kvp.Key).ToDictionary()).Evaluate(definedObjects);
     }
 
     public MathObject Simplify() {

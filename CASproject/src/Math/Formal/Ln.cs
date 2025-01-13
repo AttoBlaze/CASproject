@@ -17,10 +17,10 @@ public class Ln : MathObject {
         if(expr is Constant) return new Constant(Math.Log(expr.AsValue()));
         
         //e
-        if((expr as Variable)?.Equals(new Variable("e"))??false) return new Constant(1);
+        if((expr as Variable)?.name=="e") return new Constant(1);
 
         //e^x
-        if(((expr as Power)?.Base as Variable)?.Equals(new Variable("e"))??false) return expr.As<Power>().exponent;
+        if(((expr as Power)?.Base as Variable)?.name=="e") return expr.As<Power>().exponent;
         
         return new Ln(expr);
     }

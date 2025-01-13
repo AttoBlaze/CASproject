@@ -35,7 +35,8 @@ public class Add : MathObject {
                 var num = term.As<Multiply>().terms[0].AsValue(); 
                 MathObject mult = term.As<Multiply>().WithoutFirstTerm();
                 if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
-                    terms[i] = new Multiply(new Constant(num+1),mult);
+                    if(num+1==0) terms.RemoveAt(i);                             //a+(-1*a) = 0
+                    else terms[i] = new Multiply(new Constant(num+1),mult);
                     i=0; continue;
                 }
 
@@ -44,7 +45,9 @@ public class Add : MathObject {
                     t is Multiply && t.As<Multiply>().terms[0] is Constant && t.As<Multiply>().WithoutFirstTerm().Equals(mult)
                     ,terms,ref i,ref obj ,ref index)) 
                 {   
-                    terms[i] = new Multiply(new Constant(num+obj.As<Multiply>().terms[0].AsValue()),mult);
+                    var num2 = obj.As<Multiply>().terms[0].AsValue();
+                    if(num+num2==0) terms.RemoveAt(i);                             //n*a+(-n*a) = 0
+                    else terms[i] = new Multiply(new Constant(num+num2),mult);
                     i=0; continue;
                 }
             }
