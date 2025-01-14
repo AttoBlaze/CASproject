@@ -1,30 +1,19 @@
 namespace CAS;
 
-using Application;
-
 /// <summary>
 /// Represents a function
 /// </summary>
 public sealed class Function : MathObject, NamedObject {
     public readonly string name;
     public readonly Dictionary<string,MathObject> inputs = new();
-    public Function(Function func) {
-        this.name = func.name;
-        this.inputs = func.inputs;
-    }
-    public Function(Function func, MathObject[] inputs) {
-        if(inputs.Length!=func.inputs.Keys.Count()) throw new Exception("Cannot create function with new inputs as input counts do not match!");
+    public Function(DefinedFunction func) : this(func,func.inputs.Select(n => new Variable(n)).ToArray()) {}
+    public Function(DefinedFunction func, MathObject[] inputs) {
+        if(inputs.Length!=func.inputs.Count()) throw new Exception("Cannot create function with new inputs as input counts do not match!");
         name = func.name;
         int i = 0;
-        foreach(var key in func.inputs.Keys) {
+        foreach(var key in func.inputs) {
             this.inputs[key] = inputs[i];
             i++;
-        }
-    }
-    public Function(string name, string[] inputs, MathObject expression) {
-        this.name = name;
-        foreach(var input in inputs){
-            this.inputs[input] = new Variable(input);
         }
     }
 

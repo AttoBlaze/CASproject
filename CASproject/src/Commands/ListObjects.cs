@@ -76,8 +76,8 @@ public sealed class ListObjects : ExecutableCommand {
 
     private static void WriteMath(IEnumerable<string> objs) {
         Program.Log(string.Join("\n",objs.Select(n => 
-            Program.definedObjects[n] is Function?
-                Program.definedObjects[n].AsString()+": "+((Function)Program.definedObjects[n]).AsString():
+            Program.definedObjects[n] is DefinedFunction fun?
+                fun.GetFunctionString()+": "+fun.expr.AsString():
                 n + ": "+Program.definedObjects[n].AsString()
         )));
     }

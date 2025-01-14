@@ -95,8 +95,8 @@ public static class Program {
 	public static readonly Dictionary<string,MathObject> preDefinedObjects = new(){
         {"e",new Constant(Math.E)},
         {"pi",new Constant(Math.PI)},
-        {"radtodeg",new Function("radtodeg",["radians"],new Divide(new Multiply([new Variable("radians"),new Constant(180)]),new Variable("pi")))},
-        {"degtorad",new Function("degtorad",["degrees"],new Divide(new Multiply([new Variable("degrees"),new Variable("pi")]),new Constant(180)))},
+        {"radtodeg",new DefinedFunction("radtodeg",["radians"],new Divide(new Multiply([new Variable("radians"),new Constant(180)]),new Variable("pi")))},
+        {"degtorad",new DefinedFunction("degtorad",["degrees"],new Divide(new Multiply([new Variable("degrees"),new Variable("pi")]),new Constant(180)))},
     };
 	
 	/// <summary>
@@ -109,7 +109,7 @@ public static class Program {
 		definedObjects[name] = expression;
 	}
     public static IEnumerable<string> GetPredefined() => preDefinedObjects.Keys;
-	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is Function);
+	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is DefinedFunction);
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
 	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !preDefinedObjects.ContainsKey(key));
@@ -149,7 +149,7 @@ public static class Program {
     private static void WRITE(params object[] args) {
         foreach(var msg in args) {
             string str = msg.ToString()??" ";
-            Console.Write(str.Length>0 && str.EndsWith(" ")?str.Substring(0,str.Length-1):str+"\n");
+            Console.Write(str.Length>0 && str.EndsWith(' ')?str.Substring(0,str.Length-1):str+"\n");
         }
     }
 }
