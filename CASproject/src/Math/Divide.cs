@@ -1,8 +1,8 @@
 using CAS;
 
 public class Divide : MathObject {
-    public MathObject numerator {get; private set;}
-    public MathObject denominator {get; private set;}
+    public readonly MathObject numerator;
+    public readonly MathObject denominator;
     public Divide(MathObject numerator, MathObject denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
@@ -41,9 +41,6 @@ public class Divide : MathObject {
         obj is Divide &&                                    //same type
         ((Divide)obj).numerator.Equals(this.numerator) &&   //same terms
         ((Divide)obj).denominator.Equals(this.denominator); //same terms
-        
-
-    
 
     public string AsString() => 
         (numerator.Precedence()!=0 && numerator.AbsPrecedence()<Math.Abs(this.Precedence())? "("+numerator.AsString()+")":numerator.AsString()) + "/"+

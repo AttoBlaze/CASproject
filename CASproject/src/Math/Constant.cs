@@ -23,9 +23,9 @@ public class Constant : MathObject {
         obj is Constant &&  //same type
         ((Constant)obj).value==this.value;  //same value
 
-    public bool EquivalentTo(MathObject obj) => obj.Simplify().Equals(this);
-
     public string AsString() => value.ToString();
 
     public double AsValue() => value;
+
+    public static implicit operator Constant(double val) => new Constant(val);
 }

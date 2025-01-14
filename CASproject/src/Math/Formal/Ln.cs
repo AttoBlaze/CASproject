@@ -2,7 +2,7 @@
 namespace CAS;
 
 public class Ln : MathObject {
-    public MathObject expression;
+    public readonly MathObject expression;
     public Ln(MathObject expression) {
         this.expression = expression;
     }
@@ -14,10 +14,10 @@ public class Ln : MathObject {
         var expr = expression.Simplify();
         
         //constant
-        if(expr is Constant) return new Constant(Math.Log(expr.AsValue()));
+        if(expr is Constant num) return new Constant(Math.Log(num.value));
         
         //e
-        if((expr as Variable)?.name=="e") return new Constant(1);
+        if(expr is Variable e && e.name=="e") return new Constant(1);
 
         //e^x
         if(((expr as Power)?.Base as Variable)?.name=="e") return expr.As<Power>().exponent;
@@ -26,8 +26,8 @@ public class Ln : MathObject {
     }
 
     public bool Equals(MathObject obj) =>
-        obj is Ln &&
-        ((Ln)obj).expression.Equals(this.expression);
+        obj is Ln ln &&
+        ln.expression.Equals(this.expression);
 
     
 

@@ -5,8 +5,9 @@ namespace Commands;
 
 public sealed class DefineFunction : ExecutableCommand {
     public object Execute() {
-        Program.Define(name,new DefinedFunction(name,inputs,function));
-        return "succesfully defined function "+name+"("+string.Join(";",inputs)+") as "+function.AsString();
+        var func = new FunctionDefinition(name,inputs,function);
+        Program.Define(name,func);
+        return "succesfully defined function "+func.GetFunctionString()+" as "+function.AsString();
     }
 
     private readonly MathObject function;

@@ -110,9 +110,9 @@ public sealed partial class Command {
 				
 				//push to variable stack if a variable (no parentheses), otherwise push to the operator stack.
                 if((Program.definedObjects.TryGetValue(builder.ToString(),out MathObject? obj) 
-					&& (obj is not DefinedFunction)) ||															//math objects that are not functions with inputs
+					&& (obj is not FunctionDefinition)) ||															//math objects that are not functions with inputs
 					i>=tokens.Length || tokens[i]!='(')										
-						if (obj is DefinedFunction) output.Push(new Function((DefinedFunction)obj));			//function without inputs
+						if (obj is FunctionDefinition) output.Push(new Function((FunctionDefinition)obj));			//function without inputs
 						else output.Push(new Variable(builder.ToString()));										//math object
 				
 				else operators.Push(builder.ToString());														//commands + functions with inputs
@@ -202,16 +202,15 @@ public sealed partial class Command {
 			return formalFunction.create(output);
 
 		//functions
-		if (Program.definedObjects.TryGetValue(op, out MathObject? expression) && expression is DefinedFunction) {
-			var function = (DefinedFunction)expression;
+		if (Program.definedObjects.TryGetValue(op, out MathObject? expression) && expression is FunctionDefinition function) {
 			object args = output.Pop(); //get function inputs
 			
 			//multiple inputs
-			if (args is object[]) {
-				var Args = ((object[])args).Select(n => (MathObject)n).ToArray();
+			if (args is object[] inputs) {
+				var Args = inputs.Select(n => (MathObject)n).Reverse().ToArray();
 				
 				//error check
-				if(function.inputs.Count()!=Args.Length) throw new Exception("Improper math function input count! ("+Args.Length+" inputs given, "+function.inputs.Count()+" inputs required)");
+				if(function.inputs.Length!=Args.Length) throw new Exception("Improper math function input count! ("+Args.Length+" inputs given, "+function.inputs.Length+" inputs required)");
 				
 				//function inputs
 				return new Function(function,Args);
@@ -220,7 +219,7 @@ public sealed partial class Command {
 			//single input
 			else {
 				//error check
-				if(function.inputs.Count()!=1) throw new Exception("Improper math function input count! ("+1+" inputs given, "+function.inputs.Count()+" inputs required)");
+				if(function.inputs.Length!=1) throw new Exception("Improper math function input count! ("+1+" inputs given, "+function.inputs.Length+" inputs required)");
 				
 				return new Function(function,[(MathObject)args]);
 			}

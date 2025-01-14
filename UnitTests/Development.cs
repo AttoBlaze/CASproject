@@ -9,10 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "define(f;x;x+1)",
-            "list(functions)",
-            "f(y)",
-            "f"
+            "log(10;100)"
         );
         Assert.Pass();
     }

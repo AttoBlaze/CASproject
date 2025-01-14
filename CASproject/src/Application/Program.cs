@@ -2,7 +2,7 @@
 using CAS;
 using Commands;
 
-public static class Program {
+public static partial class Program {
     public static bool
         MuteOutput = false,
         MuteErrors = false,
@@ -87,29 +87,26 @@ public static class Program {
     /// <inheritdoc cref="Log(object,bool)"/>
     public static void Log(object log, Exception e, bool newLine = true) =>
         Log(log + (!MuteErrors?"\n"+e:""),newLine);
-
-
+    
     /// <summary>
 	/// Contains all pre-defined variables (fx e, pi).
 	/// </summary>
-	public static readonly Dictionary<string,MathObject> preDefinedObjects = new(){
-        {"e",new Constant(Math.E)},
-        {"pi",new Constant(Math.PI)},
-        {"radtodeg",new DefinedFunction("radtodeg",["radians"],new Divide(new Multiply([new Variable("radians"),new Constant(180)]),new Variable("pi")))},
-        {"degtorad",new DefinedFunction("degtorad",["degrees"],new Divide(new Multiply([new Variable("degrees"),new Variable("pi")]),new Constant(180)))},
-    };
+	public static readonly Dictionary<string,MathObject> preDefinedObjects = new();
 	
 	/// <summary>
 	/// Contains all defined variables (fx e, pi, x if user defined).
 	/// </summary>
-	public static Dictionary<string,MathObject> definedObjects {get; private set;} = preDefinedObjects.ToDictionary();
+	public readonly static Dictionary<string,MathObject> definedObjects = new();
 	public static void Define(string name, MathObject expression) {
 		if (preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot redefine predefined objects!");
         if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
 		definedObjects[name] = expression;
 	}
+    private static void Predefine(string name, MathObject expression) {
+        preDefinedObjects[name] = expression;
+    }
     public static IEnumerable<string> GetPredefined() => preDefinedObjects.Keys;
-	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is DefinedFunction);
+	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is FunctionDefinition);
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
 	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !preDefinedObjects.ContainsKey(key));
@@ -138,6 +135,13 @@ public static class Program {
             "Creating formal functions...... "
         );
         FormalFunction.CreateAllFormalFunctions();
+        if(!muted) WRITE(
+            "Finished",
+            "Creating predefined objects.... "
+        );
+        CreatePredefined();
+        foreach(var key in preDefinedObjects.Keys)
+            definedObjects[key] = preDefinedObjects[key];
         if(!muted) WRITE(
             "Finished",
             "Startup completed",

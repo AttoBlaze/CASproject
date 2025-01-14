@@ -6,8 +6,8 @@ namespace CAS;
 public sealed class Function : MathObject, NamedObject {
     public readonly string name;
     public readonly Dictionary<string,MathObject> inputs = new();
-    public Function(DefinedFunction func) : this(func,func.inputs.Select(n => new Variable(n)).ToArray()) {}
-    public Function(DefinedFunction func, MathObject[] inputs) {
+    public Function(FunctionDefinition func) : this(func,func.inputs.Select(n => new Variable(n)).ToArray()) {}
+    public Function(FunctionDefinition func, MathObject[] inputs) {
         if(inputs.Length!=func.inputs.Count()) throw new Exception("Cannot create function with new inputs as input counts do not match!");
         name = func.name;
         int i = 0;
