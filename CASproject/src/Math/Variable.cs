@@ -22,9 +22,7 @@ public class Variable : MathObject, NamedObject {
     public bool Equals(MathObject obj) =>
         obj is Variable &&           //same type
         ((Variable)obj).name==name;  //same name
-
-    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
-
+        
     public string AsString() => name;
 
     public string GetName() => name;

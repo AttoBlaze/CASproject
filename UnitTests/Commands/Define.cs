@@ -27,7 +27,6 @@ public class DefineTests{
         Assert.That(MathObject.Parse("f").Calculate().Equals(MathObject.Parse("y^2")));
     }
 
-
     [Test]
     public void DefineSelfRefVariable() {
         Program.START();

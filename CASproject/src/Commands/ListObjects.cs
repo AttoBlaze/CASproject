@@ -57,7 +57,7 @@ public sealed class ListObjects : ExecutableCommand {
     private static void Write_PREDEFINED() => WriteMath(Program.GetPredefined());
     private static void Write_VARIABLES() => WriteMath(Program.GetVariables());
     private static void Write_FUNCTIONS() {
-        Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Where(n=>n.mathematical).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
+        Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
         WriteMath(Program.GetFunctions());
     }
     private static void Write_CONSTANTS() => WriteMath(Program.GetConstants());
@@ -77,7 +77,7 @@ public sealed class ListObjects : ExecutableCommand {
     private static void WriteMath(IEnumerable<string> objs) {
         Program.Log(string.Join("\n",objs.Select(n => 
             Program.definedObjects[n] is Function?
-                Program.definedObjects[n].AsString()+": "+((Function)Program.definedObjects[n]).expression.AsString():
+                Program.definedObjects[n].AsString()+": "+((Function)Program.definedObjects[n]).AsString():
                 n + ": "+Program.definedObjects[n].AsString()
         )));
     }

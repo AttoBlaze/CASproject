@@ -23,33 +23,32 @@ public class Multiply : MathObject {
 
     public MathObject Simplify() {
         //simplify terms
-        terms = terms.Select(term => term.Simplify()).ToList();
+        var terms = this.terms.Select(term => term.Simplify()).ToList();
 
         MathObject obj = this;
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
             var term = terms[i];
             if(term is Constant) continue;
-            
-            //a*a = a^2
-            if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i, ref obj, ref index)) {
-                terms[i] = new Power(term,new Constant(2));
-                i=0; continue;
-            }
 
-            if (term is Power) {
+            if (term is Power pow) {
                 //a * a^n = a^(n+1)
-                var pow = (Power)term;
                 if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(pow.Base),terms,ref i, ref obj, ref index)) {
                     terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1)).Simplify());
-                    i=0; continue;
+                    i=-1; continue;
                 }
                 
                 //a^b * a^c = a^(b+c)
                 if (MathObject.FindAndRemoveOtherTerm(term => (term as Power)?.Base.Equals(pow.Base)??false, terms,ref i,ref obj, ref index)) {
                     terms[i] = new Power(pow.Base,new Add(pow.exponent,obj.As<Power>().exponent).Simplify());
-                    i=0; continue;
+                    i=-1; continue;
                 }
+            }
+
+            //a*a = a^2
+            if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i, ref obj, ref index)) {
+                terms[i] = new Power(term,new Constant(2));
+                i=-1; continue;
             }
         }
 
@@ -65,7 +64,7 @@ public class Multiply : MathObject {
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(1);
-        return this;
+        return new Multiply(terms);
     }
 
     public bool Contains(MathObject obj) => 
@@ -81,7 +80,7 @@ public class Multiply : MathObject {
         var objTerms = ((Multiply)obj).terms;
         return terms.All(term => objTerms.Any(n => n.Equals(term))); 
     }
-    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
+    
     public string AsString() => string.Join("*",terms.Select((term,i) => 
         term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())?    "("+term.AsString()+")":   //parentheses
         term.AsString()                                                                                         //default

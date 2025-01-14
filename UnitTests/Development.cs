@@ -9,9 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "define(f;x;x^2)",
-            "f(2)",
-            "f(x)"
+            "explain(Evaluate)"
         );
         Assert.Pass();
     }

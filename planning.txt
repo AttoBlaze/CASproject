@@ -18,7 +18,7 @@ Factorial operator
 Simplification settings:
 DisolveConstants - disolve predefined constants (replace with their value)
 PreferFractions
-
+CalculateOnDefine - calculate når noget bliver defined
 
 
 NOTES:

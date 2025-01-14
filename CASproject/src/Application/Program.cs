@@ -118,27 +118,27 @@ public static class Program {
     /// <summary>
     /// Initiates the startup process (if startup has not been initiated yet)
     /// </summary>
-    public static void START() {
+    public static void START(bool muted = false) {
         if (STARTED) return;
         const string BAR = "---------------------------------------";
-        WRITE(
+        if(!muted) WRITE(
             "",
             BAR,
             "Startup initiated",
             "Creating settings.............. "
         );
         Setting.CreateAllSettings();
-        WRITE(
+        if(!muted) WRITE(
             "Finished",
             "Creating commands.............. "
         );
         Command.CreateAllCommands();
-        WRITE(
+        if(!muted) WRITE(
             "Finished",
             "Creating formal functions...... "
         );
         FormalFunction.CreateAllFormalFunctions();
-        WRITE(
+        if(!muted) WRITE(
             "Finished",
             "Startup completed",
             BAR,

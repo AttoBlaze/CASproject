@@ -22,7 +22,7 @@ public class Add : MathObject {
     */
     public MathObject Simplify() {
         //simplify terms
-        terms = terms.Select(term => term.Simplify()).ToList();
+        var terms = this.terms.Select(term => term.Simplify()).ToList();
 
         MathObject obj = this;
         int index = 0;
@@ -37,7 +37,7 @@ public class Add : MathObject {
                 if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
                     if(num+1==0) terms.RemoveAt(i);                             //a+(-1*a) = 0
                     else terms[i] = new Multiply(new Constant(num+1),mult);
-                    i=0; continue;
+                    i=-1; continue;
                 }
 
                 //b*a + c*a = (b+c)*a
@@ -48,14 +48,14 @@ public class Add : MathObject {
                     var num2 = obj.As<Multiply>().terms[0].AsValue();
                     if(num+num2==0) terms.RemoveAt(i);                             //n*a+(-n*a) = 0
                     else terms[i] = new Multiply(new Constant(num+num2),mult);
-                    i=0; continue;
+                    i=-1; continue;
                 }
             }
 
             //a+a = 2*a
             if(MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i,ref obj,ref index)) {
                 terms[i] = new Multiply(new Constant(2),term);
-                i=0; continue;
+                i=-1; continue;
             }
         }
 
@@ -70,7 +70,7 @@ public class Add : MathObject {
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0);
-        return this;
+        return new Add(terms);
     }
 
     public bool Contains(MathObject obj) => 
@@ -86,7 +86,7 @@ public class Add : MathObject {
         return terms.All(term => objTerms.Any(n => n.Equals(term))); 
     }
 
-    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
+    
 
     public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");
     public int Precedence() => Operator.Precedence('+');

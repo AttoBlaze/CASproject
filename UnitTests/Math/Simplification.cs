@@ -14,9 +14,11 @@ public class Simplifications {
 		Assert.That(ParseSimplifyVal("1*2")==2);
 		Assert.That(ParseSimplify("1*a").Equals(Parse("a")));
 		Assert.That(ParseSimplify("a*a").Equals(Parse("a^2")));
+		Assert.That(ParseSimplify("a*a*a").Equals(Parse("a^3")));
 		Assert.That(ParseSimplify("a*a^n").Equals(Parse("a^(n+1)")));
 		Assert.That(ParseSimplify("a^b*a^c").Equals(Parse("a^(b+c)")));
 		Assert.That(ParseSimplify("1*a*a^b*a^c").Equals(Parse("a^(b+c+1)")));
+		Assert.That(ParseSimplifyVal("0*a")==0);
 	}
 
 	[Test]
@@ -37,5 +39,12 @@ public class Simplifications {
 		Assert.That(ParseSimplify("ln(1)").Equals(ParseSimplify("0")));
 		Assert.That(ParseSimplify("ln(e)").Equals(ParseSimplify("1")));
 		Assert.That(ParseSimplify("ln(e^x)").Equals(ParseSimplify("x")));
+	}
+
+	[Test]
+	public void Power() {
+		Assert.That(ParseSimplifyVal("2^3")==8);
+		Assert.That(ParseSimplifyVal("a^0")==1);
+		Assert.That(ParseSimplify("a^1").Equals(ParseSimplify("a")));
 	}
 }

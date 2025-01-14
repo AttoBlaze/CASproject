@@ -25,6 +25,4 @@ public class SettingTests {
         Program.AlwaysWrite = true;
         Assert.That(MathObject.Parse("getSetting(AlwaysWrite)").AsValue()==1);
     }
-
-
 }

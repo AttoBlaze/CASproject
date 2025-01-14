@@ -12,8 +12,7 @@ public sealed class Write : ExecutableCommand {
                 Program.definedObjects.ContainsKey(((Variable)obj).name)?   Program.definedObjects[((Variable)obj).name].AsString():
                 ((Variable)obj).name:
 
-            obj is Function?
-                ((Function)obj).expression.AsString():
+            obj is Function? Program.definedObjects[((Function)obj).name].AsString():
 
             //expressions
             obj is MathObject? ((MathObject)obj).AsString():

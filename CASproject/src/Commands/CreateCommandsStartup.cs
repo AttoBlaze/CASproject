@@ -11,34 +11,80 @@ public sealed partial class Command {
             NONE = ["",""];
 
         new Command(
-            "evaluate",
-            "Evalutes the given mathematical expression without simplifying it",
-            EXPR,
-            arguments => new EvaluateExpression((MathObject)arguments.Pop(),Program.definedObjects)
-        );
+            "help",
+            "Gives information about the usage of this program",
+            NONE,
+            arguments => {
+                return new HelpCommand();
+        });
+        new Command(
+            "explain",
+            "Explains a command/setting/formal function",
+            [
+                "SETTING","Explains the given setting",
+                "COMMAND","Explains the usage of the given command",
+                "FUNCTION","Explains the usage of the given formal function"
+            ], 
+            arguments => {
+                return new ExplainCommand(arguments.Pop().AsInput());
+        });
+        new Command(
+            "list",
+            "Lists objects",
+            ListObjects.listables.Keys.Select(key => new string[]{
+                key, ListObjects.listables[key].description
+            }).SelectMany(n=>n).ToArray(),
+            arguments => {
+                string name = arguments.Pop().AsInput();
+                return new ListObjects(name);
+		});
         new Command(
             "write",
             "Writes the output of the given command",
             CMD,
             arguments => new Write(arguments.Pop())
         );
-        new Command(
-            "simplify",
-            "Simplifies the given mathematical expression",
-            EXPR,
-            arguments => new SimplifyExpression((MathObject)arguments.Pop())
-        );
-        new Command(
-            "calculate",
-            "Calculates the given mathematical expression",
-            EXPR,
-            arguments => new InformalCommand(args =>()=> ((MathObject)args[0]).Calculate(),arguments.Pop())
-        );
 		new Command(
             "exit",
             "Exits the application", 
             NONE,
             arguments => new ExitCommand()
+        );
+        new Command(
+            "Evaluate",
+            "Evalutes the given mathematical expression without simplifying it. This will only evaluate the expression when used",
+            EXPR,
+            arguments => new EvaluateExpression((MathObject)arguments.Pop())
+        );
+        new Command(
+            "evaluate",
+            "Instantly evalutes the given mathematical expression without simplifying it",
+            EXPR,
+            arguments => ((MathObject)arguments.Pop()).Evaluate(Program.definedObjects)
+        );
+        new Command(
+            "Simplify",
+            "Simplifies the given mathematical expression. This will only simplify when the expression is used",
+            EXPR,
+            arguments => new SimplifyExpression((MathObject)arguments.Pop())
+        );
+        new Command(
+            "simplify",
+            "Instantly simplifies the given mathematical expression",
+            EXPR,
+            arguments => ((MathObject)arguments.Pop()).Simplify()
+        );
+        new Command(
+            "Calculate",
+            "Calculates the given mathematical expression. This will only calculate when the expression is used",
+            EXPR,
+            arguments => new CalculateExpression((MathObject)arguments.Pop())
+        );
+        new Command(
+            "calculate",
+            "Instantly calculates the given mathematical expression",
+            EXPR,
+            arguments => ((MathObject)arguments.Pop()).Calculate()
         );
         new Command(
             "define",
@@ -82,15 +128,14 @@ public sealed partial class Command {
                 return new DefineFunction(name,inputs,(MathObject)args[0]);
 		});
         new Command(
-            "list",
-            "Lists objects",
-            ListObjects.listables.Keys.Select(key => new string[]{
-                key, ListObjects.listables[key].description
-            }).SelectMany(n=>n).ToArray(),
+            "remove",
+            "Removes the definition of the given object",
+            [
+                "OBJECT","Removes the definition of OBJECT"
+            ],
             arguments => {
-                string name = arguments.Pop().AsInput();
-                return new ListObjects(name);
-		});
+                return new RemoveObject(arguments.Pop().AsInput());
+        });
         new Command(
             "setSetting",
             "Sets the value of a setting",
@@ -102,28 +147,18 @@ public sealed partial class Command {
                 return new SetSetting(args.Last().AsInput(),args.Count()==2?args.First():args.Skip(1).ToArray());
         });
         new Command(
-            "help",
-            "Gives information about the usage of this program",
-            NONE,
-            arguments => {
-                return new HelpCommand();
-        });
-        new Command(
-            "explain",
-            "Explains a command/setting/formal function",
+            "getSetting",
+            "Gets the value of the specified setting. Note: value will be copied as is, and will not update when setting changes",
             [
-                "SETTING","Explains the given setting",
-                "COMMAND","Explains the usage of the given command",
-                "FUNCTION","Explains the usage of the given formal function"
-            ], 
+                "SETTING","Gets the value of the given setting. The gotten value is not updated when the setting changes."
+            ],
             arguments => {
-                return new ExplainCommand(arguments.Pop().AsInput());
+                var setting = Setting.Get(arguments.Pop().AsInput());
+                return setting.convertOutput(setting.get());
         });
+        
         //NEXT:
-        //getSetting
-        //destroy
         //show/hide
         //time
-        //help command
     }
 }

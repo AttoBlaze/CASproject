@@ -22,10 +22,21 @@ public class Power : MathObject {
     */
 
     public MathObject Simplify() {
-        //combine constants
-        if(Base is Constant && exponent is Constant) return new Constant(Math.Pow(((Constant)Base).value,((Constant)exponent).value));
-        
-        return this;
+        var bas = Base.Simplify();
+        var exp = exponent.Simplify();
+
+        if (exp is Constant) {
+            var num = exp.AsValue();
+            //a^0 = 1
+            if(num==0) return new Constant(1);
+
+            //a^1 = a
+            if(num==1) return bas;
+
+            //combine constants
+            if(bas is Constant) return new Constant(Math.Pow(bas.AsValue(),num));
+        }
+        return new Power(bas,exp);
     }
 
     public bool Equals(MathObject obj) =>
@@ -38,7 +49,7 @@ public class Power : MathObject {
         Base.Equals(obj) || exponent.Equals(obj) ||
         Base.Contains(obj) || exponent.Contains(obj);
 
-    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
+    
     public string AsString() => 
         (Base.Precedence()!=0 && Base.AbsPrecedence()<Math.Abs(this.Precedence())? "("+Base.AsString()+")":Base.AsString()) + "^"+
         (exponent.Precedence()!=0 && exponent.AbsPrecedence()<Math.Abs(this.Precedence())? "("+exponent.AsString()+")":exponent.AsString());

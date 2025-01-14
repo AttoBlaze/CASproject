@@ -11,13 +11,11 @@ public sealed partial class FormalFunction {
     public readonly Func<Stack<object>,MathObject> create;
     public readonly string name, description;
     public readonly string[] inputs;
-    public readonly bool mathematical;
-    public FormalFunction(string name, string description, string[] inputs, Func<Stack<object>,MathObject> create, bool mathematical = true) {
+    public FormalFunction(string name, string description, string[] inputs, Func<Stack<object>,MathObject> create) {
         this.name = name;
         this.description = description;
         this.inputs = inputs;
         this.create = create;
-        this.mathematical = mathematical;
         Program.formalFunctions[name] = this;
     }
 }

@@ -29,7 +29,7 @@ public class Ln : MathObject {
         obj is Ln &&
         ((Ln)obj).expression.Equals(this.expression);
 
-    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
+    
 
     public bool Contains(MathObject obj) => obj.Equals(this) || expression.Contains(obj);
 

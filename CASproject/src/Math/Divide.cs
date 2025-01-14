@@ -29,7 +29,7 @@ public class Divide : MathObject {
 
         //combine constants
         if(num is Constant && denom is Constant) return new Constant(((Constant)num).value/((Constant)denom).value);
-        return this;
+        return new Divide(num,denom);
     }
 
     public bool Contains(MathObject obj) => 
@@ -43,7 +43,7 @@ public class Divide : MathObject {
         ((Divide)obj).denominator.Equals(this.denominator); //same terms
         
 
-    public bool EquivalentTo(MathObject obj) => throw new NotImplementedException();
+    
 
     public string AsString() => 
         (numerator.Precedence()!=0 && numerator.AbsPrecedence()<Math.Abs(this.Precedence())? "("+numerator.AsString()+")":numerator.AsString()) + "/"+

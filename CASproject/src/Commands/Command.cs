@@ -28,8 +28,8 @@ public sealed class ExitCommand : ExecutableCommand {
 }
 
 public sealed partial class Command {
-	public Command(string name, string description, Func<Stack<object>,ExecutableCommand> createCommand) : this(name,description,[],createCommand) {}
-	public Command(string name, string description, string[] overloads, Func<Stack<object>,ExecutableCommand> createCommand) {
+	public Command(string name, string description, Func<Stack<object>,object> createCommand) : this(name,description,[],createCommand) {}
+	public Command(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {
 		this.name = name;
 		this.description = description;
 		this.create = createCommand;
@@ -39,7 +39,7 @@ public sealed partial class Command {
 	public readonly string name;
 	public readonly string description;
 	public readonly string[] overloads;
-	public readonly Func<Stack<object>,ExecutableCommand> create;
+	public readonly Func<Stack<object>,object> create;
 
 	public static Command Get(string name) {
 		if (Program.commands.TryGetValue(name, out Command? cmd)) return cmd;
@@ -54,8 +54,8 @@ public sealed partial class Command {
         
 		if (temp is MathObject) 
 			return new Write(((MathObject)temp).Calculate());
-		
-		if (temp is ExecutableCommand && (temp is EvaluateExpression || temp is SimplifyExpression)) 
+
+		if (temp is not ExecutableCommand)
 			return new Write(temp);
 		
 		return (ExecutableCommand)temp;
@@ -110,7 +110,7 @@ public sealed partial class Command {
 				//push to variable stack if a variable (no parentheses), otherwise push to the operator stack.
                 if((Program.definedObjects.TryGetValue(builder.ToString(),out MathObject? obj) && (obj is not Function)) ||	//math objects that are not functions with inputs
 					i>=tokens.Length || tokens[i]!='(')										
-						if (obj is Function) output.Push(obj);																//function without inputs
+						if (obj is Function) output.Push(new Function((Function)obj));										//function without inputs
 						else output.Push(new Variable(builder.ToString()));													//math object
 				
 				else operators.Push(builder.ToString());																	//commands + functions with inputs

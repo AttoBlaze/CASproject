@@ -7,10 +7,6 @@ public interface EqualityComparer<T> {
     public bool Equals(T obj);
 }
 
-public interface EquivalenceComparer<T> {
-    public bool EquivalentTo(T obj);
-}
-
 public interface Simplifiable<T> {
     public T Simplify();
 }
@@ -27,7 +23,7 @@ public interface Evaluatable<T> {
 /// <summary>
 /// Represents a mathematical object/expression
 /// </summary>
-public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
+public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
     /// <summary>
 	/// Parses a string input into a math object 
 	/// </summary>
@@ -63,7 +59,8 @@ public interface MathObject : EqualityComparer<MathObject>, EquivalenceComparer<
     }
     
     public static bool FindOtherTerm(Func<MathObject,bool> predicate, List<MathObject> terms, int index, ref MathObject otherTerm, ref int otherIndex) {
-        for(int i=0; i<terms.Count && i!=index ; i++) {
+        for(int i=0; i<terms.Count ; i++) {
+            if(i==index) continue;
             if(predicate(terms[i])) {
                 otherTerm = terms[i];
                 otherIndex = i;

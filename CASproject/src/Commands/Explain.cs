@@ -71,7 +71,7 @@ public sealed class ExplainCommand : ExecutableCommand {
             
             //no overloads
             if (cmd.overloads.Length<=2) 
-                str += "Input: "+cmd.name+"("+overload[0]+") "+(overload[1].Length>0?" - "+overload[1]:"");
+                str += "Input: "+cmd.name+"("+overload[0]+")"+(overload[1].Length>0?" - "+overload[1]:"");
             //multiple overloads
             else {
                 str += "Overloads:\n" + string.Join("\n",overload.Chunk(2).Select(n => "     ^-> "+cmd.name+"("+n.First()+") - "+n.Last()));
