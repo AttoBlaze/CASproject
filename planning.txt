@@ -18,4 +18,3 @@ PreferFractions
 CalculateOnDefine - calculate når noget bliver defined
 
 NOTES:
-Fix defined functions

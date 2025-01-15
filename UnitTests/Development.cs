@@ -9,7 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "log(10;100)"
+            "write(Simplify(x*x))"
         );
         Assert.Pass();
     }

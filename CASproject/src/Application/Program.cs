@@ -102,8 +102,9 @@ public static partial class Program {
         if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
 		definedObjects[name] = expression;
 	}
-    private static void Predefine(string name, MathObject expression) {
+    public static void Predefine(string name, MathObject expression) {
         preDefinedObjects[name] = expression;
+        definedObjects[name] = expression;
     }
     public static IEnumerable<string> GetPredefined() => preDefinedObjects.Keys;
 	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is FunctionDefinition);
@@ -139,9 +140,7 @@ public static partial class Program {
             "Finished",
             "Creating predefined objects.... "
         );
-        CreatePredefined();
-        foreach(var key in preDefinedObjects.Keys)
-            definedObjects[key] = preDefinedObjects[key];
+        Program.CreateAllPredefined();
         if(!muted) WRITE(
             "Finished",
             "Startup completed",

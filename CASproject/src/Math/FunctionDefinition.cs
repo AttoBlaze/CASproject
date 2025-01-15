@@ -2,12 +2,11 @@
 namespace CAS;
 
 
-public class FunctionDefinition : MathObject, NamedObject {
+public class FunctionDefinition : MathObject {
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) => expr.Evaluate(definedObjects);
     public MathObject Simplify() => expr.Simplify();
     public string AsString() => expr.AsString();
     public bool Equals(MathObject obj) => expr.Equals(obj);
-	public string GetName() => name;
 	public string GetFunctionString() => name+"("+string.Join(";",inputs)+")";
 	public readonly string name;
 	public readonly string[] inputs;

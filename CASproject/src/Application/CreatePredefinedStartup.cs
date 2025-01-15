@@ -2,7 +2,7 @@ namespace Application;
 using CAS;
 
 public static partial class Program {
-	public static void CreatePredefined() {
+	public static void CreateAllPredefined() {
 		Predefine("e",new Constant(Math.E));
         Predefine("pi",new Constant(Math.PI));
         Predefine("log",new FunctionDefinition("log",["base","x"],MathObject.Parse("ln(x)/ln(base)")));
