@@ -12,7 +12,7 @@ public sealed class DefineVariable : ExecutableCommand {
     private readonly MathObject value;
     private readonly string name;
     public DefineVariable(string name, MathObject value) {
-        if(value.Contains(new Variable(name))) throw new Exception("Self-reference: Variables cannot be defined with themselves!");
+        if(value.ContainsAny(new Variable(name))) throw new Exception("Self-reference: Variables cannot be defined with themselves!");
         this.name = name;
         var result = value.Calculate();
         if (result is Constant)

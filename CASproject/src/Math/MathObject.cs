@@ -41,14 +41,24 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
     /// <summary>
     /// Wether or not the definition of this math object contains the given term 
     /// </summary>
-    public bool Contains(MathObject term) => Equals(term);
-
-    public T As<T>() => (T)this;
-    
+    public bool ContainsAny(MathObject term) => Equals(term);
     public int Precedence() => 0;
     public int AbsPrecedence() => Math.Abs(Precedence()); 
+    /// <summary>
+    /// Gets the value of this math object as a double.
+    /// </summary>
+    /// <exception cref="Exception">If this object is not a value</exception>
     public double AsValue() => throw new Exception("Not a value!");
+    /// <summary>
+    /// Casts this to the given type. Only used to remove nested parentheses. 
+    /// </summary>
+    public T As<T>() => (T)this;
 
+    
+    /// <summary>
+    /// Attempts to find another term in the given list which upholds the predicate condition <br/>
+    /// If one is found, the term is removed from the list.
+    /// </summary>
     public static bool FindAndRemoveOtherTerm(Func<MathObject,bool> predicate, List<MathObject> terms, ref int index, ref MathObject otherTerm, ref int otherIndex) {
         if(FindOtherTerm(predicate,terms,index,ref otherTerm,ref otherIndex)) {
             terms.RemoveAt(otherIndex);
@@ -58,6 +68,9 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
         return false;
     }
     
+    /// <summary>
+    /// Attempts to find another term in the given list which upholds the predicate condition
+    /// </summary>
     public static bool FindOtherTerm(Func<MathObject,bool> predicate, List<MathObject> terms, int index, ref MathObject otherTerm, ref int otherIndex) {
         for(int i=0; i<terms.Count ; i++) {
             if(i==index) continue;

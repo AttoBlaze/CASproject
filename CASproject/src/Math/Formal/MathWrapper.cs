@@ -12,7 +12,7 @@ public abstract class MathWrapper : MathObject {
         wrapper.transformation==this.transformation &&
         wrapper.name==this.name &&
         wrapper.expression.Equals(this.expression);
-    public virtual bool Contains(MathObject obj) => obj.Equals(this) || transformation(expression).Contains(obj);
+    public virtual bool ContainsAny(MathObject obj) => obj.Equals(this) || transformation(expression).ContainsAny(obj);
     public virtual string AsString() => name+"("+expression.AsString()+")";
     public MathObject expression {get; protected set;} = new Constant(0);
     public string name {get; protected set;} = "";

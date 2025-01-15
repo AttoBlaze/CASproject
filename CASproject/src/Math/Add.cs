@@ -73,9 +73,9 @@ public class Add : MathObject {
         return new Add(terms);
     }
 
-    public bool Contains(MathObject obj) => 
+    public bool ContainsAny(MathObject obj) => 
         obj.Equals(this) || 
-        terms.Any(term => term.Equals(obj) || term.Contains(obj)); 
+        terms.Any(term => term.Equals(obj) || term.ContainsAny(obj)); 
     
     public bool Equals(MathObject obj) {
         //same type

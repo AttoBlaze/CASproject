@@ -32,10 +32,10 @@ public class Divide : MathObject {
         return new Divide(num,denom);
     }
 
-    public bool Contains(MathObject obj) => 
+    public bool ContainsAny(MathObject obj) => 
         obj.Equals(this) || 
         numerator.Equals(obj) || denominator.Equals(obj) ||
-        numerator.Contains(obj) || denominator.Contains(obj);
+        numerator.ContainsAny(obj) || denominator.ContainsAny(obj);
 
     public bool Equals(MathObject obj) =>
         obj is Divide &&                                    //same type

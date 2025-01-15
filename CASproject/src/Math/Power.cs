@@ -44,10 +44,10 @@ public class Power : MathObject {
         ((Power)obj).Base.Equals(this.Base) &&       //same terms
         ((Power)obj).exponent.Equals(this.exponent); //same terms
         
-    public bool Contains(MathObject obj) => 
+    public bool ContainsAny(MathObject obj) => 
         obj.Equals(this) || 
         Base.Equals(obj) || exponent.Equals(obj) ||
-        Base.Contains(obj) || exponent.Contains(obj);
+        Base.ContainsAny(obj) || exponent.ContainsAny(obj);
 
     
     public string AsString() => 

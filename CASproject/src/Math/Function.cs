@@ -31,11 +31,11 @@ public sealed class Function : MathObject, NamedObject {
     }
 
     public bool Equals(MathObject obj) =>
-        obj is Function &&           //same type
-        ((Function)obj).name==name &&//same name
-        ((Function)obj).inputs.Keys.All(key => this.inputs[key].Equals(((Function)obj).inputs[key]));//same inputs
+        obj is Function fun &&           //same type
+        fun.name==name &&                //same name
+        fun.inputs.Keys.All(key => this.inputs[key].Equals(fun.inputs[key]));//same inputs
 
-    public bool Contains(MathObject obj) => obj.Equals(this) || inputs.Values.Any(n => n.Contains(obj));
+    public bool ContainsAny(MathObject obj) => obj.Equals(this) || inputs.Values.Any(n => n.ContainsAny(obj));
     public string AsString() => name+"("+string.Join(";",inputs.Values.Select(n => n.AsString()))+")";
     public string GetName() => name;
 }

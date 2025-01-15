@@ -67,9 +67,9 @@ public class Multiply : MathObject {
         return new Multiply(terms);
     }
 
-    public bool Contains(MathObject obj) => 
+    public bool ContainsAny(MathObject obj) => 
         obj.Equals(this) || 
-        terms.Any(term => term.Contains(obj) || term.Equals(obj)); 
+        terms.Any(term => term.ContainsAny(obj) || term.Equals(obj)); 
     
     
     public bool Equals(MathObject obj) {

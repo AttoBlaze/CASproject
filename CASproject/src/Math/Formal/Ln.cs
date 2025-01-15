@@ -31,7 +31,7 @@ public class Ln : MathObject {
 
     
 
-    public bool Contains(MathObject obj) => obj.Equals(this) || expression.Contains(obj);
+    public bool ContainsAny(MathObject obj) => obj.Equals(this) || expression.ContainsAny(obj);
 
     public string AsString() => "ln("+expression.AsString()+")";
 }
