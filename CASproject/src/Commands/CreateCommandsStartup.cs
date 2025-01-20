@@ -156,9 +156,23 @@ public sealed partial class Command {
                 var setting = Setting.Get(arguments.Pop().AsInput());
                 return setting.convertOutput(setting.get());
         });
-        
-        //NEXT:
-        //show/hide
-        //time
+        new Command(
+            "hide",
+            "Mutes the program output during execution of the given command",
+            CMD,
+            arguments => new HideCommand(arguments.Pop())
+        );
+        new Command(
+            "show",
+            "Unmutes the program output during execution of the given command",
+            CMD,
+            arguments => new ShowCommand(arguments.Pop())
+        );
+        new Command(
+            "time",
+            "Immediately returns the amount of time the execution of the given command took in seconds",
+            CMD,
+            arguments => new GetTime(arguments.Pop()).Execute()
+        );
     }
 }

@@ -9,7 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "write(Simplify(x*x))"
+            "time(Simplify(x*x*x*x))"
         );
         Assert.Pass();
     }

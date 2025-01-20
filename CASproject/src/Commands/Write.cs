@@ -45,9 +45,8 @@ public sealed class Write : ExecutableCommand {
 
     private readonly object obj;
     public Write(object Obj) {
-        if (Obj is Write)
-            this.obj = ((Write)Obj).obj;
-        else
-            this.obj = Obj;
+        if (Obj is Write write)
+            this.obj = write.obj;
+        else this.obj = Obj;
     }
 }

@@ -50,17 +50,16 @@ public sealed partial class Command {
 	/// <summary>
 	/// Parses a string input into an executable command. 
 	/// </summary>
-	public static ExecutableCommand Parse(string input) {
-		var temp = ParseInput(input);
-        
-		if (temp is MathObject) 
-			return new Write(((MathObject)temp).Calculate());
+	public static ExecutableCommand Parse(string input) => ConvertOutputToCommand(ParseInput(input));
+	public static ExecutableCommand ConvertOutputToCommand(object output) {
+		if (output is MathObject) 
+			return new Write(((MathObject)output).Calculate());
 
-		if (temp is not ExecutableCommand)
-			return new Write(temp);
+		if (output is not ExecutableCommand)
+			return new Write(output);
 		
-		return (ExecutableCommand)temp;
-	} 
+		return (ExecutableCommand)output;
+	}
 	
 	//Uses a slightly modified shunting yard algorithm.
 	public static object ParseInput(string input){

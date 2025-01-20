@@ -11,6 +11,7 @@ time command (records time taken to execute command)
 show/hide command (overrides showallmessages)
 Differentiable expressions
 Factorial operator
+repeat, executeall
 
 Simplification settings:
 DisolveConstants - disolve predefined constants (replace with their value)
