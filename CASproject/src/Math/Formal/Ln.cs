@@ -25,11 +25,12 @@ public class Ln : MathObject {
         return new Ln(expr);
     }
 
+    public MathObject Differentiate(string variable) =>
+        new Divide(new Constant(1),expression);
+
     public bool Equals(MathObject obj) =>
         obj is Ln ln &&
         ln.expression.Equals(this.expression);
-
-    
 
     public bool ContainsAny(MathObject obj) => obj.Equals(this) || expression.ContainsAny(obj);
 

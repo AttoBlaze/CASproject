@@ -58,7 +58,7 @@ public sealed partial class Command {
         );
         new Command(
             "evaluate",
-            "Instantly evalutes the given mathematical expression without simplifying it",
+            "Immediately evalutes the given mathematical expression without simplifying it",
             EXPR,
             arguments => ((MathObject)arguments.Pop()).Evaluate(Program.definedObjects)
         );
@@ -70,7 +70,7 @@ public sealed partial class Command {
         );
         new Command(
             "simplify",
-            "Instantly simplifies the given mathematical expression",
+            "Immediately simplifies the given mathematical expression",
             EXPR,
             arguments => ((MathObject)arguments.Pop()).Simplify()
         );
@@ -82,10 +82,54 @@ public sealed partial class Command {
         );
         new Command(
             "calculate",
-            "Instantly calculates the given mathematical expression",
+            "Immediately calculates the given mathematical expression",
             EXPR,
             arguments => ((MathObject)arguments.Pop()).Calculate()
         );
+        new Command(
+            "Derivative",
+            "Gets the derivative of the given mathematical expression. This will only derive when the expression is used",
+            [
+                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                return new DerivativeExpression((MathObject)args[1],args[0].AsInput());
+        });
+        new Command(
+            "derivative",
+            "Immediately gets the derivative of the given mathematical expression.",
+            [
+                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                return ((MathObject)args[1]).Differentiate(args[0].AsInput());
+        });
+        new Command(
+            "Diff",
+            "Gets the simplified derivative of the given mathematical expression after evalutation. This will only derive when the expression is used",
+            [
+                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                return new InformalMathWrapper(
+                    "Diff",
+                    obj => obj.Calculate().Differentiate(args[0].AsInput()).Simplify(),
+                    (MathObject)args[1]
+                );
+        });
+        new Command(
+            "diff",
+            "Immediately gets the simplified derivative of the given mathematical expression after evalutation.",
+            [
+                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                return ((MathObject)args[1]).Calculate().Differentiate(args[0].AsInput()).Simplify();
+        });
         new Command(
             "define",
             "Defines a math object",
@@ -170,7 +214,8 @@ public sealed partial class Command {
         );
         new Command(
             "time",
-            "Immediately returns the amount of time the execution of the given command took in seconds",
+            "Immediately returns the amount of time the execution of the given command took in seconds. "+
+            "Be aware that immediately executed commands are not timeable like this.",
             CMD,
             arguments => new GetTime(arguments.Pop()).Execute()
         );

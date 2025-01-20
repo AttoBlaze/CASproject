@@ -3,7 +3,7 @@ namespace CAS;
 /// <summary>
 /// Represents a constant value
 /// </summary>
-public class Constant : MathObject {
+public class Constant : MathObject, Differentiable<MathObject> { 
     public double value {get; private set;}
     public Constant(double value) {
         this.value = value;
@@ -18,6 +18,8 @@ public class Constant : MathObject {
         //constants cannot be simplified
         return this;
     }
+
+    public MathObject Differentiate(string variable) => new Constant(0);
 
     public bool Equals(MathObject obj) =>
         obj is Constant &&  //same type

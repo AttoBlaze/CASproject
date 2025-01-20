@@ -7,6 +7,7 @@ using Application;
 public abstract class MathWrapper : MathObject {
     public virtual MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => transformation(expression).Evaluate(definedObjects);
     public virtual MathObject Simplify() => transformation(expression).Simplify();
+    public virtual MathObject Differentiate(string variable) => transformation(expression).Differentiate(variable);
     public virtual bool Equals(MathObject obj) => 
         obj is MathWrapper wrapper &&
         wrapper.transformation==this.transformation &&
@@ -46,5 +47,16 @@ public sealed class CalculateExpression : MathWrapper {
         this.expression = expression;
         this.name = "Calculate";
         this.transformation = obj => obj.Calculate(Program.definedObjects);
+    }
+}
+public sealed class DerivativeExpression : MathWrapper {
+    public override MathObject Differentiate(string variable) => expression.Differentiate(variable);
+    public override string AsString() => name+"("+expression.AsString()+";"+variable+")";
+    public readonly string variable;
+    public DerivativeExpression(MathObject expression, string variable) {
+        this.expression = expression;
+        this.name = "Derivative";
+        this.variable = variable;
+        this.transformation = obj => obj.Differentiate(variable);
     }
 }

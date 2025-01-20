@@ -12,7 +12,7 @@ public interface Simplifiable<T> {
 }
 
 public interface Differentiable<T> {
-    public T Differentiate(string variable);
+    public T Differentiate(string variable) => throw new Exception("Expression is not differentiable");
 }
 
 public interface Evaluatable<T> {
@@ -23,7 +23,7 @@ public interface Evaluatable<T> {
 /// <summary>
 /// Represents a mathematical object/expression
 /// </summary>
-public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject> {
+public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject>, Differentiable<MathObject> {
     /// <summary>
 	/// Parses a string input into a math object 
 	/// </summary>
@@ -42,19 +42,21 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
     /// Wether or not the definition of this math object contains the given term 
     /// </summary>
     public bool ContainsAny(MathObject term) => Equals(term);
-    public int Precedence() => 0;
-    public int AbsPrecedence() => Math.Abs(Precedence()); 
+    
     /// <summary>
     /// Gets the value of this math object as a double.
     /// </summary>
     /// <exception cref="Exception">If this object is not a value</exception>
     public double AsValue() => throw new Exception("Not a value!");
+
+    public int Precedence() => 0;
+    public int AbsPrecedence() => Math.Abs(Precedence()); 
+    
     /// <summary>
     /// Casts this to the given type. Only used to remove nested parentheses. 
     /// </summary>
     public T As<T>() => (T)this;
 
-    
     /// <summary>
     /// Attempts to find another term in the given list which upholds the predicate condition <br/>
     /// If one is found, the term is removed from the list.

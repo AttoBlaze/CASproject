@@ -63,8 +63,20 @@ public class Multiply : MathObject {
         if (value!=1) terms.Insert(0,new Constant(value));  //1*a = a
 
         if(terms.Count==1) return terms[0];
-        if(terms.Count==0) return new Constant(1);
+        if(terms.Count==0) return new Constant(0);
         return new Multiply(terms);
+    }
+
+    public MathObject Differentiate(string variable) {
+        var constants = this.terms.Where(n => n is Constant).ToList();
+        var terms = this.terms.Where(n => n is not Constant).ToList();
+        MathObject current = terms[0];
+        for(int i=1;i<terms.Count;i++) {
+            var next = terms[i];
+            //(fg)' = f'g + fg'
+            current = new Add(new Multiply(current.Differentiate(variable),next),new Multiply(current,next.Differentiate(variable)));
+        }
+        return new Multiply(constants.Append(current));
     }
 
     public bool ContainsAny(MathObject obj) => 

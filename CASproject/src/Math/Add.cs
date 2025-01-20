@@ -5,7 +5,7 @@ public class Add : MathObject {
     public Add(MathObject obj1, MathObject obj2) : this([obj1,obj2]) {}
     public Add(IEnumerable<MathObject> terms) {
         //combine all add terms under this add
-        foreach(var term in terms) {
+        foreach(var term in terms) { 
             if(term is Add) this.terms.AddRange(((Add)term).terms);
             else this.terms.Add(term);
         }
@@ -86,6 +86,13 @@ public class Add : MathObject {
         return terms.All(term => objTerms.Any(n => n.Equals(term))); 
     }
 
+    public MathObject Differentiate(string variable) {
+        //(f+g)' = f' + g'
+        var terms = this.terms.Where(n => n is not Constant).Select(n => n.Differentiate(variable)).ToList();
+        if(terms.Count==1) return terms[0];
+        if(terms.Count==0) return new Constant(0);
+        return new Add(terms);
+    }
     
 
     public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");

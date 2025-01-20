@@ -9,7 +9,8 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "time(Simplify(x*x*x*x))"
+            "time(Diff(x^3;x))",
+            "time(explain(time))"
         );
         Assert.Pass();
     }

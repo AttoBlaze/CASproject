@@ -44,6 +44,27 @@ public class Power : MathObject {
         ((Power)obj).Base.Equals(this.Base) &&       //same terms
         ((Power)obj).exponent.Equals(this.exponent); //same terms
         
+    public MathObject Differentiate(string variable) {
+        //(e^f)' = f' * e^f
+        if(Base.Equals(new Variable("e")))
+            return new Multiply(exponent.Differentiate(variable),new Power(Base,exponent));
+        
+        if(Base.Equals(new Variable(variable))) {
+            //(f^n)' = n * f^(n-1)
+            if(exponent is Constant num1) 
+                if(num1.value == 0) return new Constant(0);
+                else if(num1.value == 1) return Base.Differentiate(variable);
+                else return new Multiply(num1,new Power(Base,new Constant(num1.value-1)));
+
+            //n^f' = ln(n) * f' * e^f
+            if(Base is Constant num2)
+                return new Multiply([new Ln(num2),exponent.Differentiate(variable),new Power(Base,exponent)]);
+        }
+
+        //(f^g)' = f^g * (f' * g/f + g'*ln(f))
+        return new Multiply(new Add(new Multiply(Base.Differentiate(variable),new Divide(exponent,Base)),new Multiply(exponent.Differentiate(variable),new Ln(Base))),new Power(Base,exponent));
+    }
+    
     public bool ContainsAny(MathObject obj) => 
         obj.Equals(this) || 
         Base.Equals(obj) || exponent.Equals(obj) ||

@@ -19,6 +19,11 @@ public class Variable : MathObject, NamedObject {
         return this;
     }
 
+    public MathObject Differentiate(string variable) {
+        if(variable==this.name) return new Constant(1);
+        return new Constant(0);
+    }
+
     public bool Equals(MathObject obj) =>
         obj is Variable &&           //same type
         ((Variable)obj).name==name;  //same name

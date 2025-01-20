@@ -32,6 +32,17 @@ public class Divide : MathObject {
         return new Divide(num,denom);
     }
 
+    public MathObject Differentiate(string variable) {
+        if(denominator is Constant num) 
+            return new Divide(numerator.Differentiate(variable),num);
+        
+        //(f/g)' = (f'g - fg')/g^2
+        return new Divide(
+            new Add(new Multiply(numerator.Differentiate(variable),denominator),Add.Negate(new Multiply(numerator,denominator.Differentiate(variable)))),
+            new Multiply(denominator,denominator)
+        );
+    }
+
     public bool ContainsAny(MathObject obj) => 
         obj.Equals(this) || 
         numerator.Equals(obj) || denominator.Equals(obj) ||

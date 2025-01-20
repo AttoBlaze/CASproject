@@ -124,8 +124,8 @@ public sealed partial class Command {
 			else if (Operator.operators.TryGetValue(tokens[i], out Operator? op)) {
 				
 				//continually apply operators
-				while (operators.Count>0 && 				//the operator stack isnt empty
-						operators.Peek()!="(" && 			//the top operator is not a left parentheses
+				while (operators.Count>0 && 											//the operator stack isnt empty
+						operators.Peek()!="(" && 										//the top operator is not a left parentheses
 						(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
 						(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0))) {	//the top operator and current operator have the same precedence and the current operator is left associative.
 					
@@ -137,8 +137,20 @@ public sealed partial class Command {
 			}
 
             //commands with several inputs have inputs seperated by ;
-            else if (tokens[i]==';') operators.Push(";");
-			
+            else if (tokens[i]==';') {
+				while(true) {
+					if(operators.Count<=0) throw new Exception("Empty input exists!");
+					
+					//; and ( signify other inputs
+					if(operators.Peek()=="(" || operators.Peek()==";") break;
+
+					//push output
+					output.Push(ApplyOperator(operators.Pop(),output));
+					if (output.Peek()==null) throw new Exception("Output after evaluating input is null!");
+				}
+				operators.Push(";");
+			}
+
 			//left parentheses
 			else if(tokens[i]=='(') operators.Push("(");
 			
