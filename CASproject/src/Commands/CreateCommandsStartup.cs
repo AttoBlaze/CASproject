@@ -116,7 +116,7 @@ public sealed partial class Command {
                 var args = (object[])arguments.Pop();
                 return new InformalMathWrapper(
                     "Diff",
-                    obj => obj.Calculate().Differentiate(args[0].AsInput()).Simplify(),
+                    obj => obj.Diff(args[0].AsInput()),
                     (MathObject)args[1]
                 );
         });
@@ -128,7 +128,7 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
-                return ((MathObject)args[1]).Calculate().Differentiate(args[0].AsInput()).Simplify();
+                return ((MathObject)args[1]).Diff(args[0].AsInput());
         });
         new Command(
             "define",
@@ -214,8 +214,8 @@ public sealed partial class Command {
         );
         new Command(
             "time",
-            "Immediately returns the amount of time the execution of the given command took in seconds. "+
-            "Be aware that immediately executed commands are not timeable like this.",
+            "Immediately returns the amount of time the execution of the given command took in seconds. \n"+
+            "NOTE: Immediately executed commands are not timeable.",
             CMD,
             arguments => new GetTime(arguments.Pop()).Execute()
         );

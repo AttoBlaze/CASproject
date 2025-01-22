@@ -20,10 +20,22 @@ public class Multiply : MathObject {
     Simplifications:
     
     */
-
     public MathObject Simplify() {
         //simplify terms
         var terms = this.terms.Select(term => term.Simplify()).ToList();
+        
+        //combine divide
+        if(terms.Any(n => n is Divide)) {
+            List<MathObject> denoms = new();
+            foreach(Divide div in terms.Where(n => n is Divide).ToList()) {
+                terms.Remove(div);
+                terms.Add(div.numerator);
+                denoms.Add(div.denominator);
+            }
+            var divN = terms.Count<=1? terms[0]:new Multiply(terms);
+            var divD = denoms.Count<=1? denoms[0]:new Multiply(denoms);
+            return new Divide(divN,divD).Simplify();
+        }
 
         MathObject obj = this;
         int index = 0;
@@ -60,7 +72,7 @@ public class Multiply : MathObject {
             value *= constant.value;            
         }
         if(value==0) return new Constant(0);                //0*a = 0
-        if (value!=1) terms.Insert(0,new Constant(value));  //1*a = a
+        if(value!=1) terms.Insert(0,new Constant(value));   //1*a = a
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0);
@@ -70,6 +82,11 @@ public class Multiply : MathObject {
     public MathObject Differentiate(string variable) {
         var constants = this.terms.Where(n => n is Constant).ToList();
         var terms = this.terms.Where(n => n is not Constant).ToList();
+        if(terms.Count==1) {
+            if(constants.Count>0) return new Multiply(constants.Append(terms[0].Differentiate(variable)));
+            return terms[0].Differentiate(variable);
+        }
+        
         MathObject current = terms[0];
         for(int i=1;i<terms.Count;i++) {
             var next = terms[i];
@@ -86,11 +103,16 @@ public class Multiply : MathObject {
     
     public bool Equals(MathObject obj) {
         //same type
-        if(!(obj is Multiply)) return false;    
+        if(!(obj is Multiply m)) return false;    
         
         //same terms
-        var objTerms = ((Multiply)obj).terms;
-        return terms.All(term => objTerms.Any(n => n.Equals(term))); 
+        var objTerms = m.terms.ToList();
+        if(objTerms.Count!=terms.Count) return false;
+        foreach(var term in terms) {
+            if(objTerms.FindOtherTerm(n => n.Equals(term),out int index)) objTerms.RemoveAt(index);
+            else return false;
+        }
+        return true;
     }
     
     public string AsString() => string.Join("*",terms.Select((term,i) => 

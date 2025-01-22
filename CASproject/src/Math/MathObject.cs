@@ -29,6 +29,7 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
 	/// </summary>
 	public static MathObject Parse(string input) => (MathObject)Command.ParseInput(input);
 
+    public MathObject Diff(string variable) => this.Calculate().Differentiate(variable).Simplify();
     public MathObject Calculate() => Calculate(Program.definedObjects);
     public MathObject Calculate(Dictionary<string,MathObject> definedObjects) => 
         this.Evaluate(definedObjects).Simplify();
@@ -88,4 +89,17 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
 
 public interface NamedObject {
     public string GetName();
+}
+
+public static class MathObjectExtensions {
+    public static bool FindOtherTerm(this List<MathObject> terms, Func<MathObject,bool> predicate, out int otherIndex) {
+        for(int i=0; i<terms.Count ; i++) {
+            if(predicate(terms[i])) {
+                otherIndex = i;
+                return true;
+            }
+        }
+        otherIndex = default;
+        return false;
+    } 
 }

@@ -34,11 +34,17 @@ public sealed class ExplainCommand : ExecutableCommand {
 
     public static string ExplainSetting(Setting setting) {
         //name
-        string str = setting.name+"\n"+
+        string str = setting.name+"\n";
 
         //description
-        " ^-> Description: "+setting.description;
-
+        if(setting.description.Contains("\n")) {
+            string[] lines = setting.description.Split("\n");
+            str += " ^-> Description:\n      | ";
+            str += string.Join("\n      | ",lines.SkipLast(1));
+            str += "\n      ╵ "+lines.Last();
+        }
+        else str += " ^-> Description: "+setting.description;
+        
         //input args/overloads
         str += "\n ^-> ";
         if (setting.overloads.Length>0) {
@@ -59,11 +65,17 @@ public sealed class ExplainCommand : ExecutableCommand {
 
     public static string ExplainCmd(Command cmd) {
         //name
-        string str = cmd.name+"\n"+
+        string str = cmd.name+"\n";
         
         //description
-        " ^-> Description: "+cmd.description;
-        
+        if(cmd.description.Contains("\n")) {
+            string[] lines = cmd.description.Split("\n");
+            str += " ^-> Description:\n      | ";
+            str += string.Join("\n      | ",lines.SkipLast(1));
+            str += "\n      ╵ "+lines.Last();
+        }
+        else str += " ^-> Description: "+cmd.description;
+
         //overloads
         str += "\n ^-> ";
         if (cmd.overloads.Length>0) {

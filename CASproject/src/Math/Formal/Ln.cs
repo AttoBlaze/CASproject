@@ -25,8 +25,9 @@ public class Ln : MathObject {
         return new Ln(expr);
     }
 
-    public MathObject Differentiate(string variable) =>
-        new Divide(new Constant(1),expression);
+    public MathObject Differentiate(string variable) {
+        return new Divide(expression.Differentiate(variable),expression);
+    }
 
     public bool Equals(MathObject obj) =>
         obj is Ln ln &&

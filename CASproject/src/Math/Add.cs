@@ -18,18 +18,18 @@ public class Add : MathObject {
 
     /*
     Simplifications:
-    a/c + b/c = (a+b)/c
+    
     */
     public MathObject Simplify() {
         //simplify terms
         var terms = this.terms.Select(term => term.Simplify()).ToList();
-
+        
         MathObject obj = this;
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
             var term = terms[i];
             if(term is Constant) continue;
-            
+
             if ((term as Multiply)?.terms[0] is Constant) {
                 //a + n*a = (n+1)*a
                 var num = term.As<Multiply>().terms[0].AsValue(); 
@@ -52,6 +52,14 @@ public class Add : MathObject {
                 }
             }
 
+            //a/b + c/b = (a+c)/b
+            if(term is Divide div1) {
+                if(MathObject.FindAndRemoveOtherTerm(n => n is Divide div2 && div2.denominator.Equals(div1.denominator),terms,ref i, ref obj, ref index)) {
+                    terms[i] = new Divide(new Add(div1.numerator,obj.As<Divide>().numerator),div1.denominator).Simplify();
+                    i=-1; continue;
+                }
+            }
+
             //a+a = 2*a
             if(MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i,ref obj,ref index)) {
                 terms[i] = new Multiply(new Constant(2),term);
@@ -62,9 +70,9 @@ public class Add : MathObject {
         //combine constants
         double value = 0;
         var temp = terms.Where(term => term is Constant).ToList();
-        foreach(Constant constant in temp) {
+        foreach(var constant in temp) {
             terms.Remove(constant);
-            value += constant.value;            
+            value += constant.AsValue();          
         }
         if(value!=0) terms.Add(new Constant(value));
 
@@ -79,11 +87,16 @@ public class Add : MathObject {
     
     public bool Equals(MathObject obj) {
         //same type
-        if(!(obj is Add)) return false;    
-        
+        if(!(obj is Add m)) return false;    
+
         //same terms
-        var objTerms = ((Add)obj).terms.ToHashSet();
-        return terms.All(term => objTerms.Any(n => n.Equals(term))); 
+        var objTerms = m.terms.ToList();
+        if(objTerms.Count!=terms.Count) return false;
+        foreach(var term in terms) {
+            if(objTerms.FindOtherTerm(n => n.Equals(term),out int index)) objTerms.RemoveAt(index);
+            else return false;
+        }
+        return true;
     }
 
     public MathObject Differentiate(string variable) {

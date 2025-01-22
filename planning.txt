@@ -4,7 +4,7 @@ Formal functions (of which will exist:
     sin, cos, tan, atan, acos, atan
     floor, ceil, round, abs, sqrt, root, random, gamma
     sum, product, recurse 
-) 
+)
 Big floating point, Precision setting
 More Simplifications
 time command (records time taken to execute command)
