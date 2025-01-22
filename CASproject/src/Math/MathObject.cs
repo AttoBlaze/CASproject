@@ -27,7 +27,7 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
     /// <summary>
 	/// Parses a string input into a math object 
 	/// </summary>
-	public static MathObject Parse(string input) => (MathObject)Command.ParseInput(input);
+	public static MathObject Parse(string input) => (MathObject)Program.ParseInput(input);
 
     public MathObject Diff(string variable) => this.Calculate().Differentiate(variable).Simplify();
     public MathObject Calculate() => Calculate(Program.definedObjects);

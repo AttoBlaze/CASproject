@@ -1,0 +1,121 @@
+Date : 2025-01-22 14:13:44
+Directory : c:\programmering\visualstudiocodeFiles\CASproject\CASproject
+Total : 70 files,  2207 codes, 264 comments, 426 blanks, all 2897 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| C#         |         36 |      1,597 |        264 |        292 |      2,153 |
+| Markdown   |         20 |        378 |          0 |        130 |        508 |
+| JSON       |         10 |        193 |          0 |          0 |        193 |
+| XML        |          3 |         26 |          0 |          3 |         29 |
+| Properties |          1 |         13 |          0 |          1 |         14 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                               | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                  |         70 |      2,207 |        264 |        426 |      2,897 |
+| . (Files)                                                                                                                          |          1 |          8 |          0 |          3 |         11 |
+| .VSCodeCounter                                                                                                                     |         25 |        383 |          0 |        130 |        513 |
+| .VSCodeCounter\2025-01-08_20-28-27                                                                                                 |          5 |         52 |          0 |         26 |         78 |
+| .VSCodeCounter\2025-01-08_20-28-32                                                                                                 |          5 |         73 |          0 |         26 |         99 |
+| .VSCodeCounter\2025-01-09_15-05-53                                                                                                 |          5 |         74 |          0 |         26 |        100 |
+| .VSCodeCounter\2025-01-09_15-05-57                                                                                                 |          5 |         76 |          0 |         26 |        102 |
+| .VSCodeCounter\2025-01-10_15-36-08                                                                                                 |          5 |        108 |          0 |         26 |        134 |
+| bin                                                                                                                                |          2 |         35 |          0 |          0 |         35 |
+| bin\Debug                                                                                                                          |          2 |         35 |          0 |          0 |         35 |
+| bin\Debug\net8.0                                                                                                                   |          2 |         35 |          0 |          0 |         35 |
+| obj                                                                                                                                |          9 |        203 |         11 |          8 |        222 |
+| obj (Files)                                                                                                                        |          4 |        170 |          0 |          0 |        170 |
+| obj\Debug                                                                                                                          |          5 |         33 |         11 |          8 |         52 |
+| obj\Debug\net8.0                                                                                                                   |          5 |         33 |         11 |          8 |         52 |
+| src                                                                                                                                |         33 |      1,578 |        253 |        285 |      2,116 |
+| src (Files)                                                                                                                        |          1 |         31 |          1 |          3 |         35 |
+| src\Application                                                                                                                    |          4 |        204 |         52 |         29 |        285 |
+| src\Commands                                                                                                                       |         14 |        699 |         76 |        113 |        888 |
+| src\Commands (Files)                                                                                                               |          9 |        566 |         63 |         84 |        713 |
+| src\Commands\Simple                                                                                                                |          5 |        133 |         13 |         29 |        175 |
+| src\Math                                                                                                                           |         14 |        644 |        124 |        140 |        908 |
+| src\Math (Files)                                                                                                                   |         10 |        529 |        118 |        122 |        769 |
+| src\Math\Formal                                                                                                                    |          4 |        115 |          6 |         18 |        139 |
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                           | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\details.md                         | Markdown   |         16 |          0 |          6 |         22 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\diff-details.md                    | Markdown   |          9 |          0 |          6 |         15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\diff.md                            | Markdown   |         12 |          0 |          7 |         19 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\results.json                       | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\results.md                         | Markdown   |         14 |          0 |          7 |         21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\details.md                         | Markdown   |         17 |          0 |          6 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\diff-details.md                    | Markdown   |         24 |          0 |          6 |         30 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\diff.md                            | Markdown   |         17 |          0 |          7 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\results.json                       | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\results.md                         | Markdown   |         14 |          0 |          7 |         21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\details.md                         | Markdown   |         17 |          0 |          6 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\diff-details.md                    | Markdown   |         25 |          0 |          6 |         31 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\diff.md                            | Markdown   |         17 |          0 |          7 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\results.json                       | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\results.md                         | Markdown   |         14 |          0 |          7 |         21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\details.md                         | Markdown   |         18 |          0 |          6 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\diff-details.md                    | Markdown   |         26 |          0 |          6 |         32 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\diff.md                            | Markdown   |         17 |          0 |          7 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\results.json                       | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\results.md                         | Markdown   |         14 |          0 |          7 |         21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\details.md                         | Markdown   |         31 |          0 |          6 |         37 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\diff-details.md                    | Markdown   |         40 |          0 |          6 |         46 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\diff.md                            | Markdown   |         19 |          0 |          7 |         26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\results.json                       | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\results.md                         | Markdown   |         17 |          0 |          7 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\CASproject.csproj                                                     | XML        |          8 |          0 |          3 |         11 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Debug\net8.0\CASproject.deps.json                                 | JSON       |         23 |          0 |          0 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Debug\net8.0\CASproject.runtimeconfig.json                        | JSON       |         12 |          0 |          0 |         12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\CASproject.csproj.nuget.dgspec.json                               | JSON       |         73 |          0 |          0 |         73 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\CASproject.csproj.nuget.g.props                                   | XML        |         16 |          0 |          0 |         16 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\CASproject.csproj.nuget.g.targets                                 | XML        |          2 |          0 |          0 |          2 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs       | C#         |          3 |          1 |          1 |          5 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.AssemblyInfo.cs                           | C#         |          9 |          9 |          5 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.GeneratedMSBuildEditorConfig.editorconfig | Properties |         13 |          0 |          1 |         14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.GlobalUsings.g.cs                         | C#         |          7 |          1 |          1 |          9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.sourcelink.json                           | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\project.assets.json                                               | JSON       |         79 |          0 |          0 |         79 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\CreatePredefinedStartup.cs                            | C#         |         11 |          0 |          1 |         12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\CreateSettingsStartup.cs                              | C#         |         38 |          0 |          1 |         39 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.cs                                            | C#         |        106 |         37 |         17 |        160 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Setting.cs                                            | C#         |         49 |         15 |         10 |         74 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Command.cs                                               | C#         |        159 |         49 |         45 |        253 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\CreateCommandsStartup.cs                                 | C#         |        217 |          2 |          4 |        223 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\DefineFunction.cs                                        | C#         |         20 |          0 |          3 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\DefineVariable.cs                                        | C#         |         20 |          0 |          3 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\InformalCommand.cs                                       | C#         |         10 |          3 |          2 |         15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\ListObjects.cs                                           | C#         |         75 |          3 |         11 |         89 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\RemoveObject.cs                                          | C#         |         14 |          0 |          3 |         17 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\SetSetting.cs                                            | C#         |         15 |          0 |          3 |         18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Simple\Explain.cs                                        | C#         |         69 |         13 |         17 |         99 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Simple\GetTime.cs                                        | C#         |         19 |          0 |          3 |         22 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Simple\Help.cs                                           | C#         |         15 |          0 |          3 |         18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Simple\Hide.cs                                           | C#         |         15 |          0 |          3 |         18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Simple\Show.cs                                           | C#         |         15 |          0 |          3 |         18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Write.cs                                                 | C#         |         36 |          6 |         10 |         52 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Main.cs                                                           | C#         |         31 |          1 |          3 |         35 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Add.cs                                                       | C#         |         83 |         15 |         17 |        115 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Constant.cs                                                  | C#         |         20 |          4 |          9 |         33 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Divide.cs                                                    | C#         |         70 |         17 |         17 |        104 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\CreateFormalFunctions.cs                              | C#         |         15 |          0 |          2 |         17 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\FormalFunction.cs                                     | C#         |         18 |          0 |          3 |         21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Ln.cs                                                 | C#         |         24 |          3 |         12 |         39 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\MathWrapper.cs                                        | C#         |         58 |          3 |          1 |         62 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Function.cs                                                  | C#         |         33 |          3 |          5 |         41 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\FunctionDefinition.cs                                        | C#         |         16 |          0 |          3 |         19 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\MathObject.cs                                                | C#         |         63 |         26 |         16 |        105 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Multiply.cs                                                  | C#         |         96 |         15 |         19 |        130 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Operator.cs                                                  | C#         |         63 |         19 |         11 |         93 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Power.cs                                                     | C#         |         61 |         15 |         17 |         93 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Variable.cs                                                  | C#         |         24 |          4 |          8 |         36 |
+| Total                                                                                                                              |            |      2,207 |        264 |        426 |      2,897 |
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

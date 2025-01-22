@@ -18,7 +18,6 @@ public class Divide : MathObject {
     a/(a^b) = a^(1-b)
     (a^b)/a = a^(b-1)
     (a^b)/(a^c) = a^(b-c)
-    a/(b/c) = (a*c)/b
     */
     public MathObject Simplify() {
         var num = numerator.Simplify();

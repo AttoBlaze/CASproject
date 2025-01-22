@@ -9,7 +9,9 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "explain(help)"
+            "explain(help)",
+            "define(f;x;y;x^y)",
+            "f(2;3)"
         );
         Assert.Pass();
     }
