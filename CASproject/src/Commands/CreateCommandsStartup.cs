@@ -44,19 +44,21 @@ public sealed partial class Command {
             "exit",
             "Exits the application", 
             NONE,
-            arguments => new ExitCommand()
-        );
+            arguments => new InformalCommand(args => {
+                Environment.Exit(0);
+                return ExecutableCommand.State.SUCCESS;
+        }));
         new Command(
             "Evaluate",
-            "Evalutes the given mathematical expression without simplifying it. This will only evaluate the expression when used",
+            "Evalutes the given expression without simplifying it. This will only evaluate the expression when used. Can evaluate certain commands.",
             EXPR,
             arguments => new EvaluateExpression((MathObject)arguments.Pop())
         );
         new Command(
             "evaluate",
-            "Immediately evalutes the given mathematical expression without simplifying it",
+            "Immediately evalutes the given expression without simplifying it. Can evaluate certain commands.",
             EXPR,
-            arguments => ((MathObject)arguments.Pop()).Evaluate(Program.definedObjects)
+            arguments => ((Evaluatable<MathObject>)arguments.Pop()).Evaluate(Program.definedObjects)
         );
         new Command(
             "Simplify",

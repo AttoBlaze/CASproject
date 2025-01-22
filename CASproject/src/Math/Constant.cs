@@ -25,7 +25,8 @@ public class Constant : MathObject, Differentiable<MathObject> {
         obj is Constant &&  //same type
         ((Constant)obj).value==this.value;  //same value
 
-    public string AsString() => value.ToString();
+    private static readonly string format = string.Join("",Enumerable.Range(0,300).Select(n=>"#"))+"0."+string.Join("",Enumerable.Range(0,300).Select(n=>"#"));
+    public string AsString() => value.ToString(format);
 
     public double AsValue() => value;
 

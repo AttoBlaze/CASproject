@@ -18,7 +18,7 @@ public class Add : MathObject {
 
     /*
     Simplifications:
-    
+    contraction: a*b + c*b = (a+c)*b
     */
     public MathObject Simplify() {
         //simplify terms

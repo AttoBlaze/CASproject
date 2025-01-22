@@ -119,6 +119,7 @@ public static partial class Program {
     public static void START(bool muted = false) {
         if (STARTED) return;
         const string BAR = "---------------------------------------";
+        var time = GetTime.Time(()=>{
         if(!muted) WRITE(
             "",
             BAR,
@@ -141,9 +142,10 @@ public static partial class Program {
             "Creating predefined objects.... "
         );
         Program.CreateAllPredefined();
+        });
         if(!muted) WRITE(
             "Finished",
-            "Startup completed",
+            "Startup completed in "+time+" seconds.",
             BAR,
             "Type \"help()\" for help."
         );

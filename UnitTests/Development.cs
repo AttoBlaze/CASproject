@@ -9,10 +9,9 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "explain(help)",
-            "define(f;x;y;x^y)",
-            "f(2;3)"
+            "define(y;x^2*(x*x)^2*x+ln(x)^ln(x)*x^3+x)"
         );
+        Program.Execute("write("+string.Join("+",Enumerable.Range(0,10).Select(n => "time(Diff(y;x))").ToArray())+")");
         Assert.Pass();
     }
 }

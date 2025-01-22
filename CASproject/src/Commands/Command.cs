@@ -16,18 +16,6 @@ public interface ExecutableCommand {
 	}
 }
 
-/// <summary>
-/// Exits the application
-/// </summary>
-public sealed class ExitCommand : ExecutableCommand {
-	public object Execute() {
-		Environment.Exit(0);
-		return 0;
-	}
-
-	public ExitCommand() {}
-}
-
 public partial class Command {
 	public Command(string name, string description, Func<Stack<object>,object> createCommand) : this(name,description,[],createCommand) {}
 	public Command(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {

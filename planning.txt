@@ -7,15 +7,18 @@ Formal functions (of which will exist:
 )
 Big floating point, Precision setting
 More Simplifications
-time command (records time taken to execute command)
-show/hide command (overrides showallmessages)
-Differentiable expressions
 Factorial operator
 repeat, executeall
 
 Simplification settings:
-DisolveConstants - disolve predefined constants (replace with their value)
-PreferFractions
-CalculateOnDefine - calculate når noget bliver defined
+DisolveConstants - disolve predefined constants (replace with their value) on evaluation
+DisolveFractionConstants - constants in fractions are combined
+ContractionMode:
+    None - expandable/contractable expressions are kept as-is
+    Expand - expressions are expanded when possible (fx a*(b+c)=a*b+a*c)
+    Contract - expressions are contracted when possible (fx a*b+c*b=(a+c)*b)
+CalculateOnDefine - calculate when defining objects
 
 NOTES:
+Overhaul formal functions: single input formal inherit most properties from base (prevents rewriting evaluation + constructor + contains + equals)
+evaluateable usable for certain commands
