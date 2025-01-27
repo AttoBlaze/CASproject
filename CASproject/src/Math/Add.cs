@@ -7,7 +7,7 @@ public class Add : MathObject {
         //combine all add terms under this add
         foreach(var term in terms) { 
             if(term is Add) this.terms.AddRange(((Add)term).terms);
-            else this.terms.Add(term);
+            else if(term is not Constant num || num.value!=0) this.terms.Add(term);
         }
     }
 

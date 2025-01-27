@@ -22,6 +22,7 @@ public static partial class Program {
 
 		//parse input
 		for (int i=0;i<tokens.Length;i++) {
+			
 			//parse constants
 			if (tokens[i]==',' || char.IsDigit(tokens[i])) {
 				
@@ -69,7 +70,7 @@ public static partial class Program {
 				
 				//continually apply operators
 				while (operators.Count>0 && 											//the operator stack isnt empty
-						operators.Peek()!="(" && 										//the top operator is not a left parentheses
+						operators.Peek()!="(" && operators.Peek()!=";" && 				//the top operator is not a left parentheses/multiple inputs
 						(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
 						(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0))) {	//the top operator and current operator have the same precedence and the current operator is left associative.
 					
@@ -107,7 +108,10 @@ public static partial class Program {
 					//if top of stack is a left parentheses then the parentheses has been calculated
 					if (operators.Peek()=="(") {
 						operators.Pop();
-						if (operators.Count>0 && Operator.Precedence(operators.Peek())==0 && operators.Peek()!="(") output.Push(ApplyOperator(operators,output));	//apply functions
+						if (operators.Count>0 && 
+							Operator.Precedence(operators.Peek())==0 && 
+							operators.Peek()!="(" && operators.Peek()!=";"
+						) output.Push(ApplyOperator(operators,output));	//apply functions
 						break;
 					}
 					
@@ -137,10 +141,6 @@ public static partial class Program {
 	private static object ApplyOperator(Stack<string> operators, Stack<object> output) {
         string op = operators.Pop();
 
-		//operators
-        if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 
-            return ope.operation(output);
-
 		//combine multiple inputs. This combines to make overloads possible as arguments can have variable lengths
 		if (op == ";") {
 			List<object> values = new(){output.Pop(),output.Pop()};
@@ -150,6 +150,10 @@ public static partial class Program {
 			}	
 			return values.Reverse<object>().ToArray();
 		}
+
+		//operators
+        if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 
+            return ope.operation(output);
 
         //commands
         if (Program.commands.TryGetValue(op, out Command? command))
