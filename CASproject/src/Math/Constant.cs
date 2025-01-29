@@ -16,7 +16,7 @@ public class Constant : MathObject, Differentiable<MathObject> {
 
     public MathObject Simplify() {
         //constants cannot be simplified
-        return this;
+        return (Constant)value;
     }
 
     public MathObject Differentiate(string variable) => new Constant(0);

@@ -10,15 +10,12 @@ public class Power : MathObject {
     
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         //calculate all terms
-        return new Power(Base.Calculate(definedObjects),exponent.Calculate(definedObjects));
+        return new Power(Base.Evaluate(definedObjects),exponent.Evaluate(definedObjects));
     }
 
     /*
     Simplifications:
-    a^b = c,  a is R, b is R, c is R
     (a^b)^c) = a^(b*c)
-    a^0 = 1
-    a^1 = a
     */
 
     public MathObject Simplify() {

@@ -19,12 +19,6 @@ public class Operator {
             '-',2,
             inputs => {
                 var term2 = (MathObject)inputs.Pop();
-                
-                //negate
-                if(inputs.Count<=0 || inputs.Peek() is not MathObject) 
-                    return Add.Negate(term2);
-                
-                //subtract
                 var term1 = (MathObject)inputs.Pop();
                 return new Add(term1,Add.Negate(term2));
             }
@@ -55,7 +49,7 @@ public class Operator {
                 var term1 = (MathObject)inputs.Pop();
                 return new Power(term1,term2);
             }
-        )}
+        )},
     };
 
     /// <summary>

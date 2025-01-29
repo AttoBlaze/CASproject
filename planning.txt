@@ -1,5 +1,7 @@
 TODO:
 
+subtract act as negation
+
 Formal functions (of which will exist:
     floor, ceil, round, abs, sqrt, root, random, gamma
     sum, product, recurse 

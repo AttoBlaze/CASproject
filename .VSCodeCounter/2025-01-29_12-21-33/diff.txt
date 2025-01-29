@@ -1,0 +1,46 @@
+Date : 2025-01-29 12:21:33
+Directory : c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src
+Total : 15 files,  219 codes, 19 comments, 40 blanks, all 278 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         15 |        219 |         19 |         40 |        278 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |         15 |        219 |         19 |         40 |        278 |
+| Application                                                                                           |          2 |          5 |          0 |          3 |          8 |
+| Commands                                                                                              |          4 |         82 |          6 |         11 |         99 |
+| Commands (Files)                                                                                      |          1 |         31 |          4 |          5 |         40 |
+| Commands\Math                                                                                         |          2 |         47 |          2 |          5 |         54 |
+| Commands\Simple                                                                                       |          1 |          4 |          0 |          1 |          5 |
+| Math                                                                                                  |          9 |        132 |         13 |         26 |        171 |
+| Math\Formal                                                                                           |          9 |        132 |         13 |         26 |        171 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                              | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\ParseInput.cs            | C#       |          4 |          0 |          2 |          6 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.cs               | C#       |          1 |          0 |          1 |          2 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\CreateCommandsStartup.cs    | C#       |         31 |          4 |          5 |         40 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Math\MathCommand.cs         | C#       |         10 |          0 |          1 |         11 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Math\Recurse.cs             | C#       |         37 |          2 |          4 |         43 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Simple\GetTime.cs           | C#       |          4 |          0 |          1 |          5 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Acos.cs                  | C#       |         22 |          2 |          5 |         29 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Asin.cs                  | C#       |         20 |          2 |          5 |         27 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Atan.cs                  | C#       |         16 |          2 |          5 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Cos.cs                   | C#       |         15 |          2 |          5 |         22 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\CreateFormalFunctions.cs | C#       |         22 |          1 |          1 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\FormalFunction.cs        | C#       |         14 |          0 |          1 |         15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Ln.cs                    | C#       |         -8 |          0 |         -6 |        -14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Sin.cs                   | C#       |         15 |          2 |          5 |         22 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal\Tan.cs                   | C#       |         16 |          2 |          5 |         23 |
+| Total                                                                                                 |          |        219 |         19 |         40 |        278 |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

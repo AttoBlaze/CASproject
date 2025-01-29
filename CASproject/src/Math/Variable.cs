@@ -16,7 +16,7 @@ public class Variable : MathObject, NamedObject {
 
     public MathObject Simplify() {
         //variables cannot be simplified
-        return this;
+        return (Variable)name;
     }
 
     public MathObject Differentiate(string variable) {

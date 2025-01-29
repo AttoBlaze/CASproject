@@ -11,8 +11,6 @@ public static partial class Program {
 		char[] tokens = input
 			.Replace(" ","").Replace("\n","")		//remove spaces & line breaks
 			.Replace(".",",")						//make dots and commas interchangeable
-			.Replace("(-","(0-")					//- in start of parentheses act as negation
-			.Replace(";-",";0-")					//- in start of multiple inputs act as negation
 			.Replace("**","^")						//make ** equivalent to a ^
 			.ToCharArray();
 		
@@ -68,7 +66,12 @@ public static partial class Program {
 			
 			//parse operators
 			else if (Operator.operators.TryGetValue(tokens[i], out Operator? op)) {
-				
+				//unary -
+				if(op.symbol=='-' && (i<=0 || !char.IsLetterOrDigit(tokens[i-1]))) {
+					operators.Push("#");
+					continue;
+				}
+
 				//continually apply operators
 				while (operators.Count>0 && 											//the operator stack isnt empty
 						operators.Peek()!="(" && operators.Peek()!=";" && 				//the top operator is not a left parentheses/multiple inputs
@@ -151,6 +154,9 @@ public static partial class Program {
 			}	
 			return values.Reverse<object>().ToArray();
 		}
+
+		//negation
+		if(op == "#") return Add.Negate((MathObject)output.Pop());
 
 		//operators
         if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 

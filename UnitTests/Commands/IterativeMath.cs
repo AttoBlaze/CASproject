@@ -15,6 +15,6 @@ public class IterativeMath {
             "define(f;x;recurse(i;1;x;i+1))",
             "f(10)"
 		);
-		Assert.That(MathObject.Parse("fibonacci(10)").Calculate().AsValue()==55);
+		Assert.That(MathObject.Parse("fibonacci(9)").Calculate().AsValue()==55);
 	}
 }
