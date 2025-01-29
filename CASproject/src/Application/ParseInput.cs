@@ -66,13 +66,13 @@ public static partial class Program {
 			
 			//parse operators
 			else if (Operator.operators.TryGetValue(tokens[i], out Operator? op)) {
-				//unary -
-				if(op.symbol=='-' && (i<=0 || !char.IsLetterOrDigit(tokens[i-1]))) {
-					operators.Push("#");
-					continue;
+				//substraction -
+				if(tokens[i]=='-' && i>0 && (char.IsLetterOrDigit(tokens[i-1]) || tokens[i-1]==')')) {
+					operators.Push("+");
 				}
-
+				
 				//continually apply operators
+				if(op.precedence!=1) //1 precedence means unary towards right and can only be applied later 
 				while (operators.Count>0 && 											//the operator stack isnt empty
 						operators.Peek()!="(" && operators.Peek()!=";" && 				//the top operator is not a left parentheses/multiple inputs
 						(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
@@ -154,9 +154,6 @@ public static partial class Program {
 			}	
 			return values.Reverse<object>().ToArray();
 		}
-
-		//negation
-		if(op == "#") return Add.Negate((MathObject)output.Pop());
 
 		//operators
         if (op.Length==1 && Operator.operators.TryGetValue(op[0], out Operator? ope)) 

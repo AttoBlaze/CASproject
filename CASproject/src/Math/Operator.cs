@@ -16,12 +16,8 @@ public class Operator {
         )},
 
         {'-',new Operator(
-            '-',2,
-            inputs => {
-                var term2 = (MathObject)inputs.Pop();
-                var term1 = (MathObject)inputs.Pop();
-                return new Add(term1,Add.Negate(term2));
-            }
+            '-',1,
+            inputs => Add.Negate((MathObject)inputs.Pop())
         )},
         
         {'*',new Operator(
