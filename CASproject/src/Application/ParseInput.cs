@@ -12,6 +12,7 @@ public static partial class Program {
 			.Replace(" ","").Replace("\n","")		//remove spaces & line breaks
 			.Replace(".",",")						//make dots and commas interchangeable
 			.Replace("(-","(0-")					//- in start of parentheses act as negation
+			.Replace(";-",";0-")					//- in start of multiple inputs act as negation
 			.Replace("**","^")						//make ** equivalent to a ^
 			.ToCharArray();
 		
@@ -186,6 +187,7 @@ public static partial class Program {
 				return new Function(function,[(MathObject)args]);
 			}
 		}
+		
         throw new Exception("No operator/function could be applied!");
     }
 }

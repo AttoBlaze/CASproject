@@ -216,5 +216,45 @@ public sealed partial class Command {
             CMD,
             arguments => new GetTime(arguments.Pop()).Execute()
         );
+        new Command(
+            "Time",
+            "Gets the amount of time the execution of the given command took in seconds. \n"+
+            "NOTE: Immediately executed commands are not timeable.",
+            CMD,
+            arguments => new GetTime(arguments.Pop())
+        );
+
+        new Command(
+            "recurse",
+            "Recursively evaluates the given expression",
+            [
+                "(INPUTS..);(INITIAL VALUES..);RECURSION COUNT;EXPRESSION",
+                    "Recursively evaluates the given expression.\n"+
+                    "Here, the inputs are variables. These effectively act as F0, F1, F2...\n",
+                    "On each recursion iteration, each variable gets the value of the current value of the variable to its left\n",
+                    "The variables starting values are decided by the initial values. If no initial value is given for a variable, it is set to 0\n",
+                    "Fx: Fibonacci can be defined like recurse((n;m);(0;1);K;n+m). This will yield the Kth fibonacci number."
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                
+                //inputs
+                IEnumerable<string> inpts = 
+                    args[0] is object[] inputList? inputList.Select(n => n.AsInput()):    //multiple input
+                    [args[0].AsInput()];                                                  //single input
+
+                //initial values
+                IEnumerable<MathObject> vals = 
+                    args[1] is object[] valueList? valueList.Select(n => (MathObject)n):    //single value
+                    [(MathObject)args[1]];                                                  //multiple values
+
+                //recursion count
+                var recursions = (MathObject)args[2];
+
+                //expression
+                var expr = (MathObject)args[3];
+                return new Recurse(inpts,vals,recursions,expr);
+            }
+        );
     }
 }

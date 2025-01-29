@@ -1,13 +1,12 @@
 TODO:
 
 Formal functions (of which will exist:
-    sin, cos, tan, atan, acos, atan
     floor, ceil, round, abs, sqrt, root, random, gamma
     sum, product, recurse 
 )
 Big floating point, Precision setting
 More Simplifications
-Factorial operator
+Factorial operator, modulus operator
 repeat, executeall
 
 Simplification settings:
@@ -20,5 +19,4 @@ ContractionMode:
 CalculateOnDefine - calculate when defining objects
 
 NOTES:
-Overhaul formal functions: single input formal inherit most properties from base (prevents rewriting evaluation + constructor + contains + equals)
 evaluateable usable for certain commands

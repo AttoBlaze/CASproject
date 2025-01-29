@@ -12,7 +12,9 @@ public static partial class Program {
     /// <summary>
     /// Parses and executes the given input  
     /// </summary>
-    public static void Execute(string input, bool muteOutput = false) {
+    public static void Execute(string input, bool muteOutput = false, bool ensureStarted = true) {
+        if(ensureStarted && !STARTED) START();
+
         bool mute = MuteOutput;
         if (muteOutput) MuteOutput = true;
         
@@ -26,9 +28,9 @@ public static partial class Program {
     /// <summary>
     /// Executes all of the given inputs 
     /// </summary>
-    public static void ExecuteAll(IEnumerable<string> inputs, bool muteOutput = false) {
+    public static void ExecuteAll(IEnumerable<string> inputs, bool muteOutput = false, bool ensureStarted = true) {
         foreach(var input in inputs)
-            Execute(input,muteOutput:muteOutput);
+            Execute(input,muteOutput,ensureStarted);
     }
     /// <inheritdoc cref="ExecuteAll(IEnumerable{string},bool)"/>
     public static void Execute(params string[] inputs) => ExecuteAll(inputs);
@@ -36,12 +38,12 @@ public static partial class Program {
     /// <summary>
     /// Attempts to parse and execute the given input 
     /// </summary>
-    public static void TryExecute(string input, bool muteOutput = false) {
+    public static void TryExecute(string input, bool muteOutput = false, bool ensureStarted = true) {
         bool showMsgs = MuteOutput;
         if (muteOutput) MuteOutput = true;
         
         try {
-            Execute(input);
+            Execute(input,muteOutput,ensureStarted);
         } catch (Exception e) {
             Log("Unknown error occured",e);
         }
@@ -51,9 +53,9 @@ public static partial class Program {
     /// <summary>
     /// Attempts to executes all of the given inputs 
     /// </summary>
-    public static void TryExecuteAll(IEnumerable<string> inputs, bool muteOutput = false) {
+    public static void TryExecuteAll(IEnumerable<string> inputs, bool muteOutput = false, bool ensureStarted = true) {
         foreach(var input in inputs)
-            TryExecute(input,muteOutput:muteOutput);
+            TryExecute(input,muteOutput,ensureStarted);
     }
     /// <inheritdoc cref="TryExecuteAll(IEnumerable{string},bool)"/>
     public static void TryExecute(params string[] inputs) => TryExecuteAll(inputs);
