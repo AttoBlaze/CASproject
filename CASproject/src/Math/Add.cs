@@ -111,5 +111,5 @@ public class Add : MathObject {
     public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");
     public int Precedence() => Operator.Precedence('+');
 
-    public static Multiply Negate(MathObject obj) => new Multiply(new Constant(-1),obj);
+    public static MathObject Negate(MathObject obj) => obj is Constant o? new Constant(-(o.value)): new Multiply(new Constant(-1),obj);
 }

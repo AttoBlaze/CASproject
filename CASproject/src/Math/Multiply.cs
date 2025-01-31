@@ -70,8 +70,8 @@ public class Multiply : MathObject {
             terms.Remove(constant);
             value *= constant.value;            
         }
-        if(value==0) return new Constant(0);                //0*a = 0
-        if(value!=1) terms.Insert(0,new Constant(value));   //1*a = a
+        if(value==0) return new Constant(0);                                //0*a = 0
+        if(value!=1 || terms.Count==0) terms.Insert(0,new Constant(value));  //1*a = a
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0);
@@ -86,6 +86,7 @@ public class Multiply : MathObject {
             return terms[0].Differentiate(variable);
         }
         
+        if(terms.Count==0) return (Constant)0;
         MathObject current = terms[0];
         for(int i=1;i<terms.Count;i++) {
             var next = terms[i];

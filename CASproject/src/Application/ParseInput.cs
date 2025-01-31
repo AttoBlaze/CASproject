@@ -73,7 +73,7 @@ public static partial class Program {
 				}
 				
 				//continually apply operators
-				if(op.precedence!=-1) //-1 precedence means unary towards right and can only be applied later 
+				if(op.precedence!=0) //0 precedence means unary towards right and can only be applied later 
 					ApplyOperatorHierarchy(op,operators,output);
 
 				//push new operator
@@ -141,9 +141,8 @@ public static partial class Program {
 		while (operators.Count>0 && 										//the operator stack isnt empty
 				operators.Peek()!="(" && operators.Peek()!=";" && 			//the top operator is not a left parentheses/multiple inputs
 				(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
-				(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0) ||	//the top operator and current operator have the same precedence and the current operator is left associative or
-				(Operator.Precedence(operators.Peek())==-1 && op.precedence>0))) {									//the top operator is a right association unary and the current operator is left associative.
-			
+				(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0))) {	//the top operator and current operator have the same precedence and the current operator is left associative or
+				
 			//apply operators
 			output.Push(ApplyOperator(operators,output));
 			if (output.Peek()==null) throw new Exception("Combined operators lead to empty output");

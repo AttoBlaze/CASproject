@@ -48,28 +48,29 @@ public class Divide : MathObject {
                 return new Divide(new Constant(1),dmult);
             }
 
-            //(a*b)/(a*c)
+            //(a*b)/(a*c) = b/c
             if(num is Multiply nmult) {
                 var smallest = nmult.terms.Count<dmult.terms.Count? nmult:dmult;
                 var biggest = nmult.terms.Count<dmult.terms.Count? dmult:nmult;
+                bool removedAny = false;
                 for (int i=0;i<smallest.terms.Count;i++) {
                     var term = smallest.terms[i];
                     if(biggest.terms.FindOtherTerm(n => n.Equals(term),out int termIndex)) {
                         biggest.terms.RemoveAt(termIndex);
                         smallest.terms.RemoveAt(i);
+                        removedAny = true;
                         i--;
                     }
                 }
-                return new Divide(nmult,dmult).Simplify();
+                if(removedAny) return new Divide(nmult,dmult).Simplify();
             }
-
-            //(a*b)/a = b
-            if(num is Multiply mult 
-            && mult.terms.FindOtherTerm(n => n.Equals(denom),out int index)) {
-                    mult.terms.RemoveAt(index);
-                    if(mult.terms.Count==1) return mult.terms[0];
-                    return mult;
-            }
+        }
+        //(a*b)/a = b
+        if(num is Multiply mult 
+        && mult.terms.FindOtherTerm(n => n.Equals(denom),out int index)) {
+            mult.terms.RemoveAt(index);
+            if(mult.terms.Count==1) return mult.terms[0];
+            return mult;
         }
 
         return new Divide(num,denom);

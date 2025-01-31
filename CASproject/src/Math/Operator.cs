@@ -16,7 +16,7 @@ public class Operator {
         )},
 
         {'-',new Operator(
-            '-',-1,
+            '-',0,
             inputs => Add.Negate((MathObject)inputs.Pop())
         )},
         

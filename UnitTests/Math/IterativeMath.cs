@@ -1,4 +1,4 @@
-namespace CommandTests;
+namespace MathTests;
 
 using CAS;
 using Commands;

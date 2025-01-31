@@ -1,5 +1,4 @@
-namespace Commands;
-using CAS;
+namespace CAS;
 
 public class Sum : MathCommand {
 	private readonly MathObject expression = (Constant)0;

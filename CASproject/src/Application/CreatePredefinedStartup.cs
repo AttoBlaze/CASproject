@@ -1,5 +1,6 @@
 namespace Application;
 using CAS;
+using Commands;
 
 public static partial class Program {
 	public static void CreateAllPredefined() {

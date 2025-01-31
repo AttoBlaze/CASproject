@@ -59,6 +59,6 @@ public class ExplainCommand : ExecutableCommand {
     }
 
     public static string ExplainFormalFunction(FormalFunction func) {
-        return func.name+"("+string.Join(",",func.inputs)+") - "+func.description;
+        return func.name+"("+string.Join(";",func.inputs)+") - "+func.description;
     }
 }

@@ -20,12 +20,13 @@ public abstract class MathWrapper : MathObject {
     public Func<MathObject,MathObject> transformation {get; protected set;} = obj => obj;
 }   
 public class InformalMathWrapper : MathWrapper { 
-    public InformalMathWrapper(string name, Func<MathObject,MathObject> transformation,MathObject expression) {
+    public InformalMathWrapper(string name, Func<MathObject,MathObject> transformation, MathObject expression) {
         this.expression = expression;
         this.name = name;
         this.transformation = transformation;
     }
 }
+
 public class SimplifyExpression : MathWrapper {
     public override MathObject Simplify() => expression.Simplify();
     public SimplifyExpression(MathObject expression) {
@@ -59,4 +60,7 @@ public class DerivativeExpression : MathWrapper {
         this.variable = variable;
         this.transformation = obj => obj.Differentiate(variable);
     }
+}
+
+public class ReferralMathWrapper : MathWrapper {
 }
