@@ -9,7 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "e^-2"
+            "product(k;1;5;k)"
         );
         Assert.Pass();
     }

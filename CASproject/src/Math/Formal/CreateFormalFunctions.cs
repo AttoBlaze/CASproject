@@ -5,10 +5,9 @@ using Commands;
 
 public sealed partial class FormalFunction {
     public static void CreateAllFormalFunctions() {
+        //ln
         new FormalFunction(
-            "ln",
-            "Natural logarithm of x",
-            ["x"],
+            "ln","Natural logarithm of x",["x"],
             arguments => new Ln((MathObject)arguments.Pop()) 
         );
 

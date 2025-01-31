@@ -266,23 +266,12 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
-                
-                //inputs
-                IEnumerable<string> inpts = 
-                    args[0] is object[] inputList? inputList.Select(n => n.AsInput()):    //multiple input
-                    [args[0].AsInput()];                                                  //single input
-
-                //initial values
-                IEnumerable<MathObject> vals = 
-                    args[1] is object[] valueList? valueList.Select(n => (MathObject)n):    //single value
-                    [(MathObject)args[1]];                                                  //multiple values
-
-                //recursion count
-                var recursions = (MathObject)args[2];
-
-                //expression
-                var expr = (MathObject)args[3];
-                return new Recurse(inpts,vals,recursions,expr);
+                return new Product(
+                    args[0].AsInput(),  //input variable
+                    (MathObject)args[1],//initial value
+                    (MathObject)args[2],//until
+                    (MathObject)args[3] //expression
+                );
             }
         );
     }

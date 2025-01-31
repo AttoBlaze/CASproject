@@ -18,7 +18,6 @@ public class Multiply : MathObject {
 
     /*
     Simplifications:
-    
     */
     public MathObject Simplify() {
         //simplify terms

@@ -17,4 +17,15 @@ public class IterativeMath {
 		);
 		Assert.That(MathObject.Parse("fibonacci(9)").Calculate().AsValue()==55);
 	}
+
+	[Test]
+	public void Product() {
+		Program.Execute(
+			"define(factorial;k;product(n;1;k;n))",
+            "factorial(10)",
+            "define(f;x;product(i;1;x;i^2))",
+            "f(10)"
+		);
+		Assert.That(MathObject.Parse("factorial(5)").Calculate().AsValue()==120);
+	}
 }

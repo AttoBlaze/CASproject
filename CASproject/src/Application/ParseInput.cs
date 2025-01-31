@@ -68,20 +68,15 @@ public static partial class Program {
 			else if (Operator.operators.TryGetValue(tokens[i], out Operator? op)) {
 				//substraction -
 				if(tokens[i]=='-' && i>0 && (char.IsLetterOrDigit(tokens[i-1]) || tokens[i-1]==')')) {
+					ApplyOperatorHierarchy(Operator.operators['+'],operators,output);
 					operators.Push("+");
 				}
 				
 				//continually apply operators
 				if(op.precedence!=1) //1 precedence means unary towards right and can only be applied later 
-				while (operators.Count>0 && 											//the operator stack isnt empty
-						operators.Peek()!="(" && operators.Peek()!=";" && 				//the top operator is not a left parentheses/multiple inputs
-						(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
-						(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0))) {	//the top operator and current operator have the same precedence and the current operator is left associative.
-					
-                    //apply operators
-					output.Push(ApplyOperator(operators,output));
-					if (output.Peek()==null) throw new Exception("Combined operators lead to empty output");
-				}
+					ApplyOperatorHierarchy(op,operators,output);
+
+				//push new operator
 				operators.Push(tokens[i]+"");
 			}
 
@@ -140,6 +135,20 @@ public static partial class Program {
 		
 		//return result
 		return output.Pop();
+	}
+
+	private static void ApplyOperatorHierarchy(Operator op, Stack<string> operators, Stack<object> output) {
+		while (operators.Count>0 && 										//the operator stack isnt empty
+				operators.Peek()!="(" && operators.Peek()!=";" && 			//the top operator is not a left parentheses/multiple inputs
+				(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
+				(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0) ||	//the top operator and current operator have the same precedence and the current operator is left associative or
+				(Operator.Precedence(operators.Peek())==1 && op.precedence>0))										//the top operator is a right association unary and the current operator is left associative.
+			) {	
+			
+			//apply operators
+			output.Push(ApplyOperator(operators,output));
+			if (output.Peek()==null) throw new Exception("Combined operators lead to empty output");
+		}
 	}
 
 	private static object ApplyOperator(Stack<string> operators, Stack<object> output) {

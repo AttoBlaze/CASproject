@@ -29,68 +29,33 @@ public sealed class ExplainCommand : ExecutableCommand {
         if(Program.formalFunctions.ContainsKey(thing))
             return ExplainFormalFunction(FormalFunction.Get(thing)); 
 
-        throw new Exception("Cannot explain given input as it is not a command/setting!");
+        throw new Exception("Cannot explain given input as it is not a command/setting/function!");
     }
 
     public static string ExplainSetting(Setting setting) {
-        //name
-        string str = setting.name+"\n";
-
-        //description
-        if(setting.description.Contains("\n")) {
-            string[] lines = setting.description.Split("\n");
-            str += " ^-> Description:\n      | ";
-            str += string.Join("\n      | ",lines.SkipLast(1));
-            str += "\n      ╵ "+lines.Last();
-        }
-        else str += " ^-> Description: "+setting.description;
-        
-        //input args/overloads
-        str += "\n ^-> ";
-        if (setting.overloads.Length>0) {
-            string[] overload = setting.overloads;
-            
-            //no overloads
-            if (setting.overloads.Length<=2) 
-                str += "Input arguments: ("+overload[0]+")"+(overload[1].Length>0?" - "+overload[1]:"");
-            
-            //multiple overloads
-            else {
-                str += "Input arguments:\n" + string.Join("\n",overload.Chunk(2).Select(n => "     ^-> "+n.First()+(n.Last().Length>0?" - "+n.Last():"")));
-            }
-        }
-        else str += "Input arguments unspecified";
-        return str;
+        return new StringBranch(setting.name,[
+            new StringLeaf("Description",setting.description),
+            setting.overloads.Length<=0? new StringLeaf("Arguments unspecified"):
+            setting.overloads.Length<=2?
+                new StringLeaf("Input","("+setting.overloads[0]+")"+ (setting.overloads[1].Length==0?"":" - "+setting.overloads[1])):
+                new StringBranch("Overloads",
+                    setting.overloads.Chunk(2).Select(n => 
+                    new StringLeaf(setting.name+"("+n.First()+")"+ (n.Count()==1?"":" - "+n.Last())))
+                )
+        ]).Write();
     }
 
     public static string ExplainCmd(Command cmd) {
-        //name
-        string str = cmd.name+"\n";
-        
-        //description
-        if(cmd.description.Contains("\n")) {
-            string[] lines = cmd.description.Split("\n");
-            str += " ^-> Description:\n      | ";
-            str += string.Join("\n      | ",lines.SkipLast(1));
-            str += "\n      ╵ "+lines.Last();
-        }
-        else str += " ^-> Description: "+cmd.description;
-
-        //overloads
-        str += "\n ^-> ";
-        if (cmd.overloads.Length>0) {
-            string[] overload = cmd.overloads;
-            
-            //no overloads
-            if (cmd.overloads.Length<=2) 
-                str += "Input: "+cmd.name+"("+overload[0]+")"+(overload[1].Length>0?" - "+overload[1]:"");
-            //multiple overloads
-            else {
-                str += "Overloads:\n" + string.Join("\n",overload.Chunk(2).Select(n => "     ^-> "+cmd.name+"("+n.First()+") - "+n.Last()));
-            }
-        }
-        else str += "Arguments unspecified";
-        return str;
+        return new StringBranch(cmd.name,[
+            new StringLeaf("Description",cmd.description),
+            cmd.overloads.Length<=0? new StringLeaf("Arguments unspecified"):
+            cmd.overloads.Length<=2?
+                new StringLeaf("Input",cmd.name+"("+cmd.overloads[0]+")"+ (cmd.overloads[1].Length==0?"":" - "+cmd.overloads[1])):
+                new StringBranch("Overloads",
+                    cmd.overloads.Chunk(2).Select(n => 
+                    new StringLeaf(cmd.name+"("+n.First()+")"+ (n.Count()==1?"":" - "+n.Last())))
+                )
+        ]).Write();
     }
 
     public static string ExplainFormalFunction(FormalFunction func) {

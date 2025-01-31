@@ -24,7 +24,7 @@ public sealed class Product : MathCommand {
 
 		List<MathObject> terms = new();
 		for(int i=initial;i<=final;i++) {
-			//evaluate sequence
+			//evaluate sequence 
 			dict[variable] = (Constant)i;
 			terms.Add(expression.Evaluate(dict));												
 		}
