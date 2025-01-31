@@ -26,7 +26,7 @@ public class InformalMathWrapper : MathWrapper {
         this.transformation = transformation;
     }
 }
-public sealed class SimplifyExpression : MathWrapper {
+public class SimplifyExpression : MathWrapper {
     public override MathObject Simplify() => expression.Simplify();
     public SimplifyExpression(MathObject expression) {
         this.expression = expression;
@@ -34,7 +34,7 @@ public sealed class SimplifyExpression : MathWrapper {
         this.transformation = obj => obj.Simplify();
     }
 }
-public sealed class EvaluateExpression : MathWrapper {
+public class EvaluateExpression : MathWrapper {
     public override MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => expression.Evaluate(Program.definedObjects);
     public EvaluateExpression(MathObject expression) {
         this.expression = expression;
@@ -42,14 +42,14 @@ public sealed class EvaluateExpression : MathWrapper {
         this.transformation = obj => obj.Evaluate(Program.definedObjects);
     }
 }
-public sealed class CalculateExpression : MathWrapper {
+public class CalculateExpression : MathWrapper {
     public CalculateExpression(MathObject expression) {
         this.expression = expression;
         this.name = "Calculate";
         this.transformation = obj => obj.Calculate(Program.definedObjects);
     }
 }
-public sealed class DerivativeExpression : MathWrapper {
+public class DerivativeExpression : MathWrapper {
     public override MathObject Differentiate(string variable) => expression.Differentiate(variable);
     public override string AsString() => name+"("+expression.AsString()+";"+variable+")";
     public readonly string variable;

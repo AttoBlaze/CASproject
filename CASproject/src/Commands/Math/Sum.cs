@@ -1,12 +1,12 @@
 namespace Commands;
 using CAS;
 
-public class Product : MathCommand {
+public class Sum : MathCommand {
 	private readonly MathObject expression = (Constant)0;
 	private readonly string variable = "";
 	private readonly MathObject initialValue = (Constant)0;
 	private readonly MathObject until = (Constant)0;
-	public Product(string variable, MathObject initialValue, MathObject until, MathObject expression) {
+	public Sum(string variable, MathObject initialValue, MathObject until, MathObject expression) {
 		this.expression = expression;
 		this.variable = variable;
 		this.initialValue = initialValue;
@@ -14,7 +14,7 @@ public class Product : MathCommand {
 	}
 
     public override MathObject Evaluate(Dictionary<string, MathObject> definedObjects) =>
-		new Product(variable,initialValue.Evaluate(definedObjects),until.Evaluate(definedObjects),expression).execute();
+		new Sum(variable,initialValue.Evaluate(definedObjects),until.Evaluate(definedObjects),expression).execute();
 
     public override MathObject execute() {
 		//initialize
@@ -28,10 +28,11 @@ public class Product : MathCommand {
 			dict[variable] = (Constant)i;
 			terms.Add(expression.Evaluate(dict));												
 		}
-		return terms.Count>0? new Multiply(terms): (Constant)0;
+		return terms.Count>0? new Add(terms): (Constant)0;
 	}
+
     public override string AsString() {
-		return "product("+
+		return "sum("+
 			variable+";"+					//variables
 			initialValue.AsString()+";"+	//initial values
 			until.AsString()+";"+			//until

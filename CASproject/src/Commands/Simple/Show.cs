@@ -2,7 +2,7 @@ namespace Commands;
 
 using Application;
 
-public sealed class ShowCommand : ExecutableCommand {
+public class ShowCommand : ExecutableCommand {
 	public object Execute() {
 		bool muted = Program.MuteOutput;
 		Program.MuteOutput = false;		

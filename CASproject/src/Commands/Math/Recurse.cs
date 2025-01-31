@@ -1,7 +1,7 @@
 namespace Commands;
 using CAS;
 
-public sealed class Recurse : MathCommand {
+public class Recurse : MathCommand {
 	private readonly MathObject expression = (Constant)0;
 	private readonly string[] variables = [];
 	private readonly MathObject[] initialValues = [];

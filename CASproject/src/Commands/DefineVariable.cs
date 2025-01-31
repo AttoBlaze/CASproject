@@ -3,7 +3,7 @@ using Application;
 
 namespace Commands;
 
-public sealed class DefineVariable : ExecutableCommand {
+public class DefineVariable : ExecutableCommand {
     public object Execute(){
         Program.Define(name,value);
         return "succesfully defined variable "+name+" as "+value.AsString();

@@ -274,5 +274,23 @@ public sealed partial class Command {
                 );
             }
         );
+        new Command(
+            "sum",
+            "The sum function for the given expression",
+            [
+                "INPUT;INITIAL VALUE;UNTIL;EXPRESSION",
+                    "Evaluates each term of the sequence decided by the given expression and returns its sum.\n"+
+                    "The input functions as the variable on the bottom of the sum function. The until functions as the upper value in the sum function."
+            ],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                return new Sum(
+                    args[0].AsInput(),  //input variable
+                    (MathObject)args[1],//initial value
+                    (MathObject)args[2],//until
+                    (MathObject)args[3] //expression
+                );
+            }
+        );
     }
 }

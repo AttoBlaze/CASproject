@@ -2,7 +2,7 @@ using CAS;
 using Application;
 
 namespace Commands;
-public sealed class Write : ExecutableCommand {
+public class Write : ExecutableCommand {
     public object Execute() {
         object temp;
         bool nothingToWrite = false;

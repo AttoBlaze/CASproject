@@ -3,7 +3,7 @@ using Application;
 
 namespace Commands;
 
-public sealed class DefineFunction : ExecutableCommand {
+public class DefineFunction : ExecutableCommand {
     public object Execute() {
         var func = new FunctionDefinition(name,inputs,function);
         Program.Define(name,func);

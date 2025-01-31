@@ -3,7 +3,7 @@ namespace Commands;
 /// <summary>
 /// Represents an informally defined command
 /// </summary>
-public sealed class InformalCommand : ExecutableCommand {
+public class InformalCommand : ExecutableCommand {
     public object Execute() => command(args);
 
     private readonly Func<object[],object> command;

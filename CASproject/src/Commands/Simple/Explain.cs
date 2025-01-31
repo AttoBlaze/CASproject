@@ -3,7 +3,7 @@ using CAS;
 
 namespace Commands;
 
-public sealed class ExplainCommand : ExecutableCommand {
+public class ExplainCommand : ExecutableCommand {
     public object Execute() {
         Program.Log(Explain(input));
         return ExecutableCommand.State.SUCCESS;

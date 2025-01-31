@@ -3,7 +3,7 @@ namespace Commands;
 using System.Diagnostics;
 using CAS;
 
-public sealed class GetTime : MathCommand {
+public class GetTime : MathCommand {
 	private static readonly Stopwatch timer = new();
 	public static double Time(Action action) {
 		timer.Restart();

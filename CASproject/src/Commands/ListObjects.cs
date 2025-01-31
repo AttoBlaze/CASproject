@@ -3,7 +3,7 @@ using CAS;
 
 namespace Commands;
 
-public sealed class ListObjects : ExecutableCommand {
+public class ListObjects : ExecutableCommand {
     public static readonly Dictionary<string,ListCommand> listables = new(){
         {"all",         new("Lists everything in the program",              Write_ALL)}, 
         {"predefined",  new("Lists all pre-defined objects in the program", Write_PREDEFINED)},

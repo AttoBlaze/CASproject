@@ -28,4 +28,15 @@ public class IterativeMath {
 		);
 		Assert.That(MathObject.Parse("factorial(5)").Calculate().AsValue()==120);
 	}
+
+	[Test]
+	public void Sum() {
+		Program.Execute(
+			"define(idkwhatitscalled;k;sum(n;1;k;n))",
+            "idkwhatitscalled(10)",
+            "define(f;x;sum(i;1;x;i^2))",
+            "f(10)"
+		);
+		Assert.That(MathObject.Parse("idkwhatitscalled(5)").Calculate().AsValue()==15);
+	}
 }

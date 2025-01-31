@@ -2,7 +2,7 @@ using Application;
 
 namespace Commands;
 
-public sealed class RemoveObject : ExecutableCommand {
+public class RemoveObject : ExecutableCommand {
     public object Execute() {
 		Program.definedObjects.Remove(name);
         return ExecutableCommand.State.SUCCESS;

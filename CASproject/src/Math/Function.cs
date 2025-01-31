@@ -3,7 +3,7 @@ namespace CAS;
 /// <summary>
 /// Represents a function
 /// </summary>
-public sealed class Function : MathObject, NamedObject {
+public class Function : MathObject, NamedObject {
     public readonly string name;
     public readonly Dictionary<string,MathObject> inputs = new();
     public Function(FunctionDefinition func) : this(func,func.inputs.Select(n => new Variable(n)).ToArray()) {}
