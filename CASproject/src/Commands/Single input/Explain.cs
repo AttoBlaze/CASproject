@@ -59,6 +59,11 @@ public class ExplainCommand : ExecutableCommand {
     }
 
     public static string ExplainFormalFunction(FormalFunction func) {
+        if(func.description.Contains("\n")) 
+            return new StringBranch(func.name,[
+                new StringLeaf("Input",func.name+"("+string.Join(";",func.inputs)+")"),
+                new StringLeaf("Description",func.description),
+            ]).Write(); 
         return func.name+"("+string.Join(";",func.inputs)+") - "+func.description;
     }
 }

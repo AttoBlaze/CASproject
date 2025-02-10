@@ -9,7 +9,7 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            
+            "1+e"
         );
         Assert.Pass();
     }

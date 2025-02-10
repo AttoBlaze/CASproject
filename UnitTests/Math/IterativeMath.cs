@@ -39,4 +39,14 @@ public class IterativeMath {
 		);
 		Assert.That(MathObject.Parse("idkwhatitscalled(5)").Calculate().AsValue()==15);
 	}
+
+	[Test]
+	public void NewtonsMethod() {
+		Program.Execute(
+			"nsolve(x;1;6;x^2-2)",
+            "define(f;x;nsolve(n;1;5;n^x-2))",
+            "f(3)"
+		);
+		Assert.That(MathObject.Parse("nsolve(x;1;5;x^2-1)").Calculate().AsValue()==1);
+	}
 }
