@@ -16,9 +16,7 @@ public class DefineFunction : ExecutableCommand {
     public DefineFunction(string name, string[] inputs, MathObject function) {
         if(inputs.Contains(name)) throw new Exception("Self-reference: Functions cannot have themselves as inputs!");
         if (function.ContainsAny(new Variable(name))) throw new Exception("Self-reference: Functions cannot be defined with themselves!");
-        string? temp = Program.AllowedObjectName(name);
-		if(temp!=null) throw new Exception(temp);
-		this.name = name;
+        this.name = name;
         this.inputs = inputs;
         this.function = function;
     }

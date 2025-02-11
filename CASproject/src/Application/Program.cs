@@ -102,10 +102,17 @@ public static partial class Program {
 	public static void Define(string name, MathObject expression) {
 		if (preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot redefine predefined objects!");
         if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
+		
+		var no = ObjectNameDisallowed(name);
+		if(no!=null) throw new Exception(no);
+		
 		definedObjects[name] = expression;
 	}
     public static void Predefine(string name, MathObject expression) {
-        preDefinedObjects[name] = expression;
+        var no = ObjectNameDisallowed(name);
+		if(no!=null) throw new Exception(no);
+		
+		preDefinedObjects[name] = expression;
         definedObjects[name] = expression;
     }
 
@@ -113,7 +120,7 @@ public static partial class Program {
 	/// Tests if the given name would be allowed for a defined object
 	/// </summary>
 	/// <returns>null if the name is allowed, otherwise a string explaining why the name is not allowed.</returns>
-	public static string? AllowedObjectName(string name) {
+	public static string? ObjectNameDisallowed(string name) {
 		if(!char.IsLetter(name.First()) && name.First()!='_') return "Defined object names must start with a letter or underscore!";
 		if(name.Any(c => !char.IsLetterOrDigit(c) && c!='_')) return "Defined object names can only consist of letters, digits, and underscores!";
 		return null;

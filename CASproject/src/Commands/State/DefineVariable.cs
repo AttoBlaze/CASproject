@@ -13,9 +13,7 @@ public class DefineVariable : ExecutableCommand {
     private readonly string name;
     public DefineVariable(string name, MathObject value) {
         if(value.ContainsAny(new Variable(name))) throw new Exception("Self-reference: Variables cannot be defined with themselves!");
-        string? temp = Program.AllowedObjectName(name);
-		if(temp!=null) throw new Exception(temp);
-		this.name = name;
+        this.name = name;
         var result = value.Simplify();
         if (result is Constant)
             this.value = result;
