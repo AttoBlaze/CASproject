@@ -9,8 +9,8 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "1+e"
+            "sin(1+1)"
         );
-        Assert.Pass();
+		Assert.Pass();
     }
 }

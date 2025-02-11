@@ -223,5 +223,13 @@ public sealed partial class Command {
             CMD,
             arguments => new GetTime(arguments.Pop())
         );
+        new Command(
+            "executeall",
+            "executes all of the given commands",
+            ["COMMANDS..",""],
+            arguments => {
+                var cmds = ((object[])arguments.Pop()).Select(n => (ExecutableCommand)n);
+                return new ExecuteAll(cmds);
+        });
     }
 }

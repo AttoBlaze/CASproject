@@ -71,7 +71,7 @@ public class Multiply : MathObject {
             value *= constant.value;            
         }
         if(value==0) return new Constant(0);                                //0*a = 0
-        if(value!=1 || terms.Count==0) terms.Insert(0,new Constant(value));  //1*a = a
+        if(value!=1 || terms.Count==0) terms.Insert(0,new Constant(value));	//1*a = a
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0);

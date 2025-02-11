@@ -47,7 +47,8 @@ public class Add : MathObject {
                 {   
                     var num2 = obj.As<Multiply>().terms[0].AsValue();
                     if(num+num2==0) terms.RemoveAt(i);                             //n*a+(-n*a) = 0
-                    else terms[i] = new Multiply(new Constant(num+num2),mult);
+                    else if (num+num2==1) terms[i] = mult;						   //1*a = a
+					else terms[i] = new Multiply(new Constant(num+num2),mult);
                     i=-1; continue;
                 }
             }

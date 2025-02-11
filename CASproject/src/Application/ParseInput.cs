@@ -141,7 +141,8 @@ public static partial class Program {
 		while (operators.Count>0 && 										//the operator stack isnt empty
 				operators.Peek()!="(" && operators.Peek()!=";" && 			//the top operator is not a left parentheses/multiple inputs
 				(Math.Abs(Operator.Precedence(operators.Peek()))>Math.Abs(op.precedence) || 						//the top operator has a higher precedence than the current operator or
-				(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0))) {	//the top operator and current operator have the same precedence and the current operator is left associative or
+				(Math.Abs(Operator.Precedence(operators.Peek()))==Math.Abs(op.precedence) && op.precedence>0) ||	//the top operator and current operator have the same precedence and the current operator is left associative or
+				Operator.Precedence(operators.Peek())==0) && op.precedence>0) {										//the top operator is a unary rightwards and the current operator is left associative	
 				
 			//apply operators
 			output.Push(ApplyOperator(operators,output));
