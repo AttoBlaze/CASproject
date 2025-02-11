@@ -46,7 +46,7 @@ public static partial class Program {
                 if (i>0 && char.IsDigit(tokens[i-1])) operators.Push("*");
 
                 //parse total length
-				while (i<tokens.Length && char.IsLetter(tokens[i])) {
+				while (i<tokens.Length && (char.IsLetterOrDigit(tokens[i]) || tokens[i]=='_')) {
 					builder.Append(tokens[i]);
 					i++;
 				}

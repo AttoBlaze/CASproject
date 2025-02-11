@@ -108,6 +108,17 @@ public static partial class Program {
         preDefinedObjects[name] = expression;
         definedObjects[name] = expression;
     }
+
+	/// <summary>
+	/// Tests if the given name would be allowed for a defined object
+	/// </summary>
+	/// <returns>null if the name is allowed, otherwise a string explaining why the name is not allowed.</returns>
+	public static string? AllowedObjectName(string name) {
+		if(!char.IsLetter(name.First()) && name.First()!='_') return "Defined object names must start with a letter or underscore!";
+		if(name.Any(c => !char.IsLetterOrDigit(c) && c!='_')) return "Defined object names can only consist of letters, digits, and underscores!";
+		return null;
+	}
+
     public static IEnumerable<string> GetPredefined() => preDefinedObjects.Keys;
 	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is FunctionDefinition);
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;

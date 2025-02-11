@@ -153,7 +153,6 @@ public sealed partial class Command {
                 object[] args = (object[])arguments.Pop();
                 string name = args[0].AsInput();
                 var expression = (MathObject)args[1];
-                if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
                 return new DefineVariable(name,expression);
 		});
 		new Command(
@@ -166,7 +165,6 @@ public sealed partial class Command {
                 object[] args = (object[])arguments.Pop();
                 string[] inputs = args.Skip(1).SkipLast(1).Select(n => n.AsInput()).ToArray();    //function inputs are all but last and first of command inputs
                 string name = args[0].AsInput();
-                if (name.ToCharArray().Any(c => !char.IsLetter(c))) throw new Exception("Defined object names can only consist of letters!");
                 return new DefineFunction(name,inputs,(MathObject)args.Last());
 		});
         new Command(

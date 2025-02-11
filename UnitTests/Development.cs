@@ -9,7 +9,10 @@ public class Tests {
     public void TEST() {
         Program.START();
         Program.Execute(
-            "sin(1+1)"
+            "define(x1;1)",
+			"define(x2;x;x+1)",
+			"x1+1",
+			"x2(10)"
         );
 		Assert.Pass();
     }

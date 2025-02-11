@@ -4,6 +4,8 @@ namespace CAS;
 /// <summary>
 /// Represents an operator (such as + or *)
 /// </summary>
+/// 
+/// Rightwards unary operators have 0 precedence, leftwards unary (fx. factorial) have negative precedence 
 public class Operator {
     public static Dictionary<char,Operator> operators = new(){
         {'+',new Operator(
