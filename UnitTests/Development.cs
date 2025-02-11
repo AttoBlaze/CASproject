@@ -10,9 +10,9 @@ public class Tests {
         Program.START();
         Program.Execute(
             "define(x1;1)",
-			"define(x2;x;x+1)",
+			"define(x_2;x;x+1)",
 			"x1+1",
-			"x2(10)"
+			"x_2(10)"
         );
 		Assert.Pass();
     }
