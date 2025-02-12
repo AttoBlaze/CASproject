@@ -32,7 +32,7 @@ public class Constant : MathObject, Differentiable<MathObject> {
 	}
 
 	public bool IsZero {get => decimalValue.IsZero();}
-	public bool IsOne {get => decimalValue.e==0 && doubleValue==1;}
+	public bool IsOne {get => decimalValue.Equals(1);}
 
 	public double AsValue() => doubleValue;
 

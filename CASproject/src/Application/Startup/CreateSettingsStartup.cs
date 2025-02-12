@@ -40,11 +40,11 @@ public sealed partial class Setting {
             ConvertToBool
         );
 		new Setting(
-            "UseDouble",
+            "ArbitraryPrecision",
             "When enabled, calculations will be made using doubles. When disabled, calculations are instead made with arbitrary precision.",
             BOOL,
-            ()=> Program.UseDouble,
-            (input)=> {Program.UseDouble = (bool)input;},
+            ()=> Program.ArbitraryPrecision,
+            (input)=> {Program.ArbitraryPrecision = (bool)input;},
             ConvertToBool
         );
 		new Setting(

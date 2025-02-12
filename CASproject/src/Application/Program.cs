@@ -12,7 +12,7 @@ public static partial class Program {
 	/// <summary>
 	/// Wrapper for CASMath.UseDouble
 	/// </summary>
-	public static bool UseDouble {get => CASMath.UseDouble; set => CASMath.UseDouble = value;}
+	public static bool ArbitraryPrecision {get => !CASMath.UseDouble; set => CASMath.UseDouble = !value;}
 	/// <summary>
 	/// Wrapper for CASMath.Precision
 	/// </summary>

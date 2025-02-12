@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CASproject
-build_property.ProjectDir = C:\programmering\visualstudiocodeFiles\CASproject\CASproject\
+build_property.ProjectDir = c:\programmering\visualstudiocodeFiles\CASproject\CASproject\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
