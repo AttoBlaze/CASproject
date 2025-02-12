@@ -11,7 +11,7 @@ public class Atan : MathFunction {
         var expr = expression.Simplify();
         
         //constant
-        if(expr is Constant num) return new Constant(Math.Atan(num.value));
+        if(expr is Constant num) return CASMath.Atan(num);
         
         //atan(tan(x))=x
         if(expr is Tan fun) return fun.expression;

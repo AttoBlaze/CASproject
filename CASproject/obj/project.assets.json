@@ -1,11 +1,64 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "DecimalSharp/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "DecimalSharp.Core": "1.0.0"
+        },
+        "compile": {
+          "lib/net6.0/DecimalSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/DecimalSharp.dll": {}
+        }
+      },
+      "DecimalSharp.Core/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/DecimalSharp.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/DecimalSharp.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "DecimalSharp/1.0.0": {
+      "sha512": "bhYwpiLCRD2xx96gkAv64sRddB824ox36WHIPfwzk9NISnYJdAXm6ccklxsMyb79jxVhCMBBqLe0iW2YMiJZag==",
+      "type": "package",
+      "path": "decimalsharp/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "decimalsharp.1.0.0.nupkg.sha512",
+        "decimalsharp.nuspec",
+        "lib/net6.0/DecimalSharp.dll"
+      ]
+    },
+    "DecimalSharp.Core/1.0.0": {
+      "sha512": "VxKHOog6cC5S3f4G1hzsBhv9+0czTCZwzMJB5ei9XAOgqhJ57TBzZrCTzfw3GZBhnhQ3Ovig4J+cCavQ2qFHyA==",
+      "type": "package",
+      "path": "decimalsharp.core/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "decimalsharp.core.1.0.0.nupkg.sha512",
+        "decimalsharp.core.nuspec",
+        "lib/net6.0/DecimalSharp.Core.dll"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "DecimalSharp >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\jonas\\.nuget\\packages\\": {},
@@ -34,7 +87,8 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://github.com/XeroXP/DecimalSharp": {}
       },
       "frameworks": {
         "net8.0": {
@@ -56,6 +110,12 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
+        "dependencies": {
+          "DecimalSharp": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

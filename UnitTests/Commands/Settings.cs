@@ -5,9 +5,10 @@ using CAS;
 using Commands;
 
 public class SettingTests {
-    [Test]
+    [SetUp] public void start() => Program.START();
+	
+	[Test]
     public void SetBoolSetting() {
-        Program.START();
         Program.Execute(
             "setSetting(AlwaysWrite;1)",
             "setSetting(AlwaysWrite;true)"
@@ -21,8 +22,26 @@ public class SettingTests {
 
     [Test]
     public void GetBoolSetting() {
-        Program.START();
         Program.AlwaysWrite = true;
         Assert.That(MathObject.Parse("getSetting(AlwaysWrite)").AsValue()==1);
     }
+
+	[Test]
+	public void SetIntSetting() {
+		Program.Execute(
+			"setSetting(Precision;50)",
+			"setSetting(Precision;20*2+10)"
+		);
+		Program.TryExecute(
+			"setSetting(Precision;0.4)",
+			"setSetting(Precision;xyz)"
+		);
+		Assert.That(Program.Precision==50);
+	}
+
+	[Test]
+	public void GetIntSetting() {
+		Program.Precision = 50;
+		Assert.That(MathObject.Parse("getSetting(Precision)").AsValue()==50);
+	}
 }

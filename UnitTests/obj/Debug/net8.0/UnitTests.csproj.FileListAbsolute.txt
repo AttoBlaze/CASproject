@@ -204,3 +204,5 @@ C:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\ref
 C:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.pdb
 C:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.genruntimeconfig.cache
 C:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\ref\UnitTests.dll
+C:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\DecimalSharp.dll
+C:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\DecimalSharp.Core.dll

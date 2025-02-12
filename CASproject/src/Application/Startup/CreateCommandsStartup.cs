@@ -86,9 +86,9 @@ public sealed partial class Command {
         );
         new Command(
             "Derivative",
-            "Gets the derivative of the given mathematical expression. This will only derive when the expression is used",
+            "Gets the partial derivative of the given mathematical expression. This will only derive when the expression is used",
             [
-                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+                "EXPRESSION;VARIABLE","Gets the partial derivative of the expression relative to the given variable"
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
@@ -96,9 +96,9 @@ public sealed partial class Command {
         });
         new Command(
             "derivative",
-            "Immediately gets the derivative of the given mathematical expression.",
+            "Immediately gets the partial derivative of the given mathematical expression.",
             [
-                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+                "EXPRESSION;VARIABLE","Gets the partial derivative of the expression relative to the given variable"
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
@@ -106,9 +106,9 @@ public sealed partial class Command {
         });
         new Command(
             "Diff",
-            "Gets the simplified derivative of the given mathematical expression after evalutation. This will only derive when the expression is used",
+            "Gets the simplified partial derivative of the given mathematical expression after evalutation. This will only derive when the expression is used",
             [
-                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+                "EXPRESSION;VARIABLE","Gets the partial derivative of the expression relative to the given variable"
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
@@ -120,9 +120,9 @@ public sealed partial class Command {
         });
         new Command(
             "diff",
-            "Immediately gets the simplified derivative of the given mathematical expression after evalutation.",
+            "Immediately gets the simplified partial derivative of the given mathematical expression after evalutation.",
             [
-                "EXPRESSION;VARIABLE","Gets the derivative of the expression relative to the given variable"
+                "EXPRESSION;VARIABLE","Gets the partial derivative of the expression relative to the given variable"
             ],
             arguments => {
                 var args = (object[])arguments.Pop();

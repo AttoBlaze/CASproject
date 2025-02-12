@@ -28,3 +28,7 @@ C:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\re
 C:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.pdb
 C:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.genruntimeconfig.cache
 C:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\ref\CASproject.dll
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Debug\net8.0\DecimalSharp.dll
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Debug\net8.0\DecimalSharp.Core.dll
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.csproj.AssemblyReference.cache
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.csproj.Up2Date

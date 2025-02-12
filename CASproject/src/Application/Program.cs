@@ -9,6 +9,15 @@ public static partial class Program {
         AlwaysWrite = true,
         AlwaysShowWrite = true;
 
+	/// <summary>
+	/// Wrapper for CASMath.UseDouble
+	/// </summary>
+	public static bool UseDouble {get => CASMath.UseDouble; set => CASMath.UseDouble = value;}
+	/// <summary>
+	/// Wrapper for CASMath.Precision
+	/// </summary>
+	public static long Precision {get => CASMath.Precision; set => CASMath.Precision = value;}
+
     /// <summary>
     /// Parses and executes the given input  
     /// </summary>

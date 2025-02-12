@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "LeTpGX0zloU=",
+  "dgSpecHash": "i85WUyQJ0Fs=",
   "success": true,
   "projectFilePath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\jonas\\.nuget\\packages\\decimalsharp\\1.0.0\\decimalsharp.1.0.0.nupkg.sha512",
+    "C:\\Users\\jonas\\.nuget\\packages\\decimalsharp.core\\1.0.0\\decimalsharp.core.1.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

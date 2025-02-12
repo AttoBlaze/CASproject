@@ -24,14 +24,17 @@ public class Divide : MathObject {
         var denom = denominator.Simplify();
 
         //a/a = 1
-        if(num.Equals(denom)) return new Constant(1);
+        if(num.Equals(denom)) return new Constant(1d);
 
         //combine constants
         if(num is Constant num1) {
-            if(denom is Constant denom1) return new Constant(num1.value/denom1.value);
+			if(denom is Constant denom1) {
+				if(denom1.IsZero) throw new DivideByZeroException();
+				return num1/denom1;
+			}
 
             //0/n = 0
-            if(num1.value==0) return new Constant(0);
+            if(num1.IsZero) return new Constant(0d);
         }
 
         //a/(b/c) = (a*c)/b
@@ -44,8 +47,8 @@ public class Divide : MathObject {
             //a/(b*a) = 1/b
             if(dmult.terms.FindOtherTerm(n => n.Equals(num),out int dIndex)) {
                 dmult.terms.RemoveAt(dIndex);
-                if(dmult.terms.Count==1) return new Divide(new Constant(1),dmult.terms[0]);
-                return new Divide(new Constant(1),dmult);
+                if(dmult.terms.Count==1) return new Divide(new Constant(1d),dmult.terms[0]);
+                return new Divide(new Constant(1d),dmult);
             }
 
             //(a*b)/(a*c) = b/c

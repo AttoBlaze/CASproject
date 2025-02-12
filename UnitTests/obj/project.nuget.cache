@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "gxuj0fH/O6g=",
+  "dgSpecHash": "d9uD6E8WWYM=",
   "success": true,
   "projectFilePath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\UnitTests\\UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jonas\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\jonas\\.nuget\\packages\\decimalsharp\\1.0.0\\decimalsharp.1.0.0.nupkg.sha512",
+    "C:\\Users\\jonas\\.nuget\\packages\\decimalsharp.core\\1.0.0\\decimalsharp.core.1.0.0.nupkg.sha512",
     "C:\\Users\\jonas\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
     "C:\\Users\\jonas\\.nuget\\packages\\microsoft.net.test.sdk\\17.8.0\\microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "C:\\Users\\jonas\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

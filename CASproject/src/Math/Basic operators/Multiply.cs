@@ -45,7 +45,7 @@ public class Multiply : MathObject {
             if (term is Power pow) {
                 //a * a^n = a^(n+1)
                 if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(pow.Base),terms,ref i, ref obj, ref index)) {
-                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1)).Simplify());
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1d)).Simplify());
                     i=-1; continue;
                 }
                 
@@ -58,23 +58,23 @@ public class Multiply : MathObject {
 
             //a*a = a^2
             if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i, ref obj, ref index)) {
-                terms[i] = new Power(term,new Constant(2));
+                terms[i] = new Power(term,new Constant(2d));
                 i=-1; continue;
             }
         }
 
         //combine constants
-        double value = 1;
+        Constant value = 1;
         var temp = terms.Where(term => term is Constant).ToList();
         foreach(Constant constant in temp) {
             terms.Remove(constant);
-            value *= constant.value;            
+            value *= constant;            
         }
-        if(value==0) return new Constant(0);                                //0*a = 0
-        if(value!=1 || terms.Count==0) terms.Insert(0,new Constant(value));	//1*a = a
+        if(value.IsZero) return new Constant(0d);                               //0*a = 0
+        if(!value.IsOne || terms.Count==0) terms.Insert(0,new Constant(value));	//1*a = a
 
         if(terms.Count==1) return terms[0];
-        if(terms.Count==0) return new Constant(0);
+        if(terms.Count==0) return new Constant(0d);
         return new Multiply(terms);
     }
 

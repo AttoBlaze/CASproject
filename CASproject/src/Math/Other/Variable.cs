@@ -20,8 +20,8 @@ public class Variable : MathObject, NamedObject {
     }
 
     public MathObject Differentiate(string variable) {
-        if(variable==this.name) return new Constant(1);
-        return new Constant(0);
+        if(variable==this.name) return new Constant(1d);
+        return new Constant(0d);
     }
 
     public bool Equals(MathObject obj) =>

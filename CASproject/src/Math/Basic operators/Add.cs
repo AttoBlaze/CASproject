@@ -7,7 +7,7 @@ public class Add : MathObject {
         //combine all add terms under this add
         foreach(var term in terms) { 
             if(term is Add) this.terms.AddRange(((Add)term).terms);
-            else if(term is not Constant num || num.value!=0) this.terms.Add(term);
+            else if(term is not Constant num || !num.IsZero) this.terms.Add(term);
         }
     }
 
@@ -31,12 +31,14 @@ public class Add : MathObject {
             if(term is Constant) continue;
 
             if ((term as Multiply)?.terms[0] is Constant) {
-                //a + n*a = (n+1)*a
-                var num = term.As<Multiply>().terms[0].AsValue(); 
+                var num = term.As<Multiply>().terms[0].As<Constant>();
                 MathObject mult = term.As<Multiply>().WithoutFirstTerm();
+                
+				//a + n*a = (n+1)*a
                 if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
-                    if(num+1==0) terms.RemoveAt(i);                             //a+(-1*a) = 0
-                    else terms[i] = new Multiply(new Constant(num+1),mult);
+                    var val = num+1;
+					if(val.IsZero) terms.RemoveAt(i);                             //a+(-1*a) = 0
+                    else terms[i] = new Multiply(val,mult);
                     i=-1; continue;
                 }
 
@@ -45,10 +47,10 @@ public class Add : MathObject {
                     t is Multiply && t.As<Multiply>().terms[0] is Constant && t.As<Multiply>().WithoutFirstTerm().Equals(mult)
                     ,terms,ref i,ref obj ,ref index)) 
                 {   
-                    var num2 = obj.As<Multiply>().terms[0].AsValue();
-                    if(num+num2==0) terms.RemoveAt(i);                             //n*a+(-n*a) = 0
-                    else if (num+num2==1) terms[i] = mult;						   //1*a = a
-					else terms[i] = new Multiply(new Constant(num+num2),mult);
+					var val = obj.As<Multiply>().terms[0].As<Constant>() + num;
+					if(val.IsZero) terms.RemoveAt(i);                           	//n*a+(-n*a) = 0
+                    else if (val.IsOne) terms[i] = mult;						    //1*a = a
+					else terms[i] = new Multiply(val,mult);
                     i=-1; continue;
                 }
             }
@@ -63,22 +65,22 @@ public class Add : MathObject {
 
             //a+a = 2*a
             if(MathObject.FindAndRemoveOtherTerm(t => t.Equals(term),terms,ref i,ref obj,ref index)) {
-                terms[i] = new Multiply(new Constant(2),term);
+                terms[i] = new Multiply(new Constant(2d),term);
                 i=-1; continue;
             }
         }
 
         //combine constants
-        double value = 0;
+        Constant value = 0;
         var temp = terms.Where(term => term is Constant).ToList();
         foreach(var constant in temp) {
             terms.Remove(constant);
-            value += constant.AsValue();          
+            value += (Constant)constant;          
         }
-        if(value!=0) terms.Add(new Constant(value));
+        if(!value.IsZero) terms.Add(new Constant(value));
 
         if(terms.Count==1) return terms[0];
-        if(terms.Count==0) return new Constant(0);
+        if(terms.Count==0) return new Constant(0d);
         return new Add(terms);
     }
 
@@ -104,7 +106,7 @@ public class Add : MathObject {
         //(f+g)' = f' + g'
         var terms = this.terms.Where(n => n is not Constant).Select(n => n.Differentiate(variable)).ToList();
         if(terms.Count==1) return terms[0];
-        if(terms.Count==0) return new Constant(0);
+        if(terms.Count==0) return new Constant(0d);
         return new Add(terms);
     }
     
@@ -112,5 +114,5 @@ public class Add : MathObject {
     public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");
     public int Precedence() => Operator.Precedence('+');
 
-    public static MathObject Negate(MathObject obj) => obj is Constant o? new Constant(-(o.value)): new Multiply(new Constant(-1),obj);
+    public static MathObject Negate(MathObject obj) => obj is Constant o? o.Negate(): new Multiply(new Constant(-1d),obj);
 }

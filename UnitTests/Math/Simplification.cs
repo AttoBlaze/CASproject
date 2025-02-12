@@ -30,6 +30,7 @@ public class Simplifications {
 		Assert.That(ParseSimplify("a+a").Equals(ParseSimplify("2*a")));
 		Assert.That(ParseSimplify("a+2*a").Equals(Parse("3*a")));
 		Assert.That(ParseSimplify("2*a+2*a").Equals(Parse("4*a")));
+		Program.Log(ParseSimplify("a-a").AsString());
 		Assert.That(ParseSimplifyVal("a-a")==0);
 		Assert.That(ParseSimplifyVal("2*a-2*a")==0);
 		Assert.That(ParseSimplifyVal("3*a-2*a-a")==0);

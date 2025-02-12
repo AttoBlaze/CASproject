@@ -11,10 +11,10 @@ public class Ln : MathFunction {
         var expr = expression.Simplify();
         
         //constant
-        if(expr is Constant num) return new Constant(Math.Log(num.value));
+        if(expr is Constant num) return CASMath.Log(num);
         
         //e
-        if(expr is Variable e && e.name=="e") return new Constant(1);
+        if(expr is Variable e && e.name=="e") return new Constant(1d);
 
         //e^x
         if(((expr as Power)?.Base as Variable)?.name=="e") return expr.As<Power>().exponent;

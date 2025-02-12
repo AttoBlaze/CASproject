@@ -1,8 +1,12 @@
+using CAS;
+
 namespace Application;
 
 public sealed partial class Setting {
     public static void CreateAllSettings() {
-        string[] BOOL = ["true|false|1|0",""];
+        string[] 
+			BOOL = ["true|false|1|0",""],
+			INTEGER = ["INTEGER","","EXPRESSION","Expression must be calculateable to an integer"];
         new Setting(
             "MuteOutput",
             "Mutes command outputs from being written in the console",
@@ -35,5 +39,22 @@ public sealed partial class Setting {
             (input)=> {Program.AlwaysShowWrite = (bool)input;},
             ConvertToBool
         );
+		new Setting(
+            "UseDouble",
+            "When enabled, calculations will be made using doubles. When disabled, calculations are instead made with arbitrary precision.",
+            BOOL,
+            ()=> Program.UseDouble,
+            (input)=> {Program.UseDouble = (bool)input;},
+            ConvertToBool
+        );
+		new Setting(
+			"Precision",
+			"The level of precision used when calculating with arbitrary precision. Input will be clamped to the range 1 to 10000.",
+			INTEGER,
+			()=> Program.Precision,
+			(input) => {Program.Precision = (long)input;},
+			ConvertToLong
+		);
+		
     }
 }

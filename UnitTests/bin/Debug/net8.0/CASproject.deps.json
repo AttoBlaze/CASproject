@@ -7,8 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "CASproject/1.0.0": {
+        "dependencies": {
+          "DecimalSharp": "1.0.0"
+        },
         "runtime": {
           "CASproject.dll": {}
+        }
+      },
+      "DecimalSharp/1.0.0": {
+        "dependencies": {
+          "DecimalSharp.Core": "1.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/DecimalSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DecimalSharp.Core/1.0.0": {
+        "runtime": {
+          "lib/net6.0/DecimalSharp.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -18,6 +40,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DecimalSharp/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bhYwpiLCRD2xx96gkAv64sRddB824ox36WHIPfwzk9NISnYJdAXm6ccklxsMyb79jxVhCMBBqLe0iW2YMiJZag==",
+      "path": "decimalsharp/1.0.0",
+      "hashPath": "decimalsharp.1.0.0.nupkg.sha512"
+    },
+    "DecimalSharp.Core/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VxKHOog6cC5S3f4G1hzsBhv9+0czTCZwzMJB5ei9XAOgqhJ57TBzZrCTzfw3GZBhnhQ3Ovig4J+cCavQ2qFHyA==",
+      "path": "decimalsharp.core/1.0.0",
+      "hashPath": "decimalsharp.core.1.0.0.nupkg.sha512"
     }
   }
 }

@@ -1,5 +1,6 @@
 using CAS;
 using Commands;
+using DecimalSharp;
 
 namespace Application;
 
@@ -30,7 +31,8 @@ public sealed partial class Setting {
     
     public static Func<object,MathObject> GetOutputConverter(object value) {
         if(value is string) return val => new Variable((string)val);
-        if(value is bool) return val => new Constant((bool)val?1:0);
+        if(value.IsNumericType()) return val => new Constant(val.ToString()??"");
+        if(value is bool) return val => new Constant((bool)val?1d:0d);
         throw new Exception("No settings output converter exists for type \""+value.GetType()+"\"!");
     }
 
@@ -69,5 +71,17 @@ public sealed partial class Setting {
         }
         
         throw new Exception("Unable to convert input to a bool");
+    }; 
+
+	public static readonly Func<object,object> ConvertToLong = input => {
+        //value 
+        if (input is MathObject math) {
+            var temp = math.Calculate();
+            if (temp is Constant c && c.AsValue()%1==0 && c.AsValue()<=long.MaxValue && c.AsValue()>=long.MinValue) 
+				return (long)c.AsValue();
+			throw new Exception("Given input does not result in an integer value when calculated");
+        }
+        
+        throw new Exception("Unable to convert input to an integer");
     }; 
 }

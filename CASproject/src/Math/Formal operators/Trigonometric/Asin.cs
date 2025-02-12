@@ -11,7 +11,7 @@ public class Asin : MathFunction {
         var expr = expression.Simplify();
         
         //constant
-        if(expr is Constant num) return new Constant(Math.Asin(num.value));
+        if(expr is Constant num) return CASMath.Asin(num);
         
         //asin(sin(x))=x
         if(expr is Sin fun) return fun.expression;

@@ -11,7 +11,7 @@ public class Acos : MathFunction {
         var expr = expression.Simplify();
         
         //constant
-        if(expr is Constant num) return new Constant(Math.Acos(num.value));
+        if(expr is Constant num) return CASMath.Acos(num);
         
         //acos(cos(x))=x
         if(expr is Cos fun) return fun.expression;

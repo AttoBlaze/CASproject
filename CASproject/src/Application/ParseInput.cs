@@ -10,7 +10,7 @@ public static partial class Program {
 		//reformat input
 		char[] tokens = input
 			.Replace(" ","").Replace("\n","")		//remove spaces & line breaks
-			.Replace(".",",")						//make dots and commas interchangeable
+			.Replace(",",".")						//make dots and commas interchangeable
 			.Replace("**","^")						//make ** equivalent to a ^
 			.ToCharArray();
 		
@@ -23,21 +23,22 @@ public static partial class Program {
 		for (int i=0;i<tokens.Length;i++) {
 			
 			//parse constants
-			if (tokens[i]==',' || char.IsDigit(tokens[i])) {
+			if (tokens[i]=='.' || char.IsDigit(tokens[i])) {
 				
                 //parse numbers
-				while(i<tokens.Length && (tokens[i]==',' || char.IsDigit(tokens[i]))) {
+				while(i<tokens.Length && (tokens[i]=='.' || char.IsDigit(tokens[i]))) {
 					builder.Append(tokens[i]); 
 					i++;
 				}
 
-				//check for shit term
-				if (double.TryParse(builder.ToString(), out double value)) {
-                    output.Push(new Constant(value));				//push to output stack
+				//convert to val
+				try {
+					var val = new Constant(builder.ToString());
+                    output.Push(val);								//push to output stack
 				    builder.Clear();					            //reset builder
 				    i--;											//account for 'overshoot'
                 } 
-                else throw new Exception("Value \""+builder+"\" was unable to be parsed");
+                catch (Exception e) {throw new Exception("Value \""+builder+"\" was unable to be parsed:\n"+e);}
 			}
 			
 			//parse letters

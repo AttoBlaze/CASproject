@@ -22,16 +22,16 @@ public class Power : MathObject {
         var bas = Base.Simplify();
         var exp = exponent.Simplify();
 
-        if (exp is Constant) {
-            var num = exp.AsValue();
-            //a^0 = 1
-            if(num==0) return new Constant(1);
+        if (exp is Constant cExp) {
+            
+			//a^0 = 1
+            if(cExp.IsZero) return new Constant(1d);
 
             //a^1 = a
-            if(num==1) return bas;
+            if(cExp.IsOne) return bas;
 
             //combine constants
-            if(bas is Constant) return new Constant(Math.Pow(bas.AsValue(),num));
+            if(bas is Constant cBas) return CASMath.Pow(cBas,cExp);
         }
 
         return new Power(bas,exp);
@@ -50,9 +50,9 @@ public class Power : MathObject {
             if(v.name==variable) {
                 //(f^n)' = n * f^(n-1)
                 if(exponent is Constant num1) { 
-                    if(num1.value == 0) return new Constant(0);
-                    if(num1.value == 1) return Base.Differentiate(variable);
-                    return new Multiply(num1,new Power(Base,new Constant(num1.value-1)));
+                    if(num1.IsZero) return new Constant(0d);
+                    if(num1.IsOne) return Base.Differentiate(variable);
+                    return new Multiply(num1,new Power(Base,num1-1));
                 }
             }
         }
