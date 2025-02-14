@@ -52,9 +52,9 @@ public class Constant : MathObject, Differentiable<MathObject> {
     public bool Equals(MathObject obj) =>
         obj is Constant &&  //same type
         ((Constant)obj).doubleValue==doubleValue;  //same value
-
+	
 	//format to prevent double strings being written with exponential notation
-    private static readonly string format = StringTree.StringOf('#',300)+"0."+StringTree.StringOf('#',300);
+	private static readonly string format = StringTree.StringOf('#',300)+"0."+StringTree.StringOf('#',300);
     public string AsString() => decimalValue.Precision()>16? decimalValue.ToString():doubleValue.ToString(format);
 
 	//conversions

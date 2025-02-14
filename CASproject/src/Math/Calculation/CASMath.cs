@@ -54,11 +54,11 @@ public partial class CASMath {
 	/// <summary>
 	/// The mathematical constant pi
 	/// </summary>
-	public Constant pi {get => precision<=16? Math.PI:factory.Asin(0);}
+	public Constant pi {get => precision<=16? Math.PI:factory.Acos(-1);}
 	/// <summary>
 	/// The mathematical constant pi. <br>
 	/// Wrapper for CASMath.Calculator.pi
 	/// </summary>
-	public static Constant PI {get => Precision<=16? Math.PI:Calculator.factory.Asin(0);}
+	public static Constant PI {get => Precision<=16? Math.PI:Calculator.factory.Acos(-1);}
 	
 }

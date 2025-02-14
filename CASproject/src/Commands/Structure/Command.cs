@@ -21,8 +21,8 @@ public partial class Command {
 	public Command(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {
 		this.name = name;
 		this.description = description;
-		this.create = createCommand;
 		this.overloads = overloads;
+		this.create = createCommand;
 		Program.commands[name] = this;
 	}
 	public readonly string name;
