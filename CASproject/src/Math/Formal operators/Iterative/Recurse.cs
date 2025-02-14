@@ -26,7 +26,7 @@ public class Recurse : MathCommand {
 		for(int i=0;i<Math.Min(initialValues.Length,variables.Length);i++) dict[variables[i]] = initialValues[i];
 
 		MathObject value = initialValues.Last();
-		for(int i=0;i<recursions.Calculate(Program.definedObjects,SimplificationSettings.Calculation).AsValue();i++) {
+		for(int i=0;i<recursions.Simplify(SimplificationSettings.Calculation).AsValue();i++) {
 			//recursively evaluate
 			value = expression.Evaluate(dict);
 			

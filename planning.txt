@@ -15,7 +15,6 @@ Factorial operator, modulus operator
 repeat, executeall
 
 Simplification settings:
-DisolveConstants - disolve predefined constants (replace with their value) on evaluation
 DisolveFractionConstants - constants in fractions are combined
 ContractionMode:
     None - expandable/contractable expressions are kept as-is

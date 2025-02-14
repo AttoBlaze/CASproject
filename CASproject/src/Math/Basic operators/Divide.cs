@@ -80,13 +80,13 @@ public class Divide : MathObject {
         return new Divide(num,denom);
     }
 
-    public MathObject Differentiate(string variable) {
+    public MathObject Differentiate(string variable, CalculusSettings settings) {
         if(denominator is Constant num) 
-            return new Divide(numerator.Differentiate(variable),num);
+            return new Divide(numerator.Differentiate(variable,settings),num);
         
         //(f/g)' = (f'g - fg')/g^2
         return new Divide(
-            new Add(new Multiply(numerator.Differentiate(variable),denominator),Add.Negate(new Multiply(numerator,denominator.Differentiate(variable)))),
+            new Add(new Multiply(numerator.Differentiate(variable,settings),denominator),Add.Negate(new Multiply(numerator,denominator.Differentiate(variable,settings)))),
             new Multiply(denominator,denominator)
         );
     }

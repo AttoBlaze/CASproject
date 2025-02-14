@@ -109,9 +109,9 @@ public class Add : MathObject {
         return true;
     }
 
-    public MathObject Differentiate(string variable) {
+    public MathObject Differentiate(string variable, CalculusSettings settings) {
         //(f+g)' = f' + g'
-        var terms = this.terms.Where(n => n is not Constant).Select(n => n.Differentiate(variable)).ToList();
+        var terms = this.terms.Where(n => n is not Constant).Select(n => n.Differentiate(variable,settings)).ToList();
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0d);
         return new Add(terms);

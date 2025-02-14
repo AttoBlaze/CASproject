@@ -25,5 +25,5 @@ public class Ln : MathFunction {
     }
 
 	//ln(f)' = f'/f
-    public override MathObject Differentiate(string variable) => new Divide(expression.Differentiate(variable),expression);
+    public override MathObject Differentiate(string variable, CalculusSettings settings) => new Divide(expression.Differentiate(variable,settings),expression);
 }

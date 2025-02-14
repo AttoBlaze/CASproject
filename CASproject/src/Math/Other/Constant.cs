@@ -6,7 +6,7 @@ namespace CAS;
 /// <summary>
 /// Represents a constant value
 /// </summary>
-public class Constant : MathObject, Differentiable<MathObject> { 
+public class Constant : MathObject { 
     public double doubleValue {get; private set;}
 	public BigDecimal decimalValue {get; private set;}
 	private Constant(double val, BigDecimal big) {
@@ -47,7 +47,7 @@ public class Constant : MathObject, Differentiable<MathObject> {
         return new Constant(this);
     }
 
-    public MathObject Differentiate(string variable) => new Constant(0d);
+    public MathObject Differentiate(string variable, CalculusSettings settings) => new Constant(0d);
 
     public bool Equals(MathObject obj) =>
         obj is Constant &&  //same type

@@ -18,6 +18,6 @@ public class Atan : MathFunction {
 
         return new Atan(expr);
     }
-    public override MathObject Differentiate(string variable) => 
-		new Divide(expression.Differentiate(variable),new Add(new Power(expression,(Constant)2),(Constant)1));
+    public override MathObject Differentiate(string variable, CalculusSettings settings) => 
+		new Divide(expression.Differentiate(variable,settings),new Add(new Power(expression,(Constant)2),(Constant)1));
 }

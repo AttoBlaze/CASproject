@@ -11,8 +11,8 @@ public interface Simplifiable<T1,T2> {
     public T1 Simplify(T2 input);
 }
 
-public interface Differentiable<T> {
-    public T Differentiate(string variable) => throw new Exception("Expression is not differentiable");
+public interface Differentiable<T1,T2> {
+    public T1 Differentiate(string variable,T2 input) => throw new Exception("Expression is not differentiable");
 }
 
 public interface Evaluatable<T> {
@@ -21,7 +21,15 @@ public interface Evaluatable<T> {
 }
 
 public struct SimplificationSettings {
-	public bool calculateConstants, eIsEulersNumber;
+	/// <summary>
+	/// Whether or not constants are calculated on simplification (eg. if 4/2 is simplified to 2)
+	/// </summary>
+	public bool calculateConstants;
+
+	/// <summary>
+	/// If a variable called e is presumed to be eulers number.
+	/// </summary>
+	public bool eIsEulersNumber;
 	public CASMath calculator;
 	public static SimplificationSettings Calculation = new(){
 		calculateConstants = true, 
@@ -30,10 +38,17 @@ public struct SimplificationSettings {
 	};
 }
 
+public struct CalculusSettings {
+	public bool eIsEulersNumber;
+	public static CalculusSettings Calculation = new(){
+		eIsEulersNumber = true
+	};
+}
+
 /// <summary>
 /// Represents a mathematical object/expression
 /// </summary>
-public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject,SimplificationSettings>, Evaluatable<MathObject>, Differentiable<MathObject> {
+public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject,SimplificationSettings>, Evaluatable<MathObject>, Differentiable<MathObject,CalculusSettings> {
 
 
 	/// <summary>
@@ -43,12 +58,8 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
 
 
 	public MathObject Simplify() => Simplify(Program.simplificationSettings);
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="variable"></param>
-	/// <returns></returns>
-    public MathObject Diff(string variable) => this.Calculate().Differentiate(variable).Simplify();
+	public MathObject Differentiate(string variable) => Differentiate(variable,Program.calculusSettings);
+	public MathObject Diff(string variable) => this.Calculate().Differentiate(variable,Program.calculusSettings).Simplify();
     
 	/// <summary>
 	/// Evaluates & simplifies this math object using the objects defined in the program

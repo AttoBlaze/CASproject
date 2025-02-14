@@ -20,7 +20,7 @@ public class Variable : MathObject, NamedObject {
         return new Variable(name);
     }
 
-    public MathObject Differentiate(string variable) {
+    public MathObject Differentiate(string variable, CalculusSettings settings) {
         if(variable==this.name) return new Constant(1d);
         return new Constant(0d);
     }

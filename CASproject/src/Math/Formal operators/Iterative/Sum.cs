@@ -21,8 +21,8 @@ public class Sum : MathCommand {
 		var dict = new Dictionary<string,MathObject>();
 		
 		//starting value and ending value
-		int initial = (int)initialValue.Calculate(Program.definedObjects,SimplificationSettings.Calculation).AsValue(),
-			final = (int)until.Calculate(Program.definedObjects,SimplificationSettings.Calculation).AsValue();
+		int initial = (int)initialValue.Simplify(SimplificationSettings.Calculation).AsValue(),
+			final = (int)until.Simplify(SimplificationSettings.Calculation).AsValue();
 
 		//sum function
 		List<MathObject> terms = new();

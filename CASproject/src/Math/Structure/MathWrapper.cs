@@ -7,7 +7,7 @@ using Application;
 public abstract class MathWrapper : MathObject {
     public virtual MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => transformation(expression).Evaluate(definedObjects);
     public virtual MathObject Simplify(SimplificationSettings settings) => transformation(expression).Simplify(settings);
-    public virtual MathObject Differentiate(string variable) => transformation(expression).Differentiate(variable);
+    public virtual MathObject Differentiate(string variable, CalculusSettings settings) => transformation(expression).Differentiate(variable,settings);
     public virtual bool Equals(MathObject obj) => 
         obj is MathWrapper wrapper &&
         wrapper.transformation==this.transformation &&
@@ -51,7 +51,7 @@ public class CalculateExpression : MathWrapper {
     }
 }
 public class DerivativeExpression : MathWrapper {
-    public override MathObject Differentiate(string variable) => expression.Differentiate(variable);
+    public override MathObject Differentiate(string variable, CalculusSettings settings) => expression.Differentiate(variable,settings);
     public override string AsString() => name+"("+expression.AsString()+";"+variable+")";
     public readonly string variable;
     public DerivativeExpression(MathObject expression, string variable) {

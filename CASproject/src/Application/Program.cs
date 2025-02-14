@@ -14,6 +14,9 @@ public static partial class Program {
 		eIsEulersNumber = true,
 		calculator = Calculator
 	};
+	public static CalculusSettings calculusSettings = new(){
+		eIsEulersNumber = true
+	};
 
     /// <summary>
     /// Parses and executes the given input  

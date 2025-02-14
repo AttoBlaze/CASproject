@@ -35,7 +35,16 @@ public class Power : MathObject {
             //combine constants
             if(bas is Constant cBas && settings.calculateConstants) return settings.calculator.pow(cBas,cExp);
         }
-
+		else if(bas is Constant cBas) {
+			//0^a = 0 (when a!=0)
+			if(cBas.IsZero) return new Constant(0d);
+			
+			//1^a = 1
+			if(cBas.IsOne) return new Constant(1d);
+		}
+		else if(bas is Power pow) {
+			return new Power(pow.Base,new Multiply(pow.exponent,exp)).Simplify(settings);
+		}
         return new Power(bas,exp);
     }
 
@@ -43,17 +52,17 @@ public class Power : MathObject {
         obj is Power &&                              //same type
         ((Power)obj).Base.Equals(this.Base) &&       //same terms
         ((Power)obj).exponent.Equals(this.exponent); //same terms
-        
-    public MathObject Differentiate(string variable) {
+
+	public MathObject Differentiate(string variable, CalculusSettings settings) {
         //(e^f)' = f' * e^f
         if(Base is Variable v) {
-            if (v.name=="e") return new Multiply(exponent.Differentiate(variable),new Power(Base,exponent));
+            if (v.name=="e" && settings.eIsEulersNumber) return new Multiply(exponent.Differentiate(variable,settings),new Power(Base,exponent));
 
             if(v.name==variable) {
                 //(f^n)' = n * f^(n-1)
                 if(exponent is Constant num1) { 
                     if(num1.IsZero) return new Constant(0d);
-                    if(num1.IsOne) return Base.Differentiate(variable);
+                    if(num1.IsOne) return Base.Differentiate(variable,settings);
                     return new Multiply(num1,new Power(Base,num1-1));
                 }
             }
@@ -61,7 +70,7 @@ public class Power : MathObject {
         
         //n^f' = ln(n) * f' * e^f
         if(Base is Constant num2)
-            return new Multiply([new Ln(num2),exponent.Differentiate(variable),new Power(Base,exponent)]);
+            return new Multiply([new Ln(num2),exponent.Differentiate(variable,settings),new Power(Base,exponent)]);
         
         //(f^g)' = f^g * (f' * g/f + g'*ln(f))
         return new Multiply(
@@ -69,11 +78,11 @@ public class Power : MathObject {
             new Add(
                 new Divide(
                     new Multiply(
-                        Base.Differentiate(variable),
+                        Base.Differentiate(variable,settings),
                         exponent),
                     Base),
                 new Multiply(
-                    exponent.Differentiate(variable),
+                    exponent.Differentiate(variable,settings),
                     new Ln(Base)
         )));
     }

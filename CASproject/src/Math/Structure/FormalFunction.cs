@@ -34,7 +34,7 @@ public abstract class MathFunction : MathObject {
     protected abstract MathObject Create(MathObject obj);
     public virtual MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => Create(expression.Evaluate(definedObjects));
     public virtual MathObject Simplify(SimplificationSettings settings) => Create(expression.Simplify(settings));
-    public virtual MathObject Differentiate(string variable) => this.Differentiate(variable);
+    public virtual MathObject Differentiate(string variable, CalculusSettings settings) => this.Differentiate(variable,settings);
     public virtual string AsString() => name+"("+expression.AsString()+")";
     public virtual bool Equals(MathObject obj) =>
         obj.GetType()==this.GetType() &&

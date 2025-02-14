@@ -18,9 +18,9 @@ public class Asin : MathFunction {
 
         return new Asin(expr);
     }
-    public override MathObject Differentiate(string variable) => 
+    public override MathObject Differentiate(string variable, CalculusSettings settings) => 
 		new Divide(
-			expression.Differentiate(variable),
+			expression.Differentiate(variable,settings),
 			new Power(
 				new Add((Constant)1,Add.Negate(new Power(expression,(Constant)2))),
 				(Constant)0.5));

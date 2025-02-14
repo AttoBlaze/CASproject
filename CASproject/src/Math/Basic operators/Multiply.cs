@@ -82,14 +82,14 @@ public class Multiply : MathObject {
         return new Multiply(terms);
     }
 
-    public MathObject Differentiate(string variable) {
+    public MathObject Differentiate(string variable, CalculusSettings settings) {
 		//account for constants
         var constants = this.terms.Where(n => n is Constant).ToList();
         var terms = this.terms.Where(n => n is not Constant).ToList();
         
 		if(terms.Count==1) {
-            if(constants.Count>0) return new Multiply(constants.Append(terms[0].Differentiate(variable)));
-            return terms[0].Differentiate(variable);
+            if(constants.Count>0) return new Multiply(constants.Append(terms[0].Differentiate(variable,settings)));
+            return terms[0].Differentiate(variable,settings);
         }
         if(terms.Count==0) return (Constant)0;
         
@@ -98,7 +98,7 @@ public class Multiply : MathObject {
         for(int i=1;i<terms.Count;i++) {
             var next = terms[i];
             //(fg)' = f'g + fg'
-            current = new Add(new Multiply(current.Differentiate(variable),next),new Multiply(current,next.Differentiate(variable)));
+            current = new Add(new Multiply(current.Differentiate(variable,settings),next),new Multiply(current,next.Differentiate(variable,settings)));
         }
         return new Multiply(constants.Append(current));
     }
