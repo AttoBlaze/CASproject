@@ -1,3 +1,5 @@
+using Application;
+
 namespace CAS;
 
 public class Product : MathCommand {
@@ -16,11 +18,13 @@ public class Product : MathCommand {
 		new Product(variable,initialValue.Evaluate(definedObjects),until.Evaluate(definedObjects),expression).execute();
 
     public override MathObject execute() {
-		//initialize
 		var dict = new Dictionary<string,MathObject>();
-		int initial = (int)initialValue.Calculate().AsValue(),
-			final = (int)until.Calculate().AsValue();
 
+		//starting value and ending value
+		int initial = (int)initialValue.Calculate(Program.definedObjects,SimplificationSettings.Calculation).AsValue(),
+			final = (int)until.Calculate(Program.definedObjects,SimplificationSettings.Calculation).AsValue();
+
+		//product function
 		List<MathObject> terms = new();
 		for(int i=initial;i<=final;i++) {
 			//evaluate sequence 

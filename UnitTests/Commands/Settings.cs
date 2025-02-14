@@ -36,12 +36,12 @@ public class SettingTests {
 			"setSetting(Precision;0.4)",
 			"setSetting(Precision;xyz)"
 		);
-		Assert.That(Program.Precision==50);
+		Assert.That(Program.Calculator.precision==50);
 	}
 
 	[Test]
 	public void GetIntSetting() {
-		Program.Precision = 50;
+		Program.Calculator.precision = 50;
 		Assert.That(MathObject.Parse("getSetting(Precision)").AsValue()==50);
 	}
 }

@@ -1,33 +1,45 @@
 namespace CAS;
 
 /// <summary>
-/// Represents a function
+/// Represents a user-defined function
 /// </summary>
 public class Function : MathObject, NamedObject {
     public readonly string name;
     public readonly Dictionary<string,MathObject> inputs = new();
     public Function(FunctionDefinition func) : this(func,func.inputs.Select(n => new Variable(n)).ToArray()) {}
     public Function(FunctionDefinition func, MathObject[] inputs) {
-        if(inputs.Length!=func.inputs.Count()) throw new Exception("Cannot create function with new inputs as input counts do not match!");
-        name = func.name;
+		if(inputs.Length!=func.inputs.Count()) throw new Exception("Cannot create function with new inputs as input counts do not match!");
+		name = func.name;
+
+		//insert inputs
         int i = 0;
         foreach(var key in func.inputs) {
             this.inputs[key] = inputs[i];
             i++;
         }
     }
+	public Function(Function fun) {
+		this.name = fun.name;
+		this.inputs = fun.inputs;
+	}
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
-        if(definedObjects.TryGetValue(name, out MathObject? expr)) return expr.Evaluate(inputs.Where(kvp => (kvp.Value as Variable)?.name!=kvp.Key).ToDictionary()).Evaluate(definedObjects);
-        foreach(var key in inputs.Keys) 
+        //if a definition for this function exists, replace it with its definition, evaluated using its inputs, then evaluated using all defined inputs.
+		if(definedObjects.TryGetValue(name, out MathObject? expr)) 
+			return expr.Evaluate(inputs.Where(kvp => (kvp.Value as Variable)?.name!=kvp.Key).ToDictionary()).Evaluate(definedObjects);
+        
+		//otherwise attempt to evaluate inputs
+		foreach(var key in inputs.Keys) 
             inputs[key] = inputs[key].Evaluate(definedObjects);
-        return this;
+        
+		return new Function(this);
     }
 
-    public MathObject Simplify() {
-        foreach(var key in inputs.Keys) 
-            inputs[key] = inputs[key].Simplify();
-        return this;
+    public MathObject Simplify(SimplificationSettings settings) {
+        var fun = new Function(this);
+		foreach(var key in fun.inputs.Keys) 
+            fun.inputs[key] = fun.inputs[key].Simplify(settings);
+		return fun;
     }
 
     public bool Equals(MathObject obj) =>

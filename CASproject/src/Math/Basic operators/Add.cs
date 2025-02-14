@@ -1,18 +1,22 @@
+using Application;
+
 namespace CAS;
 
 public class Add : MathObject {
     public List<MathObject> terms {get; private set;} = new();
     public Add(MathObject obj1, MathObject obj2) : this([obj1,obj2]) {}
     public Add(IEnumerable<MathObject> terms) {
-        //combine all add terms under this add
         foreach(var term in terms) { 
+        	//combine all add terms under this add
             if(term is Add) this.terms.AddRange(((Add)term).terms);
-            else if(term is not Constant num || !num.IsZero) this.terms.Add(term);
+            
+			//dont add terms that are 0
+			else if(term is not Constant num || !num.IsZero) this.terms.Add(term);
         }
     }
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
-        //calculate all terms
+        //evaluate all terms
         return new Add(terms.Select(term => term.Evaluate(definedObjects)));
     }
 
@@ -20,10 +24,11 @@ public class Add : MathObject {
     Simplifications:
     contraction: a*b + c*b = (a+c)*b
     */
-    public MathObject Simplify() {
+    public MathObject Simplify(SimplificationSettings settings) {
         //simplify terms
-        var terms = this.terms.Select(term => term.Simplify()).ToList();
-        
+        var terms = this.terms.Select(term => term.Simplify(settings)).ToList();
+
+		//go through terms to look for simplifications
         MathObject obj = this;
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
@@ -58,7 +63,7 @@ public class Add : MathObject {
             //a/b + c/b = (a+c)/b
             if(term is Divide div1) {
                 if(MathObject.FindAndRemoveOtherTerm(n => n is Divide div2 && div2.denominator.Equals(div1.denominator),terms,ref i, ref obj, ref index)) {
-                    terms[i] = new Divide(new Add(div1.numerator,obj.As<Divide>().numerator),div1.denominator).Simplify();
+                    terms[i] = new Divide(new Add(div1.numerator,obj.As<Divide>().numerator),div1.denominator).Simplify(settings);
                     i=-1; continue;
                 }
             }
@@ -71,13 +76,15 @@ public class Add : MathObject {
         }
 
         //combine constants
-        Constant value = 0;
-        var temp = terms.Where(term => term is Constant).ToList();
-        foreach(var constant in temp) {
-            terms.Remove(constant);
-            value += (Constant)constant;          
-        }
-        if(!value.IsZero) terms.Add(new Constant(value));
+        if(settings.calculateConstants) {
+			Constant value = 0;
+			var temp = terms.Where(term => term is Constant).ToList();
+			foreach(var constant in temp) {
+				terms.Remove(constant);
+				value = settings.calculator.add(value,(Constant)constant);          
+			}
+			if(!value.IsZero) terms.Add(new Constant(value));
+		}
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0d);

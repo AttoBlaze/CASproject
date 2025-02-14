@@ -1,13 +1,15 @@
+using Application;
+
 namespace CAS;
 
 public class Multiply : MathObject {
     public List<MathObject> terms {get; private set;} = new();
     public Multiply(MathObject obj1, MathObject obj2) : this([obj1,obj2]) {}
     public Multiply(IEnumerable<MathObject> terms) {
-        //combine all multiply terms under this multiply
         foreach(var term in terms) {
-            if(term is Multiply) this.terms.AddRange(((Multiply)term).terms);
-            else this.terms.Add(term);
+        	//combine all multiply terms under this multiply
+            if(term is Multiply m) this.terms.AddRange(m.terms.ToList());
+			else this.terms.Add(term);
         }
     }
 
@@ -19,9 +21,9 @@ public class Multiply : MathObject {
     /*
     Simplifications:
     */
-    public MathObject Simplify() {
+    public MathObject Simplify(SimplificationSettings settings) {
         //simplify terms
-        var terms = this.terms.Select(term => term.Simplify()).ToList();
+        var terms = this.terms.Select(term => term.Simplify(settings)).ToList();
         
         //combine divide
         if(terms.Any(n => n is Divide)) {
@@ -33,7 +35,7 @@ public class Multiply : MathObject {
             }
             var divN = terms.Count<=1? terms[0]:new Multiply(terms);
             var divD = denoms.Count<=1? denoms[0]:new Multiply(denoms);
-            return new Divide(divN,divD).Simplify();
+            return new Divide(divN,divD).Simplify(settings);
         }
 
         MathObject obj = this;
@@ -45,13 +47,13 @@ public class Multiply : MathObject {
             if (term is Power pow) {
                 //a * a^n = a^(n+1)
                 if (MathObject.FindAndRemoveOtherTerm(t => t.Equals(pow.Base),terms,ref i, ref obj, ref index)) {
-                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1d)).Simplify());
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,new Constant(1d)).Simplify(settings));
                     i=-1; continue;
                 }
                 
                 //a^b * a^c = a^(b+c)
                 if (MathObject.FindAndRemoveOtherTerm(term => (term as Power)?.Base.Equals(pow.Base)??false, terms,ref i,ref obj, ref index)) {
-                    terms[i] = new Power(pow.Base,new Add(pow.exponent,obj.As<Power>().exponent).Simplify());
+                    terms[i] = new Power(pow.Base,new Add(pow.exponent,obj.As<Power>().exponent).Simplify(settings));
                     i=-1; continue;
                 }
             }
@@ -64,14 +66,16 @@ public class Multiply : MathObject {
         }
 
         //combine constants
-        Constant value = 1;
-        var temp = terms.Where(term => term is Constant).ToList();
-        foreach(Constant constant in temp) {
-            terms.Remove(constant);
-            value *= constant;            
-        }
-        if(value.IsZero) return new Constant(0d);                               //0*a = 0
-        if(!value.IsOne || terms.Count==0) terms.Insert(0,new Constant(value));	//1*a = a
+        if(settings.calculateConstants) {
+			Constant value = 1;
+			var temp = terms.Where(term => term is Constant).ToList();
+			foreach(Constant constant in temp) {
+				terms.Remove(constant);
+				value = Program.Calculator.multiply(value,constant);            
+			}
+			if(value.IsZero) return new Constant(0d);                               //0*a = 0
+			if(!value.IsOne || terms.Count==0) terms.Insert(0,new Constant(value));	//1*a = a
+		}
 
         if(terms.Count==1) return terms[0];
         if(terms.Count==0) return new Constant(0d);
@@ -79,15 +83,18 @@ public class Multiply : MathObject {
     }
 
     public MathObject Differentiate(string variable) {
+		//account for constants
         var constants = this.terms.Where(n => n is Constant).ToList();
         var terms = this.terms.Where(n => n is not Constant).ToList();
-        if(terms.Count==1) {
+        
+		if(terms.Count==1) {
             if(constants.Count>0) return new Multiply(constants.Append(terms[0].Differentiate(variable)));
             return terms[0].Differentiate(variable);
         }
-        
         if(terms.Count==0) return (Constant)0;
-        MathObject current = terms[0];
+        
+		//chained differentiation
+		MathObject current = terms[0];
         for(int i=1;i<terms.Count;i++) {
             var next = terms[i];
             //(fg)' = f'g + fg'

@@ -1,4 +1,5 @@
 using DecimalSharp;
+using Application;
 
 namespace CAS;
 
@@ -27,7 +28,7 @@ public class Constant : MathObject, Differentiable<MathObject> {
 	}
 
 	public Constant(string str) {
-		this.decimalValue = CASMath.factory.BigDecimal(str);
+		this.decimalValue = CASMath.Calculator.factory.BigDecimal(str);
 		this.doubleValue = CASMath.Precision>16? this.decimalValue.ToNumber():double.Parse(str);
 	}
 
@@ -37,10 +38,11 @@ public class Constant : MathObject, Differentiable<MathObject> {
 	public double AsValue() => doubleValue;
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
-        return this;
+		//constants evaluate to themselves
+        return new Constant(this);
     }
 
-    public MathObject Simplify() {
+    public MathObject Simplify(SimplificationSettings settings) {
         //constants cannot be simplified
         return new Constant(this);
     }
@@ -51,8 +53,9 @@ public class Constant : MathObject, Differentiable<MathObject> {
         obj is Constant &&  //same type
         ((Constant)obj).doubleValue==doubleValue;  //same value
 
-    private static readonly string format = string.Join("",Enumerable.Range(0,300).Select(n=>"#"))+"0."+string.Join("",Enumerable.Range(0,300).Select(n=>"#"));
-    public string AsString() => decimalValue.ToString();
+	//format to prevent double strings being written with exponential notation
+    private static readonly string format = StringTree.StringOf('#',300)+"0."+StringTree.StringOf('#',300);
+    public string AsString() => decimalValue.Precision()>16? decimalValue.ToString():doubleValue.ToString(format);
 
 	//conversions
 	public static implicit operator Constant(double val) => new(val);
@@ -67,7 +70,5 @@ public class Constant : MathObject, Differentiable<MathObject> {
 	public static Constant operator -(Constant c) => c.Negate();
 	public static Constant operator *(Constant left, Constant right) => CASMath.Multiply(left, right);
 	public static Constant operator /(Constant left, Constant right) => CASMath.Divide(left, right);
-
 	public Constant Negate() => new Constant(-doubleValue,decimalValue.Neg());
-	
 }

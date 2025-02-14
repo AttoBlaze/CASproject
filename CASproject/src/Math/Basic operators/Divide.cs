@@ -1,3 +1,4 @@
+using Application;
 using CAS;
 
 public class Divide : MathObject {
@@ -19,9 +20,9 @@ public class Divide : MathObject {
     (a^b)/a = a^(b-1)
     (a^b)/(a^c) = a^(b-c)
     */
-    public MathObject Simplify() {
-        var num = numerator.Simplify();
-        var denom = denominator.Simplify();
+    public MathObject Simplify(SimplificationSettings settings) {
+        var num = numerator.Simplify(settings);
+        var denom = denominator.Simplify(settings);
 
         //a/a = 1
         if(num.Equals(denom)) return new Constant(1d);
@@ -30,7 +31,7 @@ public class Divide : MathObject {
         if(num is Constant num1) {
 			if(denom is Constant denom1) {
 				if(denom1.IsZero) throw new DivideByZeroException();
-				return num1/denom1;
+				if(settings.calculateConstants) return settings.calculator.divide(num1,denom1);
 			}
 
             //0/n = 0
@@ -38,10 +39,10 @@ public class Divide : MathObject {
         }
 
         //a/(b/c) = (a*c)/b
-        if(denom is Divide div) return new Divide(new Multiply(num,div.numerator),div.denominator).Simplify();
+        if(denom is Divide div) return new Divide(new Multiply(num,div.numerator),div.denominator).Simplify(settings);
 
         //(a/b)/c = a/(b*c)
-        if(num is Divide Div) return new Divide(Div.numerator,new Multiply(Div.denominator,denom)).Simplify();
+        if(num is Divide Div) return new Divide(Div.numerator,new Multiply(Div.denominator,denom)).Simplify(settings);
 
         if(denom is Multiply dmult) {
             //a/(b*a) = 1/b
@@ -65,7 +66,7 @@ public class Divide : MathObject {
                         i--;
                     }
                 }
-                if(removedAny) return new Divide(nmult,dmult).Simplify();
+                if(removedAny) return new Divide(nmult,dmult).Simplify(settings);
             }
         }
         //(a*b)/a = b

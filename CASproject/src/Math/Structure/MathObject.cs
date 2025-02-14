@@ -7,8 +7,8 @@ public interface EqualityComparer<T> {
     public bool Equals(T obj);
 }
 
-public interface Simplifiable<T> {
-    public T Simplify();
+public interface Simplifiable<T1,T2> {
+    public T1 Simplify(T2 input);
 }
 
 public interface Differentiable<T> {
@@ -20,19 +20,45 @@ public interface Evaluatable<T> {
     public T Evaluate(Dictionary<string,MathObject> definedObjects);
 }
 
+public struct SimplificationSettings {
+	public bool calculateConstants, eIsEulersNumber;
+	public CASMath calculator;
+	public static SimplificationSettings Calculation = new(){
+		calculateConstants = true, 
+		eIsEulersNumber = true,
+		calculator = CASMath.Calculator
+	};
+}
+
 /// <summary>
 /// Represents a mathematical object/expression
 /// </summary>
-public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject>, Evaluatable<MathObject>, Differentiable<MathObject> {
-    /// <summary>
+public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject,SimplificationSettings>, Evaluatable<MathObject>, Differentiable<MathObject> {
+
+
+	/// <summary>
 	/// Parses a string input into a math object 
 	/// </summary>
 	public static MathObject Parse(string input) => (MathObject)Program.ParseInput(input);
 
+
+	public MathObject Simplify() => Simplify(Program.simplificationSettings);
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="variable"></param>
+	/// <returns></returns>
     public MathObject Diff(string variable) => this.Calculate().Differentiate(variable).Simplify();
-    public MathObject Calculate() => Calculate(Program.definedObjects);
-    public MathObject Calculate(Dictionary<string,MathObject> definedObjects) => 
-        this.Evaluate(definedObjects).Simplify();
+    
+	/// <summary>
+	/// Evaluates & simplifies this math object using the objects defined in the program
+	/// </summary>
+	public MathObject Calculate() => Calculate(Program.definedObjects,Program.simplificationSettings);
+    /// <summary>
+	/// Evaluates & simplifies this math object
+	/// </summary>
+	public MathObject Calculate(Dictionary<string,MathObject> definedObjects, SimplificationSettings simplificationSettings) => 
+        this.Evaluate(definedObjects).Simplify(simplificationSettings);
 
     /// <summary>
     /// Gives a string representation of this math object. 
@@ -50,7 +76,10 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
     /// <exception cref="Exception">If this object is not a value</exception>
     public double AsValue() => throw new Exception("Not a value!");
 
-    public int Precedence() => 0;
+	/// <summary>
+	/// The precedence of this term. Mainly used to make string parentheses.
+	/// </summary>
+	public int Precedence() => 0;
     public int AbsPrecedence() => Math.Abs(Precedence()); 
     
     /// <summary>
@@ -87,6 +116,9 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObj
     }
 }
 
+/// <summary>
+/// Specifies that this object contains a name. Mainly used to convert math objects to string inputs.
+/// </summary>
 public interface NamedObject {
     public string GetName();
 }

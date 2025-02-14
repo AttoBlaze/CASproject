@@ -8,15 +8,12 @@ public static partial class Program {
         MuteErrors = false,
         AlwaysWrite = true,
         AlwaysShowWrite = true;
-
-	/// <summary>
-	/// Wrapper for CASMath.UseDouble
-	/// </summary>
-	public static bool ArbitraryPrecision {get => !CASMath.UseDouble; set => CASMath.UseDouble = !value;}
-	/// <summary>
-	/// Wrapper for CASMath.Precision
-	/// </summary>
-	public static long Precision {get => CASMath.Precision; set => CASMath.Precision = value;}
+	public static CASMath Calculator = new();
+	public static SimplificationSettings simplificationSettings = new() {
+		calculateConstants = true,
+		eIsEulersNumber = true,
+		calculator = Calculator
+	};
 
     /// <summary>
     /// Parses and executes the given input  

@@ -1,3 +1,5 @@
+using Application;
+
 namespace CAS;
 
 public class Power : MathObject {
@@ -18,9 +20,9 @@ public class Power : MathObject {
     (a^b)^c) = a^(b*c)
     */
 
-    public MathObject Simplify() {
-        var bas = Base.Simplify();
-        var exp = exponent.Simplify();
+    public MathObject Simplify(SimplificationSettings settings) {
+        var bas = Base.Simplify(settings);
+        var exp = exponent.Simplify(settings);
 
         if (exp is Constant cExp) {
             
@@ -31,7 +33,7 @@ public class Power : MathObject {
             if(cExp.IsOne) return bas;
 
             //combine constants
-            if(bas is Constant cBas) return CASMath.Pow(cBas,cExp);
+            if(bas is Constant cBas && settings.calculateConstants) return settings.calculator.pow(cBas,cExp);
         }
 
         return new Power(bas,exp);

@@ -7,11 +7,11 @@ public class Acos : MathFunction {
         this.expression = expression;
     }
 
-    public override MathObject Simplify() {
-        var expr = expression.Simplify();
+    public override MathObject Simplify(SimplificationSettings settings) {
+        var expr = expression.Simplify(settings);
         
         //constant
-        if(expr is Constant num) return CASMath.Acos(num);
+        if(expr is Constant num && settings.calculateConstants) return settings.calculator.acos(num);
         
         //acos(cos(x))=x
         if(expr is Cos fun) return fun.expression;

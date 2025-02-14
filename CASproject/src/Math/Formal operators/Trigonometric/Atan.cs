@@ -7,11 +7,11 @@ public class Atan : MathFunction {
         this.expression = expression;
     }
 
-    public override MathObject Simplify() {
-        var expr = expression.Simplify();
+    public override MathObject Simplify(SimplificationSettings settings) {
+        var expr = expression.Simplify(settings);
         
         //constant
-        if(expr is Constant num) return CASMath.Atan(num);
+        if(expr is Constant num && settings.calculateConstants) return settings.calculator.atan(num);
         
         //atan(tan(x))=x
         if(expr is Tan fun) return fun.expression;

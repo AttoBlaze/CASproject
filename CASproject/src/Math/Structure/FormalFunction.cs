@@ -2,12 +2,17 @@ namespace CAS;
 
 using Application;
 
+/// <summary>
+/// Represents a formal mathematical operation/function, such as ln(x).
+/// </summary>
 public sealed partial class FormalFunction {
     public static FormalFunction Get(string name) {
         if(Program.formalFunctions.TryGetValue(name, out FormalFunction? formalFunction)) return formalFunction;
         throw new Exception("Given formal function does not exist!");
     }
-
+	/// <summary>
+	/// Creates an instance of this formal function using the given input. Used for parsing.
+	/// </summary>
     public readonly Func<Stack<object>,MathObject> create;
     public readonly string name, description;
     public readonly string[] inputs;
@@ -20,12 +25,15 @@ public sealed partial class FormalFunction {
     }
 }
 
+/// <summary>
+/// A wrapper for streamlining simple formal functions.
+/// </summary>
 public abstract class MathFunction : MathObject {
     public string name {get; protected set;} = "";
     public MathObject expression {get; protected set;} = (Constant)0;
     protected abstract MathObject Create(MathObject obj);
     public virtual MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => Create(expression.Evaluate(definedObjects));
-    public virtual MathObject Simplify() => Create(expression.Simplify());
+    public virtual MathObject Simplify(SimplificationSettings settings) => Create(expression.Simplify(settings));
     public virtual MathObject Differentiate(string variable) => this.Differentiate(variable);
     public virtual string AsString() => name+"("+expression.AsString()+")";
     public virtual bool Equals(MathObject obj) =>

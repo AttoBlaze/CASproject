@@ -2,11 +2,11 @@ namespace CAS;
 using Application;
 
 /// <summary>
-/// Represents a wrapper for a math object; this is effectively a stored transformation on a mathobject. 
+/// Represents a wrapper for a math object; this is effectively a stored transformation on a mathobject (such as simplify).
 /// </summary>
 public abstract class MathWrapper : MathObject {
     public virtual MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => transformation(expression).Evaluate(definedObjects);
-    public virtual MathObject Simplify() => transformation(expression).Simplify();
+    public virtual MathObject Simplify(SimplificationSettings settings) => transformation(expression).Simplify(settings);
     public virtual MathObject Differentiate(string variable) => transformation(expression).Differentiate(variable);
     public virtual bool Equals(MathObject obj) => 
         obj is MathWrapper wrapper &&
@@ -28,7 +28,7 @@ public class InformalMathWrapper : MathWrapper {
 }
 
 public class SimplifyExpression : MathWrapper {
-    public override MathObject Simplify() => expression.Simplify();
+    public override MathObject Simplify(SimplificationSettings settings) => expression.Simplify();
     public SimplifyExpression(MathObject expression) {
         this.expression = expression;
         this.name = "Simplify";
@@ -47,7 +47,7 @@ public class CalculateExpression : MathWrapper {
     public CalculateExpression(MathObject expression) {
         this.expression = expression;
         this.name = "Calculate";
-        this.transformation = obj => obj.Calculate(Program.definedObjects);
+        this.transformation = obj => obj.Calculate();
     }
 }
 public class DerivativeExpression : MathWrapper {

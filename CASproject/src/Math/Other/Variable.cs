@@ -10,13 +10,14 @@ public class Variable : MathObject, NamedObject {
     }
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
+		//if a definition exists for this variable, then replace it with its definition (evaluated).
         if (definedObjects.TryGetValue(name, out MathObject? value)) return value.Evaluate(definedObjects);
-        return this;
+        return new Variable(name);
     }
 
-    public MathObject Simplify() {
+    public MathObject Simplify(SimplificationSettings settings) {
         //variables cannot be simplified
-        return (Variable)name;
+        return new Variable(name);
     }
 
     public MathObject Differentiate(string variable) {

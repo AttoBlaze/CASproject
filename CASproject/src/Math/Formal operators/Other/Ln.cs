@@ -1,3 +1,5 @@
+using Application;
+
 namespace CAS;
 
 public class Ln : MathFunction {
@@ -7,19 +9,21 @@ public class Ln : MathFunction {
         this.expression = expression;
     }
 
-    public override MathObject Simplify() {
-        var expr = expression.Simplify();
+    public override MathObject Simplify(SimplificationSettings settings) {
+        var expr = expression.Simplify(settings);
         
         //constant
-        if(expr is Constant num) return CASMath.Log(num);
+        if(expr is Constant num && settings.calculateConstants) return settings.calculator.log(num);
         
         //e
-        if(expr is Variable e && e.name=="e") return new Constant(1d);
+        if(expr is Variable e && e.name=="e" && settings.eIsEulersNumber) return new Constant(1d);
 
         //e^x
-        if(((expr as Power)?.Base as Variable)?.name=="e") return expr.As<Power>().exponent;
+        if(((expr as Power)?.Base as Variable)?.name=="e" && settings.eIsEulersNumber) return expr.As<Power>().exponent;
         
         return new Ln(expr);
     }
+
+	//ln(f)' = f'/f
     public override MathObject Differentiate(string variable) => new Divide(expression.Differentiate(variable),expression);
 }

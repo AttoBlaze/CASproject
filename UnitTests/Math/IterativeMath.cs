@@ -47,6 +47,6 @@ public class IterativeMath {
             "define(f;x;nsolve(n;1;5;n^x-2))",
             "f(3)"
 		);
-		Assert.That(MathObject.Parse("nsolve(x;1;5;x^2-4)").Calculate().AsValue()-2<0.001);
+		Assert.That(MathObject.Parse("nsolve(x;1;5;x^2-4)").Calculate(new(),SimplificationSettings.Calculation).AsValue()-2<0.001);
 	}
 }

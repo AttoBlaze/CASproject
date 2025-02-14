@@ -43,16 +43,23 @@ public sealed partial class Setting {
             "ArbitraryPrecision",
             "When enabled, calculations will be made using doubles. When disabled, calculations are instead made with arbitrary precision.",
             BOOL,
-            ()=> Program.ArbitraryPrecision,
-            (input)=> {Program.ArbitraryPrecision = (bool)input;},
+            ()=> Program.Calculator.arbitraryPrecision,
+            (input)=> {Program.Calculator.arbitraryPrecision = (bool)input;},
             ConvertToBool
         );
 		new Setting(
 			"Precision",
-			"The level of precision used when calculating with arbitrary precision. Input will be clamped to the range 1 to 10000.",
+			"The level of precision used when calculating with arbitrary precision. Input will be clamped to the range 5 to 1000.",
 			INTEGER,
-			()=> Program.Precision,
-			(input) => {Program.Precision = (long)input;},
+			()=> Program.Calculator.precision,
+			(input) => {
+				var val = (long)input;
+				Program.Calculator.precision = val;
+				if(val>16) {
+					Program.Predefine("e",Program.Calculator.e);
+					Program.Predefine("pi",Program.Calculator.pi);
+				}
+			},
 			ConvertToLong
 		);
 		

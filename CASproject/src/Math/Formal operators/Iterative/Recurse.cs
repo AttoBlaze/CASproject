@@ -1,3 +1,5 @@
+using Application;
+
 namespace CAS;
 
 public class Recurse : MathCommand {
@@ -14,15 +16,17 @@ public class Recurse : MathCommand {
 
     public override MathObject Evaluate(Dictionary<string, MathObject> definedObjects) =>
 		new Recurse(variables,initialValues.Select(n => n.Evaluate(definedObjects)),recursions.Evaluate(definedObjects),expression).execute();
-
-    public override MathObject execute() {
-		//initialize
+	public override MathObject execute() {
 		var dict = new Dictionary<string,MathObject>();
+
+		//initialize initial values
 		for(int i=0;i<variables.Length;i++) dict[variables[i]] = (Constant)0;
+		
+		//map inputted initial values
 		for(int i=0;i<Math.Min(initialValues.Length,variables.Length);i++) dict[variables[i]] = initialValues[i];
 
 		MathObject value = initialValues.Last();
-		for(int i=0;i<recursions.Calculate().AsValue();i++) {
+		for(int i=0;i<recursions.Calculate(Program.definedObjects,SimplificationSettings.Calculation).AsValue();i++) {
 			//recursively evaluate
 			value = expression.Evaluate(dict);
 			

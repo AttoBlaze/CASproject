@@ -1,10 +1,12 @@
 
 namespace CAS;
 
-
+/// <summary>
+/// Represents a definition for a function (fx: f(x) -> x^2).
+/// </summary>
 public class FunctionDefinition : MathObject {
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) => expr.Evaluate(definedObjects);
-    public MathObject Simplify() => expr.Simplify();
+    public MathObject Simplify(SimplificationSettings settings) => expr.Simplify(settings);
     public string AsString() => expr.AsString();
     public bool Equals(MathObject obj) => expr.Equals(obj);
 	public string GetFunctionString() => name+"("+string.Join(";",inputs)+")";
