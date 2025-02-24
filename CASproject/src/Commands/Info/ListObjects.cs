@@ -64,7 +64,7 @@ public class ListObjects : ExecutableCommand {
     private static void Write_COMMANDS() => WriteCommands(Program.GetCommands());
     
     private static void Write_FORMAL() {
-        Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(",",n.inputs)+")")));
+        Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(";",n.inputs)+")")));
     }
     private static void WriteSettings(IEnumerable<string> settings) {
         Program.Log(string.Join("\n",settings.OrderBy(n=>n)));

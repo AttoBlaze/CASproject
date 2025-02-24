@@ -71,7 +71,7 @@ public class Multiply : MathObject {
 			var temp = terms.Where(term => term is Constant).ToList();
 			foreach(Constant constant in temp) {
 				terms.Remove(constant);
-				value = Program.Calculator.multiply(value,constant);            
+				value = settings.calculator.multiply(value,constant);            
 			}
 			if(value.IsZero) return new Constant(0d);                               //0*a = 0
 			if(!value.IsOne || terms.Count==0) terms.Insert(0,new Constant(value));	//1*a = a

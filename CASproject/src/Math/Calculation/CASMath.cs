@@ -4,9 +4,10 @@ using Application;
 namespace CAS;
 
 public partial class CASMath {
-	public static CASMath Calculator = new(40,true);
+	public static CASMath Calculator = new();
 	public CASMath(long precision = 40, bool arbitraryPrecision = true) {
 		this.factory = new();
+		factory.Config.ToExpPos = 50;
 		this.arbitraryPrecision = arbitraryPrecision;
 		this.precision = precision;
 	}
@@ -41,7 +42,7 @@ public partial class CASMath {
 
 
 	/// <summary>
-	/// The mathematical constant e
+	/// The mathematical constant e.
 	/// </summary>
 	public Constant e {get => precision<=16? Math.E:factory.Exp(1);}
 	/// <summary>
@@ -52,7 +53,7 @@ public partial class CASMath {
 	
 
 	/// <summary>
-	/// The mathematical constant pi
+	/// The mathematical constant pi.
 	/// </summary>
 	public Constant pi {get => precision<=16? Math.PI:factory.Acos(-1);}
 	/// <summary>

@@ -8,11 +8,11 @@ public interface EqualityComparer<T> {
 }
 
 public interface Simplifiable<T1,T2> {
-    public T1 Simplify(T2 input);
+    public T2 Simplify(T1 input);
 }
 
 public interface Differentiable<T1,T2> {
-    public T1 Differentiate(string variable,T2 input) => throw new Exception("Expression is not differentiable");
+    public T2 Differentiate(string variable,T1 input) => throw new Exception("Expression is not differentiable");
 }
 
 public interface Evaluatable<T> {
@@ -48,8 +48,7 @@ public struct CalculusSettings {
 /// <summary>
 /// Represents a mathematical object/expression
 /// </summary>
-public interface MathObject : EqualityComparer<MathObject>, Simplifiable<MathObject,SimplificationSettings>, Evaluatable<MathObject>, Differentiable<MathObject,CalculusSettings> {
-
+public interface MathObject : EqualityComparer<MathObject>, Simplifiable<SimplificationSettings,MathObject>, Evaluatable<MathObject>, Differentiable<CalculusSettings,MathObject> {
 
 	/// <summary>
 	/// Parses a string input into a math object 

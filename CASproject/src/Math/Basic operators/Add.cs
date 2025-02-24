@@ -41,7 +41,7 @@ public class Add : MathObject {
                 
 				//a + n*a = (n+1)*a
                 if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
-                    var val = num+1;
+                    var val = settings.calculator.add(num,1);
 					if(val.IsZero) terms.RemoveAt(i);                             //a+(-1*a) = 0
                     else terms[i] = new Multiply(val,mult);
                     i=-1; continue;
@@ -52,7 +52,7 @@ public class Add : MathObject {
                     t is Multiply && t.As<Multiply>().terms[0] is Constant && t.As<Multiply>().WithoutFirstTerm().Equals(mult)
                     ,terms,ref i,ref obj ,ref index)) 
                 {   
-					var val = obj.As<Multiply>().terms[0].As<Constant>() + num;
+					var val = settings.calculator.add(obj.As<Multiply>().terms[0].As<Constant>(),num);
 					if(val.IsZero) terms.RemoveAt(i);                           	//n*a+(-n*a) = 0
                     else if (val.IsOne) terms[i] = mult;						    //1*a = a
 					else terms[i] = new Multiply(val,mult);
@@ -63,7 +63,10 @@ public class Add : MathObject {
             //a/b + c/b = (a+c)/b
             if(term is Divide div1) {
                 if(MathObject.FindAndRemoveOtherTerm(n => n is Divide div2 && div2.denominator.Equals(div1.denominator),terms,ref i, ref obj, ref index)) {
-                    terms[i] = new Divide(new Add(div1.numerator,obj.As<Divide>().numerator),div1.denominator).Simplify(settings);
+                    terms[i] = new Divide(
+						new Add(div1.numerator, obj.As<Divide>().numerator),
+						div1.denominator)
+					.Simplify(settings);
                     i=-1; continue;
                 }
             }

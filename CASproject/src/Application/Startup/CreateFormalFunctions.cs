@@ -43,7 +43,7 @@ public sealed partial class FormalFunction {
             "The sum function for the given expression\n"+
             "Evaluates each term of the sequence decided by the given expression and returns its sum.\n"+
             "The input functions as the variable on the bottom of the sum function. The until functions as the upper value in the sum function.",
-            ["INPUT","INITIAL VALUE","UNTIL","EXPRESSION"],
+            ["input","initial value","until","expression"],
             arguments => {
                 var args = (object[])arguments.Pop();
                 return new Sum(
@@ -57,7 +57,7 @@ public sealed partial class FormalFunction {
             "The product function for the given expression:\n"+
             "Evaluates each term of the sequence decided by the given expression and returns its product.\n"+
             "The input functions as the variable on the bottom of the product function. The until functions as the upper value in the product function.",
-            ["INPUT","INITIAL VALUE","UNTIL","EXPRESSION"],
+            ["input","initial value","until","expression"],
             arguments => {
                 var args = (object[])arguments.Pop();
                 return new Product(
@@ -65,8 +65,7 @@ public sealed partial class FormalFunction {
                     (MathObject)args[1],//initial value
                     (MathObject)args[2],//until
                     (MathObject)args[3] //expression
-                );
-        });
+		);});
         new FormalFunction(
             "recurse",
             "Recursively evaluates the given expression:\n"+
@@ -74,7 +73,7 @@ public sealed partial class FormalFunction {
             "On each recursion iteration, each variable gets the value of the current value of the variable to its right\n"+
             "The variables starting values are decided by the initial values. If no initial value is given for a variable, it is set to 0.\n"+
             "Fx: Fibonacci can be defined like recurse((n;m);(0;1);K;n+m). This will yield the (K+1)th fibonacci number.",
-            ["(INPUTS..)","(INITIAL VALUES..)","RECURSION COUNT","EXPRESSION"],
+            ["(inputs..)","(initial values..)","recursion count","expression"],
             arguments => {
                 var args = (object[])arguments.Pop();
                 

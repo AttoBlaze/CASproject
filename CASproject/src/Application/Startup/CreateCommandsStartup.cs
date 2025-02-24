@@ -92,6 +92,7 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
+				if(args.Length!=2) throw new InputCountException("Derivative",2,args.Length);
                 return new DerivativeExpression((MathObject)args[0],args[1].AsInput());
         });
         new Command(
@@ -102,7 +103,8 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
-                return ((MathObject)args[0]).Differentiate(args[1].AsInput());
+				if(args.Length!=2) throw new InputCountException("derivative",2,args.Length);
+				return ((MathObject)args[0]).Differentiate(args[1].AsInput());
         });
         new Command(
             "Diff",
@@ -112,6 +114,7 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
+				if(args.Length!=2) throw new InputCountException("Diff",2,args.Length);
                 return new InformalMathWrapper(
                     "Diff",
                     obj => obj.Diff(args[1].AsInput()),
@@ -126,6 +129,7 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
+				if(args.Length!=2) throw new InputCountException("diff",2,args.Length);
                 return ((MathObject)args[0]).Diff(args[1].AsInput());
         });
         new Command(
@@ -153,6 +157,7 @@ public sealed partial class Command {
                 object[] args = (object[])arguments.Pop();
                 string name = args[0].AsInput();
                 var expression = (MathObject)args[1];
+				if(args.Length!=2) throw new InputCountException("defineVariable",2,args.Length);
                 return new DefineVariable(name,expression);
 		});
 		new Command(
@@ -163,7 +168,8 @@ public sealed partial class Command {
             ],
             arguments => {
                 object[] args = (object[])arguments.Pop();
-                string[] inputs = args.Skip(1).SkipLast(1).Select(n => n.AsInput()).ToArray();    //function inputs are all but last and first of command inputs
+                if(args.Length<3) throw new InputCountException("defineFunction","3 or more",args.Length);
+				string[] inputs = args.Skip(1).SkipLast(1).Select(n => n.AsInput()).ToArray();    //function inputs are all but last and first of command inputs
                 string name = args[0].AsInput();
                 return new DefineFunction(name,inputs,(MathObject)args.Last());
 		});
@@ -183,6 +189,7 @@ public sealed partial class Command {
             ],
             arguments => {
                 var args = (object[])arguments.Pop();
+				if(args.Length<2) throw new InputCountException("setSetting","at least 2",args.Length);
                 return new SetSetting(args[0].AsInput(),args.Count()==2?args[1]:args.Skip(1).ToArray());
         });
         new Command(
@@ -229,5 +236,17 @@ public sealed partial class Command {
                 var cmds = ((object[])arguments.Pop()).Select(n => (ExecutableCommand)n);
                 return new ExecuteAll(cmds);
         });
+		new Command(
+            "repeatexecute",
+            "repeatedly executes the given command",
+            ["COMMAND","COUNT"],
+            arguments => {
+                var args = (object[])arguments.Pop();
+				if(args.Length!=2) throw new InputCountException("repeatexecute",2,args.Length);
+                var cmd = (ExecutableCommand)args[0];
+				var amount = (int)((MathObject)args[1]).Calculate().As<Constant>().doubleValue;
+				return new RepeatExecute((ExecutableCommand)args[0],amount);
+        });
+		
     }
 }
