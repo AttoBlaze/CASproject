@@ -1,7 +1,7 @@
 namespace CAS;
 
 /// <summary>
-/// Represents a variable value
+/// Represents a variable expression.
 /// </summary>
 public class Variable : MathObject, NamedObject {
     public string name {get; private set;}

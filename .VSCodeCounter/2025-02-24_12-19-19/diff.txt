@@ -1,0 +1,38 @@
+Date : 2025-02-24 12:19:19
+Directory : c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src
+Total : 6 files,  70 codes, 3 comments, 12 blanks, all 85 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |          6 |         70 |          3 |         12 |         85 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                             |          6 |         70 |          3 |         12 |         85 |
+| Application                                                                                                   |          3 |         24 |          0 |          4 |         28 |
+| Application (Files)                                                                                           |          1 |          7 |          0 |          3 |         10 |
+| Application\Startup                                                                                           |          2 |         17 |          0 |          1 |         18 |
+| Commands                                                                                                      |          1 |         15 |          0 |          3 |         18 |
+| Commands\Other                                                                                                |          1 |         15 |          0 |          3 |         18 |
+| Math                                                                                                          |          2 |         31 |          3 |          5 |         39 |
+| Math\Basic operators                                                                                          |          1 |          3 |          0 |          0 |          3 |
+| Math\Other                                                                                                    |          1 |         28 |          3 |          5 |         36 |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                      | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.Exceptions.cs            | C#       |          7 |          0 |          3 |         10 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateCommandsStartup.cs | C#       |         18 |          0 |          1 |         19 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateFormalFunctions.cs | C#       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\RepeatExecute.cs              | C#       |         15 |          0 |          3 |         18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Add.cs                  | C#       |          3 |          0 |          0 |          3 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Constant.cs                       | C#       |         28 |          3 |          5 |         36 |
+| Total                                                                                                         |          |         70 |          3 |         12 |         85 |
++---------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

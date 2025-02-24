@@ -7,60 +7,40 @@ namespace CAS;
 /// Represents a constant value
 /// </summary>
 public class Constant : MathObject { 
-    //double precision
-	public double doubleValue {get {
-		if(!doubleInittet) {
-			_doubleValue = _decimalValue.ToNumber();
-			doubleInittet = true;
-		}
-		return _doubleValue;
-	}}
-	private double _doubleValue = 0;
+	//double precision
+	public double doubleValue {get; init;}
 	
-	//arbitrary precision
+	//arbitrary precision- prevent initiating until usage is needed for performance
 	public BigDecimal decimalValue {get {
-		if(!decimalInittet) {
-			_decimalValue = new BigDecimal(_doubleValue);
-			decimalInittet = true;
-		}
+		_decimalValue ??= new BigDecimal(doubleValue);
 		return _decimalValue;
 	}}
-	private BigDecimal _decimalValue = new(0);
-	
-	//init tracker- prevent initiating until usage is needed for performance
-	private bool decimalInittet = false, doubleInittet = false;
+	private BigDecimal? _decimalValue = null;
 
 	private Constant(double val, BigDecimal big) {
 		this._decimalValue = big;
-		decimalInittet = true;
-		this._doubleValue = val;
-		doubleInittet = true;
+		this.doubleValue = val;
 	}
 	public Constant(double value) {
-        this._doubleValue = value;
-		doubleInittet = true;
+        this.doubleValue = value;
 	}
 	public Constant(BigDecimal value) {
         this._decimalValue = value;
-		this.decimalInittet = true;
+		this.doubleValue = value.ToNumber();
 	}
 	
 	public Constant(Constant constant) {
-		this._decimalValue = constant._decimalValue;
-		this.decimalInittet = constant.decimalInittet;
-		this._doubleValue = constant._doubleValue;
-		this.doubleInittet = constant.doubleInittet;
+		if(constant._decimalValue!=null) this._decimalValue = constant._decimalValue;
+		this.doubleValue = constant.doubleValue;
 	}
 
 	public Constant(string str) {
 		this._decimalValue = CASMath.Calculator.factory.BigDecimal(str);
-		decimalInittet = true;
-		this._doubleValue = CASMath.Precision>16? this.decimalValue.ToNumber():double.Parse(str);
-		doubleInittet = true;
+		this.doubleValue = CASMath.Precision>16? this.decimalValue.ToNumber():double.Parse(str);
 	}
 
-	public bool IsZero {get => decimalInittet? _decimalValue.IsZero(): _doubleValue==0;}
-	public bool IsOne {get => decimalInittet? _decimalValue.Equals(1): _doubleValue==1;}
+	public bool IsZero {get => _decimalValue?.IsZero()??true && doubleValue==0;}
+	public bool IsOne {get => _decimalValue?.Equals(1)??true && doubleValue==1;}
 
 	public double AsValue() => doubleValue;
 
@@ -78,8 +58,8 @@ public class Constant : MathObject {
 
     public bool Equals(MathObject obj) =>
         obj is Constant c &&  //same type
-		(c.decimalInittet && this.decimalInittet && c._decimalValue.Equals(this._decimalValue) ||	//same value
-		c.doubleValue==doubleValue);  
+		((c._decimalValue==null && this._decimalValue==null) || c.decimalValue.Equals(this.decimalValue)) &&	//same value
+		c.doubleValue==doubleValue;  
 
 	//format to prevent double strings being written with exponential notation
 	private static readonly string format = StringTree.StringOf('#',50)+"0."+StringTree.StringOf('#',50);
@@ -104,10 +84,7 @@ public class Constant : MathObject {
 	
 	
 	public Constant Negate() {
-		if(decimalInittet) {
-			if(doubleInittet) return new Constant(-_doubleValue,_decimalValue.Neg());
-			return new Constant(_decimalValue.Neg());
-		}	
-		return new Constant(-_doubleValue);
+		if(_decimalValue!=null) return new Constant(-doubleValue,_decimalValue.Neg());
+		return new Constant(-doubleValue);
 	} 
 }

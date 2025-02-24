@@ -41,7 +41,7 @@ public sealed partial class Setting {
         );
 		new Setting(
             "ArbitraryPrecision",
-            "When enabled, calculations will be made using doubles. When disabled, calculations are instead made with arbitrary precision.",
+            "When enabled, calculations will be made using arbitrary precision. When disabled, calculations are instead made with double precision.",
             BOOL,
             ()=> Program.Calculator.arbitraryPrecision,
             (input)=> {Program.Calculator.arbitraryPrecision = (bool)input;},

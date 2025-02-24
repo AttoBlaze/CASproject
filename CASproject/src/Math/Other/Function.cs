@@ -1,7 +1,8 @@
 namespace CAS;
 
 /// <summary>
-/// Represents a user-defined function
+/// Represents a user-defined function with inputs. <br/>
+/// The function expression represented is decided on evaluation, much like variables.  
 /// </summary>
 public class Function : MathObject, NamedObject {
     public readonly string name;
