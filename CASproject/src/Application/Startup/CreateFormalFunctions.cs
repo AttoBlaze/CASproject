@@ -6,39 +6,39 @@ using Commands;
 public sealed partial class FormalFunction {
     public static void CreateAllFormalFunctions() {
         //ln
-        new FormalFunction(
+        CreateFormalFunction(
             "ln","Natural logarithm of x",["x"],
             arguments => new Ln((MathObject)arguments.Pop()) 
         );
 
         //trigonometric functions
-        new FormalFunction(
+        CreateFormalFunction(
             "sin","Sin of x",["x"],
             arguments => new Sin((MathObject)arguments.Pop())
         );
-        new FormalFunction(
+        CreateFormalFunction(
             "asin","Arc sin of x / sin^-1(x)",["x"],
             arguments => new Asin((MathObject)arguments.Pop())
         );
-        new FormalFunction(
+        CreateFormalFunction(
             "cos","Cos of x",["x"],
             arguments => new Cos((MathObject)arguments.Pop())
         );
-        new FormalFunction(
+        CreateFormalFunction(
             "acos","Arc cos of x / cos^-1(x)",["x"],
             arguments => new Acos((MathObject)arguments.Pop())
         );
-        new FormalFunction(
+        CreateFormalFunction(
             "tan","Tan of x",["x"],
             arguments => new Tan((MathObject)arguments.Pop())
         );
-        new FormalFunction(
+        CreateFormalFunction(
             "atan","Arc tan of x / tan^-1(x)",["x"],
             arguments => new Atan((MathObject)arguments.Pop())
         );
 
         //iterative math
-        new FormalFunction(
+        CreateFormalFunction(
             "sum",
             "The sum function for the given expression\n"+
             "Evaluates each term of the sequence decided by the given expression and returns its sum.\n"+
@@ -52,7 +52,7 @@ public sealed partial class FormalFunction {
                     (MathObject)args[2],//until
                     (MathObject)args[3] //expression
         );});
-        new FormalFunction(
+        CreateFormalFunction(
             "product",
             "The product function for the given expression:\n"+
             "Evaluates each term of the sequence decided by the given expression and returns its product.\n"+
@@ -66,7 +66,7 @@ public sealed partial class FormalFunction {
                     (MathObject)args[2],//until
                     (MathObject)args[3] //expression
 		);});
-        new FormalFunction(
+        CreateFormalFunction(
             "recurse",
             "Recursively evaluates the given expression:\n"+
             "Here, the inputs are variables. These effectively act as F0, F1, F2...\n"+
@@ -96,7 +96,7 @@ public sealed partial class FormalFunction {
         });
         
         //root finding
-        new FormalFunction(
+        CreateFormalFunction(
             "nsolve",
             "Finds a root of the given expression with respect to the given input numerically using Newton's method",
             ["input","initial value","iterations","expression"],

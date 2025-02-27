@@ -7,7 +7,7 @@ public sealed partial class Setting {
         string[] 
 			BOOL = ["true|false|1|0",""],
 			INTEGER = ["INTEGER","","EXPRESSION","Expression must be calculateable to an integer"];
-        new Setting(
+        CreateSetting(
             "MuteOutput",
             "Mutes command outputs from being written in the console",
             BOOL,
@@ -15,7 +15,7 @@ public sealed partial class Setting {
             (input)=> {Program.MuteOutput = (bool)input;},
             ConvertToBool
         );
-        new Setting(
+        CreateSetting(
             "MuteErrors",
             "Mutes error logs being written in the console",
             BOOL,
@@ -23,7 +23,7 @@ public sealed partial class Setting {
             (input)=> {Program.MuteErrors = (bool)input;},
             ConvertToBool
         );
-        new Setting(
+        CreateSetting(
             "AlwaysWrite",
             "Enables/disables all executed commands being written in the console",
             BOOL,
@@ -31,7 +31,7 @@ public sealed partial class Setting {
             (input)=> {Program.AlwaysWrite = (bool)input;},
             ConvertToBool
         );
-        new Setting(
+        CreateSetting(
             "AlwaysShowWrite",
             "When enabled, the Write command will override the ShowAllMessages setting and will always be written in the console",
             BOOL,
@@ -39,7 +39,7 @@ public sealed partial class Setting {
             (input)=> {Program.AlwaysShowWrite = (bool)input;},
             ConvertToBool
         );
-		new Setting(
+		CreateSetting(
             "ArbitraryPrecision",
             "When enabled, calculations will be made using arbitrary precision. When disabled, calculations are instead made with double precision.",
             BOOL,
@@ -47,7 +47,7 @@ public sealed partial class Setting {
             (input)=> {Program.Calculator.arbitraryPrecision = (bool)input;},
             ConvertToBool
         );
-		new Setting(
+		CreateSetting(
 			"Precision",
 			"The level of precision used when calculating with arbitrary precision. Input will be clamped to the range 5 to 1000.",
 			INTEGER,

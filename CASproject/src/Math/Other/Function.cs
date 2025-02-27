@@ -21,7 +21,7 @@ public class Function : MathObject, NamedObject {
     }
 	public Function(Function fun) {
 		this.name = fun.name;
-		this.inputs = fun.inputs;
+		this.inputs = fun.inputs.ToDictionary();
 	}
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {

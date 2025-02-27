@@ -16,11 +16,13 @@ public sealed partial class FormalFunction {
     public readonly Func<Stack<object>,MathObject> create;
     public readonly string name, description;
     public readonly string[] inputs;
-    public FormalFunction(string name, string description, string[] inputs, Func<Stack<object>,MathObject> create) {
+    private FormalFunction(string name, string description, string[] inputs, Func<Stack<object>,MathObject> create) {
         this.name = name;
         this.description = description;
         this.inputs = inputs;
         this.create = create;
-        Program.formalFunctions[name] = this;
     }
+    public static void CreateFormalFunction(string name, string description, string[] inputs, Func<Stack<object>,MathObject> create) {
+        Program.formalFunctions[name] = new FormalFunction(name,description,inputs,create);
+	}
 }

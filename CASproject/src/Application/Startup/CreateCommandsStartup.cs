@@ -10,13 +10,13 @@ public sealed partial class Command {
             CMD = ["COMMAND",""],
             NONE = ["",""];
 
-        new Command(
+        CreateCommand(
             "help",
             "Gives information about the usage of this program",
             NONE,
             arguments => new HelpCommand()
         );
-        new Command(
+        CreateCommand(
             "explain",
             "Explains a command/setting/formal function",
             [
@@ -26,7 +26,7 @@ public sealed partial class Command {
             ], 
             arguments => new ExplainCommand(arguments.Pop().AsInput())
         );
-        new Command(
+        CreateCommand(
             "list",
             "Lists objects",
             ListObjects.listables.Keys.Select(key => new string[]{
@@ -34,13 +34,13 @@ public sealed partial class Command {
             }).SelectMany(n=>n).ToArray(),
             arguments => new ListObjects(arguments.Pop().AsInput())
         );
-        new Command(
+        CreateCommand(
             "write",
             "Writes the output of the given command",
             CMD,
             arguments => new Write(arguments.Pop())
         );
-		new Command(
+		CreateCommand(
             "exit",
             "Exits the application", 
             NONE,
@@ -48,43 +48,43 @@ public sealed partial class Command {
                 Environment.Exit(0);
                 return ExecutableCommand.State.SUCCESS;
         }));
-        new Command(
+        CreateCommand(
             "Evaluate",
             "Evalutes the given expression without simplifying it. This will only evaluate the expression when used. Can evaluate certain commands.",
             EXPR,
             arguments => new EvaluateExpression((MathObject)arguments.Pop())
         );
-        new Command(
+        CreateCommand(
             "evaluate",
             "Immediately evalutes the given expression without simplifying it. Can evaluate certain commands.",
             EXPR,
             arguments => ((Evaluatable<MathObject>)arguments.Pop()).Evaluate(Program.definedObjects)
         );
-        new Command(
+        CreateCommand(
             "Simplify",
             "Simplifies the given mathematical expression. This will only simplify when the expression is used",
             EXPR,
             arguments => new SimplifyExpression((MathObject)arguments.Pop())
         );
-        new Command(
+        CreateCommand(
             "simplify",
             "Immediately simplifies the given mathematical expression",
             EXPR,
             arguments => ((MathObject)arguments.Pop()).Simplify()
         );
-        new Command(
+        CreateCommand(
             "Calculate",
             "Calculates the given mathematical expression. This will only calculate when the expression is used",
             EXPR,
             arguments => new CalculateExpression((MathObject)arguments.Pop())
         );
-        new Command(
+        CreateCommand(
             "calculate",
             "Immediately calculates the given mathematical expression",
             EXPR,
             arguments => ((MathObject)arguments.Pop()).Calculate()
         );
-        new Command(
+        CreateCommand(
             "Derivative",
             "Gets the partial derivative of the given mathematical expression. This will only derive when the expression is used",
             [
@@ -95,7 +95,7 @@ public sealed partial class Command {
 				if(args.Length!=2) throw new InputCountException("Derivative",2,args.Length);
                 return new DerivativeExpression((MathObject)args[0],args[1].AsInput());
         });
-        new Command(
+        CreateCommand(
             "derivative",
             "Immediately gets the partial derivative of the given mathematical expression.",
             [
@@ -106,7 +106,7 @@ public sealed partial class Command {
 				if(args.Length!=2) throw new InputCountException("derivative",2,args.Length);
 				return ((MathObject)args[0]).Differentiate(args[1].AsInput());
         });
-        new Command(
+        CreateCommand(
             "Diff",
             "Gets the simplified partial derivative of the given mathematical expression after evalutation. This will only derive when the expression is used",
             [
@@ -121,7 +121,7 @@ public sealed partial class Command {
                     (MathObject)args[0]
                 );
         });
-        new Command(
+        CreateCommand(
             "diff",
             "Immediately gets the simplified partial derivative of the given mathematical expression after evalutation.",
             [
@@ -132,7 +132,7 @@ public sealed partial class Command {
 				if(args.Length!=2) throw new InputCountException("diff",2,args.Length);
                 return ((MathObject)args[0]).Diff(args[1].AsInput());
         });
-        new Command(
+        CreateCommand(
             "define",
             "Defines a math object",
             [
@@ -147,7 +147,7 @@ public sealed partial class Command {
                 //functions
                 return Command.Get("defineFunction").create(arguments);
 		});
-        new Command(
+        CreateCommand(
             "defineVariable",
             "Defines a variable",
             [
@@ -160,7 +160,7 @@ public sealed partial class Command {
 				if(args.Length!=2) throw new InputCountException("defineVariable",2,args.Length);
                 return new DefineVariable(name,expression);
 		});
-		new Command(
+		CreateCommand(
             "defineFunction",
             "Defines a function",
             [
@@ -173,7 +173,7 @@ public sealed partial class Command {
                 string name = args[0].AsInput();
                 return new DefineFunction(name,inputs,(MathObject)args.Last());
 		});
-        new Command(
+        CreateCommand(
             "remove",
             "Removes the definition of the given object",
             [
@@ -181,7 +181,7 @@ public sealed partial class Command {
             ],
             arguments => new RemoveObject(arguments.Pop().AsInput())
         );
-        new Command(
+        CreateCommand(
             "setSetting",
             "Sets the value of a setting",
             [
@@ -192,7 +192,7 @@ public sealed partial class Command {
 				if(args.Length<2) throw new InputCountException("setSetting","at least 2",args.Length);
                 return new SetSetting(args[0].AsInput(),args.Count()==2?args[1]:args.Skip(1).ToArray());
         });
-        new Command(
+        CreateCommand(
             "getSetting",
             "Gets the value of the specified setting. Note: value will be copied as is, and will not update when setting changes",
             [
@@ -202,33 +202,33 @@ public sealed partial class Command {
                 var setting = Setting.Get(arguments.Pop().AsInput());
                 return setting.convertOutput(setting.get());
         });
-        new Command(
+        CreateCommand(
             "hide",
             "Mutes the program output during execution of the given command",
             CMD,
             arguments => new HideCommand(arguments.Pop())
         );
-        new Command(
+        CreateCommand(
             "show",
             "Unmutes the program output during execution of the given command",
             CMD,
             arguments => new ShowCommand(arguments.Pop())
         );
-        new Command(
+        CreateCommand(
             "time",
             "Immediately returns the amount of time the execution of the given command took in seconds. \n"+
             "NOTE: Immediately executed commands are not timeable.",
             CMD,
             arguments => new GetTime(arguments.Pop()).Execute()
         );
-        new Command(
+        CreateCommand(
             "Time",
             "Gets the amount of time the execution of the given command took in seconds. \n"+
             "NOTE: Immediately executed commands are not timeable.",
             CMD,
             arguments => new GetTime(arguments.Pop())
         );
-        new Command(
+        CreateCommand(
             "executeall",
             "executes all of the given commands",
             ["COMMANDS..",""],
@@ -236,7 +236,7 @@ public sealed partial class Command {
                 var cmds = ((object[])arguments.Pop()).Select(n => (ExecutableCommand)n);
                 return new ExecuteAll(cmds);
         });
-		new Command(
+		CreateCommand(
             "repeatexecute",
             "repeatedly executes the given command",
             ["COMMAND","COUNT"],

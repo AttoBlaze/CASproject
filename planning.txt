@@ -3,16 +3,9 @@ TODO:
 Formal functions (of which will exist:
     floor, ceil, round, abs, root, random, gamma
 )
-Big floating point, Precision setting: 
-	Constants have 2 fields; doble and exponent.
-	Calculation is done in custom class taking constant arguments.
-	Calculation class defines wether double or bigfloat is used.
-	
-
 
 More Simplifications
 Factorial operator, modulus operator
-repeat, executeall
 
 Simplification settings:
 DisolveFractionConstants - constants in fractions are combined
@@ -20,7 +13,6 @@ ContractionMode:
     None - expandable/contractable expressions are kept as-is
     Expand - expressions are expanded when possible (fx a*(b+c)=a*b+a*c)
     Contract - expressions are contracted when possible (fx a*b+c*b=(a+c)*b)
-CalculateOnDefine - calculate when defining objects
 
-NOTES:
-evaluateable usable for certain commands
+
+Create own BigDecimal library focused on performance

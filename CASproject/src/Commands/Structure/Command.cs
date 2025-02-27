@@ -17,13 +17,15 @@ public interface ExecutableCommand {
 }
 
 public partial class Command {
-	public Command(string name, string description, Func<Stack<object>,object> createCommand) : this(name,description,[],createCommand) {}
-	public Command(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {
+	private Command(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {
 		this.name = name;
 		this.description = description;
 		this.overloads = overloads;
 		this.create = createCommand;
-		Program.commands[name] = this;
+	}
+	public static void CreateCommand(string name, string description, Func<Stack<object>,object> createCommand) => CreateCommand(name,description,[],createCommand);
+	public static void CreateCommand(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {
+		Program.commands[name] = new Command(name,description,overloads,createCommand);
 	}
 	public readonly string name;
 	public readonly string description;
