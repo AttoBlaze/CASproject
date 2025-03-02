@@ -42,8 +42,8 @@ public class Add : MathObject {
 				//a + n*a = (n+1)*a
                 if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
                     var val = settings.calculator.add(num,1);
-					if(val.IsZero) terms.RemoveAt(i);                             //a+(-1*a) = 0
-                    else terms[i] = new Multiply(val,mult);
+					if(val.IsZero) terms.RemoveAt(i);						//a+(-1*a) = 0
+					else terms[i] = new Multiply(val,mult);
                     i=-1; continue;
                 }
 

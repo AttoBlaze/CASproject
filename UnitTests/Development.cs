@@ -9,10 +9,9 @@ namespace Development;
 public class Tests {
     [Test]
     public void TEST() {
-		Program.START();
-        Program.Execute(
+		Program.Execute(
 			"pi"
         );
 		Assert.Pass();
-    }
+}
 }

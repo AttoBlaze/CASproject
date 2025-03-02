@@ -92,7 +92,31 @@ public sealed partial class FormalFunction {
 
                 //expression
                 var expr = (MathObject)args[3];
-                return new Recurse(inpts,vals,recursions,expr);
+                return new Recurse(inpts,vals,recursions,expr,false,Program.simplificationSettings);
+        });
+		CreateFormalFunction(
+            "sRecurse",
+            "Acts like the recurse command, but actively simplifies the result for every iteration.",
+            ["(inputs..)","(initial values..)","recursion count","expression"],
+            arguments => {
+                var args = (object[])arguments.Pop();
+                
+                //inputs
+                IEnumerable<string> inpts = 
+                    args[0] is object[] inputList? inputList.Select(n => n.AsInput()):    //multiple input
+                    [args[0].AsInput()];                                                  //single input
+
+                //initial values
+                IEnumerable<MathObject> vals = 
+                    args[1] is object[] valueList? valueList.Select(n => (MathObject)n):    //single value
+                    [(MathObject)args[1]];                                                  //multiple values
+
+                //recursion count
+                var recursions = (MathObject)args[2];
+
+                //expression
+                var expr = (MathObject)args[3];
+                return new Recurse(inpts,vals,recursions,expr,true,Program.simplificationSettings);
         });
         
         //root finding
@@ -114,9 +138,10 @@ public sealed partial class FormalFunction {
                 )));
                 return new FunctionWrapper(
                     ()=> "nsolve("+input+";"+val.AsString()+";"+iterations.AsString()+";"+expr.AsString()+")",
-                    (objs)=> new Recurse(
-                        [input],[val],iterations,newton.Evaluate(objs)
-                ).Evaluate(objs));
+                    (objs)=> new Recurse([input],[val],iterations,newton.Evaluate(objs),true,Program.simplificationSettings).Evaluate(objs),
+					(obj) => new Recurse([input],[val],iterations,newton,true,Program.simplificationSettings).Equals(obj),
+					Contains: (obj) => new Recurse([input],[val],iterations,newton,true,Program.simplificationSettings).ContainsAny(obj)
+				);
         });
     }
 }

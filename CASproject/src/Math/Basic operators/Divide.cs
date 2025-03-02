@@ -24,8 +24,6 @@ public class Divide : MathObject {
         var num = numerator.Simplify(settings);
         var denom = denominator.Simplify(settings);
 
-        //a/a = 1
-        if(num.Equals(denom)) return new Constant(1d);
 
         //combine constants
         if(num is Constant num1) {
@@ -37,6 +35,9 @@ public class Divide : MathObject {
             //0/n = 0
             if(num1.IsZero) return new Constant(0d);
         }
+        
+		//a/a = 1
+        if(num.Equals(denom)) return new Constant(1d);
 
         //a/(b/c) = (a*c)/b
         if(denom is Divide div) return new Divide(new Multiply(num,div.numerator),div.denominator).Simplify(settings);

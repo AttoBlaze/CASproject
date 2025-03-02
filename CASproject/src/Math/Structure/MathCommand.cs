@@ -11,4 +11,5 @@ public abstract class MathCommand : ExecutableCommand, MathObject {
 	public virtual MathObject Evaluate(Dictionary<string,MathObject> definedObjects) => execute();
 	public virtual MathObject Simplify(SimplificationSettings settings) => (MathObject)this.MemberwiseClone();
 	public virtual bool Equals(MathObject obj) => false;
+	public virtual bool ContainsAny(MathObject obj) => Equals(obj);
 }

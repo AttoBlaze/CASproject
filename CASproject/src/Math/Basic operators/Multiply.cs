@@ -63,6 +63,12 @@ public class Multiply : MathObject {
                 terms[i] = new Power(term,new Constant(2d));
                 i=-1; continue;
             }
+
+			//a*(b+c) = a*b + a*c
+			if(settings.expandParentheses && term is Add add) {
+				terms.RemoveAt(i);
+				return new Add(add.terms.Select(n => new Multiply(terms.Append(n)))).Simplify(settings);
+			}
         }
 
         //combine constants

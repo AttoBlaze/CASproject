@@ -30,11 +30,16 @@ public struct SimplificationSettings {
 	/// If a variable called e is presumed to be eulers number.
 	/// </summary>
 	public bool eIsEulersNumber;
+	/// <summary>
+	/// If parentheses like (a+b)*(c+d) is expanded to ac+ad+bc+bd.
+	/// </summary>
+	public bool expandParentheses;
 	public CASMath calculator;
 	public static SimplificationSettings Calculation = new(){
 		calculateConstants = true, 
-		eIsEulersNumber = true,
-		calculator = CASMath.Calculator
+		eIsEulersNumber = false,
+		expandParentheses = false,
+		calculator = Program.Calculator
 	};
 }
 

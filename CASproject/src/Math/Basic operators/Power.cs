@@ -25,7 +25,6 @@ public class Power : MathObject {
         var exp = exponent.Simplify(settings);
 
         if (exp is Constant cExp) {
-            
 			//a^0 = 1
             if(cExp.IsZero) return new Constant(1d);
 
@@ -34,6 +33,9 @@ public class Power : MathObject {
 
             //combine constants
             if(bas is Constant cBas && settings.calculateConstants) return settings.calculator.pow(cBas,cExp);
+
+			//(a+b)^i where i is int
+			//if(bas is Add bAdd && )
         }
 		else if(bas is Constant cBas) {
 			//0^a = 0 (when a!=0)

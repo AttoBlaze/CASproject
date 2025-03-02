@@ -14,5 +14,6 @@ ContractionMode:
     Expand - expressions are expanded when possible (fx a*(b+c)=a*b+a*c)
     Contract - expressions are contracted when possible (fx a*b+c*b=(a+c)*b)
 
+Refactor ContainsAny- only check for string vars.
 
-Create own BigDecimal library focused on performance
+Create own BigDecimal library focused on performance?

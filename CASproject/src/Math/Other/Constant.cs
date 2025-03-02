@@ -8,10 +8,10 @@ namespace CAS;
 /// </summary>
 public class Constant : MathObject { 
 	//double precision
-	public double doubleValue {get; init;}
+	public readonly double doubleValue;
 	
-	//arbitrary precision- prevent initiating until usage is needed for performance
-	public BigDecimal decimalValue {get {
+	//arbitrary precision- prevent initializing until usage is needed when calculating with double precision for performance
+	public BigDecimal decimalValue {get{
 		_decimalValue ??= new BigDecimal(doubleValue);
 		return _decimalValue;
 	}}
@@ -30,17 +30,18 @@ public class Constant : MathObject {
 	}
 	
 	public Constant(Constant constant) {
-		if(constant._decimalValue!=null) this._decimalValue = constant._decimalValue;
+		this._decimalValue = constant._decimalValue;
 		this.doubleValue = constant.doubleValue;
 	}
 
 	public Constant(string str) {
-		this._decimalValue = CASMath.Calculator.factory.BigDecimal(str);
-		this.doubleValue = CASMath.Precision>16? this.decimalValue.ToNumber():double.Parse(str);
+		this._decimalValue = new BigDecimal(str);
+		this.doubleValue = double.Parse(str);
 	}
 
 	public bool IsZero {get => _decimalValue?.IsZero()??true && doubleValue==0;}
 	public bool IsOne {get => _decimalValue?.Equals(1)??true && doubleValue==1;}
+	public bool IsWhole {get => _decimalValue?.IsInteger()??true && doubleValue%1==0;}
 
 	public double AsValue() => doubleValue;
 
@@ -65,8 +66,8 @@ public class Constant : MathObject {
 	private static readonly string format = StringTree.StringOf('#',50)+"0."+StringTree.StringOf('#',50);
     public string AsString() {
 		string str = decimalValue.Precision()>16? decimalValue.ToString():doubleValue.ToString(format);
-		if(str.Contains('e')) return "("+str+")";
-		return str;
+		if(str.Contains('e')) str = "("+str.Replace("e","*10^").Replace("+","")+")";
+		return str.Replace(",",".");
 	}
 
 	//conversions

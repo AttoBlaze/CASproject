@@ -4,7 +4,7 @@ namespace CAS;
 /// Represents a variable expression.
 /// </summary>
 public class Variable : MathObject, NamedObject {
-    public string name {get; private set;}
+    public readonly string name;
     public Variable(string name) {
         this.name = name;
     }

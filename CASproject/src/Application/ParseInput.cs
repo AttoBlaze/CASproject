@@ -42,7 +42,7 @@ public static partial class Program {
 			}
 			
 			//parse letters
-			else if (char.IsLetter(tokens[i])) {
+			else if (char.IsLetter(tokens[i]) || tokens[i]=='_') {
 				//if this letter borders a digit, then add a multiply
                 if (i>0 && char.IsDigit(tokens[i-1])) operators.Push("*");
 
@@ -83,6 +83,7 @@ public static partial class Program {
 
             //commands with several inputs have inputs seperated by ;
             else if (tokens[i]==';') {
+				//apply operators between ; and last ; or (
 				while(true) {
 					if(operators.Count<=0) throw new Exception("Empty input exists!");
 					
@@ -101,6 +102,8 @@ public static partial class Program {
 			
 			//right parentheses
 			else if (tokens[i]==')') {
+
+				//apply operators inside parentheses
 				while (true) {
 					//if the stack is empty then an unenclosed parentheses exists
 					if (operators.Count<=0) throw new Exception("Unenclosed parentheses exists in input");

@@ -7,15 +7,20 @@ public class Recurse : MathCommand {
 	private readonly string[] variables = [];
 	private readonly MathObject[] initialValues = [];
 	private readonly MathObject recursions = (Constant)0;
-	public Recurse(IEnumerable<string> variables, IEnumerable<MathObject> initialVals, MathObject recursions, MathObject expression) {
+	private readonly bool activelySimplify;
+	private readonly SimplificationSettings simplificationSettings;
+	public Recurse(IEnumerable<string> variables, IEnumerable<MathObject> initialVals, MathObject recursions, MathObject expression, bool activelySimplify = false, SimplificationSettings? settings = null) {
 		this.variables = variables.ToArray();
 		this.initialValues = initialVals.ToArray();
 		this.recursions = recursions;
 		this.expression = expression;
+		this.activelySimplify = activelySimplify;
+		this.simplificationSettings = settings ?? SimplificationSettings.Calculation;
 	}
 
     public override MathObject Evaluate(Dictionary<string, MathObject> definedObjects) =>
-		new Recurse(variables,initialValues.Select(n => n.Evaluate(definedObjects)),recursions.Evaluate(definedObjects),expression).execute();
+		new Recurse(variables,initialValues.Select(n => n.Evaluate(definedObjects)),recursions.Evaluate(definedObjects),expression,activelySimplify,simplificationSettings).execute();
+
 	public override MathObject execute() {
 		var dict = new Dictionary<string,MathObject>();
 
@@ -29,7 +34,8 @@ public class Recurse : MathCommand {
 		for(int i=0;i<recursions.Simplify(SimplificationSettings.Calculation).AsValue();i++) {
 			//recursively evaluate
 			value = expression.Evaluate(dict);
-			
+			if(activelySimplify) value = value.Simplify(simplificationSettings);
+
 			//update inputs
 			for(int j=0;j<variables.Length-1;j++) dict[variables[j]] = dict[variables[j+1]];	
 			dict[variables[variables.Length-1]] = value;															
@@ -47,9 +53,16 @@ public class Recurse : MathCommand {
 		")";
 	}
 
-	public bool ContainsAny(MathObject obj) =>
-		variables.Any(v => obj.Equals((Variable)v)) ||
-		initialValues.Any(v => v.ContainsAny(obj)) ||
-		recursions.ContainsAny(obj) ||
-		expression.ContainsAny(obj);
+	public new bool Equals(MathObject obj) =>
+		obj is Recurse recurse &&
+		recurse.expression.Equals(this.expression) &&
+		recurse.initialValues.Select((n,i) => this.initialValues[i].Equals(n)).All(n => n==true) &&
+		recurse.variables.Select((n,i) => this.variables[i]==n).All(n => n==true);
+
+	public override bool ContainsAny(MathObject obj) => 
+		obj.Equals(this) ||
+		expression.ContainsAny(obj) ||
+		(obj is Variable v && variables.Any(n => n==v.name)) ||
+		initialValues.Any(n => n.ContainsAny(obj)) ||
+		recursions.ContainsAny(obj);
 }

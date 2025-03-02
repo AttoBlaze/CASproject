@@ -12,6 +12,7 @@ public static partial class Program {
 	public static SimplificationSettings simplificationSettings = new() {
 		calculateConstants = true,
 		eIsEulersNumber = true,
+		expandParentheses = true,
 		calculator = Calculator
 	};
 	public static CalculusSettings calculusSettings = new(){
@@ -111,6 +112,8 @@ public static partial class Program {
 	public static void Define(string name, MathObject expression) {
 		if (preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot redefine predefined objects!");
         if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
+		if (settings.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a setting!");
+		if (commands.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a command!");
 		
 		var no = ObjectNameDisallowed(name);
 		if(no!=null) throw new Exception(no);
