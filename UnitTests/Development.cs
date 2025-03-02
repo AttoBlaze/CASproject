@@ -12,6 +12,8 @@ public class Tests {
 		Program.Execute(
 			"pi"
         );
+		Console.WriteLine(new BigDecimal("0.14").ToString());
+		Console.WriteLine(double.Parse("0,14").ToString());
 		Assert.Pass();
 }
 }

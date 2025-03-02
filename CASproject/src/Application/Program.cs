@@ -12,7 +12,7 @@ public static partial class Program {
 	public static SimplificationSettings simplificationSettings = new() {
 		calculateConstants = true,
 		eIsEulersNumber = true,
-		expandParentheses = true,
+		expandParentheses = false,
 		calculator = Calculator
 	};
 	public static CalculusSettings calculusSettings = new(){

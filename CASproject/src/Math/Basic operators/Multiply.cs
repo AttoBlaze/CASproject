@@ -42,7 +42,7 @@ public class Multiply : MathObject {
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
             var term = terms[i];
-            if(term is Constant) continue;
+            if(term is Constant c) continue;
 
             if (term is Power pow) {
                 //a * a^n = a^(n+1)

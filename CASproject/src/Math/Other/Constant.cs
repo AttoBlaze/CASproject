@@ -35,8 +35,8 @@ public class Constant : MathObject {
 	}
 
 	public Constant(string str) {
-		this._decimalValue = new BigDecimal(str);
-		this.doubleValue = double.Parse(str);
+		this._decimalValue = new BigDecimal(str.Replace(',','.'));
+		this.doubleValue = double.Parse(str.Replace('.',','));
 	}
 
 	public bool IsZero {get => _decimalValue?.IsZero()??true && doubleValue==0;}

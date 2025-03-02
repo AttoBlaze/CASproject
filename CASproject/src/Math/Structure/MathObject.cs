@@ -37,7 +37,7 @@ public struct SimplificationSettings {
 	public CASMath calculator;
 	public static SimplificationSettings Calculation = new(){
 		calculateConstants = true, 
-		eIsEulersNumber = false,
+		eIsEulersNumber = true,
 		expandParentheses = false,
 		calculator = Program.Calculator
 	};

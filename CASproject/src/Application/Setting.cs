@@ -80,7 +80,7 @@ public sealed partial class Setting {
         //value 
         if (input is MathObject math) {
             var temp = math.Calculate();
-            if (temp is Constant c && c.AsValue()%1==0 && c.AsValue()<=long.MaxValue && c.AsValue()>=long.MinValue) 
+            if (temp is Constant c && c.IsWhole && c.AsValue()<=long.MaxValue && c.AsValue()>=long.MinValue) 
 				return (long)c.AsValue();
 			throw new Exception("Given input does not result in an integer value when calculated");
         }

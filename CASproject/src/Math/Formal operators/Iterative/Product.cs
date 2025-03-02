@@ -42,7 +42,7 @@ public class Product : MathCommand {
 		")";
 	}
 
-	public bool ContainsAny(MathObject obj) =>
+	public override bool ContainsAny(MathObject obj) =>
 		obj.Equals((Variable)variable) ||
 		initialValue.ContainsAny(obj) ||
 		until.ContainsAny(obj) ||

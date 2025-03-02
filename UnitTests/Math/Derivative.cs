@@ -40,7 +40,7 @@ public class DerivativeTests {
 	[Test] public void Sin() => Assert.That(ParseDiff("sin(x)","x").Equals(Parse("cos(x)")));
 	[Test] public void Asin() => Assert.That(ParseDiff("asin(x)","x").Equals(Parse("1/(-x^2+1)^0.5")));
 	[Test] public void Cos() => Assert.That(ParseDiff("cos(x)","x").Equals(Parse("-sin(x)")));
-	[Test] public void Acos() => Assert.That(ParseDiff("acos(x)","x").Equals(Parse("-1/(-x^2+1)^0,5").Simplify()));
+	[Test] public void Acos() => Assert.That(ParseDiff("acos(x)","x").Equals(Parse("-1/(-x^2+1)^0.5").Simplify()));
 	[Test] public void Tan() => Assert.That(ParseDiff("tan(x)","x").Equals(Parse("tan(x)^2+1")));
 	[Test] public void Atan() => Assert.That(ParseDiff("atan(x)","x").Equals(Parse("1/(x^2+1)").Simplify()));
 	
