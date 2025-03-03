@@ -71,11 +71,11 @@ public class ConsoleStyling {
 		ResetConsoleStyle();
 
 		//text
-		if(textColor is Color text) 
+		if(textColor is Color text) //dont change if null
 			Console.Write("\x1b[38;2;"+text.R+";"+text.G+";"+text.B+"m");						
 		
 		//background
-		if(backgroundColor is Color background) 	
+		if(backgroundColor is Color background) //dont change if null	
 			Console.Write("\x1b[48;2;"+background.R+";"+background.G+";"+background.B+"m");		
 		
 		//font stylings
@@ -84,11 +84,9 @@ public class ConsoleStyling {
 	}
 
 	/// <summary>
-	/// Resets the styling of the console to default
+	/// Resets the styling of the console to its default.
 	/// </summary>
-	public static void ResetConsoleStyle() {
-		Console.Write("\x1b[0m");
-	}
+	public static void ResetConsoleStyle() => Console.Write("\x1b[0m");
 	
 	public static implicit operator ConsoleStyling(Color col) => new(col);
 	public static implicit operator ConsoleStyling(ConsoleFontStyling col) => new(col);

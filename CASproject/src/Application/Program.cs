@@ -22,6 +22,10 @@ public static partial class Program {
 	public static CalculusSettings calculusSettings = new(){
 		eIsEulersNumber = true
 	};
+	public static readonly ConsoleStyling 
+		LoggerStyling = new(ConsoleFontStyling.Italic),
+		LoggerWarningStyling = new(Color.Yellow),
+		LoggerErrorStyling = new(Color.Red);
 	#endregion
 
 	#region Parsing + executing
@@ -103,24 +107,24 @@ public static partial class Program {
     /// </summary>
     public static void Log(object log, ConsoleStyling? styling = null, bool newLine = true) {
         if(MuteOutput) return;
-		styling ??= ConsoleStyling.Current;
+		styling ??= LoggerStyling;
 		styling.Write(log + (newLine?"\n":""));
     }
 
 	/// <summary>
     /// Logs the given warning in the console
     /// </summary>
-    public static void LogWarning(object log, bool newLine = true) {
+    public static void LogWarning(object log, ConsoleStyling? styling = null,  bool newLine = true) {
 		if(MuteWarnings) return;
-		Log("WARNING: " + log, new(Color.Yellow), newLine);
+		Log("WARNING: " + log, styling ?? LoggerWarningStyling, newLine);
 	}
 
 	/// <summary>
     /// Logs the given error in the console
     /// </summary>
-    public static void LogError(object log, Exception e, bool newLine = true) {
+    public static void LogError(object log, Exception e, ConsoleStyling? styling = null, bool newLine = true) {
 		if(MuteErrors) return;
-		Log("ERROR: " + log + ":\n" + e, new(Color.Red), newLine);
+		Log("ERROR: " + log + ":\n" + e, styling ?? LoggerErrorStyling, newLine);
 	}
 	#endregion
 
@@ -167,7 +171,8 @@ public static partial class Program {
 	public static IEnumerable<string> GetFunctions() => definedObjects.Keys.Where(key => definedObjects[key] is FunctionDefinition);
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
-	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !preDefinedObjects.ContainsKey(key));
+	public static IEnumerable<string> GetUserDefined() =>	definedObjects.Keys.Where(key => !preDefinedObjects.ContainsKey(key));
+	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => definedObjects[key] is not FunctionDefinition);
 	#endregion
 
 	#region Startup

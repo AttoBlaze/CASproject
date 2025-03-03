@@ -46,7 +46,7 @@ public class Function : MathObject, NamedObject {
     }
 
 	public MathObject Differentiate(string variable, CalculusSettings settings) {
-		Program.LogWarning("WARNING: Functions are not differentiable as their expression is unknown until evaluation. Evaluate the function in order to get its derivative.");
+		Program.LogWarning("Functions are not naturally differentiable, as their expression is unknown until evaluation. Evaluate the function in order to get its derivative.");
 		return new Constant(0d);
 	}
 

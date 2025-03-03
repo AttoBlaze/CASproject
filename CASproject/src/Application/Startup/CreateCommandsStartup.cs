@@ -44,11 +44,8 @@ public sealed partial class Command {
             "exit",
             "Exits the application", 
             NONE,
-            arguments => new InformalCommand(args => {
-				Program.Log("Exiting program...",Write.Styling);
-                Environment.Exit(0);
-                return ExecutableCommand.State.SUCCESS;
-        }));
+            arguments => new ExitCommand()
+		);
         CreateCommand(
             "Evaluate",
             "Evalutes the given expression without simplifying it. This will only evaluate the expression when used. Can evaluate certain commands.",
