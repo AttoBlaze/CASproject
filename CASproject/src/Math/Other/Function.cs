@@ -1,3 +1,5 @@
+using Application;
+
 namespace CAS;
 
 /// <summary>
@@ -27,7 +29,7 @@ public class Function : MathObject, NamedObject {
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
         //if a definition for this function exists, replace it with its definition, evaluated using its inputs, then evaluated using all defined inputs.
 		if(definedObjects.TryGetValue(name, out MathObject? expr)) 
-			return expr.Evaluate(inputs.Where(kvp => (kvp.Value as Variable)?.name!=kvp.Key).ToDictionary()).Evaluate(definedObjects);
+			return expr.Evaluate(inputs).Evaluate(definedObjects);
         
 		//otherwise attempt to evaluate inputs
 		foreach(var key in inputs.Keys) 
@@ -42,6 +44,11 @@ public class Function : MathObject, NamedObject {
             fun.inputs[key] = fun.inputs[key].Simplify(settings);
 		return fun;
     }
+
+	public MathObject Differentiate(string variable, CalculusSettings settings) {
+		Program.LogWarning("WARNING: Functions are not differentiable as their expression is unknown until evaluation. Evaluate the function in order to get its derivative.");
+		return new Constant(0d);
+	}
 
     public bool Equals(MathObject obj) =>
         obj is Function fun &&           //same type

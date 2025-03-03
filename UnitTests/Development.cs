@@ -10,10 +10,8 @@ public class Tests {
     [Test]
     public void TEST() {
 		Program.Execute(
-			"pi"
-        );
-		Console.WriteLine(new BigDecimal("0.14").ToString());
-		Console.WriteLine(double.Parse("0,14").ToString());
+			"(x+x)^2"
+			);
 		Assert.Pass();
 }
 }

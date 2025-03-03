@@ -4,7 +4,9 @@ using System.Collections;
 
 namespace Commands;
 public class Write : ExecutableCommand {
-    public object Execute() {
+    public static readonly ConsoleStyling Styling = new(ConsoleFontStyling.Italic);
+	
+	public object Execute() {
         string str = AsString(obj);
         if(str=="") return ExecutableCommand.State.SUCCESS;
 
@@ -12,11 +14,11 @@ public class Write : ExecutableCommand {
         if(Program.AlwaysShowWrite) {
             bool mute = Program.MuteOutput;
             Program.MuteOutput = false;  
-            Program.Log(str);
+            Program.Log(str,Styling);
             Program.MuteOutput = mute;  
         }
 
-        else Program.Log(str);
+        else Program.Log(str,Styling);
         return ExecutableCommand.State.SUCCESS;
     }
 

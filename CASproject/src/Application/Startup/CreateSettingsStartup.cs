@@ -16,6 +16,14 @@ public sealed partial class Setting {
             ConvertToBool
         );
         CreateSetting(
+            "MuteWarnings",
+            "Mutes warning logs from being written in the console",
+            BOOL,
+            ()=> Program.MuteWarnings,
+            (input)=> {Program.MuteWarnings = (bool)input;},
+            ConvertToBool
+        );
+        CreateSetting(
             "MuteErrors",
             "Mutes error logs being written in the console",
             BOOL,

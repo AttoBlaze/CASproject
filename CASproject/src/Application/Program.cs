@@ -1,10 +1,14 @@
 ﻿namespace Application;
+
+using System.Drawing;
 using CAS;
 using Commands;
 
 public static partial class Program {
+	#region Fields
     public static bool
         MuteOutput = false,
+        MuteWarnings = false,
         MuteErrors = false,
         AlwaysWrite = true,
         AlwaysShowWrite = true;
@@ -18,7 +22,9 @@ public static partial class Program {
 	public static CalculusSettings calculusSettings = new(){
 		eIsEulersNumber = true
 	};
+	#endregion
 
+	#region Parsing + executing
     /// <summary>
     /// Parses and executes the given input  
     /// </summary>
@@ -55,7 +61,7 @@ public static partial class Program {
         try {
             Execute(input,muteOutput,ensureStarted);
         } catch (Exception e) {
-            Log("Unknown error occured",e);
+            LogError("Error occured during command execution",e);
         }
 
         if (muteOutput) MuteOutput = showMsgs;
@@ -69,8 +75,9 @@ public static partial class Program {
     }
     /// <inheritdoc cref="TryExecuteAll(IEnumerable{string},bool)"/>
     public static void TryExecute(params string[] inputs) => TryExecuteAll(inputs);
-    
+	#endregion
 
+	#region Commands, Settings, Formal functions
     /// <summary>
     /// Contains all settings
     /// </summary>
@@ -88,18 +95,36 @@ public static partial class Program {
     /// </summary>
     public static readonly Dictionary<string,FormalFunction> formalFunctions = new();
     public static IEnumerable<string> GetFormalFunctions() => formalFunctions.Keys;
+	#endregion
 
+	#region Logging
     /// <summary>
     /// Logs the given message in the console
     /// </summary>
-    public static void Log(object log, bool newLine = true) {
-        if(!MuteOutput)
-            Console.Write(log + (newLine?"\n":""));
+    public static void Log(object log, ConsoleStyling? styling = null, bool newLine = true) {
+        if(MuteOutput) return;
+		styling ??= ConsoleStyling.Current;
+		styling.Write(log + (newLine?"\n":""));
     }
-    /// <inheritdoc cref="Log(object,bool)"/>
-    public static void Log(object log, Exception e, bool newLine = true) =>
-        Log(log + (!MuteErrors?"\n"+e:""),newLine);
-    
+
+	/// <summary>
+    /// Logs the given warning in the console
+    /// </summary>
+    public static void LogWarning(object log, bool newLine = true) {
+		if(MuteWarnings) return;
+		Log("WARNING: " + log, new(Color.Yellow), newLine);
+	}
+
+	/// <summary>
+    /// Logs the given error in the console
+    /// </summary>
+    public static void LogError(object log, Exception e, bool newLine = true) {
+		if(MuteErrors) return;
+		Log("ERROR: " + log + ":\n" + e, new(Color.Red), newLine);
+	}
+	#endregion
+
+	#region Objects
     /// <summary>
 	/// Contains all pre-defined variables (fx e, pi).
 	/// </summary>
@@ -143,7 +168,9 @@ public static partial class Program {
     public static IEnumerable<string> GetDefinedObjects() => definedObjects.Keys;
     public static IEnumerable<string> GetConstants() =>	definedObjects.Keys.Where(key => definedObjects[key] is Constant);
 	public static IEnumerable<string> GetVariables() =>	definedObjects.Keys.Where(key => !preDefinedObjects.ContainsKey(key));
+	#endregion
 
+	#region Startup
     private static bool STARTED = false;
     /// <summary>
     /// Initiates the startup process (if startup has not been initiated yet)
@@ -151,43 +178,62 @@ public static partial class Program {
     public static void START(bool muted = false) {
         if (STARTED) return;
         const string BAR = "---------------------------------------";
-        var time = GetTime.Time(()=>{
-        if(!muted) WRITE(
-            "",
-            BAR,
-            "Startup initiated",
-            "Creating settings.............. "
-        );
+		ConsoleStyling 
+			bar =		new(Color.White),
+			start = 	new(Color.Magenta,ConsoleFontStyling.Bold,ConsoleFontStyling.Underlined),
+			creating = 	new(Color.LightGray,ConsoleFontStyling.Italic), 
+			dots =		new(Color.DarkGray), 
+			finished = 	new(Color.LightGreen,ConsoleFontStyling.Italic),
+			doneIn = 	new(Color.Magenta,ConsoleFontStyling.Bold),
+			help = 		new(Color.Magenta,ConsoleFontStyling.Italic)
+		;
+		
+		var time = GetTime.Time(()=>{
+        if(!muted) {
+			WRITE(bar,"",BAR);
+			WRITE(start,"Startup initiated");
+			WRITE(creating,"Creating settings ");
+			WRITE(dots,".............. ");
+		}
         Setting.CreateAllSettings();
-        if(!muted) WRITE(
-            "Finished",
-            "Creating commands.............. "
-        );
+        if(!muted) {
+			WRITE(finished,"Finished");
+            WRITE(creating,"Creating commands ");
+			WRITE(dots,".............. ");
+		};
         Command.CreateAllCommands();
-        if(!muted) WRITE(
-            "Finished",
-            "Creating formal functions...... "
-        );
+        if(!muted) {
+			WRITE(finished,"Finished");
+			WRITE(creating,"Creating formal functions ");
+			WRITE(dots,"...... ");
+		} 
         FormalFunction.CreateAllFormalFunctions();
-        if(!muted) WRITE(
-            "Finished",
-            "Creating predefined objects.... "
-        );
+        if(!muted) {
+			WRITE(finished,"Finished");
+            WRITE(creating,"Creating predefined objects ");
+			WRITE(dots,".... ");
+		}
         Program.CreateAllPredefined();
         });
-        if(!muted) WRITE(
-            "Finished",
-            "Startup completed in "+time+" seconds.",
-            BAR,
-            "Type \"help()\" for help."
-        );
+        if(!muted) {
+			WRITE(finished,"Finished");
+			WRITE(doneIn,"Startup completed in "+time+" seconds.");
+			WRITE(bar,BAR);
+			WRITE(help,"Type \"help()\" for help.");
+		};
         STARTED = true;
     }
-    private static void WRITE(params object[] args) {
+	
+	/// <inheritdoc cref="WRITE(ConsoleStyling,object[])"/>
+    private static void WRITE(params object[] args) => WRITE(ConsoleStyling.Current,args);
+    /// <summary>
+	/// writes a new line for each argument unless that argument ends with a space.
+	/// </summary>
+	private static void WRITE(ConsoleStyling style, params object[] args) {
         foreach(var msg in args) {
             string str = msg.ToString()??" ";
-            Console.Write(str.Length>0 && str.EndsWith(' ')?str.Substring(0,str.Length-1):str+"\n");
+            style.Write(str.Length>0 && str.EndsWith(' ')?str.Substring(0,str.Length-1):str+"\n");
         }
     }
+	#endregion
 }
-

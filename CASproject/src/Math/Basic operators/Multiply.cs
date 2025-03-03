@@ -42,7 +42,11 @@ public class Multiply : MathObject {
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
             var term = terms[i];
-            if(term is Constant c) continue;
+            if(term is Constant c) {
+				//0*(...) = 0
+				if(c.IsZero) return new Constant(0d);
+				continue;
+			}
 
             if (term is Power pow) {
                 //a * a^n = a^(n+1)
@@ -110,23 +114,12 @@ public class Multiply : MathObject {
     }
 
     public bool ContainsAny(MathObject obj) => 
-        obj.Equals(this) || 
-        terms.Any(term => term.ContainsAny(obj) || term.Equals(obj)); 
+        terms.Any(term => term.ContainsAny(obj)) ||
+        obj.Equals(this);
     
-    
-    public bool Equals(MathObject obj) {
-        //same type
-        if(!(obj is Multiply m)) return false;    
-        
-        //same terms
-        var objTerms = m.terms.ToList();
-        if(objTerms.Count!=terms.Count) return false;
-        foreach(var term in terms) {
-            if(objTerms.FindOtherTerm(n => n.Equals(term),out int index)) objTerms.RemoveAt(index);
-            else return false;
-        }
-        return true;
-    }
+    public bool Equals(MathObject obj) =>
+		obj is Multiply m &&
+		MathObject.TermListsContainSameElements(m.terms,this.terms);
     
     public string AsString() => string.Join("*",terms.Select((term,i) => 
         term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())?    "("+term.AsString()+")":   //parentheses

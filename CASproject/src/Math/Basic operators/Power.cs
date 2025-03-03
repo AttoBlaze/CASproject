@@ -35,7 +35,15 @@ public class Power : MathObject {
             if(bas is Constant cBas && settings.calculateConstants) return settings.calculator.pow(cBas,cExp);
 
 			//(a+b)^i where i is int
-			//if(bas is Add bAdd && )
+			if(settings.expandParentheses && bas is Add bAdd && cExp.IsWhole) {
+				List<MathObject> terms = new();
+				for(int i=0;i<Math.Abs(cExp.AsValue());i++) {
+					terms.Add(bAdd);
+				}
+				var mult = new Multiply(terms);
+				if(cExp.IsNegative) return new Divide((Constant)1d,mult).Simplify(settings);
+				return mult.Simplify(settings);
+			}
         }
 		else if(bas is Constant cBas) {
 			//0^a = 0 (when a!=0)

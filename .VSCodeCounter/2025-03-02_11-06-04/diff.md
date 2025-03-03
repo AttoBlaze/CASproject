@@ -1,10 +1,10 @@
 # Diff Summary
 
-Date : 2025-02-12 19:18:49
+Date : 2025-03-02 11:06:04
 
 Directory c:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject
 
-Total : 74 files,  911 codes, 40 comments, 184 blanks, all 1135 lines
+Total : 53 files,  767 codes, 23 comments, 150 blanks, all 940 lines
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
 
@@ -13,14 +13,14 @@ Total : 74 files,  911 codes, 40 comments, 184 blanks, all 1135 lines
 | :--- | ---: | ---: | ---: | ---: | ---: |
 | Markdown | 20 | 378 | 0 | 130 | 508 |
 | JSON | 10 | 296 | 0 | 0 | 296 |
-| C# | 40 | 195 | 40 | 49 | 284 |
+| C# | 19 | 51 | 23 | 15 | 89 |
 | XML | 3 | 29 | 0 | 4 | 33 |
 | Properties | 1 | 13 | 0 | 1 | 14 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 74 | 911 | 40 | 184 | 1,135 |
+| . | 53 | 767 | 23 | 150 | 940 |
 | . (Files) | 1 | 11 | 0 | 4 | 15 |
 | .VSCodeCounter | 25 | 383 | 0 | 130 | 513 |
 | .VSCodeCounter\\2025-01-08_20-28-27 | 5 | 52 | 0 | 26 | 78 |
@@ -35,21 +35,18 @@ Total : 74 files,  911 codes, 40 comments, 184 blanks, all 1135 lines
 | obj (Files) | 4 | 237 | 0 | 0 | 237 |
 | obj\\Debug | 5 | 33 | 11 | 8 | 52 |
 | obj\\Debug\\net8.0 | 5 | 33 | 11 | 8 | 52 |
-| src | 37 | 176 | 29 | 42 | 247 |
-| src\\Application | 5 | 49 | 11 | 10 | 70 |
-| src\\Application (Files) | 3 | 24 | 11 | 8 | 43 |
-| src\\Application\\Startup | 2 | 25 | 0 | 2 | 27 |
-| src\\Commands | 23 | 16 | 2 | 4 | 22 |
-| src\\Commands\\Info | 6 | 217 | 14 | 41 | 272 |
-| src\\Commands\\No input | 1 | -15 | 0 | -3 | -18 |
-| src\\Commands\\Other | 3 | 23 | 0 | 3 | 26 |
-| src\\Commands\\Single input | 7 | -238 | -12 | -43 | -293 |
-| src\\Commands\\State | 4 | 69 | 0 | 12 | 81 |
-| src\\Commands\\Structure | 2 | -40 | 0 | -6 | -46 |
-| src\\Math | 9 | 111 | 16 | 28 | 155 |
-| src\\Math\\Basic operators | 3 | 4 | 0 | 2 | 6 |
-| src\\Math\\Calculation | 4 | 77 | 12 | 19 | 108 |
-| src\\Math\\Other | 1 | 30 | 2 | 7 | 39 |
-| src\\Math\\Structure | 1 | 0 | 2 | 0 | 2 |
+| src | 16 | 32 | 12 | 8 | 52 |
+| src\\Application | 5 | 26 | 6 | 5 | 37 |
+| src\\Application (Files) | 4 | 9 | 2 | 1 | 12 |
+| src\\Application\\Startup | 1 | 17 | 4 | 4 | 25 |
+| src\\Commands | 2 | 6 | 0 | 0 | 6 |
+| src\\Commands\\Other | 1 | 4 | 0 | 0 | 4 |
+| src\\Commands\\Structure | 1 | 2 | 0 | 0 | 2 |
+| src\\Math | 9 | 0 | 6 | 3 | 9 |
+| src\\Math\\Basic operators | 3 | 4 | 3 | 2 | 9 |
+| src\\Math\\Formal operators | 1 | 11 | 0 | 2 | 13 |
+| src\\Math\\Formal operators\\Iterative | 1 | 11 | 0 | 2 | 13 |
+| src\\Math\\Other | 2 | -20 | 0 | -1 | -21 |
+| src\\Math\\Structure | 3 | 5 | 3 | 0 | 8 |
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

@@ -1,17 +1,17 @@
 # Diff Summary
 
-Date : 2025-02-14 12:57:15
+Date : 2025-03-02 14:08:05
 
 Directory c:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src
 
-Total : 59 files,  -675 codes, 51 comments, -121 blanks, all -745 lines
+Total : 42 files,  -708 codes, 6 comments, -138 blanks, all -840 lines
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| C# | 25 | 41 | 51 | 14 | 106 |
+| C# | 8 | 8 | 6 | -3 | 11 |
 | Properties | 1 | -13 | 0 | -1 | -14 |
 | XML | 3 | -29 | 0 | -4 | -33 |
 | JSON | 10 | -296 | 0 | 0 | -296 |
@@ -20,7 +20,7 @@ Total : 59 files,  -675 codes, 51 comments, -121 blanks, all -745 lines
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 59 | -675 | 51 | -121 | -745 |
+| . | 42 | -708 | 6 | -138 | -840 |
 | .. | 37 | -735 | -11 | -142 | -888 |
 | .. (Files) | 1 | -11 | 0 | -4 | -15 |
 | ..\\.VSCodeCounter | 25 | -383 | 0 | -130 | -513 |
@@ -36,16 +36,9 @@ Total : 59 files,  -675 codes, 51 comments, -121 blanks, all -745 lines
 | ..\\obj (Files) | 4 | -237 | 0 | 0 | -237 |
 | ..\\obj\\Debug | 5 | -33 | -11 | -8 | -52 |
 | ..\\obj\\Debug\\net8.0 | 5 | -33 | -11 | -8 | -52 |
-| Application | 2 | 11 | -6 | -1 | 4 |
-| Application (Files) | 1 | 4 | -6 | -1 | -3 |
-| Application\\Startup | 1 | 7 | 0 | 0 | 7 |
-| Math | 20 | 49 | 68 | 22 | 139 |
-| Math\\Basic operators | 4 | 8 | 4 | 5 | 17 |
-| Math\\Calculation | 4 | 20 | 19 | 5 | 44 |
-| Math\\Formal operators | 4 | 4 | 4 | 8 | 16 |
-| Math\\Formal operators\\Iterative | 3 | 3 | 3 | 6 | 12 |
-| Math\\Formal operators\\Other | 1 | 1 | 1 | 2 | 4 |
-| Math\\Other | 4 | 7 | 9 | 0 | 16 |
-| Math\\Structure | 4 | 10 | 32 | 4 | 46 |
+| Math | 5 | 27 | 17 | 4 | 48 |
+| Math\\Basic operators | 3 | -4 | -5 | -2 | -11 |
+| Math\\Other | 1 | 2 | 0 | 1 | 3 |
+| Math\\Structure | 1 | 29 | 22 | 5 | 56 |
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

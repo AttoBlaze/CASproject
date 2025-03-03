@@ -1,10 +1,10 @@
 # Diff Details
 
-Date : 2025-02-14 12:57:15
+Date : 2025-03-02 14:08:05
 
 Directory c:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src
 
-Total : 59 files,  -675 codes, 51 comments, -121 blanks, all -745 lines
+Total : 42 files,  -708 codes, 6 comments, -138 blanks, all -840 lines
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details
 
@@ -48,27 +48,10 @@ Total : 59 files,  -675 codes, 51 comments, -121 blanks, all -745 lines
 | [CASproject/obj/Debug/net8.0/CASproject.GlobalUsings.g.cs](/CASproject/obj/Debug/net8.0/CASproject.GlobalUsings.g.cs) | C# | -7 | -1 | -1 | -9 |
 | [CASproject/obj/Debug/net8.0/CASproject.sourcelink.json](/CASproject/obj/Debug/net8.0/CASproject.sourcelink.json) | JSON | -1 | 0 | 0 | -1 |
 | [CASproject/obj/project.assets.json](/CASproject/obj/project.assets.json) | JSON | -139 | 0 | 0 | -139 |
-| [CASproject/src/Application/Program.cs](/CASproject/src/Application/Program.cs) | C# | 4 | -6 | -1 | -3 |
-| [CASproject/src/Application/Startup/CreateSettingsStartup.cs](/CASproject/src/Application/Startup/CreateSettingsStartup.cs) | C# | 7 | 0 | 0 | 7 |
-| [CASproject/src/Math/Basic operators/Add.cs](/CASproject/src/Math/Basic%20operators/Add.cs) | C# | 3 | 2 | 2 | 7 |
-| [CASproject/src/Math/Basic operators/Divide.cs](/CASproject/src/Math/Basic%20operators/Divide.cs) | C# | 1 | 0 | 0 | 1 |
-| [CASproject/src/Math/Basic operators/Multiply.cs](/CASproject/src/Math/Basic%20operators/Multiply.cs) | C# | 3 | 2 | 2 | 7 |
-| [CASproject/src/Math/Basic operators/Power.cs](/CASproject/src/Math/Basic%20operators/Power.cs) | C# | 1 | 0 | 1 | 2 |
-| [CASproject/src/Math/Calculation/CASMath.Functions.cs](/CASproject/src/Math/Calculation/CASMath.Functions.cs) | C# | 2 | 0 | 0 | 2 |
-| [CASproject/src/Math/Calculation/CASMath.Operators.cs](/CASproject/src/Math/Calculation/CASMath.Operators.cs) | C# | 5 | 0 | 0 | 5 |
-| [CASproject/src/Math/Calculation/CASMath.Trigonometric.cs](/CASproject/src/Math/Calculation/CASMath.Trigonometric.cs) | C# | 6 | 0 | 0 | 6 |
-| [CASproject/src/Math/Calculation/CASMath.cs](/CASproject/src/Math/Calculation/CASMath.cs) | C# | 7 | 19 | 5 | 31 |
-| [CASproject/src/Math/Formal operators/Iterative/Product.cs](/CASproject/src/Math/Formal%20operators/Iterative/Product.cs) | C# | 1 | 1 | 2 | 4 |
-| [CASproject/src/Math/Formal operators/Iterative/Recurse.cs](/CASproject/src/Math/Formal%20operators/Iterative/Recurse.cs) | C# | 1 | 1 | 2 | 4 |
-| [CASproject/src/Math/Formal operators/Iterative/Sum.cs](/CASproject/src/Math/Formal%20operators/Iterative/Sum.cs) | C# | 1 | 1 | 2 | 4 |
-| [CASproject/src/Math/Formal operators/Other/Ln.cs](/CASproject/src/Math/Formal%20operators/Other/Ln.cs) | C# | 1 | 1 | 2 | 4 |
-| [CASproject/src/Math/Other/Constant.cs](/CASproject/src/Math/Other/Constant.cs) | C# | 1 | 2 | -2 | 1 |
-| [CASproject/src/Math/Other/Function.cs](/CASproject/src/Math/Other/Function.cs) | C# | 6 | 3 | 3 | 12 |
-| [CASproject/src/Math/Other/FunctionDefinition.cs](/CASproject/src/Math/Other/FunctionDefinition.cs) | C# | 0 | 3 | -1 | 2 |
-| [CASproject/src/Math/Other/Variable.cs](/CASproject/src/Math/Other/Variable.cs) | C# | 0 | 1 | 0 | 1 |
-| [CASproject/src/Math/Structure/FormalFunction.cs](/CASproject/src/Math/Structure/FormalFunction.cs) | C# | 0 | 9 | -1 | 8 |
-| [CASproject/src/Math/Structure/FunctionWrapper.cs](/CASproject/src/Math/Structure/FunctionWrapper.cs) | C# | 0 | 3 | 0 | 3 |
-| [CASproject/src/Math/Structure/MathCommand.cs](/CASproject/src/Math/Structure/MathCommand.cs) | C# | 0 | 3 | 0 | 3 |
-| [CASproject/src/Math/Structure/MathObject.cs](/CASproject/src/Math/Structure/MathObject.cs) | C# | 10 | 17 | 5 | 32 |
+| [CASproject/src/Math/Basic operators/Add.cs](/CASproject/src/Math/Basic%20operators/Add.cs) | C# | -6 | -2 | -1 | -9 |
+| [CASproject/src/Math/Basic operators/Multiply.cs](/CASproject/src/Math/Basic%20operators/Multiply.cs) | C# | -7 | -2 | -1 | -10 |
+| [CASproject/src/Math/Basic operators/Power.cs](/CASproject/src/Math/Basic%20operators/Power.cs) | C# | 9 | -1 | 0 | 8 |
+| [CASproject/src/Math/Other/Constant.cs](/CASproject/src/Math/Other/Constant.cs) | C# | 2 | 0 | 1 | 3 |
+| [CASproject/src/Math/Structure/MathObject.cs](/CASproject/src/Math/Structure/MathObject.cs) | C# | 29 | 22 | 5 | 56 |
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details

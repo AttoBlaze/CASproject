@@ -56,7 +56,7 @@ public class Recurse : MathCommand {
 	public new bool Equals(MathObject obj) =>
 		obj is Recurse recurse &&
 		recurse.expression.Equals(this.expression) &&
-		recurse.initialValues.Select((n,i) => this.initialValues[i].Equals(n)).All(n => n==true) &&
+		MathObject.TermListsAreExactlyEqual(this.initialValues,recurse.initialValues) &&
 		recurse.variables.Select((n,i) => this.variables[i]==n).All(n => n==true);
 
 	public override bool ContainsAny(MathObject obj) => 

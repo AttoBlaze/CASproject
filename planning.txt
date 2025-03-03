@@ -8,12 +8,12 @@ More Simplifications
 Factorial operator, modulus operator
 
 Simplification settings:
-DisolveFractionConstants - constants in fractions are combined
 ContractionMode:
     None - expandable/contractable expressions are kept as-is
     Expand - expressions are expanded when possible (fx a*(b+c)=a*b+a*c)
     Contract - expressions are contracted when possible (fx a*b+c*b=(a+c)*b)
 
-Refactor ContainsAny- only check for string vars.
+Refactor ContainsAny- input is string
+Refactor Equals to make possible to just check under arguments for specific functions- maybe use  
 
 Create own BigDecimal library focused on performance?

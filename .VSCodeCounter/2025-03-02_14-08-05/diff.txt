@@ -1,12 +1,12 @@
-Date : 2025-02-14 12:57:15
+Date : 2025-03-02 14:08:05
 Directory : c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src
-Total : 59 files,  -675 codes, 51 comments, -121 blanks, all -745 lines
+Total : 42 files,  -708 codes, 6 comments, -138 blanks, all -840 lines
 
 Languages
 +------------+------------+------------+------------+------------+------------+
 | language   | files      | code       | comment    | blank      | total      |
 +------------+------------+------------+------------+------------+------------+
-| C#         |         25 |         41 |         51 |         14 |        106 |
+| C#         |          8 |          8 |          6 |         -3 |         11 |
 | Properties |          1 |        -13 |          0 |         -1 |        -14 |
 | XML        |          3 |        -29 |          0 |         -4 |        -33 |
 | JSON       |         10 |       -296 |          0 |          0 |       -296 |
@@ -17,7 +17,7 @@ Directories
 +------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 | path                                                                                                                               | files      | code       | comment    | blank      | total      |
 +------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| .                                                                                                                                  |         59 |       -675 |         51 |       -121 |       -745 |
+| .                                                                                                                                  |         42 |       -708 |          6 |       -138 |       -840 |
 | ..                                                                                                                                 |         37 |       -735 |        -11 |       -142 |       -888 |
 | .. (Files)                                                                                                                         |          1 |        -11 |          0 |         -4 |        -15 |
 | ..\.VSCodeCounter                                                                                                                  |         25 |       -383 |          0 |       -130 |       -513 |
@@ -33,17 +33,10 @@ Directories
 | ..\obj (Files)                                                                                                                     |          4 |       -237 |          0 |          0 |       -237 |
 | ..\obj\Debug                                                                                                                       |          5 |        -33 |        -11 |         -8 |        -52 |
 | ..\obj\Debug\net8.0                                                                                                                |          5 |        -33 |        -11 |         -8 |        -52 |
-| Application                                                                                                                        |          2 |         11 |         -6 |         -1 |          4 |
-| Application (Files)                                                                                                                |          1 |          4 |         -6 |         -1 |         -3 |
-| Application\Startup                                                                                                                |          1 |          7 |          0 |          0 |          7 |
-| Math                                                                                                                               |         20 |         49 |         68 |         22 |        139 |
-| Math\Basic operators                                                                                                               |          4 |          8 |          4 |          5 |         17 |
-| Math\Calculation                                                                                                                   |          4 |         20 |         19 |          5 |         44 |
-| Math\Formal operators                                                                                                              |          4 |          4 |          4 |          8 |         16 |
-| Math\Formal operators\Iterative                                                                                                    |          3 |          3 |          3 |          6 |         12 |
-| Math\Formal operators\Other                                                                                                        |          1 |          1 |          1 |          2 |          4 |
-| Math\Other                                                                                                                         |          4 |          7 |          9 |          0 |         16 |
-| Math\Structure                                                                                                                     |          4 |         10 |         32 |          4 |         46 |
+| Math                                                                                                                               |          5 |         27 |         17 |          4 |         48 |
+| Math\Basic operators                                                                                                               |          3 |         -4 |         -5 |         -2 |        -11 |
+| Math\Other                                                                                                                         |          1 |          2 |          0 |          1 |          3 |
+| Math\Structure                                                                                                                     |          1 |         29 |         22 |          5 |         56 |
 +------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 
 Files
@@ -87,27 +80,10 @@ Files
 | c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.GlobalUsings.g.cs                         | C#         |         -7 |         -1 |         -1 |         -9 |
 | c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.sourcelink.json                           | JSON       |         -1 |          0 |          0 |         -1 |
 | c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\project.assets.json                                               | JSON       |       -139 |          0 |          0 |       -139 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.cs                                            | C#         |          4 |         -6 |         -1 |         -3 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateSettingsStartup.cs                      | C#         |          7 |          0 |          0 |          7 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Add.cs                                       | C#         |          3 |          2 |          2 |          7 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Divide.cs                                    | C#         |          1 |          0 |          0 |          1 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Multiply.cs                                  | C#         |          3 |          2 |          2 |          7 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Power.cs                                     | C#         |          1 |          0 |          1 |          2 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Functions.cs                             | C#         |          2 |          0 |          0 |          2 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Operators.cs                             | C#         |          5 |          0 |          0 |          5 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Trigonometric.cs                         | C#         |          6 |          0 |          0 |          6 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.cs                                       | C#         |          7 |         19 |          5 |         31 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Product.cs                        | C#         |          1 |          1 |          2 |          4 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Recurse.cs                        | C#         |          1 |          1 |          2 |          4 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Sum.cs                            | C#         |          1 |          1 |          2 |          4 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Other\Ln.cs                                 | C#         |          1 |          1 |          2 |          4 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Constant.cs                                            | C#         |          1 |          2 |         -2 |          1 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Function.cs                                            | C#         |          6 |          3 |          3 |         12 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\FunctionDefinition.cs                                  | C#         |          0 |          3 |         -1 |          2 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Variable.cs                                            | C#         |          0 |          1 |          0 |          1 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\FormalFunction.cs                                  | C#         |          0 |          9 |         -1 |          8 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\FunctionWrapper.cs                                 | C#         |          0 |          3 |          0 |          3 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathCommand.cs                                     | C#         |          0 |          3 |          0 |          3 |
-| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathObject.cs                                      | C#         |         10 |         17 |          5 |         32 |
-| Total                                                                                                                              |            |       -675 |         51 |       -121 |       -745 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Add.cs                                       | C#         |         -6 |         -2 |         -1 |         -9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Multiply.cs                                  | C#         |         -7 |         -2 |         -1 |        -10 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Power.cs                                     | C#         |          9 |         -1 |          0 |          8 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Constant.cs                                            | C#         |          2 |          0 |          1 |          3 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathObject.cs                                      | C#         |         29 |         22 |          5 |         56 |
+| Total                                                                                                                              |            |       -708 |          6 |       -138 |       -840 |
 +------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

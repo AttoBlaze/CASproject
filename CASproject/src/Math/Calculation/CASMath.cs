@@ -32,7 +32,15 @@ public partial class CASMath {
 	/// </summary>
 	public long precision {
 		get => factory.Config.Precision; 
-		set => factory.Config.Precision = Math.Clamp(value,5,1000);
+		set {
+			factory.Config.Precision = Math.Clamp(value,5,1000);
+			
+			//redefine e & pi if needed
+			if(factory.Config.Precision>16) {
+				_e = factory.Exp(1);
+				_pi = factory.Acos(-1);
+			}
+		}
 	}
 	/// <summary>
 	/// Wether or not calculations are made using double on static methods. <br/>
@@ -44,22 +52,24 @@ public partial class CASMath {
 	/// <summary>
 	/// The mathematical constant e.
 	/// </summary>
-	public Constant e {get => precision<=16? Math.E:factory.Exp(1);}
+	public Constant e {get => new Constant(_e);}
+	private Constant _e = Math.E;
 	/// <summary>
 	/// The mathematical constant e. <br>
 	/// Wrapper for CASMath.Calculator.e
 	/// </summary>
-	public static Constant E {get => Precision<=16? Math.E:Calculator.factory.Exp(1);}
+	public static Constant E {get => Calculator.e;}
 	
 
 	/// <summary>
 	/// The mathematical constant pi.
 	/// </summary>
-	public Constant pi {get => precision<=16? Math.PI:factory.Acos(-1);}
+	public Constant pi {get => new Constant(_pi);}
+	private Constant _pi = Math.PI;
 	/// <summary>
 	/// The mathematical constant pi. <br>
 	/// Wrapper for CASMath.Calculator.pi
 	/// </summary>
-	public static Constant PI {get => Precision<=16? Math.PI:Calculator.factory.Acos(-1);}
+	public static Constant PI {get => Calculator.pi;}
 	
 }

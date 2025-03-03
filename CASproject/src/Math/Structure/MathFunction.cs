@@ -15,5 +15,5 @@ public abstract class MathFunction : MathObject {
         obj.GetType()==this.GetType() &&
         obj.As<MathFunction>().expression.Equals(this.expression);
     public virtual bool ContainsAny(MathObject obj) =>
-        obj.Equals(this) || expression.ContainsAny(obj);
+        obj.Equals(this) || expression.Equals(obj) || expression.ContainsAny(obj);
 }

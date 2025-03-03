@@ -2,7 +2,11 @@ using Application;
 
 internal class MAIN {
     static void Main() {
-        Program.START();
+        //start program
+		Program.START();
+
+		//style console for inputs
+		new ConsoleStyling(System.Drawing.Color.WhiteSmoke).Apply(); 
 
         //input reader
         while(true) {

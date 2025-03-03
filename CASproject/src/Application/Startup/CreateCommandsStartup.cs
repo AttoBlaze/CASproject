@@ -45,6 +45,7 @@ public sealed partial class Command {
             "Exits the application", 
             NONE,
             arguments => new InformalCommand(args => {
+				Program.Log("Exiting program...",Write.Styling);
                 Environment.Exit(0);
                 return ExecutableCommand.State.SUCCESS;
         }));

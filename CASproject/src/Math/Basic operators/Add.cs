@@ -33,14 +33,15 @@ public class Add : MathObject {
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
             var term = terms[i];
-            if(term is Constant) continue;
+            if(term is Constant c) continue;
 
             if ((term as Multiply)?.terms[0] is Constant) {
                 var num = term.As<Multiply>().terms[0].As<Constant>();
                 MathObject mult = term.As<Multiply>().WithoutFirstTerm();
                 
 				//a + n*a = (n+1)*a
-                if(MathObject.FindAndRemoveOtherTerm(term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
+                if(MathObject.FindAndRemoveOtherTerm(
+					term => term.Equals(mult),terms,ref i,ref obj ,ref index)) {
                     var val = settings.calculator.add(num,1);
 					if(val.IsZero) terms.RemoveAt(i);						//a+(-1*a) = 0
 					else terms[i] = new Multiply(val,mult);
@@ -48,8 +49,8 @@ public class Add : MathObject {
                 }
 
                 //b*a + c*a = (b+c)*a
-                if(MathObject.FindAndRemoveOtherTerm(t => 
-                    t is Multiply && t.As<Multiply>().terms[0] is Constant && t.As<Multiply>().WithoutFirstTerm().Equals(mult)
+                if(MathObject.FindAndRemoveOtherTerm(
+					term => term is Multiply && term.As<Multiply>().terms[0] is Constant && term.As<Multiply>().WithoutFirstTerm().Equals(mult)
                     ,terms,ref i,ref obj ,ref index)) 
                 {   
 					var val = settings.calculator.add(obj.As<Multiply>().terms[0].As<Constant>(),num);
@@ -98,19 +99,9 @@ public class Add : MathObject {
         obj.Equals(this) || 
         terms.Any(term => term.Equals(obj) || term.ContainsAny(obj)); 
     
-    public bool Equals(MathObject obj) {
-        //same type
-        if(!(obj is Add m)) return false;    
-
-        //same terms
-        var objTerms = m.terms.ToList();
-        if(objTerms.Count!=terms.Count) return false;
-        foreach(var term in terms) {
-            if(objTerms.FindOtherTerm(n => n.Equals(term),out int index)) objTerms.RemoveAt(index);
-            else return false;
-        }
-        return true;
-    }
+    public bool Equals(MathObject obj) =>
+        obj is Add m && 												//same type
+        MathObject.TermListsContainSameElements(m.terms,this.terms);	//same terms
 
     public MathObject Differentiate(string variable, CalculusSettings settings) {
         //(f+g)' = f' + g'

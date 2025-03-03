@@ -69,8 +69,8 @@ public sealed partial class FormalFunction {
         CreateFormalFunction(
             "recurse",
             "Recursively evaluates the given expression:\n"+
-            "Here, the inputs are variables. These effectively act as F0, F1, F2...\n"+
-            "On each recursion iteration, each variable gets the value of the current value of the variable to its right\n"+
+            "Here, the inputs are variables. These effectively act as F0, F1, F2... for the recursive sequence.\n"+
+            "On each recursion iteration, each variable gets the value of the variable to its right.\n"+
             "The variables starting values are decided by the initial values. If no initial value is given for a variable, it is set to 0.\n"+
             "Fx: Fibonacci can be defined like recurse((n;m);(0;1);K;n+m). This will yield the (K+1)th fibonacci number.",
             ["(inputs..)","(initial values..)","recursion count","expression"],
@@ -96,7 +96,7 @@ public sealed partial class FormalFunction {
         });
 		CreateFormalFunction(
             "sRecurse",
-            "Acts like the recurse command, but actively simplifies the result for every iteration.",
+            "Acts like the recurse function, but actively simplifies the result for every iteration.",
             ["(inputs..)","(initial values..)","recursion count","expression"],
             arguments => {
                 var args = (object[])arguments.Pop();

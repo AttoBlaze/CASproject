@@ -42,6 +42,9 @@ public class Constant : MathObject {
 	public bool IsZero {get => _decimalValue?.IsZero()??true && doubleValue==0;}
 	public bool IsOne {get => _decimalValue?.Equals(1)??true && doubleValue==1;}
 	public bool IsWhole {get => _decimalValue?.IsInteger()??true && doubleValue%1==0;}
+	public bool IsPositive {get => _decimalValue?.IsPositive()??true && doubleValue>0;}
+	public bool IsNegative {get => _decimalValue?.IsPositive()??true && doubleValue<0;}
+	
 
 	public double AsValue() => doubleValue;
 

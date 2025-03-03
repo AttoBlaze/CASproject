@@ -11,7 +11,10 @@ public class Variable : MathObject, NamedObject {
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
 		//if a definition exists for this variable, then replace it with its definition (evaluated).
-        if (definedObjects.TryGetValue(name, out MathObject? value)) return value.Evaluate(definedObjects);
+        if (definedObjects.TryGetValue(name, out MathObject? value)) {
+			if(value.ContainsAny(this)) return value;
+			return value.Evaluate(definedObjects);
+		}
         return new Variable(name);
     }
 
