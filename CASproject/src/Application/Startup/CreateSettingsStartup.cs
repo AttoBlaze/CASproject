@@ -32,6 +32,14 @@ public sealed partial class Setting {
             ConvertToBool
         );
         CreateSetting(
+            "MuteErrorStack",
+            "Mutes error stacks being written in the console",
+            BOOL,
+            ()=> Program.MuteErrorStack,
+            (input)=> {Program.MuteErrorStack = (bool)input;},
+            ConvertToBool
+        );
+        CreateSetting(
             "AlwaysWrite",
             "Enables/disables all executed commands being written in the console",
             BOOL,

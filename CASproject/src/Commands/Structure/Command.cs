@@ -25,7 +25,14 @@ public partial class Command {
 	}
 	public static void CreateCommand(string name, string description, Func<Stack<object>,object> createCommand) => CreateCommand(name,description,[],createCommand);
 	public static void CreateCommand(string name, string description, string[] overloads, Func<Stack<object>,object> createCommand) {
-		Program.commands[name] = new Command(name,description,overloads,createCommand);
+		var cmd = new Command(name,description,overloads,createCommand);
+
+		//validate
+		if (Program.formalFunctions.ContainsKey(name)) throw new Exception("Could not create command, as a formal function with the same name already exists."); 
+		if (Program.settings.ContainsKey(name)) throw new Exception("Could not create command, as a setting with the same name already exists."); 
+		
+		//define
+		Program.commands[name] = cmd;
 	}
 	public readonly string name;
 	public readonly string description;

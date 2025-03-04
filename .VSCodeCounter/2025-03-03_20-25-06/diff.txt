@@ -1,0 +1,197 @@
+Date : 2025-03-03 20:25:06
+Directory : c:\programmering\visualstudiocodeFiles\CASproject\UnitTests
+Total : 123 files,  -777 codes, -421 comments, -514 blanks, all -1712 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |         18 |      1,672 |          0 |          0 |      1,672 |
+| XML        |          8 |         63 |          0 |          3 |         66 |
+| Properties |          3 |         13 |          0 |          1 |         14 |
+| Markdown   |         20 |       -378 |          0 |       -130 |       -508 |
+| C#         |         74 |     -2,147 |       -421 |       -388 |     -2,956 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                   |        123 |       -777 |       -421 |       -514 |     -1,712 |
+| . (Files)                                                                                                                           |          3 |         44 |          0 |         10 |         54 |
+| ..                                                                                                                                  |         93 |     -3,244 |       -447 |       -592 |     -4,283 |
+| ..\CASproject                                                                                                                       |         93 |     -3,244 |       -447 |       -592 |     -4,283 |
+| ..\CASproject (Files)                                                                                                               |          1 |        -11 |          0 |         -4 |        -15 |
+| ..\CASproject\.VSCodeCounter                                                                                                        |         25 |       -383 |          0 |       -130 |       -513 |
+| ..\CASproject\.VSCodeCounter\2025-01-08_20-28-27                                                                                    |          5 |        -52 |          0 |        -26 |        -78 |
+| ..\CASproject\.VSCodeCounter\2025-01-08_20-28-32                                                                                    |          5 |        -73 |          0 |        -26 |        -99 |
+| ..\CASproject\.VSCodeCounter\2025-01-09_15-05-53                                                                                    |          5 |        -74 |          0 |        -26 |       -100 |
+| ..\CASproject\.VSCodeCounter\2025-01-09_15-05-57                                                                                    |          5 |        -76 |          0 |        -26 |       -102 |
+| ..\CASproject\.VSCodeCounter\2025-01-10_15-36-08                                                                                    |          5 |       -108 |          0 |        -26 |       -134 |
+| ..\CASproject\bin                                                                                                                   |          2 |        -71 |          0 |          0 |        -71 |
+| ..\CASproject\bin\Debug                                                                                                             |          2 |        -71 |          0 |          0 |        -71 |
+| ..\CASproject\bin\Debug\net8.0                                                                                                      |          2 |        -71 |          0 |          0 |        -71 |
+| ..\CASproject\obj                                                                                                                   |          9 |       -270 |        -11 |         -8 |       -289 |
+| ..\CASproject\obj (Files)                                                                                                           |          4 |       -237 |          0 |          0 |       -237 |
+| ..\CASproject\obj\Debug                                                                                                             |          5 |        -33 |        -11 |         -8 |        -52 |
+| ..\CASproject\obj\Debug\net8.0                                                                                                      |          5 |        -33 |        -11 |         -8 |        -52 |
+| ..\CASproject\src                                                                                                                   |         56 |     -2,509 |       -436 |       -450 |     -3,395 |
+| ..\CASproject\src (Files)                                                                                                           |          1 |        -32 |         -3 |         -4 |        -39 |
+| ..\CASproject\src\Application                                                                                                       |          8 |       -830 |       -120 |       -102 |     -1,052 |
+| ..\CASproject\src\Application (Files)                                                                                               |          4 |       -371 |       -106 |        -80 |       -557 |
+| ..\CASproject\src\Application\Startup                                                                                               |          4 |       -459 |        -14 |        -22 |       -495 |
+| ..\CASproject\src\Commands                                                                                                          |         16 |       -405 |        -27 |        -77 |       -509 |
+| ..\CASproject\src\Commands\Info                                                                                                     |          6 |       -212 |        -14 |        -42 |       -268 |
+| ..\CASproject\src\Commands\Other                                                                                                    |          4 |        -68 |          0 |        -11 |        -79 |
+| ..\CASproject\src\Commands\State                                                                                                    |          4 |        -69 |          0 |        -12 |        -81 |
+| ..\CASproject\src\Commands\Structure                                                                                                |          2 |        -56 |        -13 |        -12 |        -81 |
+| ..\CASproject\src\Math                                                                                                              |         29 |     -1,144 |       -251 |       -247 |     -1,642 |
+| ..\CASproject\src\Math\Basic operators                                                                                              |          4 |       -338 |        -62 |        -75 |       -475 |
+| ..\CASproject\src\Math\Calculation                                                                                                  |          4 |       -106 |        -32 |        -25 |       -163 |
+| ..\CASproject\src\Math\Formal operators                                                                                             |         10 |       -257 |        -26 |        -63 |       -346 |
+| ..\CASproject\src\Math\Formal operators\Iterative                                                                                   |          3 |       -134 |        -10 |        -25 |       -169 |
+| ..\CASproject\src\Math\Formal operators\Other                                                                                       |          1 |        -17 |         -4 |         -8 |        -29 |
+| ..\CASproject\src\Math\Formal operators\Trigonometric                                                                               |          6 |       -106 |        -12 |        -30 |       -148 |
+| ..\CASproject\src\Math\Other                                                                                                        |          4 |       -153 |        -25 |        -38 |       -216 |
+| ..\CASproject\src\Math\Structure                                                                                                    |          7 |       -290 |       -106 |        -46 |       -442 |
+| ..\CASproject\src\Other                                                                                                             |          2 |        -98 |        -35 |        -20 |       -153 |
+| Commands                                                                                                                            |          3 |        114 |          0 |         17 |        131 |
+| Math                                                                                                                                |          5 |        208 |          4 |         36 |        248 |
+| bin                                                                                                                                 |          4 |        552 |          0 |          0 |        552 |
+| bin\Debug                                                                                                                           |          4 |        552 |          0 |          0 |        552 |
+| bin\Debug\net8.0                                                                                                                    |          4 |        552 |          0 |          0 |        552 |
+| obj                                                                                                                                 |         15 |      1,549 |         22 |         15 |      1,586 |
+| obj (Files)                                                                                                                         |          7 |      1,485 |          0 |          0 |      1,485 |
+| obj\Debug                                                                                                                           |          8 |         64 |         22 |         15 |        101 |
+| obj\Debug\net8.0                                                                                                                    |          8 |         64 |         22 |         15 |        101 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                            | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\details.md                          | Markdown   |        -16 |          0 |         -6 |        -22 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\diff-details.md                     | Markdown   |         -9 |          0 |         -6 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\diff.md                             | Markdown   |        -12 |          0 |         -7 |        -19 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\results.json                        | JSON       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-27\results.md                          | Markdown   |        -14 |          0 |         -7 |        -21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\details.md                          | Markdown   |        -17 |          0 |         -6 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\diff-details.md                     | Markdown   |        -24 |          0 |         -6 |        -30 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\diff.md                             | Markdown   |        -17 |          0 |         -7 |        -24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\results.json                        | JSON       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-08_20-28-32\results.md                          | Markdown   |        -14 |          0 |         -7 |        -21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\details.md                          | Markdown   |        -17 |          0 |         -6 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\diff-details.md                     | Markdown   |        -25 |          0 |         -6 |        -31 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\diff.md                             | Markdown   |        -17 |          0 |         -7 |        -24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\results.json                        | JSON       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-53\results.md                          | Markdown   |        -14 |          0 |         -7 |        -21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\details.md                          | Markdown   |        -18 |          0 |         -6 |        -24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\diff-details.md                     | Markdown   |        -26 |          0 |         -6 |        -32 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\diff.md                             | Markdown   |        -17 |          0 |         -7 |        -24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\results.json                        | JSON       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-09_15-05-57\results.md                          | Markdown   |        -14 |          0 |         -7 |        -21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\details.md                          | Markdown   |        -31 |          0 |         -6 |        -37 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\diff-details.md                     | Markdown   |        -40 |          0 |         -6 |        -46 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\diff.md                             | Markdown   |        -19 |          0 |         -7 |        -26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\results.json                        | JSON       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\.VSCodeCounter\2025-01-10_15-36-08\results.md                          | Markdown   |        -17 |          0 |         -7 |        -24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\CASproject.csproj                                                      | XML        |        -11 |          0 |         -4 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Debug\net8.0\CASproject.deps.json                                  | JSON       |        -59 |          0 |          0 |        -59 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Debug\net8.0\CASproject.runtimeconfig.json                         | JSON       |        -12 |          0 |          0 |        -12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\CASproject.csproj.nuget.dgspec.json                                | JSON       |        -80 |          0 |          0 |        -80 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\CASproject.csproj.nuget.g.props                                    | XML        |        -16 |          0 |          0 |        -16 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\CASproject.csproj.nuget.g.targets                                  | XML        |         -2 |          0 |          0 |         -2 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs        | C#         |         -3 |         -1 |         -1 |         -5 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.AssemblyInfo.cs                            | C#         |         -9 |         -9 |         -5 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.GeneratedMSBuildEditorConfig.editorconfig  | Properties |        -13 |          0 |         -1 |        -14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.GlobalUsings.g.cs                          | C#         |         -7 |         -1 |         -1 |         -9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\Debug\net8.0\CASproject.sourcelink.json                            | JSON       |         -1 |          0 |          0 |         -1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\obj\project.assets.json                                                | JSON       |       -139 |          0 |          0 |       -139 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\ParseInput.cs                                          | C#         |       -128 |        -40 |        -40 |       -208 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.Exceptions.cs                                  | C#         |         -8 |          0 |         -3 |        -11 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.cs                                             | C#         |       -170 |        -50 |        -25 |       -245 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Setting.cs                                             | C#         |        -65 |        -16 |        -12 |        -93 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateCommandsStartup.cs                       | C#         |       -243 |         -2 |         -5 |       -250 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateFormalFunctions.cs                       | C#         |       -122 |        -12 |        -13 |       -147 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreatePredefinedStartup.cs                     | C#         |        -14 |          0 |         -1 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateSettingsStartup.cs                       | C#         |        -80 |          0 |         -3 |        -83 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Explain.cs                                           | C#         |        -56 |         -3 |        -10 |        -69 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Help.cs                                              | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Hide.cs                                              | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\ListObjects.cs                                       | C#         |        -70 |         -3 |        -12 |        -85 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Show.cs                                              | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Write.cs                                             | C#         |        -41 |         -8 |        -11 |        -60 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\ExecuteAll.cs                                       | C#         |        -11 |          0 |         -3 |        -14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\ExitCommand.cs                                      | C#         |        -11 |          0 |         -2 |        -13 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\GetTime.cs                                          | C#         |        -31 |          0 |         -3 |        -34 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\RepeatExecute.cs                                    | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\DefineFunction.cs                                   | C#         |        -20 |          0 |         -3 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\DefineVariable.cs                                   | C#         |        -20 |          0 |         -3 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\RemoveObject.cs                                     | C#         |        -14 |          0 |         -3 |        -17 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\SetSetting.cs                                       | C#         |        -15 |          0 |         -3 |        -18 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Structure\Command.cs                                      | C#         |        -46 |        -10 |        -10 |        -66 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Structure\InformalCommand.cs                              | C#         |        -10 |         -3 |         -2 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Main.cs                                                            | C#         |        -32 |         -3 |         -4 |        -39 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Add.cs                                        | C#         |        -85 |        -15 |        -19 |       -119 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Divide.cs                                     | C#         |        -76 |        -16 |        -17 |       -109 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Multiply.cs                                   | C#         |       -100 |        -16 |        -20 |       -136 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Power.cs                                      | C#         |        -77 |        -15 |        -19 |       -111 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Functions.cs                              | C#         |        -13 |          0 |         -2 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Operators.cs                              | C#         |        -28 |          0 |         -6 |        -34 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Trigonometric.cs                          | C#         |        -33 |          0 |         -6 |        -39 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.cs                                        | C#         |        -32 |        -32 |        -11 |        -75 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Product.cs                         | C#         |        -40 |         -3 |         -7 |        -50 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Recurse.cs                         | C#         |        -54 |         -4 |        -10 |        -68 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Sum.cs                             | C#         |        -40 |         -3 |         -8 |        -51 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Other\Ln.cs                                  | C#         |        -17 |         -4 |         -8 |        -29 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Acos.cs                        | C#         |        -22 |         -2 |         -5 |        -29 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Asin.cs                        | C#         |        -20 |         -2 |         -5 |        -27 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Atan.cs                        | C#         |        -16 |         -2 |         -5 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Cos.cs                         | C#         |        -16 |         -2 |         -5 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Sin.cs                         | C#         |        -16 |         -2 |         -5 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Tan.cs                         | C#         |        -16 |         -2 |         -5 |        -23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Constant.cs                                             | C#         |        -66 |        -10 |        -18 |        -94 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Function.cs                                             | C#         |        -44 |         -7 |        -10 |        -61 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\FunctionDefinition.cs                                   | C#         |        -16 |         -3 |         -2 |        -21 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Variable.cs                                             | C#         |        -27 |         -5 |         -8 |        -40 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\FormalFunction.cs                                   | C#         |        -20 |         -6 |         -2 |        -28 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\FunctionWrapper.cs                                  | C#         |        -19 |         -3 |         -3 |        -25 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathCommand.cs                                      | C#         |        -11 |         -3 |         -1 |        -15 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathFunction.cs                                     | C#         |        -15 |         -3 |         -1 |        -19 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathObject.cs                                       | C#         |       -108 |        -69 |        -27 |       -204 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathWrapper.cs                                      | C#         |        -60 |         -3 |         -3 |        -66 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\Operator.cs                                         | C#         |        -57 |        -19 |         -9 |        -85 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Other\ConsoleStyling.cs                                            | C#         |        -46 |        -32 |        -15 |        -93 |
+| c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Other\StringTree.cs                                                | C#         |        -52 |         -3 |         -5 |        -60 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Commands\Define.cs                                                      | C#         |         41 |          0 |          6 |         47 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Commands\Settings.cs                                                    | C#         |         41 |          0 |          6 |         47 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Commands\SingleInput.cs                                                 | C#         |         32 |          0 |          5 |         37 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Development.cs                                                          | C#         |         15 |          0 |          2 |         17 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\Comparison.cs                                                      | C#         |         13 |          4 |          3 |         20 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\Derivative.cs                                                      | C#         |         38 |          0 |         10 |         48 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\Hierarchy.cs                                                       | C#         |         44 |          0 |          7 |         51 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\IterativeMath.cs                                                   | C#         |         46 |          0 |          6 |         52 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\Math\Simplification.cs                                                  | C#         |         67 |          0 |         10 |         77 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\UnitTests.cs                                                            | C#         |          7 |          0 |          1 |          8 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\UnitTests.csproj                                                        | XML        |         22 |          0 |          7 |         29 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\CASproject.deps.json                                   | JSON       |         59 |          0 |          0 |         59 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\CASproject.runtimeconfig.json                          | JSON       |         12 |          0 |          0 |         12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\UnitTests.deps.json                                    | JSON       |        469 |          0 |          0 |        469 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\bin\Debug\net8.0\UnitTests.runtimeconfig.json                           | JSON       |         12 |          0 |          0 |         12 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs         | C#         |          3 |          1 |          1 |          5 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\TestProject1.AssemblyInfo.cs                           | C#         |          9 |         10 |          5 |         24 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\TestProject1.GeneratedMSBuildEditorConfig.editorconfig | Properties |         13 |          0 |          1 |         14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\TestProject1.GlobalUsings.g.cs                         | C#         |          8 |          1 |          1 |         10 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.AssemblyInfo.cs                              | C#         |          9 |          9 |          5 |         23 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.GeneratedMSBuildEditorConfig.editorconfig    | Properties |         13 |          0 |          1 |         14 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.GlobalUsings.g.cs                            | C#         |          8 |          1 |          1 |         10 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\Debug\net8.0\UnitTests.sourcelink.json                              | JSON       |          1 |          0 |          0 |          1 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\TestProject1.csproj.nuget.dgspec.json                               | JSON       |         95 |          0 |          0 |         95 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\TestProject1.csproj.nuget.g.props                                   | XML        |         26 |          0 |          0 |         26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\TestProject1.csproj.nuget.g.targets                                 | XML        |          9 |          0 |          0 |          9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json                                  | JSON       |        172 |          0 |          0 |        172 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\UnitTests.csproj.nuget.g.props                                      | XML        |         26 |          0 |          0 |         26 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\UnitTests.csproj.nuget.g.targets                                    | XML        |          9 |          0 |          0 |          9 |
+| c:\programmering\visualstudiocodeFiles\CASproject\UnitTests\obj\project.assets.json                                                 | JSON       |      1,148 |          0 |          0 |      1,148 |
+| Total                                                                                                                               |            |       -777 |       -421 |       -514 |     -1,712 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

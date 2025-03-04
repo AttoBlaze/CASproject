@@ -10,6 +10,7 @@ public static partial class Program {
         MuteOutput = false,
         MuteWarnings = false,
         MuteErrors = false,
+		MuteErrorStack = false,
         AlwaysWrite = true,
         AlwaysShowWrite = true;
 	public static CASMath Calculator = new();
@@ -122,9 +123,9 @@ public static partial class Program {
 	/// <summary>
     /// Logs the given error in the console
     /// </summary>
-    public static void LogError(object log, Exception e, ConsoleStyling? styling = null, bool newLine = true) {
+    public static void LogError(object log, Exception? e = null, ConsoleStyling? styling = null, bool newLine = true) {
 		if(MuteErrors) return;
-		Log("ERROR: " + log + ":\n" + e, styling ?? LoggerErrorStyling, newLine);
+		Log("ERROR: " + log + (e==null || MuteErrorStack?"":":\n"+e), styling ?? LoggerErrorStyling, newLine);
 	}
 	#endregion
 
@@ -138,6 +139,10 @@ public static partial class Program {
 	/// Contains all defined variables (fx e, pi, x if user defined).
 	/// </summary>
 	public readonly static Dictionary<string,MathObject> definedObjects = new();
+	
+	/// <summary>
+	/// Attempts to define the given math object in the program. 
+	/// </summary>
 	public static void Define(string name, MathObject expression) {
 		if (preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot redefine predefined objects!");
         if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
@@ -149,8 +154,16 @@ public static partial class Program {
 		
 		definedObjects[name] = expression;
 	}
-    public static void Predefine(string name, MathObject expression) {
-        var no = ObjectNameDisallowed(name);
+
+	/// <summary>
+	/// Attempts to predefine the given math object in the program. 
+	/// </summary>
+	public static void Predefine(string name, MathObject expression) {
+        if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a formal function!"); 
+		if (settings.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a setting!");
+		if (commands.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a command!");
+		
+		var no = ObjectNameDisallowed(name);
 		if(no!=null) throw new Exception(no);
 		
 		preDefinedObjects[name] = expression;
@@ -185,11 +198,11 @@ public static partial class Program {
         const string BAR = "---------------------------------------";
 		ConsoleStyling 
 			bar =		new(Color.White),
-			start = 	new(Color.Magenta,ConsoleFontStyling.Bold,ConsoleFontStyling.Underlined),
-			creating = 	new(Color.LightGray,ConsoleFontStyling.Italic), 
+			start = 	new(Color.Magenta,ConsoleFontStyling.Underlined),
+			creating = 	new(Color.Khaki,ConsoleFontStyling.Italic), 
 			dots =		new(Color.DarkGray), 
 			finished = 	new(Color.LightGreen,ConsoleFontStyling.Italic),
-			doneIn = 	new(Color.Magenta,ConsoleFontStyling.Bold),
+			doneIn = 	new(Color.Magenta,ConsoleFontStyling.Italic),
 			help = 		new(Color.Magenta,ConsoleFontStyling.Italic)
 		;
 		

@@ -1,3 +1,6 @@
+/// <summary>
+/// A string tree branch with multiple subbranches/leaves
+/// </summary>
 public class StringBranch : StringTree {
 	public string branchStr;
 	public StringTree[] branches;
@@ -17,8 +20,12 @@ public class StringBranch : StringTree {
 	}
 }
 
+/// <summary>
+/// A leaf of a string tree; contains no branches.
+/// </summary>
 public class StringLeaf : StringTree {
-	public string title, singleSeperator = ": ", multiSeperator = ":";
+	public string title, singleSeperator = ": ", multiSeperator = ":", slabLineJoin = "| ", slabEnd = "╵ ";
+	public int slabIndentation = 1;
 	public StringLeaf(string text) {
 		this.title = "";
 		this.text = text;
@@ -29,32 +36,41 @@ public class StringLeaf : StringTree {
 		this.title = title;
 		this.text = text;
 	}
+	
     public override string Write(int indentation = 0) {
 		if(text.Contains("\n"))
-			return StringTree.MultiLineConvert(title+multiSeperator,text,indentation+1);
+			return StringTree.MultiLineConvert(title+multiSeperator,text,indentation+slabIndentation,slabLineJoin,slabEnd);
 		return title+singleSeperator+text;
 	}
 }
 
 /// <summary>
-/// A tree with string branches. Made to simplify the explain command output.
+/// A tree with string branches. Made to simplify the explain command output, or just trees which need to be written like a tree.
 /// </summary>
 public class StringTree {
 	public string text = "";
 	public virtual string Write(int indentation = 0) => StringOf(' ',indentation)+text;
 
+	/// <summary>
+	/// Creates a string of the given char with a certain length.
+	/// </summary>
 	public static string StringOf(char c, int length) {
 		char[] chars = new char[length];
 		Array.Fill(chars,c);
 		return new string(chars);
 	}
 
-	public static string MultiLineConvert(string title, string text, int indents) {
+	/// <summary>
+	/// Converts a single text with seperations into a conjoined slab with indentation. <br/>
+	/// </summary>
+	/// <param name="slabLineJoin">The string used to combine different lines together into a single slab</param>
+	/// <param name="slabEnd">The combining string used on the last line of a slab</param>
+	public static string MultiLineConvert(string title, string text, int indents, string slabLineJoin ="| ", string slabEnd = "╵ ") {
         string str = "", indent = StringOf(' ',indents);
         string[] lines = text.Split("\n");
-        str += title+"\n"+indent+"| ";
-        str += string.Join("\n"+indent+"| ",lines.SkipLast(1));
-        str += "\n"+indent+"╵ "+lines.Last();
+        str += title+"\n"+indent+slabLineJoin;
+        str += string.Join("\n"+indent+slabLineJoin,lines.SkipLast(1));
+        str += "\n"+indent+slabEnd+lines.Last();
         return str;
     }
 }

@@ -28,9 +28,17 @@ public sealed partial class Setting {
     }
     public static void CreateSetting(string name, string description, string[] overloads, Func<object> get, Action<object> set, Func<object,object> convertInput) => CreateSetting(name,description,overloads,get,set,convertInput,GetOutputConverter(get()));
     public static void CreateSetting(string name, string description, string[] overloads, Func<object> get, Action<object> set, Func<object,object> convertInput, Func<object,MathObject> convertOutput) {
-    	Program.settings[name] = new Setting(name,description,overloads,get,set,convertInput,convertOutput);
+		var setting = new Setting(name,description,overloads,get,set,convertInput,convertOutput);
+    	
+		//validate args
+		if (Program.formalFunctions.ContainsKey(name)) throw new Exception("Could not create setting, as a formal function with the same name already exists."); 
+		if (Program.commands.ContainsKey(name)) throw new Exception("Could not create setting, as a command with the same name already exists."); 
+		
+		//define
+		Program.settings[name] = setting;
 	}
     
+	#region Converters
     public static Func<object,MathObject> GetOutputConverter(object value) {
         if(value is string) return ConvertFromString;
         if(value.IsNumericType()) return ConvertFromLong;
@@ -89,4 +97,5 @@ public sealed partial class Setting {
     }; 
 
 	public static readonly Func<object,MathObject> ConvertFromString = val => new Variable((string)val);
+	#endregion
 }

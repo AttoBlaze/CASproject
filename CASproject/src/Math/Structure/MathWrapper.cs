@@ -62,5 +62,13 @@ public class DerivativeExpression : MathWrapper {
     }
 }
 
-public class ReferralMathWrapper : MathWrapper {
+public class DiffExpression : MathWrapper {
+    public override string AsString() => name+"("+expression.AsString()+";"+variable+")";
+    public readonly string variable;
+    public DiffExpression(MathObject expression, string variable) {
+        this.expression = expression;
+        this.name = "Diff";
+        this.variable = variable;
+        this.transformation = obj => obj.Diff(variable);
+    }
 }

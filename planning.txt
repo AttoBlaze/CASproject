@@ -1,19 +1,30 @@
 TODO:
 
-Formal functions (of which will exist:
-    floor, ceil, round, abs, root, random, gamma
-)
+Expansions:
+	Formal functions: floor, ceil, round, abs, root, random, gamma
+	More Simplifications
+	Factorial operator, modulus operator
 
-More Simplifications
-Factorial operator, modulus operator
+	Simplification settings:
+		ContractionMode:
+			None - expandable/contractable expressions are kept as-is
+			Expand - expressions are expanded when possible (fx a*(b+c)=a*b+a*c)
+			Contract - expressions are contracted when possible (fx a*b+c*b=(a+c)*b)
 
-Simplification settings:
-ContractionMode:
-    None - expandable/contractable expressions are kept as-is
-    Expand - expressions are expanded when possible (fx a*(b+c)=a*b+a*c)
-    Contract - expressions are contracted when possible (fx a*b+c*b=(a+c)*b)
+Refactorings:
+	ContainsAny refactor
+	Refactor Equals to make possible to just check under arguments for specific functions- check sequential under arguments
 
-Refactor ContainsAny- input is string
-Refactor Equals to make possible to just check under arguments for specific functions- maybe use  
+Features: 
+	Plotting:
+		Function plotting
+		Point plotting
+		Line/segment plotting
 
-Create own BigDecimal library focused on performance?
+	Evaluate with only specific objects
+	Evaluate with a specific list of objects
+
+Ideas: 
+	Create own BigDecimal library focused on performance?
+	Complex numbers
+	Simple integration

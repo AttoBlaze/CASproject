@@ -1,10 +1,10 @@
 # Diff Details
 
-Date : 2025-02-14 12:57:38
+Date : 2025-03-03 20:24:21
 
 Directory c:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject
 
-Total : 37 files,  735 codes, 11 comments, 142 blanks, all 888 lines
+Total : 49 files,  857 codes, 56 comments, 165 blanks, all 1078 lines
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details
 
@@ -48,5 +48,17 @@ Total : 37 files,  735 codes, 11 comments, 142 blanks, all 888 lines
 | [CASproject/obj/Debug/net8.0/CASproject.GlobalUsings.g.cs](/CASproject/obj/Debug/net8.0/CASproject.GlobalUsings.g.cs) | C# | 7 | 1 | 1 | 9 |
 | [CASproject/obj/Debug/net8.0/CASproject.sourcelink.json](/CASproject/obj/Debug/net8.0/CASproject.sourcelink.json) | JSON | 1 | 0 | 0 | 1 |
 | [CASproject/obj/project.assets.json](/CASproject/obj/project.assets.json) | JSON | 139 | 0 | 0 | 139 |
+| [CASproject/src/Application/Program.cs](/CASproject/src/Application/Program.cs) | C# | 40 | 9 | 2 | 51 |
+| [CASproject/src/Application/Startup/CreateCommandsStartup.cs](/CASproject/src/Application/Startup/CreateCommandsStartup.cs) | C# | -2 | 0 | 0 | -2 |
+| [CASproject/src/Application/Startup/CreateSettingsStartup.cs](/CASproject/src/Application/Startup/CreateSettingsStartup.cs) | C# | 16 | 0 | 0 | 16 |
+| [CASproject/src/Commands/Info/ListObjects.cs](/CASproject/src/Commands/Info/ListObjects.cs) | C# | -5 | 0 | 1 | -4 |
+| [CASproject/src/Commands/Other/ExitCommand.cs](/CASproject/src/Commands/Other/ExitCommand.cs) | C# | 11 | 0 | 2 | 13 |
+| [CASproject/src/Main.cs](/CASproject/src/Main.cs) | C# | 1 | 2 | 1 | 4 |
+| [CASproject/src/Math/Basic operators/Multiply.cs](/CASproject/src/Math/Basic%20operators/Multiply.cs) | C# | 3 | 1 | -1 | 3 |
+| [CASproject/src/Math/Calculation/CASMath.cs](/CASproject/src/Math/Calculation/CASMath.cs) | C# | 8 | 1 | 1 | 10 |
+| [CASproject/src/Math/Other/Function.cs](/CASproject/src/Math/Other/Function.cs) | C# | 5 | 0 | 2 | 7 |
+| [CASproject/src/Math/Other/Variable.cs](/CASproject/src/Math/Other/Variable.cs) | C# | 3 | 0 | 0 | 3 |
+| [CASproject/src/Math/Structure/MathObject.cs](/CASproject/src/Math/Structure/MathObject.cs) | C# | -4 | 0 | 0 | -4 |
+| [CASproject/src/Other/ConsoleStyling.cs](/CASproject/src/Other/ConsoleStyling.cs) | C# | 46 | 32 | 15 | 93 |
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details

@@ -113,11 +113,7 @@ public sealed partial class Command {
             arguments => {
                 var args = (object[])arguments.Pop();
 				if(args.Length!=2) throw new InputCountException("Diff",2,args.Length);
-                return new InformalMathWrapper(
-                    "Diff",
-                    obj => obj.Diff(args[1].AsInput()),
-                    (MathObject)args[0]
-                );
+                return new DiffExpression((MathObject)args[0],args[1].AsInput());
         });
         CreateCommand(
             "diff",

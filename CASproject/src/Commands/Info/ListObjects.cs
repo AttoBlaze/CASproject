@@ -62,24 +62,21 @@ public class ListObjects : ExecutableCommand {
     private static void Write_COMMANDS() => WriteCommands(Program.GetCommands());
 	private static void Write_USERDEFINED() => WriteMath(Program.GetUserDefined());
     
-    private static void Write_FORMAL() {
+    private static void Write_FORMAL() => 
         Program.Log(string.Join("\n",Program.formalFunctions.Keys.Select(FormalFunction.Get).Select(n => n.name+"("+string.Join(";",n.inputs)+")")));
-    }
-    private static void WriteSettings(IEnumerable<string> settings) {
+
+    private static void WriteSettings(IEnumerable<string> settings) =>
         Program.Log(string.Join("\n",settings.OrderBy(n=>n)));
-    }
 
-    private static void WriteCommands(IEnumerable<string> commands) {
-        Program.Log(string.Join("\n",commands.OrderBy(n=>n)));
-    }
+    private static void WriteCommands(IEnumerable<string> commands) =>
+		Program.Log(string.Join("\n",commands.OrderBy(n=>n)));
 
-    private static void WriteMath(IEnumerable<string> objs) {
+    private static void WriteMath(IEnumerable<string> objs) =>
         Program.Log(string.Join("\n",objs.Select(n => 
             Program.definedObjects[n] is FunctionDefinition fun?
                 fun.GetFunctionString()+": "+fun.expr.AsString():
                 n + ": "+Program.definedObjects[n].AsString()
-        )));
-    }
+		)));
 
     private readonly string objects;
     public ListObjects(string objects) {

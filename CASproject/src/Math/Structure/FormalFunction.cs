@@ -23,6 +23,13 @@ public sealed partial class FormalFunction {
         this.create = create;
     }
     public static void CreateFormalFunction(string name, string description, string[] inputs, Func<Stack<object>,MathObject> create) {
-        Program.formalFunctions[name] = new FormalFunction(name,description,inputs,create);
+		var func = new FormalFunction(name,description,inputs,create);
+        
+		//validate
+		if (Program.commands.ContainsKey(name)) throw new Exception("Could not create formal function, as a command with the same name already exists."); 
+		if (Program.settings.ContainsKey(name)) throw new Exception("Could not create formal function, as a setting with the same name already exists."); 
+		
+		//define
+		Program.formalFunctions[name] = func;
 	}
 }

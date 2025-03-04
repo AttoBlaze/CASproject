@@ -11,6 +11,7 @@ public enum ConsoleFontStyling {
 	Faint = 2,
 	Underlined = 4,
 	Strikethrough = 9,
+	Overlined = 55
 }
 
 /// <summary>
@@ -41,53 +42,82 @@ public class ConsoleStyling {
 	}
 	
 
-	/// <inheritdoc cref="WriteStylized(object,bool,bool)"></inheritdoc>
+	/// <inheritdoc cref="WriteStylized(object,bool,bool)"/>
 	public void Write(object obj) => WriteStylized(obj,false);
-	/// <inheritdoc cref="WriteStylized(object,bool,bool)"></inheritdoc>
+	
+	/// <inheritdoc cref="WriteStylized(object,bool,bool)"/>
 	public void WriteLine(object obj) => WriteStylized(obj,true);
+	
 	/// <summary>
 	/// Writes in the console with this styling. The console style is reverted to normal after use. 
 	/// </summary>
 	public void WriteStylized(object obj, bool newLine = false, bool resetStyling = true) {
-		this.apply();
-		if(newLine) Console.WriteLine(obj);
-		else		Console.Write(obj);
-		if(resetStyling) Current.apply();
+		string msg = Stylize(obj,resetStyling);
+
+		//write stylized message
+		if(newLine) Console.WriteLine(msg);
+		else Console.Write(msg);
+	}
+
+	/// <summary>
+	/// Gets a string which is written with this styling. The console style is reverted back to the "ConsoleStyling.Current" styling after this string unless specified.
+	/// </summary>
+	public string Stylize(object obj, bool resetStyling = true) {
+		//create stylized message
+		string msg = GetStyling() + obj;
+
+		//reset styling after message if specified
+		if(resetStyling) msg += Current.GetStyling();
+		return msg;
 	}
 
 	/// <summary>
 	/// Applies this styling to the console.
 	/// </summary>
 	public void Apply() {
-		apply();
+		Console.Write(GetStyling());
 		Current = this;
 	}
 
 	/// <summary>
-	/// Applies this styling to the console without changing the current styling
+	/// Gets the string which, when written in the console, applies this styling to the console.
 	/// </summary>
-	private void apply() {
+	public string GetStyling() {
 		//reset styling
-		ResetConsoleStyle();
+		string styling = GetStylingReset();
 
-		//text
+		//text color
 		if(textColor is Color text) //dont change if null
-			Console.Write("\x1b[38;2;"+text.R+";"+text.G+";"+text.B+"m");						
+			styling += "\x1b[38;2;"+text.R+";"+text.G+";"+text.B+"m";						
 		
-		//background
+		//background color
 		if(backgroundColor is Color background) //dont change if null	
-			Console.Write("\x1b[48;2;"+background.R+";"+background.G+";"+background.B+"m");		
+			styling += "\x1b[48;2;"+background.R+";"+background.G+";"+background.B+"m";		
 		
 		//font stylings
 		foreach(var fontStyling in fontStylings)
-			Console.Write("\x1b["+(int)fontStyling+"m");												
+			styling += "\x1b["+(int)fontStyling+"m";
+
+		return styling;												
 	}
 
 	/// <summary>
 	/// Resets the styling of the console to its default.
 	/// </summary>
-	public static void ResetConsoleStyle() => Console.Write("\x1b[0m");
+	public static void ResetConsoleStyling() => Plain.Apply();
 	
-	public static implicit operator ConsoleStyling(Color col) => new(col);
-	public static implicit operator ConsoleStyling(ConsoleFontStyling col) => new(col);
+	/// <summary>
+	/// Gets the string which, when written in the console, resets the styling.
+	/// </summary>
+	public static string GetStylingReset() => "\x1b[0m";
+	
+	//implicit casts
+	public static implicit operator ConsoleStyling(Color textColor) => new(textColor);
+	public static implicit operator ConsoleStyling(ConsoleFontStyling fontStyle) => new(fontStyle);
+}
+
+public static class ConsoleStylingExtensions {
+	/// <inheritdoc cref="ConsoleStyling.Stylize(object, bool)"/>
+	public static string StylizeInConsole(this string obj, ConsoleStyling style, bool resetStyling = true) =>
+		style.Stylize(obj,resetStyling);
 }

@@ -11,7 +11,7 @@ public class Tests {
     public void TEST() {
 		Program.Execute(
 			"(x+x)^2"
-			);
+		);
 		Assert.Pass();
 }
 }
