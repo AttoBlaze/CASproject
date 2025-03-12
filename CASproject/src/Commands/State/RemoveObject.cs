@@ -4,8 +4,8 @@ namespace Commands;
 
 public class RemoveObject : ExecutableCommand {
     public object Execute() {
-		Program.definedObjects.Remove(name);
-        return ExecutableCommand.State.SUCCESS;
+		Program.Remove(name);
+        return "succesfully removed object "+name+"";
     }
 
     private readonly string name;

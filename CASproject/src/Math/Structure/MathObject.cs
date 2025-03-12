@@ -30,16 +30,18 @@ public struct SimplificationSettings {
 	/// If a variable called e is presumed to be eulers number.
 	/// </summary>
 	public bool eIsEulersNumber;
+
 	/// <summary>
 	/// If parentheses like (a+b)*(c+d) is expanded to ac+ad+bc+bd.
 	/// </summary>
 	public bool expandParentheses;
+
 	public CASMath calculator;
 	public static SimplificationSettings Calculation = new(){
 		calculateConstants = true, 
+		calculator = CASMath.Calculator,
 		eIsEulersNumber = true,
 		expandParentheses = false,
-		calculator = Program.Calculator
 	};
 }
 
@@ -168,6 +170,8 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<Simplif
 		}
 		return true;
 	}
+
+	public static MathObject Negate(MathObject obj) => obj is Constant o? o.Negate(): new Multiply(new Constant(-1d),obj);
 }
 
 /// <summary>

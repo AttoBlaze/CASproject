@@ -12,7 +12,7 @@ public static partial class Program {
         MuteErrors = false,
 		MuteErrorStack = false,
         AlwaysWrite = true,
-        AlwaysShowWrite = true;
+        AlwaysShowWrite = false;
 	public static CASMath Calculator = new();
 	public static SimplificationSettings simplificationSettings = new() {
 		calculateConstants = true,
@@ -109,7 +109,7 @@ public static partial class Program {
     public static void Log(object log, ConsoleStyling? styling = null, bool newLine = true) {
         if(MuteOutput) return;
 		styling ??= LoggerStyling;
-		styling.Write(log + (newLine?"\n":""));
+		styling.WriteStylized(log,newLine);
     }
 
 	/// <summary>
@@ -144,14 +144,17 @@ public static partial class Program {
 	/// Attempts to define the given math object in the program. 
 	/// </summary>
 	public static void Define(string name, MathObject expression) {
+		//check for other objs
 		if (preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot redefine predefined objects!");
         if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a formal function!"); 
 		if (settings.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a setting!");
 		if (commands.ContainsKey(name)) throw new Exception("You cannot define an object with the same name as a command!");
 		
+		//check name
 		var no = ObjectNameDisallowed(name);
 		if(no!=null) throw new Exception(no);
 		
+		//define
 		definedObjects[name] = expression;
 	}
 
@@ -159,10 +162,12 @@ public static partial class Program {
 	/// Attempts to predefine the given math object in the program. 
 	/// </summary>
 	public static void Predefine(string name, MathObject expression) {
-        if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a formal function!"); 
+        //check for other objs
+		if (formalFunctions.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a formal function!"); 
 		if (settings.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a setting!");
 		if (commands.ContainsKey(name)) throw new Exception("You cannot predefine an object with the same name as a command!");
 		
+		//check name
 		var no = ObjectNameDisallowed(name);
 		if(no!=null) throw new Exception(no);
 		
@@ -170,6 +175,15 @@ public static partial class Program {
         definedObjects[name] = expression;
     }
 
+	/// <summary>
+	/// Removes the given object from the objects defined in the program
+	/// </summary>
+	/// <exception cref="Exception">Upon attempting to remove a predefined object</exception>
+	public static void Remove(string name) {
+		if(preDefinedObjects.ContainsKey(name)) throw new Exception("You cannot remove a predefined object!");
+		definedObjects.Remove(name);
+	}
+	
 	/// <summary>
 	/// Tests if the given name would be allowed for a defined object
 	/// </summary>

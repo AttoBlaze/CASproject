@@ -65,13 +65,13 @@ public sealed partial class Setting {
         );
 		CreateSetting(
 			"Precision",
-			"The level of precision used when calculating with arbitrary precision. Input will be clamped to the range 5 to 1000.",
+			"The level of precision used when calculating with arbitrary precision. Input will be clamped to the range "+CASMath.MIN_PRECISION+" to "+CASMath.MAX_PRECISION+".",
 			INTEGER,
 			()=> Program.Calculator.precision,
 			(input) => {
 				var val = (long)input;
 				Program.Calculator.precision = val;
-				if(val>16) {
+				if(val>CASMath.DOUBLE_PRECISION) {
 					Program.Predefine("e",Program.Calculator.e);
 					Program.Predefine("pi",Program.Calculator.pi);
 				}

@@ -18,6 +18,7 @@ public class Tan : MathFunction {
 
         return new Tan(expr);
     }
+
     public override MathObject Differentiate(string variable, CalculusSettings settings) => 
 		new Multiply(new Add((Constant)1,new Power(new Tan(expression),(Constant)2)),expression.Differentiate(variable,settings));
 }

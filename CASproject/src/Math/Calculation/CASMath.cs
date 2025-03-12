@@ -4,8 +4,14 @@ using Application;
 namespace CAS;
 
 public partial class CASMath {
+	public const int 
+		MIN_PRECISION = 5, 
+		MAX_PRECISION = 1000, 
+		DOUBLE_PRECISION = 16
+	;
+	
 	public static CASMath Calculator = new();
-	public CASMath(long precision = 40, bool arbitraryPrecision = true) {
+	public CASMath(long precision = 50, bool arbitraryPrecision = true) {
 		this.factory = new();
 		factory.Config.ToExpPos = 50;
 		this.arbitraryPrecision = arbitraryPrecision;
@@ -33,10 +39,10 @@ public partial class CASMath {
 	public long precision {
 		get => factory.Config.Precision; 
 		set {
-			factory.Config.Precision = Math.Clamp(value,5,1000);
+			factory.Config.Precision = Math.Clamp(value,MIN_PRECISION,MAX_PRECISION);
 			
 			//redefine e & pi if needed
-			if(factory.Config.Precision>16) {
+			if(factory.Config.Precision>DOUBLE_PRECISION) {
 				_e = factory.Exp(1);
 				_pi = factory.Acos(-1);
 			}

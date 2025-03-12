@@ -46,11 +46,14 @@ public sealed partial class FormalFunction {
             ["input","initial value","until","expression"],
             arguments => {
                 var args = (object[])arguments.Pop();
-                return new Sum(
+                var calc = SimplificationSettings.Calculation;
+				calc.calculator = Program.Calculator;
+				return new Sum(
                     args[0].AsInput(),  //input variable
                     (MathObject)args[1],//initial value
                     (MathObject)args[2],//until
-                    (MathObject)args[3] //expression
+                    (MathObject)args[3],//expression
+					calc
         );});
         CreateFormalFunction(
             "product",
@@ -60,11 +63,14 @@ public sealed partial class FormalFunction {
             ["input","initial value","until","expression"],
             arguments => {
                 var args = (object[])arguments.Pop();
-                return new Product(
+                var calc = SimplificationSettings.Calculation;
+				calc.calculator = Program.Calculator;
+				return new Product(
                     args[0].AsInput(),  //input variable
                     (MathObject)args[1],//initial value
                     (MathObject)args[2],//until
-                    (MathObject)args[3] //expression
+                    (MathObject)args[3],//expression
+					calc
 		);});
         CreateFormalFunction(
             "recurse",
@@ -92,7 +98,9 @@ public sealed partial class FormalFunction {
 
                 //expression
                 var expr = (MathObject)args[3];
-                return new Recurse(inpts,vals,recursions,expr,false,Program.simplificationSettings);
+				var calc = SimplificationSettings.Calculation;
+				calc.calculator = Program.Calculator;
+                return new Recurse(inpts,vals,recursions,expr,false,calc);
         });
 		CreateFormalFunction(
             "sRecurse",
@@ -116,7 +124,9 @@ public sealed partial class FormalFunction {
 
                 //expression
                 var expr = (MathObject)args[3];
-                return new Recurse(inpts,vals,recursions,expr,true,Program.simplificationSettings);
+				var calc = SimplificationSettings.Calculation;
+				calc.calculator = Program.Calculator;
+                return new Recurse(inpts,vals,recursions,expr,true,calc);
         });
         
         //root finding
@@ -133,14 +143,16 @@ public sealed partial class FormalFunction {
                 var newton = new SimplifyExpression(new Add(//newton (simplify to increase performance as unsimplified will continually expand)
                     (Variable)input,
                     new Divide(
-                        Add.Negate(expr),
+                        MathObject.Negate(expr),
                         expr.Differentiate(input)
                 )));
+				var calc = SimplificationSettings.Calculation;
+				calc.calculator = Program.Calculator;
                 return new FunctionWrapper(
                     ()=> "nsolve("+input+";"+val.AsString()+";"+iterations.AsString()+";"+expr.AsString()+")",
-                    (objs)=> new Recurse([input],[val],iterations,newton.Evaluate(objs),true,Program.simplificationSettings).Evaluate(objs),
-					(obj) => new Recurse([input],[val],iterations,newton,true,Program.simplificationSettings).Equals(obj),
-					Contains: (obj) => new Recurse([input],[val],iterations,newton,true,Program.simplificationSettings).ContainsAny(obj)
+                    (objs)=> new Recurse([input],[val],iterations,newton.Evaluate(objs),true,calc).Evaluate(objs),
+					(obj) => new Recurse([input],[val],iterations,newton,true,calc).Equals(obj),
+					Contains: (obj) => new Recurse([input],[val],iterations,newton,true,calc).ContainsAny(obj)
 				);
         });
     }

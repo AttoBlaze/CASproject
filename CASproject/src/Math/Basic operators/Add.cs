@@ -59,7 +59,7 @@ public class Add : MathObject {
 					else terms[i] = new Multiply(val,mult);
                     i=-1; continue;
                 }
-            }
+            }	
 
             //a/b + c/b = (a+c)/b
             if(term is Divide div1) {
@@ -114,6 +114,4 @@ public class Add : MathObject {
 
     public string AsString() => string.Join("+",terms.Select(term => term.Precedence()!=0 && term.AbsPrecedence()<Math.Abs(this.Precedence())? "("+term.AsString()+")":term.AsString())).Replace("+-","-");
     public int Precedence() => Operator.Precedence('+');
-
-    public static MathObject Negate(MathObject obj) => obj is Constant o? o.Negate(): new Multiply(new Constant(-1d),obj);
 }

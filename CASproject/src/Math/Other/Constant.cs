@@ -8,43 +8,56 @@ namespace CAS;
 /// </summary>
 public class Constant : MathObject { 
 	//double precision
-	public readonly double doubleValue;
+	public double doubleValue {
+		get => _doubleValue; 
+		set {
+			_doubleValue = value;
+			_decimalValue = null; //deinit arbitrary precision
+		}
+	}
+	private double _doubleValue;
 	
 	//arbitrary precision- prevent initializing until usage is needed when calculating with double precision for performance
-	public BigDecimal decimalValue {get{
-		_decimalValue ??= new BigDecimal(doubleValue);
-		return _decimalValue;
-	}}
+	public BigDecimal decimalValue {
+		get{
+			_decimalValue ??= new BigDecimal(doubleValue);	//delayed init if value was defined from a double val
+			return _decimalValue;
+		} 
+		set {
+			_decimalValue = value;
+			_doubleValue = value.ToNumber();
+		}
+	}
 	private BigDecimal? _decimalValue = null;
 
 	private Constant(double val, BigDecimal big) {
 		this._decimalValue = big;
-		this.doubleValue = val;
+		this._doubleValue = val;
 	}
 	public Constant(double value) {
-        this.doubleValue = value;
+        this._doubleValue = value;
 	}
 	public Constant(BigDecimal value) {
         this._decimalValue = value;
-		this.doubleValue = value.ToNumber();
+		this._doubleValue = value.ToNumber();
 	}
 	
 	public Constant(Constant constant) {
 		this._decimalValue = constant._decimalValue;
-		this.doubleValue = constant.doubleValue;
+		this._doubleValue = constant._doubleValue;
 	}
 
 	public Constant(string str) {
 		this._decimalValue = new BigDecimal(str.Replace(',','.'));
-		this.doubleValue = double.Parse(str.Replace('.',','));
+		this._doubleValue = double.Parse(str.Replace('.',','));
 	}
 
-	public bool IsZero {get => _decimalValue?.IsZero()??true && doubleValue==0;}
-	public bool IsOne {get => _decimalValue?.Equals(1)??true && doubleValue==1;}
-	public bool IsWhole {get => _decimalValue?.IsInteger()??true && doubleValue%1==0;}
-	public bool IsPositive {get => _decimalValue?.IsPositive()??true && doubleValue>0;}
-	public bool IsNegative {get => _decimalValue?.IsPositive()??true && doubleValue<0;}
-	
+	public bool IsZero => _decimalValue?.IsZero()??true && doubleValue==0;
+	public bool IsOne => _decimalValue?.Equals(1)??true && doubleValue==1;
+	public bool IsWhole => _decimalValue?.IsInteger()??true && doubleValue%1==0;
+	public bool IsPositive => _decimalValue?.IsPositive()??true && doubleValue>0;
+	public bool IsNegative => _decimalValue?.IsPositive()??true && doubleValue<0;
+	public bool IsPowerOfTwo =>	_decimalValue?.Log(2).IsInteger()??false || Math.Log2(doubleValue)%1==0;
 
 	public double AsValue() => doubleValue;
 
@@ -57,7 +70,7 @@ public class Constant : MathObject {
         //constants cannot be simplified
         return new Constant(this);
     }
-
+	
     public MathObject Differentiate(string variable, CalculusSettings settings) => new Constant(0d);
 
     public bool Equals(MathObject obj) =>
@@ -68,16 +81,14 @@ public class Constant : MathObject {
 	//format to prevent double strings being written with exponential notation
 	private static readonly string format = StringTree.StringOf('#',50)+"0."+StringTree.StringOf('#',50);
     public string AsString() {
-		string str = decimalValue.Precision()>16? decimalValue.ToString():doubleValue.ToString(format);
+		string str =_decimalValue!=null && decimalValue.Precision()>CASMath.DOUBLE_PRECISION? decimalValue.ToString():doubleValue.ToString(format);
 		if(str.Contains('e')) str = "("+str.Replace("e","*10^").Replace("+","")+")";
 		return str.Replace(",",".");
 	}
 
 	//conversions
 	public static implicit operator Constant(double val) => new(val);
-	public static implicit operator double(Constant val) => val.doubleValue;
 	public static implicit operator Constant(BigDecimal val) => new(val);
-	public static implicit operator BigDecimal(Constant val) => val.decimalValue;
 	
 	//operators
 	public static Constant operator +(Constant left, Constant right) => CASMath.Add(left, right);

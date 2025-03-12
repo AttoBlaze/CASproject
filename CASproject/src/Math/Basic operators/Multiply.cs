@@ -25,7 +25,7 @@ public class Multiply : MathObject {
         //simplify terms
         var terms = this.terms.Select(term => term.Simplify(settings)).ToList();
         
-        //combine divide
+        //combine divide: (a/b)*(c/d) = (a*c)/(b*d)
         if(terms.Any(n => n is Divide)) {
             List<MathObject> denoms = new();
             foreach(Divide div in terms.Where(n => n is Divide).ToList()) {
@@ -38,7 +38,7 @@ public class Multiply : MathObject {
             return new Divide(divN,divD).Simplify(settings);
         }
 
-        MathObject obj = this;
+        MathObject obj = this;//set to this only for init
         int index = 0;
         for(int i=0;i<terms.Count;i++) {
             var term = terms[i];
@@ -112,7 +112,7 @@ public class Multiply : MathObject {
         }
         return new Multiply(constants.Append(current));
     }
-
+	
     public bool ContainsAny(MathObject obj) => 
         terms.Any(term => term.ContainsAny(obj)) ||
         obj.Equals(this);

@@ -7,11 +7,13 @@ public class Sum : MathCommand {
 	private readonly string variable = "";
 	private readonly MathObject initialValue = (Constant)0;
 	private readonly MathObject until = (Constant)0;
-	public Sum(string variable, MathObject initialValue, MathObject until, MathObject expression) {
+	private readonly SimplificationSettings simplificationSettings;
+	public Sum(string variable, MathObject initialValue, MathObject until, MathObject expression, SimplificationSettings? settings = null) {
 		this.expression = expression;
 		this.variable = variable;
 		this.initialValue = initialValue;
 		this.until = until;
+		this.simplificationSettings = settings ?? SimplificationSettings.Calculation;
 	}
 
     public override MathObject Evaluate(Dictionary<string, MathObject> definedObjects) =>
@@ -21,8 +23,8 @@ public class Sum : MathCommand {
 		var dict = new Dictionary<string,MathObject>();
 		
 		//starting value and ending value
-		int initial = (int)initialValue.Simplify(SimplificationSettings.Calculation).AsValue(),
-			final = (int)until.Simplify(SimplificationSettings.Calculation).AsValue();
+		int initial = (int)initialValue.Simplify(simplificationSettings).AsValue(),
+			final = (int)until.Simplify(simplificationSettings).AsValue();
 
 		//sum function
 		List<MathObject> terms = new();

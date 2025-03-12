@@ -24,6 +24,11 @@ Features:
 	Evaluate with only specific objects
 	Evaluate with a specific list of objects
 
+	ToConstantTree:
+		Method to convert expression of only constants to an expression tree optimized for calculations.
+		Could be used to speed up plotting calculations
+		All underarguments are assumed to be constants
+
 Ideas: 
 	Create own BigDecimal library focused on performance?
 	Complex numbers

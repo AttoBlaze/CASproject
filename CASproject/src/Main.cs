@@ -1,4 +1,5 @@
 using Application;
+using System.Drawing;
 
 internal class MAIN {
     static void Main() {
@@ -6,8 +7,9 @@ internal class MAIN {
 		Program.START();
 
 		//style console for inputs
-		new ConsoleStyling(System.Drawing.Color.WhiteSmoke).Apply(); 
-
+		ConsoleStyling inputReaderStyling = new(Color.WhiteSmoke); 
+		inputReaderStyling.Apply();
+		
         //input reader
         while(true) {
             string? input = Console.ReadLine();

@@ -59,6 +59,11 @@ public class StringTree {
 		Array.Fill(chars,c);
 		return new string(chars);
 	}
+	public static string StringOf(string c, int length) {
+		var builder = new System.Text.StringBuilder();
+		for(int i=0;i<length;i++) builder.Append(c);
+		return builder.ToString();
+	}
 
 	/// <summary>
 	/// Converts a single text with seperations into a conjoined slab with indentation. <br/>

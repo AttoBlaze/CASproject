@@ -10,8 +10,7 @@ public enum ConsoleFontStyling {
 	Bold = 1,
 	Faint = 2,
 	Underlined = 4,
-	Strikethrough = 9,
-	Overlined = 55
+	Strikethrough = 9
 }
 
 /// <summary>
@@ -29,8 +28,8 @@ public class ConsoleStyling {
 	public static ConsoleStyling Current {get; private set;} = Plain;
 	
 	
-	public Color? textColor, backgroundColor;
-	public HashSet<ConsoleFontStyling> fontStylings = [];
+	public Color? textColor, backgroundColor;				//null = console default color
+	public HashSet<ConsoleFontStyling> fontStylings = [];	//hashset to prevent multiple of same font stylings
 	
 	
 	public ConsoleStyling(params ConsoleFontStyling[] fontStylings) : this(null,null,fontStylings) {}
@@ -52,17 +51,18 @@ public class ConsoleStyling {
 	/// Writes in the console with this styling. The console style is reverted to normal after use. 
 	/// </summary>
 	public void WriteStylized(object obj, bool newLine = false, bool resetStyling = true) {
-		string msg = Stylize(obj,resetStyling);
-
+		string msg = 
+			Stylize(obj, resetStyling) + 		//stylized msg
+			(newLine? Console.Out.NewLine:"");	//newline
+		
 		//write stylized message
-		if(newLine) Console.WriteLine(msg);
-		else Console.Write(msg);
+		Console.Write(msg);
 	}
 
 	/// <summary>
-	/// Gets a string which is written with this styling. The console style is reverted back to the "ConsoleStyling.Current" styling after this string unless specified.
+	/// Gets a string which is written with this styling. The console style is reverted back to the <see cref="Current"/> styling after this string unless specified.
 	/// </summary>
-	public string Stylize(object obj, bool resetStyling = true) {
+	public string Stylize(object obj, bool resetStyling = true, bool colorBlankLines = true) {
 		//create stylized message
 		string msg = GetStyling() + obj;
 
@@ -110,10 +110,6 @@ public class ConsoleStyling {
 	/// Gets the string which, when written in the console, resets the styling.
 	/// </summary>
 	public static string GetStylingReset() => "\x1b[0m";
-	
-	//implicit casts
-	public static implicit operator ConsoleStyling(Color textColor) => new(textColor);
-	public static implicit operator ConsoleStyling(ConsoleFontStyling fontStyle) => new(fontStyle);
 }
 
 public static class ConsoleStylingExtensions {

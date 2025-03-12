@@ -18,6 +18,7 @@ public class Sin : MathFunction {
 
         return new Sin(expr);
     }
-    public override MathObject Differentiate(string variable, CalculusSettings settings) => 
+
+	public override MathObject Differentiate(string variable, CalculusSettings settings) => 
 		new Multiply(new Cos(expression),expression.Differentiate(variable,settings));
 }

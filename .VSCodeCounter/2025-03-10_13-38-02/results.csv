@@ -1,0 +1,58 @@
+"filename", "language", "C#", "comment", "blank", "total"
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\ParseInput.cs", "C#", 128, 40, 40, 208
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.Exceptions.cs", "C#", 8, 0, 3, 11
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Program.cs", "C#", 177, 65, 29, 271
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Setting.cs", "C#", 70, 18, 14, 102
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateCommandsStartup.cs", "C#", 239, 2, 5, 246
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateFormalFunctions.cs", "C#", 134, 12, 13, 159
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreatePredefinedStartup.cs", "C#", 14, 0, 1, 15
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Application\Startup\CreateSettingsStartup.cs", "C#", 80, 0, 3, 83
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Explain.cs", "C#", 56, 3, 10, 69
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Help.cs", "C#", 15, 0, 3, 18
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Hide.cs", "C#", 15, 0, 3, 18
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\ListObjects.cs", "C#", 70, 3, 12, 85
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Show.cs", "C#", 15, 0, 3, 18
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Info\Write.cs", "C#", 41, 8, 11, 60
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\ExecuteAll.cs", "C#", 11, 0, 3, 14
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\ExitCommand.cs", "C#", 11, 0, 2, 13
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\GetTime.cs", "C#", 31, 0, 3, 34
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Other\RepeatExecute.cs", "C#", 15, 0, 3, 18
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\DefineFunction.cs", "C#", 20, 0, 3, 23
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\DefineVariable.cs", "C#", 20, 0, 3, 23
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\RemoveObject.cs", "C#", 14, 0, 3, 17
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\State\SetSetting.cs", "C#", 15, 0, 3, 18
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Structure\Command.cs", "C#", 49, 12, 12, 73
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Commands\Structure\InformalCommand.cs", "C#", 10, 3, 2, 15
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Main.cs", "C#", 34, 3, 4, 41
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Add.cs", "C#", 85, 15, 19, 119
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Divide.cs", "C#", 77, 19, 18, 114
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Multiply.cs", "C#", 100, 16, 20, 136
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Basic operators\Power.cs", "C#", 77, 15, 19, 111
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Functions.cs", "C#", 13, 0, 2, 15
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Operators.cs", "C#", 28, 0, 6, 34
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.Trigonometric.cs", "C#", 33, 0, 6, 39
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Calculation\CASMath.cs", "C#", 37, 32, 12, 81
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Product.cs", "C#", 42, 3, 7, 52
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Recurse.cs", "C#", 54, 4, 10, 68
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Iterative\Sum.cs", "C#", 42, 3, 8, 53
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Other\Ln.cs", "C#", 17, 4, 8, 29
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Acos.cs", "C#", 22, 2, 5, 29
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Asin.cs", "C#", 20, 2, 5, 27
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Atan.cs", "C#", 16, 2, 5, 23
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Cos.cs", "C#", 16, 2, 5, 23
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Sin.cs", "C#", 16, 2, 5, 23
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Formal operators\Trigonometric\Tan.cs", "C#", 16, 2, 5, 23
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Constant.cs", "C#", 65, 10, 17, 92
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Function.cs", "C#", 44, 7, 10, 61
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\FunctionDefinition.cs", "C#", 16, 3, 2, 21
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Other\Variable.cs", "C#", 27, 5, 8, 40
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\FormalFunction.cs", "C#", 23, 8, 4, 35
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\FunctionWrapper.cs", "C#", 19, 3, 3, 25
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathCommand.cs", "C#", 11, 3, 1, 15
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathFunction.cs", "C#", 15, 3, 1, 19
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathObject.cs", "C#", 108, 69, 29, 206
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\MathWrapper.cs", "C#", 68, 3, 3, 74
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Math\Structure\Operator.cs", "C#", 57, 19, 9, 85
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Other\ConsoleStyling.cs", "C#", 55, 42, 22, 119
+"c:\programmering\visualstudiocodeFiles\CASproject\CASproject\src\Other\StringTree.cs", "C#", 58, 17, 6, 81
+"Total", "-", 2569, 484, 471, 3524

@@ -58,6 +58,7 @@ public class Power : MathObject {
         return new Power(bas,exp);
     }
 
+	
     public bool Equals(MathObject obj) =>
         obj is Power &&                              //same type
         ((Power)obj).Base.Equals(this.Base) &&       //same terms

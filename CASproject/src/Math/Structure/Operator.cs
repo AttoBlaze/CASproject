@@ -19,7 +19,7 @@ public class Operator {
 		//unary -
         {'-',new Operator(
             '-',0,
-            inputs => Add.Negate((MathObject)inputs.Pop())
+            inputs => MathObject.Negate((MathObject)inputs.Pop())
         )},
         
         {'*',new Operator(

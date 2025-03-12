@@ -33,8 +33,8 @@ public class Write : ExecutableCommand {
             return Program.definedObjects.TryGetValue(vari.name, out MathObject? value)? value.AsString(): vari.name;
 
         //functions
-        if (obj is Function fun) 
-            return Program.definedObjects[fun.name].AsString();
+        if (obj is Function fun)
+            return fun.Evaluate(new()).AsString();
 
         //expressions
         if (obj is MathObject mObj) 
