@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CASproject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67292a05fe7d47f0e23837a414458fd57664a96b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+423955c304733d6a1c54248d2b07ca5aa9f25d87")]
 [assembly: System.Reflection.AssemblyProductAttribute("CASproject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CASproject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

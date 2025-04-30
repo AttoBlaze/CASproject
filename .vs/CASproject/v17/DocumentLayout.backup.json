@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
-      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\casproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\casproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\src\\application\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\src\\application\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\src\\application\\parseinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\src\\application\\parseinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\src\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\src\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\src\\application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\src\\application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\casproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\casproject.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\src\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|solutionrelative:casproject\\src\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BF9857A8-C12A-4C85-9FF9-DC98A8ACE26B}|CASproject\\CASproject.csproj|c:\\programmering\\visualstudiocodefiles\\casproject\\casproject\\casproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -46,23 +54,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClassDiagram1.cd",
-              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\ClassDiagram1.cd",
-              "RelativeDocumentMoniker": "CASproject\\ClassDiagram1.cd",
-              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\ClassDiagram1.cd*",
-              "RelativeToolTip": "CASproject\\ClassDiagram1.cd*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2025-03-10T11:35:20.515Z",
+              "DocumentIndex": 1,
+              "Title": "Setting.cs",
+              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Setting.cs",
+              "RelativeDocumentMoniker": "CASproject\\src\\Application\\Setting.cs",
+              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Setting.cs",
+              "RelativeToolTip": "CASproject\\src\\Application\\Setting.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAqwBYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T12:04:19.043Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Program.cs",
+              "RelativeDocumentMoniker": "CASproject\\src\\Application\\Program.cs",
+              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Program.cs",
+              "RelativeToolTip": "CASproject\\src\\Application\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T11:48:13.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClassDiagram1.cd",
+              "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\ClassDiagram1.cd",
+              "RelativeDocumentMoniker": "CASproject\\ClassDiagram1.cd",
+              "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\ClassDiagram1.cd",
+              "RelativeToolTip": "CASproject\\ClassDiagram1.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2025-03-10T11:35:20.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Main.cs",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Main.cs",
               "RelativeDocumentMoniker": "CASproject\\src\\Main.cs",
@@ -70,23 +102,23 @@
               "RelativeToolTip": "CASproject\\src\\Main.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T11:28:28.306Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T11:28:28.306Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "CASproject",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj",
               "RelativeDocumentMoniker": "CASproject\\CASproject.csproj",
               "ToolTip": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj",
               "RelativeToolTip": "CASproject\\CASproject.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-10T11:27:59.022Z"
+              "WhenOpened": "2025-03-10T11:27:59.022Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "CASproject.csproj",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\CASproject.csproj",
               "RelativeDocumentMoniker": "CASproject\\CASproject.csproj",
@@ -98,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ParseInput.cs",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\ParseInput.cs",
               "RelativeDocumentMoniker": "CASproject\\src\\Application\\ParseInput.cs",
@@ -106,12 +138,11 @@
               "RelativeToolTip": "CASproject\\src\\Application\\ParseInput.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T11:21:38.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-12T11:21:38.259Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "UnitTests",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\UnitTests\\UnitTests.csproj",
               "RelativeDocumentMoniker": "UnitTests\\UnitTests.csproj",
@@ -122,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "UnitTests.csproj",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTests.csproj",
               "RelativeDocumentMoniker": "TestProject1\\UnitTests.csproj",
@@ -133,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\TestProject1\\UnitTest1.cs",
               "RelativeDocumentMoniker": "TestProject1\\UnitTest1.cs",
@@ -144,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Main.cs",
               "DocumentMoniker": "C:\\programmering\\visualstudiocodeFiles\\CASproject\\CASproject\\src\\Application\\Main.cs",
               "RelativeDocumentMoniker": "CASproject\\src\\Application\\Main.cs",

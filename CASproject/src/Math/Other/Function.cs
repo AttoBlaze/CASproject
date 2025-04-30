@@ -21,9 +21,10 @@ public class Function : MathObject, NamedObject {
             i++;
         }
     }
-	public Function(Function fun) {
-		this.name = fun.name;
-		this.inputs = fun.inputs.ToDictionary();
+	public Function(Function fun) : this(fun.name,fun.inputs.ToDictionary()){}
+	private Function(string name, Dictionary<string,MathObject> dict) {
+		this.name = name;
+		this.inputs = dict;
 	}
 
     public MathObject Evaluate(Dictionary<string, MathObject> definedObjects) {
@@ -32,10 +33,11 @@ public class Function : MathObject, NamedObject {
 			return expr.Evaluate(inputs).Evaluate(definedObjects);
         
 		//otherwise attempt to evaluate inputs
-		foreach(var key in inputs.Keys) 
-            inputs[key] = inputs[key].Evaluate(definedObjects);
+		var newDict = this.inputs.ToDictionary();
+		foreach(var key in newDict.Keys) 
+            newDict[key] = newDict[key].Evaluate(definedObjects);
         
-		return new Function(this);
+		return new Function(name,newDict);
     }
 
     public MathObject Simplify(SimplificationSettings settings) {

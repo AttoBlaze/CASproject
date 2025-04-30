@@ -81,7 +81,7 @@ public class Constant : MathObject {
 	//format to prevent double strings being written with exponential notation
 	private static readonly string format = StringTree.StringOf('#',50)+"0."+StringTree.StringOf('#',50);
     public string AsString() {
-		string str =_decimalValue!=null && decimalValue.Precision()>CASMath.DOUBLE_PRECISION? decimalValue.ToString():doubleValue.ToString(format);
+		string str = _decimalValue!=null && Math.Abs(decimalValue.Precision()??0)>CASMath.DOUBLE_PRECISION? decimalValue.ToString():doubleValue.ToString(format);
 		if(str.Contains('e')) str = "("+str.Replace("e","*10^").Replace("+","")+")";
 		return str.Replace(",",".");
 	}

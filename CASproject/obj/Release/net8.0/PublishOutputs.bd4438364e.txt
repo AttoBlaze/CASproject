@@ -1,0 +1,7 @@
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\CASproject.exe
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\CASproject.dll
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\CASproject.deps.json
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\CASproject.runtimeconfig.json
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\CASproject.pdb
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\DecimalSharp.dll
+C:\programmering\visualstudiocodeFiles\CASproject\CASproject\bin\Release\net8.0\publish\DecimalSharp.Core.dll

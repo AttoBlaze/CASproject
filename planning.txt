@@ -20,9 +20,9 @@ Features:
 		Function plotting
 		Point plotting
 		Line/segment plotting
+		Equation plotting
 
 	Evaluate with only specific objects
-	Evaluate with a specific list of objects
 
 	ToConstantTree:
 		Method to convert expression of only constants to an expression tree optimized for calculations.

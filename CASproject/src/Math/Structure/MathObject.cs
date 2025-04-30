@@ -20,7 +20,7 @@ public interface Evaluatable<T> {
     public T Evaluate(Dictionary<string,MathObject> definedObjects);
 }
 
-public struct SimplificationSettings {
+public record SimplificationSettings {
 	/// <summary>
 	/// Whether or not constants are calculated on simplification (eg. if 4/2 is simplified to 2)
 	/// </summary>
@@ -36,7 +36,7 @@ public struct SimplificationSettings {
 	/// </summary>
 	public bool expandParentheses;
 
-	public CASMath calculator;
+	public required CASMath calculator;
 	public static SimplificationSettings Calculation = new(){
 		calculateConstants = true, 
 		calculator = CASMath.Calculator,
@@ -45,7 +45,7 @@ public struct SimplificationSettings {
 	};
 }
 
-public struct CalculusSettings {
+public record CalculusSettings {
 	public bool eIsEulersNumber;
 	public static CalculusSettings Calculation = new(){
 		eIsEulersNumber = true
@@ -63,8 +63,9 @@ public interface MathObject : EqualityComparer<MathObject>, Simplifiable<Simplif
 	public static MathObject Parse(string input) => (MathObject)Program.ParseInput(input);
 	public MathObject Simplify() => Simplify(Program.simplificationSettings);
 	public MathObject Differentiate(string variable) => Differentiate(variable,Program.calculusSettings);
-	public MathObject Diff(string variable) => this.Calculate().Differentiate(variable,Program.calculusSettings).Simplify();
-    
+	public MathObject Diff(string variable) => this.Calculate().Diff(variable,Program.calculusSettings,Program.simplificationSettings);
+	public MathObject Diff(string variable, CalculusSettings calcSettings, SimplificationSettings simpSettings) => Differentiate(variable,calcSettings).Simplify(simpSettings);
+
 	/// <summary>
 	/// Evaluates & simplifies this math object using the objects defined in the program
 	/// </summary>

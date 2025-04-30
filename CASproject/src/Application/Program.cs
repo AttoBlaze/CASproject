@@ -209,6 +209,7 @@ public static partial class Program {
     /// </summary>
     public static void START(bool muted = false) {
         if (STARTED) return;
+		
         const string BAR = "---------------------------------------";
 		ConsoleStyling 
 			bar =		new(Color.White),

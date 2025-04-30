@@ -2,7 +2,7 @@ using System.Drawing;
 
 /// <summary>
 /// A styling of the console font. <br/>
-/// Utilizes ANSI codes.
+/// Utilizes ANSI escape codes.
 /// </summary>
 public enum ConsoleFontStyling {
 	Plain = 10,
@@ -15,7 +15,7 @@ public enum ConsoleFontStyling {
 
 /// <summary>
 /// Represents a styling of the console. Used streamline the process of writing in the console with different fonts and colors. <br/>
-/// Utilizes ANSI codes.
+/// Utilizes ANSI escape codes.
 /// </summary>
 public class ConsoleStyling {
 	/// <summary>
